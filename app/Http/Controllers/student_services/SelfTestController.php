@@ -35,7 +35,7 @@ class SelfTestController extends Controller
         $chapterIds = session('chapterIds');
         $chapters = Chapter::whereIn('id', $chapterIds)->get();
         $questions = Question::where('question_type', 'mcq')
-            ->whereIn('chapter_no', $chapterIds)
+            ->whereIn('chapter_id', $chapterIds)
             ->get()
             ->random(20);
         // $questions = collect();
