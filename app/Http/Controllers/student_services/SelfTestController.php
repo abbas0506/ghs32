@@ -34,16 +34,20 @@ class SelfTestController extends Controller
 
         $chapterIds = session('chapterIds');
         $chapters = Chapter::whereIn('id', $chapterIds)->get();
-        $questions = collect();
-        foreach ($chapters as $chapter) {
-            $questionsFromThisChapter = Question::where('question_type', 'mcq')
-                ->where('chapter_id', $chapter->id)
-                ->get()
-                ->random(round(20 / sizeOf($chapterIds), 0));
+        $questions = Question::where('question_type', 'mcq')
+            ->whereIn('chapter_no', $chapterIds)
+            ->get()
+            ->random(20);
+        // $questions = collect();
+        // foreach ($chapters as $chapter) {
+        //     $questionsFromThisChapter = Question::where('question_type', 'mcq')
+        //         ->where('chapter_id', $chapter->id)
+        //         ->get()
+        //         ->random(round(20 / sizeOf($chapterIds), 0));
 
-            foreach ($questionsFromThisChapter as $question)
-                $questions->add($question);
-        }
+        //     foreach ($questionsFromThisChapter as $question)
+        //         $questions->add($question);
+        // }
         // echo $questions;
         return view('student_services.selftest.show', compact('subject', 'questions'));
     }
