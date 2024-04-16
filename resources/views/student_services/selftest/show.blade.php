@@ -110,6 +110,7 @@ $sr=1;
         <button id='finishQuizButton' type="submit" class="fixed bottom-6 right-6 w-12 h-12 rounded-full btn-teal flex justify-center items-center"> <i class="bi-caret-right"></i></button>
     </div>
     <div class="my-8"></div>
+    <input type="hidden" id="mcqs_count" value="{{ $questions->count() }}">
 </div>
 
 @endsection
@@ -126,7 +127,7 @@ $sr=1;
 
     $('#finishQuizButton').click(function() {
         var correctAnswers = 0;
-        var unAnswered = 20;
+        var unAnswered = $('#mcqs_count').val();;
         $('.answer').each(function() {
             $(this).children().find('.radio:checked').each(function() {
                 unAnswered -= 1
