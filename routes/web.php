@@ -99,7 +99,6 @@ Route::get('login/as', function () {
     return view('login_as', compact('year'));
 });
 
-Route::redirect('apply', 'applications.create');
 Route::resource('applications', AdmissionApplicationController::class);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('login/as', [AuthController::class, 'loginAs'])->name('login.as');
