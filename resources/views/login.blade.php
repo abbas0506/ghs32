@@ -10,13 +10,12 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        opacity: 0.6;
+        opacity: 0.8;
     }
 </style>
 
 <div class="main flex flex-col items-center justify-center p-5 h-screen w-screen">
-    <!-- <div class="flex flex-col justify-between items-center w-full md:w-2/3 lg:w-1/3 py-4 px-8 h-[80vh] bg-white relative z-20 rounded opacity-80"> -->
-    <div class="flex flex-col justify-between items-center w-full md:w-2/3 lg:w-1/3 py-4 px-8 h-[80vh] backdrop-blur-2xl relative z-20 rounded">
+    <div class="flex flex-col justify-between items-center w-full md:w-2/3 lg:w-1/3 py-4 px-8 h-[80vh] relative z-20 rounded bg-white opacity-80">
         <div class="w-full">
             <img class="w-36 md:w-40 mx-auto" alt="logo" src="{{asset('images/logo/school_logo.png')}}">
         </div>

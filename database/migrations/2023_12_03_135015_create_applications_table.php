@@ -15,21 +15,23 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('father', 50);
-            $table->string('phone', 16)->nullable();
+            $table->string('phone', 16);
             $table->string('address', 100)->nullable();
             $table->string('bise_name', 20);
             $table->year('pass_year');
             $table->string('rollno', 8);
-            $table->unsignedSmallInteger('marks');
+            $table->unsignedSmallInteger('obtained');
+            $table->unsignedSmallInteger('total');
             $table->enum('medium', ['English', 'Urdu'])->default('Urdu'); //english:0, urdu:1
             $table->string('objection', 200)->nullable();
-            $table->unsignedSmallInteger('fee')->nullable();
+            $table->unsignedSmallInteger('fee_paid')->nullable();
+            $table->unsignedSmallInteger('concession')->nullable();
             $table->timestamps();
 
-            $table->unsignedBigInteger('clas_id');
+            $table->unsignedBigInteger('grade_id');
             $table->unsignedBigInteger('group_id');
 
-            $table->foreign('clas_id')->references('id')->on('clas')->onDelete('cascade');
+            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
         });
     }

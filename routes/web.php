@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\StudentController;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\TeacherController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\Admission\ApplicationController as AdmissionApplicationController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\assistant\BookIssuanceController;
@@ -98,6 +99,8 @@ Route::get('login/as', function () {
     return view('login_as', compact('year'));
 });
 
+Route::redirect('apply', 'applications.create');
+Route::resource('applications', AdmissionApplicationController::class);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('login/as', [AuthController::class, 'loginAs'])->name('login.as');
 Route::get('signout', [AuthController::class, 'signout'])->name('signout');

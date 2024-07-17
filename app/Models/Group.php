@@ -9,9 +9,11 @@ class Group extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'short_name',
-        'full_name',
-        'fee',
+        'name',
+        'name',
+        'subjects_list',
+        'admission_fee',
+
     ];
     public function applications()
     {

@@ -22,6 +22,6 @@ class AdminController extends Controller
         $students = Student::all();
         $grades = Grade::where('id', '>', 8)->get();
 
-        return view('admin.index', compact('students', 'teachers', 'grades'));
+        return view('admin.dashboard', compact('students', 'teachers', 'grades'));
     }
 }

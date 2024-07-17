@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('teacher_id');
             $table->enum('evaluation_marks', [0, 1, 2, 3])->default(2); //0 not done, 1:poor, 2:avg, 3:good
             $table->unsignedInteger('weight')->default(1); //equal weightage
+            $table->unsignedTinyInteger('month');
             $table->timestamps();
 
             $table->foreign('teacher_evaluation_item_id')->references('id')->on('teacher_evaluation_items')->onDelete('cascade');

@@ -16,17 +16,20 @@ class Application extends Model
         'adddress',
         'bise_name',
         'rollno',
-        'marks',
-        'pass_year',    //applied when
+        'obtained',
+        'total',
+        'pass_year',
         'medium',       //english / urdu
         'group_id',     //applied for
         'objection',
-        'fee',
+        'fee_paid',
+        'concession',
 
-        'clas_id',
-        'group_id',
+        'grade_id',
 
     ];
+
+
 
     public function clas()
     {
