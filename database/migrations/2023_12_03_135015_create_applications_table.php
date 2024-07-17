@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('medium', ['English', 'Urdu'])->default('Urdu'); //english:0, urdu:1
             $table->string('objection', 200)->nullable();
             $table->unsignedSmallInteger('fee_paid')->nullable();
+            $table->date('paid_at')->nullable();
             $table->unsignedSmallInteger('concession')->nullable();
             $table->timestamps();
 

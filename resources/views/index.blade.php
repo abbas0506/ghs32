@@ -6,7 +6,11 @@
 
 @section('body')
 <section class="w-screen h-screen">
-    <div class="flex justify-between items-center px-24 h-[90%] mt-16 bg-teal-800">
+    <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full pt-16 bg-teal-800">
+        <div class="flex flex-1 justify-end items-center">
+            <img src="{{ url(asset('images/hero/book-0.png')) }}" alt="" class="w-48 h-48 md:w-96 md:h-96">
+
+        </div>
         <div class="flex flex-col flex-1 gap-y-2 justify-center text-slate-100">
             <div class="text-3xl md:text-5xl">Admission Open</div>
             <p class="text-slate-300">Welcome to our online admission portal. Join us to get quality education in any of three disciplines: Pre Engineering, ICS & Humanities (Arts group). </p>
@@ -14,16 +18,44 @@
                 <button class="btn-orange mt-5">Apply Now <i class="bi-arrow-right"></i></button>
             </a>
         </div>
-        <div class="flex flex-1 justify-end items-center">
-            <img src="{{ url(asset('images/hero/book-0.png')) }}" alt="" class="w-96 h-96">
 
-        </div>
     </div>
 
-</section>
 
+</section>
+<div class="flex justify-center w-full bg-teal-200">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-x-24 p-5 text-center">
+        <a href="" class="flex flex-col justify-center items-center">
+            <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
+                <i class="bi bi-tools text-2xl text-cyan-400"></i>
+            </div>
+            <h3 class="mt-3 text-lg">Site Administration</h3>
+        </a>
+        <a href="{{url('login/admission-portal')}}" class="flex flex-col justify-center items-center">
+            <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
+                <i class="bi bi-person-gear text-2xl text-green-400"></i>
+            </div>
+            <h3 class="mt-3 text-lg">Admission Portal</h3>
+        </a>
+        <a href="" class="flex flex-col justify-center items-center">
+            <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
+                <i class="bi bi-book text-2xl text-orange-400"></i>
+            </div>
+            <h3 class="mt-3 text-lg">Digital Library</h3>
+        </a>
+        <a href="" class="flex flex-col justify-center items-center">
+            <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
+                <i class="bi bi-laptop text-2xl text-blue-400"></i>
+            </div>
+            <h3 class="mt-3 text-lg">Self Assessment</h3>
+        </a>
+
+
+    </div>
+
+</div>
 <!-- features section -->
-<section id='features' class="mt-16 px-4 md:px-24">
+<section id='features' class="md:mt-24 px-4 md:px-24">
     <h2 class="text-4xl text-center">Why Us</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
         <div class="feature-box hover:border-pink-300 hover:bg-pink-50">
@@ -284,9 +316,8 @@
         <button class="btn-teal py-2 px-4">Submit</button>
 
     </div>
-
-
 </section>
+
 <!-- footer -->
 <x-footer></x-footer>
 @endsection

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
@@ -48,7 +49,9 @@ class AuthController extends Controller
         // 
         if (Auth::attempt($credentials)) {
             //user verified
-            return redirect('login/as');
+            if (Auth::user()->hasRole('office'))
+                return redirect('admission');
+            // echo "validated";
         } else {
             //user not verified
             return redirect()->back()->with(['warning' => 'User credentials incorrect !']);

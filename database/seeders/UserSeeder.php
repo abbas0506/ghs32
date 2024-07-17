@@ -17,6 +17,27 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //admin
+        $user = User::create([
+            'login_id' => 'admin@ghsscb.edu.pk',
+            'password' => Hash::make('password'),
+        ]);
+
+        $user->assignRole('admin');
+
+        $user = User::create([
+            'login_id' => 'admission@ghsscb.edu.pk',
+            'password' => Hash::make('password'),
+        ]);
+
+        $user->assignRole('office');
+
+        $user = User::create([
+            'login_id' => 'library@ghsscb.edu.pk',
+            'password' => Hash::make('password'),
+        ]);
+
+        $user->assignRole('librarian');
+
         $teacher = Teacher::create([
             'name' => "Muhammad Abbas",
             'father' => "Muhammad Yousaf",
@@ -39,7 +60,6 @@ class UserSeeder extends Seeder
             'userable_type' => 'App\Models\Teacher',
         ]);
 
-        $user->assignRole('admin');
         $user->assignRole('teacher');
 
         //admin
@@ -65,7 +85,6 @@ class UserSeeder extends Seeder
             'userable_type' => 'App\Models\Teacher',
         ]);
 
-        $user->assignRole('admin');
         $user->assignRole('teacher');
 
 
@@ -115,7 +134,6 @@ class UserSeeder extends Seeder
             'userable_id' => $teacher->id,
             'userable_type' => 'App\Models\Teacher',
         ]);
-        $user->assignRole('librarian');
         $user->assignRole('teacher');
 
         // assistant 1

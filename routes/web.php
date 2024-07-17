@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admission\ApplicationController as AdmissionApplicationController;
+use App\Http\Controllers\Admission\DashboardController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\assistant\BookIssuanceController;
@@ -30,13 +31,13 @@ use App\Http\Controllers\assistant\BookReturnController;
 use App\Http\Controllers\assistant\ClassController as AssistantClassController;
 use App\Http\Controllers\assistant\LibrayAssistantController;
 use App\Http\Controllers\assistant\QRCodeController;
-use App\Http\Controllers\librarian\BookController as LibrarianBookController;
-use App\Http\Controllers\librarian\BookDomainController;
-use App\Http\Controllers\librarian\BookRackController as LibrarianBookRackController;
-use App\Http\Controllers\librarian\BookReturnPolicyController;
-use App\Http\Controllers\librarian\LibrayInchargeController;
-use App\Http\Controllers\librarian\QrCodeController as LibrarianQrCodeController;
-use App\Http\Controllers\librarian\LibraryRuleController;
+use App\Http\Controllers\Library\BookController as LibrarianBookController;
+use App\Http\Controllers\Library\BookDomainController;
+use App\Http\Controllers\Library\BookRackController as LibrarianBookRackController;
+use App\Http\Controllers\Library\BookReturnPolicyController;
+use App\Http\Controllers\Library\LibrayInchargeController;
+use App\Http\Controllers\Library\QrCodeController as LibrarianQrCodeController;
+use App\Http\Controllers\Library\LibraryRuleController;
 use App\Http\Controllers\principal\PrincipalController;
 use App\Http\Controllers\principal\TeacherController as PrincipalTeacherController;
 use App\Http\Controllers\principal\TeacherEvaluationController;
@@ -101,6 +102,9 @@ Route::get('login/as', function () {
 
 Route::resource('applications', AdmissionApplicationController::class);
 Route::post('login', [AuthController::class, 'login']);
+Route::view('login/library', 'login.library');
+Route::view('login/admission-portal', 'login.admission-portal');
+
 Route::post('login/as', [AuthController::class, 'loginAs'])->name('login.as');
 Route::get('signout', [AuthController::class, 'signout'])->name('signout');
 
@@ -131,6 +135,12 @@ Route::group(['prefix' => 'principal', 'as' => 'principal.', 'middleware' => ['r
     Route::resource('teachers.evaluation', TeacherEvaluationController::class);
     Route::get('teacher-evaluation-add/{teacher}', [TeacherEvaluationController::class, 'add'])->name('teacher-evaluation.add');
 });
+
+Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:office']], function () {
+    Route::get('/', [DashboardController::class, 'index']);
+});
+
+
 
 Route::group(['prefix' => 'dep', 'as' => 'dep.', 'middleware' => ['role:dep']], function () {
     Route::get('/', [DepController::class, 'index']);

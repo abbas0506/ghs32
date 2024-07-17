@@ -23,13 +23,15 @@ class Application extends Model
         'group_id',     //applied for
         'objection',
         'fee_paid',
+        'paid_at',
         'concession',
 
         'grade_id',
 
     ];
 
-
+    protected $dateFormat = 'Y-m-d';
+    protected $dates = ['paid_at'];
 
     public function clas()
     {

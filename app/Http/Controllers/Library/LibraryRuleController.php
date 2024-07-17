@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\librarian;
+namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
-use App\Models\Assistant;
-use App\Models\Book;
-use App\Models\BookDomain;
+use App\Models\LibraryRule;
+use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class LibrayInchargeController extends Controller
+class LibraryRuleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +15,8 @@ class LibrayInchargeController extends Controller
     public function index()
     {
         //
-        $user = Auth::user();
-        $assistants = Assistant::all();
-        $books = Book::all();
-        return view('librarian.index', compact('user', 'assistants', 'books'));
+        $libraryRules = LibraryRule::all();
+        return view('librarian.library-rules.index', compact('libraryRules'));
     }
 
     /**
@@ -53,6 +49,8 @@ class LibrayInchargeController extends Controller
     public function edit(string $id)
     {
         //
+        $libraryRule = LibraryRule::find($id);
+        return view('librarian.library-rules.edit', compact('libraryRule'));
     }
 
     /**
@@ -61,6 +59,19 @@ class LibrayInchargeController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'max_books' => 'required',
+            'max_days' => 'required',
+            'fine_per_day' => 'required',
+        ]);
+        try {
+            $libraryRule = LibraryRule::find($id);
+            $libraryRule->update($request->all());
+            return redirect()->route('librarian.library-rules.index')->with('success', 'Successfully updated');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+            // something went wrong
+        }
     }
 
     /**

@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\librarian;
+namespace App\Http\Controllers\Admission;
 
 use App\Http\Controllers\Controller;
-use App\Models\LibraryRule;
-use Exception;
+use App\Models\Application;
 use Illuminate\Http\Request;
 
-class LibraryRuleController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,15 @@ class LibraryRuleController extends Controller
     public function index()
     {
         //
-        $libraryRules = LibraryRule::all();
-        return view('librarian.library-rules.index', compact('libraryRules'));
+        $applications = Application::orderBy('id', 'desc')->get();
+        //$recentpayers =application::where('paidAt', now()->format('Y-m-d'))->get('id', 'group_id');
+        $recentpayments = Application::select('group_id', 'fee_paid', 'concession')
+            ->join('groups', 'groups.id', 'group_id')
+            ->where('paid_at', now()->format('Y-m-d'))
+            ->get();
+
+
+        return view('admission.dashboard', compact('applications', 'recentpayments'));
     }
 
     /**
@@ -49,8 +55,6 @@ class LibraryRuleController extends Controller
     public function edit(string $id)
     {
         //
-        $libraryRule = LibraryRule::find($id);
-        return view('librarian.library-rules.edit', compact('libraryRule'));
     }
 
     /**
@@ -59,19 +63,6 @@ class LibraryRuleController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $request->validate([
-            'max_books' => 'required',
-            'max_days' => 'required',
-            'fine_per_day' => 'required',
-        ]);
-        try {
-            $libraryRule = LibraryRule::find($id);
-            $libraryRule->update($request->all());
-            return redirect()->route('librarian.library-rules.index')->with('success', 'Successfully updated');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors($e->getMessage());
-            // something went wrong
-        }
     }
 
     /**

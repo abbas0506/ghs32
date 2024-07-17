@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\librarian;
+namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
 
