@@ -1,62 +1,104 @@
 @extends('layouts.admission')
 @section('page-content')
-<!-- page title -->
-<div class="flexrow row-mid-left txt-m bg-teal px-5 py-2 txt-white auto-col">
-    <div class="mr-5">
-        <span class='text-light'>Applications</span>
-        <span class='bage badge-pill badge-success ml-2 p-0 px-2 txt-s'>{{$applications->count()}}</span>
+<div class="container bg-slate-100">
+    <!--welcome  -->
+    <div class="flex items-center">
+        <div class="flex-1">
+            <div class="bread-crumb">
+                <div>Admission Portal</div>
+                <div>/</div>
+                <div>Dashboard</div>
+            </div>
+        </div>
+        <div class="text-slate-500">{{ today()->format('d/m/Y') }}</div>
     </div>
-    <div class="mx-3 txt-s"><i data-feather='thermometer' class="feather-small mx-1"></i>{{$applications->where('group_id',1)->count()}}</div>
-    <div class="mx-3 txt-s"><i data-feather='tool' class="feather-small mx-1"></i>{{$applications->where('group_id',2)->count()}}</div>
-    <div class="mx-3 txt-s"><i data-feather='monitor' class="feather-small mx-1"></i>{{$applications->where('group_id',3)->count()}}</div>
-    <div class="ml-5"><i data-feather='clock' class="feather-small mx-1"></i><span class="txt-s">{{now()->format('d-m-Y')}}</span>
-        <span class="ml-3 txt-s">
-            <i data-feather='users' class="feather-small"></i>
-            {{$recentpayments->count()}}
-        </span>
-        <span class="txt-s mx-1">::</span>
-        <span class="txt-s text-warning">Rs.{{$recentpayments->sum('fee')-$recentpayments->sum('concession')}}</span>
+    <!-- pallets -->
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-3">
+        <a href="" class="pallet-box">
+            <div class="flex-1 ">
+                <div class="title">Applications</div>
+                <div class="flex items-center">
+                    <div class="h2 mr-8">{{ $applications->count() }}</div>
+                    <i class="bi-arrow-up text-green-700 text-sm"></i>
+                    <p class="text-green-700 text-sm">{{ $applications->where('created_at', today())->count() }}</p>
+                </div>
+            </div>
+            <div class="ico bg-teal-100">
+                <i class="bi bi-person text-teal-600"></i>
+            </div>
+        </a>
+        <a href="" class="pallet-box">
+            <div class="flex-1">
+                <div class="title">Fee</div>
+                <div class="flex items-center">
+                    <div class="h2 mr-8"> {{ $applications->sum('fee_paid') }}</div>
+                    <i class="bi-arrow-up text-green-700 text-sm"></i>
+                    <p class="text-green-700 text-sm">{{ $applications->where('paid_at', today())->sum('fee_paid') }}</p>
+                </div>
+            </div>
+            <div class="ico bg-blue-100">
+                <i class="bi bi-currency-rupee text-blue-600"></i>
+            </div>
+        </a>
+        <a href="" class="pallet-box">
+            <div class="flex-1">
+                <div class="title">Objections</div>
+                <div class="flex items-center">
+                    <div class="h2 mr-8"> {{ $applications->whereNotNull('objection')->count() }}</div>
+                    <i class="bi-arrow-up text-red-600 text-sm"></i>
+                    <p class="text-red-600 text-sm">{{ $applications->where('created_at', today())->whereNotNull('objection')->count() }}</p>
+                </div>
+            </div>
+            <div class="ico bg-red-100">
+                <i class="bi bi-question text-red-600"></i>
+            </div>
+        </a>
+        <a href="" class="pallet-box">
+            <div class="flex-1">
+                <div class="title">High Acheivers</div>
+                <div class="flex items-center">
+                    <div class="h2 mr-8"> {{ $applications->where('obtained','>',1000)->count() }}</div>
+                    <i class="bi-arrow-up text-green-700 text-sm"></i>
+                    <p class="text-green-700 text-sm">{{ $applications->where('created_at', today())->where('obtained','>',1000)->count() }}</p>
+                </div>
+            </div>
+            <div class="ico bg-green-100">
+                <i class="bi bi-hand-thumbs-up text-green-600"></i>
+            </div>
+        </a>
+
 
     </div>
-</div>
 
-<div class="flexrow my-4 mx-5">
-    <input type="text" class='input-rounded' placeholder="Search" oninput="search(event)"><i data-feather='search' class="feather-small" style="position:relative; right:24; top:4px"></i>
-    <div class="flexcol border-0 circular-25 centered bg-orange"><a href="{{route('applications.create')}}" class="text-light"><i data-feather='user-plus' class="feather-xsmall mx-1" style="position:relative; margin-left:5px; top:-2px"></i></a></div>
-    <div class="ml-2">Create New</div>
-</div>
-<!-- display record save, del, update message if any -->
-@if ($errors->any())
-<div class="alert alert-danger mx-5">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-<br />
-@elseif(session('success'))
-<div class="alert alert-success mx-5">
-    {{session('success')}}
-</div>
-<br />
+    @php $sr=1; @endphp
+    <div class="overflow-x-auto w-full mt-8">
 
-@endif
-<!-- page content -->
-<div class="flex row pl-2 mx-5 mb-2 txt-b txt-grey">
-    <div class="flexcol col-mid-left hw-10">Form </div>
-    <div class="flexcol col-mid-left hw-30">Name </div>
-    <div class="flexcol col-mid-left hw-15">Marks </div>
-    <div class="flexcol col-mid-left hw-15">Group </div>
-    <div class="flexcol col-mid-left hw-10">Scrutiny </div>
-    <div class="flexcol col-center hw-10">Fee</div>
-
-    <div class="flexcol col-mid-left hw-10"> <i data-feather='more-horizontal' class="feather-small mx-4"></i></div>
+        <table class="table-fixed borderless w-full">
+            <thead>
+                <tr class="border-b">
+                    <th class="w-8">Sr</th>
+                    <th class="w-40 text-left">Group</th>
+                    <th class="w-16">Total</th>
+                    <th class="w-12">Objectioned</th>
+                    <th class="w-12">Finalized</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($groups as $group)
+                <tr class="tr text-sm border-b">
+                    <td>{{$sr++}}</td>
+                    <td class="text-left">
+                        <a href="#" class="link">{{ $group->name }}</a>
+                    </td>
+                    <td>{{ $group->applications()->count() }} @if($group->applications()->today()->count()) <span class="text-green-600 text-xs pl-2">{{ $group->applications()->today()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
+                    <td>{{ $group->applications()->objectioned()->count() }}</td>
+                    <td>{{ $group->applications()->feepaid()->count() }} @if($group->applications()->feepaid()->recentlyPaid()->count())<span class="text-green-600 text-xs pl-2">{{ $group->applications()->today()->feepaid()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
-
-</div>
-
-
 
 @endsection
 @section('script')

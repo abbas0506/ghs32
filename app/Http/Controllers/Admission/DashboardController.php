@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admission;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
+use App\Models\Group;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,14 +16,9 @@ class DashboardController extends Controller
     {
         //
         $applications = Application::orderBy('id', 'desc')->get();
-        //$recentpayers =application::where('paidAt', now()->format('Y-m-d'))->get('id', 'group_id');
-        $recentpayments = Application::select('group_id', 'fee_paid', 'concession')
-            ->join('groups', 'groups.id', 'group_id')
-            ->where('paid_at', now()->format('Y-m-d'))
-            ->get();
+        $groups = Group::all();
 
-
-        return view('admission.dashboard', compact('applications', 'recentpayments'));
+        return view('admission.dashboard', compact('applications', 'groups'));
     }
 
     /**

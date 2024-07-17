@@ -51,12 +51,12 @@ class Application extends Model
 
     public function scopeToday($query)
     {
-        return $query->whereDate('updated_at', today());
+        return $query->whereDate('created_at', today());
     }
 
     public function scopeUnderprocess($query)
     {
-        return $query->whereNull('objection')->whereNull('fee');
+        return $query->whereNull('objection')->whereNull('fee_paid');
     }
     public function scopeObjectioned($query)
     {
@@ -64,8 +64,13 @@ class Application extends Model
     }
     public function scopeFeepaid($query)
     {
-        return $query->whereNotNull('fee');
+        return $query->whereNotNull('fee_paid');
     }
+    public function scopeRecentlyPaid($query)
+    {
+        return $query->whereDate('paid_at', today());
+    }
+
     public function scopeMedical($query)
     {
         return $query->where('group_id', 1);
