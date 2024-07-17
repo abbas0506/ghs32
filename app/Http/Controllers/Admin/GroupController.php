@@ -1,21 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Clas;
-use App\Models\Grade;
-use App\Models\Teacher;
+use App\Models\Group;
 use Exception;
 use Illuminate\Http\Request;
 
-class ClassController extends Controller
+class GroupController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         //
-        $classes = Clas::query()->active()->get();
-        return view('admin.classes.index', compact('classes'));
+        $groups = Group::all();
+        return view('admin.groups.index', compact('groups'));
     }
 
     /**
@@ -24,9 +25,7 @@ class ClassController extends Controller
     public function create()
     {
         //
-        $grades = Grade::where('id', '>', 5)->get();
-        $teachers = Teacher::all();
-        return view('admin.classes.create', compact('grades', 'teachers'));
+        return view('admin.groups.create');
     }
 
     /**
@@ -35,18 +34,15 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         //
-
         $request->validate([
-            'grade_id' => 'required|numeric',
-            'section_label' => 'required',
-            'induction_year' => 'required|numeric',
-            'incharge_id' => 'nullable|numeric',
+            'name' => 'required',
+            'short' => 'required',
+            'fee' => 'required|numeric|min:0'
         ]);
 
-
         try {
-            Clas::create($request->all());
-            return redirect()->route('admin.classes.index')->with('success', 'Successfully created');
+            Group::create($request->all());
+            return redirect()->route('admin.groups.index')->with('success', 'Successfully created');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -60,8 +56,6 @@ class ClassController extends Controller
     {
         //
 
-        $clas = Clas::find($id);
-        return view('admin.classes.show', compact('clas'));
     }
 
     /**
@@ -69,8 +63,9 @@ class ClassController extends Controller
      */
     public function edit(string $id)
     {
-        $model = Clas::find($id);
-        return view('admin.classes.edit', compact('model'));
+        //
+        $group = Group::find($id);
+        return view('admin.groups.edit', compact('group'));
     }
 
     /**
@@ -82,23 +77,25 @@ class ClassController extends Controller
         $request->validate([
             'name' => 'required',
             'short' => 'required',
+            'fee' => 'required|numeric|min:0'
         ]);
 
-        $model = Clas::find($id);
+        $model = Group::find($id);
         try {
             $model->update($request->all());
-            return redirect()->route('admin.classes.index')->with('success', 'Successfully updated');
+            return redirect()->route('admin.groups.index')->with('success', 'Successfully updated');
         } catch (Exception $ex) {
             return redirect()->back()->withErrors($ex->getMessage());
         }
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         //
-        $model = Clas::findOrFail($id);
+        $model = Group::findOrFail($id);
         try {
             $model->delete();
             return redirect()->back()->with('success', 'Successfully deleted');

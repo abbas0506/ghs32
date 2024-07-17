@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\ClassController;
-use App\Http\Controllers\admin\GradeController;
-use App\Http\Controllers\admin\GroupController;
-use App\Http\Controllers\admin\StudentController;
-use App\Http\Controllers\admin\SubjectController;
-use App\Http\Controllers\admin\TeacherController;
-use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ClassController;
+use App\Http\Controllers\Admin\GradeController;
+use App\Http\Controllers\Admin\GroupController;
+use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admission\ApplicationController as AdmissionApplicationController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
