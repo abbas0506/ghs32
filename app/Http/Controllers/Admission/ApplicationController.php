@@ -16,6 +16,8 @@ class ApplicationController extends Controller
     public function index()
     {
         //
+        $applications = Application::all();
+        return view('admission.applications.index', compact('applications'));
     }
 
     /**
@@ -25,7 +27,7 @@ class ApplicationController extends Controller
     {
         //
         $groups = Group::all();
-        return view('applications.create', compact('groups'));
+        return view('admission.applications.create', compact('groups'));
     }
 
     /**
@@ -58,10 +60,6 @@ class ApplicationController extends Controller
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
         }
-
-
-        return redirect()->route('registration.index')
-            ->with('success', 'Registration created successfully.');
     }
 
     /**
@@ -70,6 +68,8 @@ class ApplicationController extends Controller
     public function show(string $id)
     {
         //
+        $application = Application::find($id);
+        return view('admission.applications.show', compact('application'));
     }
 
     /**
@@ -78,6 +78,9 @@ class ApplicationController extends Controller
     public function edit(string $id)
     {
         //
+        $application = Application::find($id);
+        $groups = Group::all();
+        return view('admission.applications.edit', compact('application', 'groups'));
     }
 
     /**
@@ -86,6 +89,29 @@ class ApplicationController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'father' => 'required',
+            'phone' => 'required',
+            'bise_name' => 'required',
+            'rollno' => 'required',
+            'obtained' => 'required',
+            'total' => 'required',
+            'pass_year' => 'required',
+            'objection' => 'nullable',
+            // 'concession' => 'required',
+            'group_id' => 'required',
+        ]);
+
+        try {
+            $application = Application::find($id);
+
+            $application->update($request->all());
+            return redirect()->route('admission.applications.index')->with('success', 'Application # ' . $application->rollno . ' successfully updated');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+            // something went wrong
+        }
     }
 
     /**

@@ -14,7 +14,7 @@
     </div>
     <!-- pallets -->
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-3">
-        <a href="" class="pallet-box">
+        <a href="{{ route('admission.applications.index') }}" class="pallet-box">
             <div class="flex-1 ">
                 <div class="title">Applications</div>
                 <div class="flex items-center">
@@ -27,7 +27,7 @@
                 <i class="bi bi-person text-teal-600"></i>
             </div>
         </a>
-        <a href="" class="pallet-box">
+        <a href="{{ route('admission.fee.index') }}" class="pallet-box">
             <div class="flex-1">
                 <div class="title">Fee</div>
                 <div class="flex items-center">
@@ -36,11 +36,11 @@
                     <p class="text-green-700 text-sm">{{ $applications->where('paid_at', today())->sum('fee_paid') }}</p>
                 </div>
             </div>
-            <div class="ico bg-blue-100">
-                <i class="bi bi-currency-rupee text-blue-600"></i>
+            <div class="ico bg-sky-100">
+                <i class="bi bi-currency-rupee text-sky-600"></i>
             </div>
         </a>
-        <a href="" class="pallet-box">
+        <a href="{{ route('admission.objections.index') }}" class="pallet-box">
             <div class="flex-1">
                 <div class="title">Objections</div>
                 <div class="flex items-center">
@@ -53,13 +53,13 @@
                 <i class="bi bi-question text-red-600"></i>
             </div>
         </a>
-        <a href="" class="pallet-box">
+        <a href="{{ route('admission.high-achievers.index') }}" class="pallet-box">
             <div class="flex-1">
-                <div class="title">High Acheivers</div>
+                <div class="title">High Achievers</div>
                 <div class="flex items-center">
-                    <div class="h2 mr-8"> {{ $applications->where('obtained','>',1000)->count() }}</div>
+                    <div class="h2 mr-8"> {{ $applications->where('obtained','>=',1000)->count() }}</div>
                     <i class="bi-arrow-up text-green-700 text-sm"></i>
-                    <p class="text-green-700 text-sm">{{ $applications->where('created_at', today())->where('obtained','>',1000)->count() }}</p>
+                    <p class="text-green-700 text-sm">{{ $applications->where('created_at', today())->where('obtained','>=',1000)->count() }}</p>
                 </div>
             </div>
             <div class="ico bg-green-100">
@@ -88,7 +88,7 @@
                 <tr class="tr text-sm border-b">
                     <td>{{$sr++}}</td>
                     <td class="text-left">
-                        <a href="#" class="link">{{ $group->name }}</a>
+                        <a href="{{ route('admission.group.applications.index',$group) }}" class="link">{{ $group->name }}</a>
                     </td>
                     <td>{{ $group->applications()->count() }} @if($group->applications()->today()->count()) <span class="text-green-600 text-xs pl-2">{{ $group->applications()->today()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
                     <td>{{ $group->applications()->objectioned()->count() }}</td>

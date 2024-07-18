@@ -43,9 +43,9 @@ class Application extends Model
     }
     public function status()
     {
-        $status = 0;    //under process
-        if ($this->objection != null) $status = 1; //objection over
-        elseif ($this->fee != null) $status = 2;   //fee paid
+        $status = '';    //under process
+        if ($this->objection != null) $status = $this->objection; //objection over
+        elseif ($this->fee_paid != null) $status = 'finalized';   //fee paid
         return $status;
     }
 
@@ -71,24 +71,8 @@ class Application extends Model
         return $query->whereDate('paid_at', today());
     }
 
-    public function scopeMedical($query)
+    public function obtainedPercentage()
     {
-        return $query->where('group_id', 1);
-    }
-    public function scopeEngg($query)
-    {
-        return $query->where('group_id', 2);
-    }
-    public function scopeIcs($query)
-    {
-        return $query->where('group_id', 3);
-    }
-    public function scopeArts($query)
-    {
-        return $query->where('group_id', 4);
-    }
-    public function scopeGroup($query, $id)
-    {
-        return $query->where('group_id', $id);
+        return round($this->obtained / $this->total * 100, 2);
     }
 }

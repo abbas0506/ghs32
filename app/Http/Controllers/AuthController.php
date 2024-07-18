@@ -49,8 +49,11 @@ class AuthController extends Controller
         // 
         if (Auth::attempt($credentials)) {
             //user verified
-            if (Auth::user()->hasRole('office'))
+            if (Auth::user()->hasRole('admission')) {
+                session(['role' => 'admission']);
                 return redirect('admission');
+            }
+
             // echo "validated";
         } else {
             //user not verified

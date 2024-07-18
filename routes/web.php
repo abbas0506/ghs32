@@ -10,6 +10,10 @@ use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admission\ApplicationController as AdmissionApplicationController;
 use App\Http\Controllers\Admission\DashboardController;
+use App\Http\Controllers\Admission\FeeController as AdmissionFeeController;
+use App\Http\Controllers\Admission\GroupApplicationController;
+use App\Http\Controllers\Admission\HighAchieverController;
+use App\Http\Controllers\Admission\ObjectionController as AdmissionObjectionController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\assistant\BookIssuanceController;
@@ -136,8 +140,13 @@ Route::group(['prefix' => 'principal', 'as' => 'principal.', 'middleware' => ['r
     Route::get('teacher-evaluation-add/{teacher}', [TeacherEvaluationController::class, 'add'])->name('teacher-evaluation.add');
 });
 
-Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:office']], function () {
+Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {
     Route::get('/', [DashboardController::class, 'index']);
+    Route::resource('applications', AdmissionApplicationController::class);
+    Route::resource('group.applications', GroupApplicationController::class);
+    Route::resource('fee', AdmissionFeeController::class);
+    Route::resource('objections', AdmissionObjectionController::class);
+    Route::resource('high-achievers', HighAchieverController::class);
 });
 
 

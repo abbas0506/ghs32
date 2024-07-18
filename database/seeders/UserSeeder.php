@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        $user->assignRole('office');
+        $user->assignRole('admission');
 
         $user = User::create([
             'login_id' => 'library@ghsscb.edu.pk',

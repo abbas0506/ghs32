@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\dep;
+namespace App\Http\Controllers\Admission;
 
 use App\Http\Controllers\Controller;
+use App\Models\Application;
+use Exception;
 use Illuminate\Http\Request;
 
-class DocumentController extends Controller
+class ObjectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,6 +15,8 @@ class DocumentController extends Controller
     public function index()
     {
         //
+        $applications = Application::whereNotNull('objection')->get();
+        return view('admission.objections.index', compact('applications'));
     }
 
     /**
@@ -45,6 +49,8 @@ class DocumentController extends Controller
     public function edit(string $id)
     {
         //
+        $application = Application::find($id);
+        return view('admission.objections.edit', compact('application'));
     }
 
     /**
@@ -53,6 +59,17 @@ class DocumentController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'objection' => 'nullable',
+        ]);
+
+        $application = Application::find($id);
+        try {
+            $application->update($request->all());
+            return redirect()->route('admission.objections.index')->with('success', 'Objection on ' . $application->rollno . ' Successfully updated ');
+        } catch (Exception $ex) {
+            return redirect()->back()->withErrors($ex->getMessage());
+        }
     }
 
     /**

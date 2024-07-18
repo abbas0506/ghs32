@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\dep;
+namespace App\Http\Controllers\Admission;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
-use App\Models\Session;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -16,8 +15,8 @@ class FeeController extends Controller
     public function index()
     {
         //
-        $session = Session::find(session('session_id'));
-        return view('dep.fee.index', compact('session'));
+        $applications = Application::whereNull('objection')->get();
+        return view('admission.fee.index', compact('applications'));
     }
 
     /**
@@ -26,8 +25,6 @@ class FeeController extends Controller
     public function create()
     {
         //
-        $session = Session::find(session('session_id'));
-        return view('dep.fee.create', compact('session'));
     }
 
     /**
@@ -53,7 +50,7 @@ class FeeController extends Controller
     {
         //
         $application = Application::find($id);
-        return view('dep.fee.edit', compact('application'));
+        return view('admission.fee.edit', compact('application'));
     }
 
     /**
@@ -63,13 +60,16 @@ class FeeController extends Controller
     {
         //
         $request->validate([
-            'fee' => 'required|numeric|min:0',
+            'fee_paid' => 'required|numeric|min:0',
+        ]);
+        $request->merge([
+            'paid_at' => now(),
         ]);
 
-        $model = Application::find($id);
+        $application = Application::find($id);
         try {
-            $model->update($request->all());
-            return redirect()->route('dep.applications.index')->with('success', 'Successfully updated : fee');
+            $application->update($request->all());
+            return redirect()->route('admission.fee.index')->with('success', 'Fee for ' . $application->rollno . ' Successfully updated ');
         } catch (Exception $ex) {
             return redirect()->back()->withErrors($ex->getMessage());
         }
@@ -81,14 +81,5 @@ class FeeController extends Controller
     public function destroy(string $id)
     {
         //
-        $model = Application::find($id);
-        try {
-            $model->update([
-                'fee' => null,
-            ]);
-            return redirect()->route('dep.fee.index')->with('success', 'Successfully removed');
-        } catch (Exception $ex) {
-            return redirect()->back()->withErrors($ex->getMessage());
-        }
     }
 }

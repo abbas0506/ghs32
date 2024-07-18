@@ -6,7 +6,7 @@
 
 @section('sidebar')
 <x-sidebars.admission></x-sidebars.admission>
-
+@endsection
 
 @section('body')
 
