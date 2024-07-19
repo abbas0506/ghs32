@@ -16,7 +16,7 @@ class LibraryRuleController extends Controller
     {
         //
         $libraryRules = LibraryRule::all();
-        return view('librarian.library-rules.index', compact('libraryRules'));
+        return view('library.library-rules.index', compact('libraryRules'));
     }
 
     /**
@@ -50,7 +50,7 @@ class LibraryRuleController extends Controller
     {
         //
         $libraryRule = LibraryRule::find($id);
-        return view('librarian.library-rules.edit', compact('libraryRule'));
+        return view('library.library-rules.edit', compact('libraryRule'));
     }
 
     /**
@@ -67,7 +67,7 @@ class LibraryRuleController extends Controller
         try {
             $libraryRule = LibraryRule::find($id);
             $libraryRule->update($request->all());
-            return redirect()->route('librarian.library-rules.index')->with('success', 'Successfully updated');
+            return redirect()->route('library.library-rules.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong

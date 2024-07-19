@@ -26,7 +26,7 @@ class BookController extends Controller
             $books = Book::all();
 
         $bookDomains = BookDomain::all();
-        return view('librarian.books.index', compact('books', 'bookDomains', 'filtered'));
+        return view('library.books.index', compact('books', 'bookDomains', 'filtered'));
     }
 
     /**
@@ -51,7 +51,7 @@ class BookController extends Controller
     public function show(string $id)
     {
         $book = Book::find($id);
-        return view('librarian.books.show', compact('book'));
+        return view('library.books.show', compact('book'));
     }
 
     /**
@@ -64,7 +64,7 @@ class BookController extends Controller
         $languages = Language::all();
         $book_domains = BookDomain::all();
         $book_racks = BookRack::all();
-        return view('librarian.books.edit', compact('book', 'languages', 'book_domains', 'book_racks'));
+        return view('library.books.edit', compact('book', 'languages', 'book_domains', 'book_racks'));
     }
 
     /**
@@ -112,6 +112,6 @@ class BookController extends Controller
     public function search(Request $request)
     {
         $books = Book::where('title', 'like', '%' . $request->searchby . '%')->get();
-        return redirect()->route('librarian.books.index')->with('books', $books);
+        return redirect()->route('library.books.index')->with('books', $books);
     }
 }

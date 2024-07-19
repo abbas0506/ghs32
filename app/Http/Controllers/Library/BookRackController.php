@@ -16,9 +16,10 @@ class BookRackController extends Controller
     public function index()
     {
         //
-        $bookRacks = BookRack::has('books')->get();
+        // $bookRacks = BookRack::has('books')->get();
+        $bookRacks = BookRack::all();
         $books = Book::all();
-        return view('librarian.book-racks.index', compact('bookRacks', 'books'));
+        return view('library.book-racks.index', compact('bookRacks', 'books'));
     }
 
     /**
@@ -27,7 +28,7 @@ class BookRackController extends Controller
     public function create()
     {
         //
-        return view('librarian.book-racks.create');
+        return view('library.book-racks.create');
     }
 
     /**
@@ -41,7 +42,7 @@ class BookRackController extends Controller
         ]);
         try {
             BookRack::create($request->all());
-            return redirect()->route('librarian.book-racks.index')->with('success', 'Successfully updated');
+            return redirect()->route('library.book-racks.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -55,7 +56,7 @@ class BookRackController extends Controller
     {
         //
         $bookRack = $BookRack;
-        return view('librarian.book-racks.show', compact('bookRack'));
+        return view('library.book-racks.show', compact('bookRack'));
     }
 
     /**
@@ -65,7 +66,7 @@ class BookRackController extends Controller
     {
         //
         $bookRack = BookRack::find($id);
-        return view('librarian.book-racks.edit', compact('bookRack'));
+        return view('library.book-racks.edit', compact('bookRack'));
     }
 
     /**
@@ -79,7 +80,7 @@ class BookRackController extends Controller
         ]);
         try {
             $BookRack->update($request->all());
-            return redirect()->route('librarian.book-racks.index')->with('success', 'Successfully updated');
+            return redirect()->route('library.book-racks.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -104,7 +105,7 @@ class BookRackController extends Controller
     {
         $bookRack = BookRack::find($id);
 
-        $pdf = PDF::loadView('librarian.book-racks.preview', compact('bookRack'))->setPaper('a4', 'portrait');
+        $pdf = PDF::loadview('library.book-racks.preview', compact('bookRack'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = Str::lower($bookRack->title) . "-list of books.pdf";
         return $pdf->stream($file);

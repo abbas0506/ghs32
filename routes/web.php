@@ -108,6 +108,7 @@ Route::resource('applications', AdmissionApplicationController::class);
 Route::post('login', [AuthController::class, 'login']);
 Route::view('login/library', 'login.library');
 Route::view('login/admission-portal', 'login.admission-portal');
+Route::view('login/library', 'login.library');
 
 Route::post('login/as', [AuthController::class, 'loginAs'])->name('login.as');
 Route::get('signout', [AuthController::class, 'signout'])->name('signout');
@@ -174,7 +175,7 @@ Route::group(['prefix' => 'dep', 'as' => 'dep.', 'middleware' => ['role:dep']], 
     Route::get('pdf/finalized', [DepPdfController::class, 'finalized']);
 });
 
-Route::group(['prefix' => 'librarian', 'as' => 'librarian.', 'middleware' => ['role:librarian']], function () {
+Route::group(['prefix' => 'library', 'as' => 'library.', 'middleware' => ['role:librarian']], function () {
     Route::get('/', [LibrayInchargeController::class, 'index']);
     Route::resource('books', LibrarianBookController::class);
     Route::resource('book-domains', BookDomainController::class);

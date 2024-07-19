@@ -20,7 +20,7 @@ class QrCodeController extends Controller
     {
         //
         $bookRacks = BookRack::has('books')->get();
-        return view('librarian.qrcodes.index', compact('bookRacks'));
+        return view('library.qrcodes.index', compact('bookRacks'));
     }
 
     /**
@@ -79,7 +79,7 @@ class QrCodeController extends Controller
         ]);
         try {
             $books = Book::whereBetween('id', [$request->from, $request->to])->where('book_rack_id', $request->book_rack_id)->get();
-            return redirect()->route('librarian.qr.range.preview')->with('books', $books);
+            return redirect()->route('library.qr.range.preview')->with('books', $books);
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -90,7 +90,7 @@ class QrCodeController extends Controller
 
         if (session('books')) {
             $books = session('books');
-            $pdf = PDF::loadView('librarian.qrcodes.preview', compact('books'))->setPaper('a4', 'portrait');
+            $pdf = PDF::loadView('library.qrcodes.preview', compact('books'))->setPaper('a4', 'portrait');
             $pdf->set_option("isPhpEnabled", true);
 
             $file = "QrCode.pdf";
@@ -106,7 +106,7 @@ class QrCodeController extends Controller
         ]);
         try {
             $specificQr = $request->qr;
-            return redirect()->route('librarian.qr.specific.preview')->with('specificQr', $specificQr);
+            return redirect()->route('library.qr.specific.preview')->with('specificQr', $specificQr);
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -117,7 +117,7 @@ class QrCodeController extends Controller
         if (session('specificQr')) {
             $specificQr = session('specificQr');
 
-            $pdf = PDF::loadView('librarian.qrcodes.specific', compact('specificQr'))->setPaper('a4', 'portrait');
+            $pdf = PDF::loadView('library.qrcodes.specific', compact('specificQr'))->setPaper('a4', 'portrait');
             $pdf->set_option("isPhpEnabled", true);
             $file = Str::lower($specificQr) . "-qr.pdf";
             return $pdf->stream($file);
@@ -132,7 +132,7 @@ class QrCodeController extends Controller
     {
         $bookRack = BookRack::find($id);
         $books = $bookRack->books;
-        $pdf = PDF::loadView('librarian.qrcodes.preview', compact('books'))->setPaper('a4', 'portrait');
+        $pdf = PDF::loadView('library.qrcodes.preview', compact('books'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = Str::lower($bookRack->label) . "-qr.pdf";
         return $pdf->stream($file);

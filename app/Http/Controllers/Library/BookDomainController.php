@@ -17,7 +17,7 @@ class BookDomainController extends Controller
     {
         //
         $bookDomains = BookDomain::all();
-        return view('librarian.book-domains.index', compact('bookDomains'));
+        return view('library.book-domains.index', compact('bookDomains'));
     }
 
     /**
@@ -26,7 +26,7 @@ class BookDomainController extends Controller
     public function create()
     {
         //
-        return view('librarian.book-domains.create');
+        return view('library.book-domains.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class BookDomainController extends Controller
         ]);
         try {
             BookDomain::create($request->all());
-            return redirect()->route('librarian.book-domains.index')->with('success', 'Successfully updated');
+            return redirect()->route('library.book-domains.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -53,7 +53,7 @@ class BookDomainController extends Controller
     public function show(BookDomain $bookDomain)
     {
         //
-        return view('librarian.book-domains.show', compact('bookDomain'));
+        return view('library.book-domains.show', compact('bookDomain'));
     }
 
     /**
@@ -62,7 +62,7 @@ class BookDomainController extends Controller
     public function edit(BookDomain $bookDomain)
     {
         //
-        return view('librarian.book-domains.edit', compact('bookDomain'));
+        return view('library.book-domains.edit', compact('bookDomain'));
     }
 
     /**
@@ -76,7 +76,7 @@ class BookDomainController extends Controller
         ]);
         try {
             $bookDomain->update($request->all());
-            return redirect()->route('librarian.book-domains.index')->with('success', 'Successfully updated');
+            return redirect()->route('library.book-domains.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong

@@ -10,25 +10,25 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('books.index')}}" class="flex items-center p-2">
+                <a href="{{route('library.books.index')}}" class="flex items-center p-2">
                     <i class="bi bi-book"></i>
                     <span class="ml-3">Books</span>
                 </a>
             </li>
             <li>
-                <a href="{{route('book-domains.index')}}" class="flex items-center p-2">
+                <a href="{{route('library.book-domains.index')}}" class="flex items-center p-2">
                     <i class="bi-diagram-3"></i>
                     <span class="ml-3">Domains</span>
                 </a>
             </li>
             <li>
-                <a href="{{route('book-racks.index')}}" class="flex items-center p-2">
+                <a href="{{route('library.book-racks.index')}}" class="flex items-center p-2">
                     <i class="bi bi-hdd-rack"></i>
                     <span class="ml-3">Racks</span>
                 </a>
             </li>
             <li>
-                <a href="{{route('library-rules.index')}}" class="flex items-center p-2">
+                <a href="{{route('library.library-rules.index')}}" class="flex items-center p-2">
                     <i class="bi bi-bookmark-check"></i>
                     <span class="ml-3">Library Rules</span>
                 </a>
@@ -42,7 +42,7 @@
             </li>
 
             <li>
-                <a href="{{route('qrcodes.index')}}" class="flex items-center p-2">
+                <a href="{{route('library.qrcodes.index')}}" class="flex items-center p-2">
                     <i class="bi bi-qr-code"></i>
                     <span class="ml-3">Specific QR</span>
                 </a>

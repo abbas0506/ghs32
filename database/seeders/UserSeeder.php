@@ -38,6 +38,7 @@ class UserSeeder extends Seeder
 
         $user->assignRole('librarian');
 
+
         $teacher = Teacher::create([
             'name' => "Muhammad Abbas",
             'father' => "Muhammad Yousaf",

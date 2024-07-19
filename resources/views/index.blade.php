@@ -5,6 +5,14 @@
 @endsection
 
 @section('body')
+
+<!-- page message -->
+@if($errors->any())
+<x-message :errors='$errors'></x-message>
+@else
+<x-message></x-message>
+@endif
+
 <section class="w-screen h-screen">
     <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full pt-16 bg-teal-800">
         <div class="flex flex-1 justify-end items-center">
@@ -37,11 +45,11 @@
             </div>
             <h3 class="mt-3 text-lg">Admission Portal</h3>
         </a>
-        <a href="" class="flex flex-col justify-center items-center">
+        <a href="{{ url('login/library') }}" class="flex flex-col justify-center items-center">
             <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
                 <i class="bi bi-book text-2xl text-orange-400"></i>
             </div>
-            <h3 class="mt-3 text-lg">Digital Library</h3>
+            <h3 class="mt-3 text-lg">Library System</h3>
         </a>
         <a href="" class="flex flex-col justify-center items-center">
             <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">

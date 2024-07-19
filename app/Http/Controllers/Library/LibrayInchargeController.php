@@ -20,7 +20,7 @@ class LibrayInchargeController extends Controller
         $user = Auth::user();
         $assistants = Assistant::all();
         $books = Book::all();
-        return view('librarian.index', compact('user', 'assistants', 'books'));
+        return view('library.dashboard', compact('user', 'assistants', 'books'));
     }
 
     /**
