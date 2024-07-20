@@ -136,6 +136,7 @@ class UserSeeder extends Seeder
             'userable_type' => 'App\Models\Teacher',
         ]);
         $user->assignRole('teacher');
+        $user->assignRole('librarian');
 
         // assistant 1
         $assistant = Assistant::create(['name' => 'Muzammil']);

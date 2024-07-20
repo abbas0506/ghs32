@@ -1,13 +1,15 @@
 @extends('layouts.library')
 @section('page-content')
 <div class="custom-container">
-    <h2>{{ $domain->name }}</h2>
+    <h2>Domains / {{ $domain->name }}</h2>
     <div class="bread-crumb">
         <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
-        <a href="{{route('library.books.index')}}">Books</a>
+        <a href="{{route('library.domains.index')}}">Domains </a>
         <div>/</div>
-        <div>{{ $domain->name }} ( {{$domain->books->count()}} )</div>
+        <div>{{ $domain->name }}</div>
+        <div>/</div>
+        <div>Books ( {{$domain->books->count()}} )</div>
     </div>
 
     <div class="mt-8">

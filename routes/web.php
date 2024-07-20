@@ -23,12 +23,16 @@ use App\Http\Controllers\Library\BookController;
 use App\Http\Controllers\Library\BookIssuanceController;
 use App\Http\Controllers\Library\RackController;
 use App\Http\Controllers\Library\BookReturnController;
+use App\Http\Controllers\Library\DashboardController as LibraryDashboardController;
 use App\Http\Controllers\Library\DomainBooksController;
 use App\Http\Controllers\Library\DomainController;
 use App\Http\Controllers\Library\LibrayInchargeController;
 use App\Http\Controllers\Library\QrCodeController;
 use App\Http\Controllers\Library\LibraryRuleController;
-
+use App\Http\Controllers\Library\PdfController;
+use App\Http\Controllers\Library\PrintController;
+use App\Http\Controllers\Library\RackBooksController;
+use App\Http\Controllers\Library\TeacherController as LibraryTeacherController;
 use App\Http\Controllers\principal\PrincipalController;
 
 use App\Http\Controllers\principal\TeacherController as PrincipalTeacherController;
@@ -87,11 +91,6 @@ Route::view('team', 'team');
 Route::view('blogs', 'blogs');
 Route::view('login', 'login');
 
-Route::get('login/as', function () {
-    $year = date('Y');
-    return view('login_as', compact('year'));
-});
-
 Route::resource('applications', AdmissionApplicationController::class);
 Route::post('login', [AuthController::class, 'login']);
 Route::view('login/library', 'login.library');
@@ -141,24 +140,23 @@ Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['r
 Route::group(
     ['prefix' => 'library', 'as' => 'library.', 'middleware' => ['role:librarian']],
     function () {
-        Route::get('/', [LibrayInchargeController::class, 'index']);
+        Route::get('/', [LibraryDashboardController::class, 'index']);
         Route::resource('books', BookController::class);
         Route::resource('domains', DomainController::class);
         Route::resource('domain.books', DomainBooksController::class);
-
         Route::resource('racks', RackController::class);
-        Route::get('racks/print/{rack}', [RackController::class, 'print'])->name('racks.print');
+        Route::resource('rack.books', RackBooksController::class);
         Route::resource('library-rules', LibraryRuleController::class);
-        Route::get('book/search', [BookController::class, 'search'])->name('books.search');
-        Route::resource('qrcodes', QrCodeController::class);
+        Route::resource('teachers', LibraryTeacherController::class);
 
-        Route::get('qrcodes/books/preview/{rack}', [QrCodeController::class, 'previewBooksQrByRack'])->name('qrcodes.books.preview');
+        Route::get('print', [PrintController::class, 'index']);
 
-        Route::post('qr/range/create', [QrCodeController::class, 'createRangeQr'])->name('qr.range.create');
-        Route::get('qr/range/preview', [QrCodeController::class, 'previewRangeQr'])->name('qr.range.preview');
+        Route::get('print/teachers/list', [PrintController::class, 'printTeachersList'])->name('print.teachers.list');
+        Route::get('print/rack-books/{rack}/list', [PrintController::class, 'printRackBooksList'])->name('print.rack-books.list');
 
-        Route::post('qr/specific/create', [QrCodeController::class, 'createSpecificQr'])->name('qr.specific.create');
-        Route::get('qr/specific/preview', [QrCodeController::class, 'previewSpecificQr'])->name('qr.specific.preview');
+        Route::get('print/teachers/qr', [PrintController::class, 'printTeachersQr'])->name('print.teachers.qr');
+        Route::get('print/rack-books/{rack}/qr', [PrintController::class, 'printRackBooksQr'])->name('print.rack-books.qr');
+        Route::get('print/specific-qr', [PrintController::class, 'printSpecificQr'])->name('print.specific-qr');
 
         Route::get('book-issuance/scan', [BookIssuanceController::class, 'scan'])->name('book-issuance.scan');
         Route::post('book-issuance/scan', [BookIssuanceController::class, 'postScan'])->name('book-issuance.scan.post');
@@ -172,41 +170,5 @@ Route::group(
         Route::post('book-return/scan', [BookReturnController::class, 'postScan'])->name('book-return.scan.post');
         Route::get('book-return/confirm', [BookReturnController::class, 'confirm'])->name('book-return.confirm');
         Route::patch('book-return/confirm/{book_issuance}', [BookReturnController::class, 'postConfirm'])->name('book-return.confirm.post');
-
-        Route::get('qrcodes/books/preview/{rack}', [QRCodeController::class, 'previewBooksQrByRack'])->name('qrcodes.books.preview');
-        // Route::get('qrcodes/books/preview/{rack}', [QRCodeController::class, 'previewBooksQR'])->name('qrcodes.books.preview');
-        Route::get('qrcodes/teachers/preview', [QRCodeController::class, 'previewTeachersQR'])->name('qrcodes.teachers.preview');
-        Route::get('qrcodes/students/preview/{clas}', [QRCodeController::class, 'previewStudentsQR'])->name('qrcodes.students.preview');
     }
 );
-
-
-
-Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['role:teacher']], function () {
-    Route::get('/', [TeacherTeacherController::class, 'index']);
-    Route::get('qbank', [QbankController::class, 'index'])->name('qbank.index');
-    Route::resource('qbank/grades.subjects', GradeSubjectController::class);
-    Route::resource('qbank/subjects.chapters', SubjectChapterController::class);
-    Route::resource('qbank/chapters.short', ChapterShortController::class);
-    Route::resource('qbank/chapters.long', ChapterLongController::class);
-    Route::resource('qbank/chapters.mcq', ChapterMcqController::class);
-
-    Route::resource('tests', TestController::class);
-    Route::resource('tests.pdf', TestPdfController::class);
-
-    Route::get('test/annex/grade/{grade}', [TestController::class, 'annexGrade'])->name('tests.annex.grade');
-    Route::get('test/annex/subject/{subject}', [TestController::class, 'annexSubject'])->name('tests.annex.subject');
-    Route::resource('test-questions', TestQuestionController::class);
-    Route::get('test/questions/add/{test}/{questionType}', [TestQuestionController::class, 'add'])->name('tests.questions.add');
-    Route::get('test/{test}/questions/{q}/refresh',);
-    Route::resource('question-parts', TestQuestionPartController::class);
-    Route::get('test/questions/{part}/refresh', [TestQuestionPartController::class, 'refresh'])->name('tests.questions.parts.refresh');
-    Route::get('tests/{test}/anskey', [AnswerKeyController::class, 'show'])->name('tests.anskey.show');
-    Route::get('tests/{test}/anskey/pdf', [AnswerKeyController::class, 'pdf'])->name('tests.anskey.pdf');
-});
-
-Route::view('student/services', 'student_services.index');
-Route::get('student/services/selftest', [SelfTestController::class, 'index']);
-Route::get('student/services/selftest/{grade}/subjects', [SelfTestController::class, 'subjects'])->name('student.services.selftest.subjects');
-Route::get('student/services/selftest/grades/{subject}/chapters', [SelfTestController::class, 'chapters'])->name('student.services.selftest.chapters');
-Route::resource('student/services/selftest', SelfTestController::class);

@@ -1,22 +1,19 @@
 @extends('layouts.library')
 @section('page-content')
 <div class="custom-container">
-    <div class="flex items-center">
-        <div class="w-5/6">
-            <h2>{{ $domain->name }} / Book</h2>
-            <div class="bread-crumb">
-                <a href="{{url('library')}}">Dashoboard</a>
-                <div>/</div>
-                <a href="{{route('library.domain.books.index', $domain)}}">{{ $domain->name }}</a>
-                <div>/</div>
-                <div>Book</div>
-
-            </div>
-
-        </div>
+    <h2>Racks / {{ $rack->label }}</h2>
+    <div class="bread-crumb">
+        <a href="{{url('library')}}">Dashoboard</a>
+        <div>/</div>
+        <a href="{{route('library.racks.index')}}">Racks</a>
+        <div>/</div>
+        <a href="{{route('library.rack.books.index', $rack)}}">{{ $rack->label}}</a>
+        <div>/</div>
+        <div>Book</div>
     </div>
+
     <div class="container px-5 md:px-48 mt-2 relative">
-        <a href="{{ route('library.domain.books.index', $domain) }}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
+        <a href="{{ route('library.rack.books.index', $rack) }}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
         <div class="grid md:grid-cols-2 gap-4 mt-8 ">
             <div class="col-span-2 border-b">
                 <label for="">Book</label>

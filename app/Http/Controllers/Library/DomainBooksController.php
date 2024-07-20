@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\Models\rack;
 use App\Models\domain;
 use App\Models\Language;
+use Egulias\EmailValidator\Parser\DomainPart;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class DomainBooksController extends Controller
     public function index($domainId)
     {
         //
-        $domain = domain::find($domainId);
+        $domain = Domain::find($domainId);
         return view('library.domain-books.index', compact('domain'));
     }
 
@@ -28,7 +29,7 @@ class DomainBooksController extends Controller
     public function create($domainId)
     {
         //
-        $domain = domain::find($domainId);
+        $domain = Domain::find($domainId);
         $languages = Language::all();
         $racks = Rack::all();
         return view('library.domain-books.create', compact('domain', 'languages', 'racks'));
@@ -109,7 +110,6 @@ class DomainBooksController extends Controller
         try {
             $domain = Domain::find($domainId);
             $book = $domain->books()->find($id)->update($request->all());
-            // $book->update($request->all());
             return redirect()->route('library.domain.books.index', $domainId)->with('success', 'Successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
@@ -120,8 +120,15 @@ class DomainBooksController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($domainId, string $id)
     {
         //
+        try {
+            $book = Book::find($id);
+            $book->delete();
+            return redirect()->route('library.domain.books.index', $domainId)->with('success', 'Successfully deleted!');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
 }

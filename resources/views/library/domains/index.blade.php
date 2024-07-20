@@ -43,7 +43,9 @@
                     @foreach($domains->sortByDesc('updated_at') as $domain)
                     <tr class="tr">
                         <td>{{$sr++}}</td>
-                        <td class="text-left">{{$domain->name}}</td>
+                        <td class="text-left">
+                            <a href="{{ route('library.domain.books.index', $domain) }}" class="link">{{$domain->name}}</a>
+                        </td>
                         <td>
                             <div class="flex items-center justify-center">
                                 <a href="{{route('library.domains.edit',$domain)}}"><i class="bx bx-pencil text-green-600"></i></a>

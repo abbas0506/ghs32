@@ -49,15 +49,15 @@ class AuthController extends Controller
         // 
         if (Auth::attempt($credentials)) {
             //user verified
-            // if (Auth::user()->hasRole('admission')) {
-            //     session(['role' => 'admission']);
-            //     return redirect('admission');
-            // } else if (Auth::user()->hasRole('librarian')) {
-            //     session(['role' => 'librarian']);
-            //     return redirect('library');
-            // }
+            if (Auth::user()->hasRole('admission')) {
+                session(['role' => 'admission']);
+                return redirect('admission');
+            } else if (Auth::user()->hasRole('librarian')) {
+                session(['role' => 'librarian']);
+                return redirect('library');
+            }
 
-            return  redirect('login/as');
+            // return  redirect('login/as');
             // echo "validated";
         } else {
             //user not verified
@@ -65,31 +65,6 @@ class AuthController extends Controller
         }
     }
     // login step2
-    public function loginAs(Request $request)
-    {
-        $request->validate([
-            'role' => 'required',
-        ]);
-
-
-        if (Auth::user()->hasRole($request->role)) {
-
-            session([
-                'role' => $request->role,
-            ]);
-            // go to related page
-            return redirect($request->role);
-        } else
-            return redirect('/');
-    }
-
-
-    public function verify_step2(Request $request)
-    {
-        //get 2nd factor secret code sent to gmail
-        //if matched, redirect to user dashboard
-
-    }
 
     /**
      * Display the specified resource.

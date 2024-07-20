@@ -7,9 +7,11 @@
             <div class="bread-crumb">
                 <a href="{{url('library')}}">Dashoboard</a>
                 <div>/</div>
-                <a href="{{route('library.books.index')}}">Books</a>
+                <a href="{{route('library.domain.books.index', $domain)}}">{{ $domain->name }}</a>
                 <div>/</div>
-                <div>{{ $domain->name }}</div>
+                <div>Books</div>
+                <div>/</div>
+                <div>New</div>
             </div>
 
         </div>

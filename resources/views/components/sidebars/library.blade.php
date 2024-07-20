@@ -22,11 +22,18 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('library.qrcodes.index')}}" class="flex items-center p-2">
-                    <i class="bi bi-qr-code"></i>
-                    <span class="ml-3">QR Codes</span>
+                <a href="#" class="flex items-center p-2">
+                    <i class="bi bi-person-slash"></i>
+                    <span class="ml-3">Block Defaulters</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ url('library/print') }}" class="flex items-center p-2">
+                    <i class="bi bi-printer"></i>
+                    <span class="ml-3">Print / Download</span>
+                </a>
+            </li>
+
         </ul>
     </div>
 </aside>

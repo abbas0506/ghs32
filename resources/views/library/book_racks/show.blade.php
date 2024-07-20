@@ -5,7 +5,7 @@
     <div class="bread-crumb">
         <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
-        <div>Book Racks</div>
+        <div>Racks</div>
         <div>/</div>
         <div>All</div>
     </div>

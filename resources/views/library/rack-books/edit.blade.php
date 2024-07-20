@@ -1,11 +1,13 @@
 @extends('layouts.library')
 @section('page-content')
 <div class="custom-container">
-    <h2>{{ $domain->name }} / Edit Book</h2>
+    <h2>Racks / {{$rack->label}}</h2>
     <div class="bread-crumb">
         <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
-        <a href="{{route('library.domain.books.index', $domain)}}">{{ $domain->name }}</a>
+        <a href="{{route('library.racks.index')}}">Racks</a>
+        <div>/</div>
+        <a href="{{route('library.rack.books.index', $rack)}}">{{ $rack->label}}</a>
         <div>/</div>
         <div>Books</div>
         <div>/</div>
@@ -20,10 +22,10 @@
         <x-message></x-message>
         @endif
 
-        <form action="{{route('library.domain.books.update', [$domain, $book])}}" method='post' class="mt-4" onsubmit="return validate(event)">
+        <form action="{{route('library.rack.books.update', [$rack, $book])}}" method='post' class="mt-4" onsubmit="return validate(event)">
             @csrf
             @method('PATCH')
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-1">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <div class="col-span-2 md:col-span-3">
                     <label>Book Title *</label>
                     <input type="text" name='title' class="custom-input" placeholder="Type here" value="{{$book->title}}">
@@ -54,16 +56,15 @@
                     </select>
                 </div>
                 <div>
-                    <label>Book Rack *</label>
-                    <select name="rack_id" id="" class="custom-input">
-                        <option value="">Select --</option>
-                        @foreach($racks as $rack)
-                        <option value="{{$rack->id}}" @selected($book->rack_id==$rack->id)>{{$rack->label}}</option>
+                    <label>Domain *</label>
+                    <select name="domain_id" id="" class="custom-input">
+                        @foreach($domains as $domain)
+                        <option value="{{$domain->id}}" @selected($book->domain_id==$domain->id)>{{$domain->name}}</option>
                         @endforeach
                     </select>
-
                 </div>
             </div>
+
             <div class="flex mt-4">
                 <button type="submit" class="btn-teal rounded p-2">Update Now</button>
             </div>

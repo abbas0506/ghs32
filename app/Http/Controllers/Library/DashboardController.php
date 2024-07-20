@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
-use App\Models\Assistant;
 use App\Models\Book;
-use App\Models\Domain;
 use App\Models\BookIssuance;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LibrayInchargeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +17,12 @@ class LibrayInchargeController extends Controller
     public function index()
     {
         //
-
+        $user = Auth::user();
+        $books = Book::all();
+        $bookIssuances = BookIssuance::whereNull('return_date')->get();
+        $defaulters_array = BookIssuance::whereNull('return_date')->where('due_date', '<', today())->pluck('user_id')->toArray();
+        $defaulters = User::whereIn('id', $defaulters_array)->get();
+        return view('library.dashboard', compact('user', 'books', 'bookIssuances', 'defaulters'));
     }
 
     /**

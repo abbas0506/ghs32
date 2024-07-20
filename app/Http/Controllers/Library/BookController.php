@@ -79,12 +79,7 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         //
-        try {
-            $book->delete();
-            return redirect()->back()->with('success', 'Successfully deleted!');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors($e->getMessage());
-        }
+
     }
 
     public function search(Request $request)

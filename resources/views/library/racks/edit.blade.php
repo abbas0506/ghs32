@@ -5,7 +5,7 @@
     <div class="bread-crumb">
         <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
-        <a href="{{route('library.racks.index')}}">Book Racks</a>
+        <a href="{{route('library.racks.index')}}">Racks</a>
         <div>/</div>
         <div>Edit</div>
     </div>

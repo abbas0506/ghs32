@@ -6,7 +6,7 @@
         <div class="bread-crumb">
             <a href="{{url('library')}}">Dashoboard</a>
             <div>/</div>
-            <div>Books ( {{ $books->count() }} ) </div>
+            <div>Domains / Books ( {{ $books->count() }} ) </div>
         </div>
 
         <a href="" class="btn-orange rounded">Search <i class="bi-search"></i></a>

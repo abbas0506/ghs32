@@ -3,15 +3,10 @@
 namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
-use App\Models\Assistant;
-use App\Models\Book;
-use App\Models\Domain;
-use App\Models\BookIssuance;
-use App\Models\User;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class LibrayInchargeController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +14,8 @@ class LibrayInchargeController extends Controller
     public function index()
     {
         //
-
+        $teachers = Teacher::all();
+        return view('library.teachers.index', compact('teachers'));
     }
 
     /**

@@ -105,7 +105,7 @@ class RackController extends Controller
     {
         $rack = Rack::find($id);
 
-        $pdf = PDF::loadview('library.racks.preview', compact('rack'))->setPaper('a4', 'portrait');
+        $pdf = PDF::loadview('library.pdf.rack-wise-books', compact('rack'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = Str::lower($rack->title) . "-list of books.pdf";
         return $pdf->stream($file);
