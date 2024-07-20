@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\assistant;
 
 use App\Http\Controllers\Controller;
-use App\Models\BookRack;
+use App\Models\rack;
 use Illuminate\Http\Request;
 
-class BookRackController extends Controller
+class RackController extends Controller
 {
 
     public function index()
@@ -21,7 +21,7 @@ class BookRackController extends Controller
     public function show(string $id)
     {
         //
-        $book_rack = BookRack::find($id);
-        return view('assistant.book_racks.show', compact('book_rack'));
+        $rack = Rack::find($id);
+        return view('assistant.racks.show', compact('rack'));
     }
 }

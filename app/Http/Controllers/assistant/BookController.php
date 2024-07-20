@@ -5,7 +5,7 @@ namespace App\Http\Controllers\assistant;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Domain;
-use App\Models\BookRack;
+use App\Models\rack;
 use App\Models\Language;
 use Exception;
 use Illuminate\Http\Request;
@@ -33,9 +33,9 @@ class BookController extends Controller
         //
         $languages = Language::all();
         $domains = Domain::all();
-        $book_racks = BookRack::all();
+        $racks = Rack::all();
         $books = Book::all();
-        return view('assistant.books.create', compact('languages', 'domains', 'book_racks', 'books'));
+        return view('assistant.books.create', compact('languages', 'domains', 'racks', 'books'));
     }
 
     /**
@@ -52,7 +52,7 @@ class BookController extends Controller
             'num_of_copies' => 'required',
             'price' => 'required|min:0',
             'domain_id' => 'required',
-            'book_rack_id' => 'required',
+            'rack_id' => 'required',
             'language_id' => 'required',
         ]);
         try {
@@ -65,7 +65,7 @@ class BookController extends Controller
                     'success' => 'Successfully added',
                     'recent_language_id' => $book->language_id,
                     'recent_domain_id' => $book->domain_id,
-                    'recent_rack_id' => $book->book_rack_id,
+                    'recent_rack_id' => $book->rack_id,
                 ]
             );
         } catch (Exception $e) {
@@ -93,8 +93,8 @@ class BookController extends Controller
         $book = Book::find($id);
         $languages = Language::all();
         $domains = Domain::all();
-        $book_racks = BookRack::all();
-        return view('assistant.books.edit', compact('book', 'languages', 'domains', 'book_racks'));
+        $racks = Rack::all();
+        return view('assistant.books.edit', compact('book', 'languages', 'domains', 'racks'));
     }
 
     /**
@@ -111,7 +111,7 @@ class BookController extends Controller
             'num_of_copies' => 'required',
             'price' => 'required|min:0',
             'domain_id' => 'required',
-            'book_rack_id' => 'required',
+            'rack_id' => 'required',
             'language_id' => 'required',
         ]);
         try {

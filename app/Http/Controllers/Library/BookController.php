@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Library;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Domain;
-use App\Models\BookRack;
+use App\Models\rack;
 use App\Models\Language;
 use Exception;
 use Illuminate\Http\Request;

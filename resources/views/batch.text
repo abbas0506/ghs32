@@ -1,8 +1,8 @@
 insert into eschool.book_domains
 SELECT * from temp.domains;
 
-insert into eschool.book_racks
-SELECT * from temp.book_racks;
+insert into eschool.racks
+SELECT * from temp.racks;
 
 insert into eschool.languages
 SELECT * from temp.languages;

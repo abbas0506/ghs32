@@ -4,22 +4,22 @@ namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
-use App\Models\BookRack;
+use App\Models\rack;
 use Exception;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Str;
 
-class BookRackController extends Controller
+class RackController extends Controller
 {
 
     public function index()
     {
         //
-        // $bookRacks = BookRack::has('books')->get();
-        $bookRacks = BookRack::all();
+        // $racks = Rack::has('books')->get();
+        $racks = Rack::all();
         $books = Book::all();
-        return view('library.book-racks.index', compact('bookRacks', 'books'));
+        return view('library.racks.index', compact('racks', 'books'));
     }
 
     /**
@@ -28,7 +28,7 @@ class BookRackController extends Controller
     public function create()
     {
         //
-        return view('library.book-racks.create');
+        return view('library.racks.create');
     }
 
     /**
@@ -41,8 +41,8 @@ class BookRackController extends Controller
             'label' => 'required',
         ]);
         try {
-            BookRack::create($request->all());
-            return redirect()->route('library.book-racks.index')->with('success', 'Successfully updated');
+            Rack::create($request->all());
+            return redirect()->route('library.racks.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -52,11 +52,11 @@ class BookRackController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BookRack $BookRack)
+    public function show(rack $rack)
     {
         //
-        $bookRack = $BookRack;
-        return view('library.book-racks.show', compact('bookRack'));
+        $rack = $rack;
+        return view('library.racks.show', compact('rack'));
     }
 
     /**
@@ -65,22 +65,22 @@ class BookRackController extends Controller
     public function edit($id)
     {
         //
-        $bookRack = BookRack::find($id);
-        return view('library.book-racks.edit', compact('bookRack'));
+        $rack = Rack::find($id);
+        return view('library.racks.edit', compact('rack'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BookRack $BookRack)
+    public function update(Request $request, rack $rack)
     {
         //
         $request->validate([
             'label' => 'required',
         ]);
         try {
-            $BookRack->update($request->all());
-            return redirect()->route('library.book-racks.index')->with('success', 'Successfully updated');
+            $rack->update($request->all());
+            return redirect()->route('library.racks.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -90,11 +90,11 @@ class BookRackController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BookRack $BookRack)
+    public function destroy(rack $rack)
     {
         //
         try {
-            $BookRack->delete();
+            $rack->delete();
             return redirect()->back()->with('success', 'Successfully deleted!');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
@@ -103,11 +103,11 @@ class BookRackController extends Controller
 
     public function print($id)
     {
-        $bookRack = BookRack::find($id);
+        $rack = Rack::find($id);
 
-        $pdf = PDF::loadview('library.book-racks.preview', compact('bookRack'))->setPaper('a4', 'portrait');
+        $pdf = PDF::loadview('library.racks.preview', compact('rack'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
-        $file = Str::lower($bookRack->title) . "-list of books.pdf";
+        $file = Str::lower($rack->title) . "-list of books.pdf";
         return $pdf->stream($file);
     }
 }

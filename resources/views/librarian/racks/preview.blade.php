@@ -50,7 +50,7 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-xl font-bold">Books - {{$bookRack->label}} </td>
+                            <td class="text-center text-xl font-bold">Books - {{$rack->label}} </td>
                         </tr>
                         <tr>
                             <td class="text-center text-sm">Govt. Higher Secondary School Chak Bedi, Pakpattan</td>
@@ -65,7 +65,7 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr class="text-xs">
-                            <td class="text-left">Rack: {{ $bookRack->label}} </td>
+                            <td class="text-left">Rack: {{ $rack->label}} </td>
                             <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
                         </tr>
                     </tbody>
@@ -86,7 +86,7 @@ $roman = config('global.romans');
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($bookRack->books as $book)
+                    @foreach($rack->books as $book)
                     <tr class="text-xs border">
                         <td>{{$i++}}</td>
                         <td class="text-left">{{$book->title}}</td>

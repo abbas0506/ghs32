@@ -5,7 +5,7 @@
     <div class="bread-crumb">
         <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
-        <a href="{{route('library.book-racks.index')}}">Book Racks</a>
+        <a href="{{route('library.racks.index')}}">Book Racks</a>
         <div>/</div>
         <div>Edit</div>
     </div>
@@ -18,13 +18,13 @@
             <x-message></x-message>
             @endif
 
-            <form action="{{route('library.book-racks.update', $bookRack)}}" method='post' class="mt-4" onsubmit="return validate(event)">
+            <form action="{{route('library.racks.update', $rack)}}" method='post' class="mt-4" onsubmit="return validate(event)">
                 @csrf
                 @method('PATCH')
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-1">
                     <div class="col-span-2 md:col-span-3">
                         <label>Book Rack *</label>
-                        <input type="text" name='label' class="custom-input" placeholder="Type here" value="{{$bookRack->label}}">
+                        <input type="text" name='label' class="custom-input" placeholder="Type here" value="{{$rack->label}}">
                     </div>
                     <div class="flex mt-4">
                         <button type="submit" class="btn-teal rounded p-2">Update Now</button>

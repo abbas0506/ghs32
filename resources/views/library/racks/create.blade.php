@@ -7,7 +7,7 @@
             <div class="bread-crumb">
                 <a href="{{url('library')}}">Dashoboard</a>
                 <div>/</div>
-                <a href="{{route('library.book-racks.index')}}">Book Racks</a>
+                <a href="{{route('library.racks.index')}}">Book Racks</a>
                 <div>/</div>
                 <div>New</div>
             </div>
@@ -23,7 +23,7 @@
             <x-message></x-message>
             @endif
 
-            <form action="{{route('library.book-racks.store')}}" method='post' class="mt-4" onsubmit="return validate(event)">
+            <form action="{{route('library.racks.store')}}" method='post' class="mt-4" onsubmit="return validate(event)">
                 @csrf
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-1">
 

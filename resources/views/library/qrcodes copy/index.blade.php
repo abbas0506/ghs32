@@ -37,8 +37,8 @@
             </div>
 
             <div class="flex items-center flex-wrap gap-y-4 p-4 text-sm bg-teal-50 text-center">
-                @foreach($book_racks as $book_rack)
-                <a href="{{route('library.book-racks.show',$book_rack)}}" class="link w-16">{{$book_rack->label}} <span class="text-xs text-slate-600">({{$book_rack->books->count()}})</span></a>
+                @foreach($racks as $rack)
+                <a href="{{route('library.racks.show',$rack)}}" class="link w-16">{{$rack->label}} <span class="text-xs text-slate-600">({{$rack->books->count()}})</span></a>
                 @endforeach
             </div>
         </div>

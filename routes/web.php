@@ -21,7 +21,7 @@ use App\Http\Controllers\AjaxController;
 
 use App\Http\Controllers\Library\BookController;
 use App\Http\Controllers\Library\BookIssuanceController;
-use App\Http\Controllers\Library\BookRackController;
+use App\Http\Controllers\Library\RackController;
 use App\Http\Controllers\Library\BookReturnController;
 use App\Http\Controllers\Library\DomainBooksController;
 use App\Http\Controllers\Library\DomainController;
@@ -54,7 +54,7 @@ use App\Http\Controllers\teacher\TestController;
 use App\Http\Controllers\teacher\TestPdfController;
 use App\Http\Controllers\teacher\TestQuestionController;
 use App\Http\Controllers\teacher\TestQuestionPartController;
-use App\Models\BookRack;
+use App\Models\rack;
 use App\Models\TestQuestionPart;
 use FontLib\Table\Type\cmap;
 use Illuminate\Support\Facades\Route;
@@ -146,8 +146,8 @@ Route::group(
         Route::resource('domains', DomainController::class);
         Route::resource('domain.books', DomainBooksController::class);
 
-        Route::resource('book-racks', BookRackController::class);
-        Route::get('book-racks/print/{rack}', [BookRackController::class, 'print'])->name('book-racks.print');
+        Route::resource('racks', RackController::class);
+        Route::get('racks/print/{rack}', [RackController::class, 'print'])->name('racks.print');
         Route::resource('library-rules', LibraryRuleController::class);
         Route::get('book/search', [BookController::class, 'search'])->name('books.search');
         Route::resource('qrcodes', QrCodeController::class);

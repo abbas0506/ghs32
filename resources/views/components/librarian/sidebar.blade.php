@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('book-racks.index')}}" class="flex items-center p-2">
+                <a href="{{route('racks.index')}}" class="flex items-center p-2">
                     <i class="bi bi-hdd-rack"></i>
                     <span class="ml-3">Racks</span>
                 </a>

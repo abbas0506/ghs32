@@ -27,7 +27,7 @@
         <div class="flex flex-row items-center justify-between mt-8">
             <div class="text-gray-800 font-thin">Books: ({{$books->count()}}), Total Copies: ({{$books->sum('num_of_copies')}})</div>
 
-            <a href="{{route('library.book-racks.create')}}" class="btn-teal rounded-sm">New</a>
+            <a href="{{route('library.racks.create')}}" class="btn-teal rounded-sm">New</a>
 
         </div>
         @php $sr=1; @endphp
@@ -45,24 +45,24 @@
                 </thead>
                 <tbody>
 
-                    @foreach($bookRacks as $bookRack)
+                    @foreach($racks as $rack)
                     <tr class="tr">
                         <td>{{$sr++}}</td>
                         <td>
-                            <a href="{{route('library.book-racks.show', $bookRack)}}" class="link">{{$bookRack->label}}</a>
+                            <a href="{{route('library.racks.show', $rack)}}" class="link">{{$rack->label}}</a>
                         </td>
-                        <td>{{$bookRack->books->count()}}</td>
-                        <td>{{$bookRack->books->sum('num_of_copies')}}</td>
+                        <td>{{$rack->books->count()}}</td>
+                        <td>{{$rack->books->sum('num_of_copies')}}</td>
                         <td>
-                            <a href="{{route('library.qrcodes.books.preview', $bookRack)}}" target="_blank"><i class="bi-qr-code text-blue-600"></i></a>
+                            <a href="{{route('library.qrcodes.books.preview', $rack)}}" target="_blank"><i class="bi-qr-code text-blue-600"></i></a>
                         </td>
                         <td>
                             <div class="flex items-center justify-center">
-                                <a href="{{route('library.book-racks.print',$bookRack)}}" target="_blank"><i class="bi bi-printer text-slate-600"></i></a>
+                                <a href="{{route('library.racks.print',$rack)}}" target="_blank"><i class="bi bi-printer text-slate-600"></i></a>
                                 <span class="text-slate-300 px-2">|</span>
-                                <a href="{{route('library.book-racks.edit',$bookRack)}}"><i class="bx bx-pencil text-green-600"></i></a>
+                                <a href="{{route('library.racks.edit',$rack)}}"><i class="bx bx-pencil text-green-600"></i></a>
                                 <span class="text-slate-300 px-2">|</span>
-                                <form action="{{route('library.book-racks.destroy',$bookRack)}}" method="post" onsubmit="return confirmDel(event)">
+                                <form action="{{route('library.racks.destroy',$rack)}}" method="post" onsubmit="return confirmDel(event)">
                                     @csrf
                                     @method('DELETE')
                                     <button><i class="bx bx-trash text-red-600"></i></button>

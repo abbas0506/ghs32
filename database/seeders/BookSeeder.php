@@ -22,7 +22,7 @@ class BookSeeder extends Seeder
             'price' => 400,
             'language_id' => 1,
             'domain_id' => 2,
-            'book_rack_id' => 1,
+            'rack_id' => 1,
         ]);
         Book::create([
             'title' => 'The Great Allah',
@@ -32,7 +32,7 @@ class BookSeeder extends Seeder
             'price' => 400,
             'language_id' => 1,
             'domain_id' => 2,
-            'book_rack_id' => 1,
+            'rack_id' => 1,
         ]);
         Book::create([
             'title' => 'The Criticism',
@@ -42,7 +42,7 @@ class BookSeeder extends Seeder
             'price' => 400,
             'language_id' => 1,
             'domain_id' => 2,
-            'book_rack_id' => 1,
+            'rack_id' => 1,
         ]);
         Book::create([
             'title' => 'The Great Muhammad PBUH',
@@ -52,7 +52,7 @@ class BookSeeder extends Seeder
             'price' => 400,
             'language_id' => 1,
             'domain_id' => 2,
-            'book_rack_id' => 1,
+            'rack_id' => 1,
         ]);
         Book::create([
             'title' => 'The Ocean',
@@ -62,7 +62,7 @@ class BookSeeder extends Seeder
             'price' => 400,
             'language_id' => 1,
             'domain_id' => 2,
-            'book_rack_id' => 1,
+            'rack_id' => 1,
         ]);
         Book::create([
             'title' => 'Miracles of air',
@@ -72,7 +72,7 @@ class BookSeeder extends Seeder
             'price' => 400,
             'language_id' => 1,
             'domain_id' => 2,
-            'book_rack_id' => 1,
+            'rack_id' => 1,
         ]);
         Book::create([
             'title' => 'The Water',
@@ -82,7 +82,7 @@ class BookSeeder extends Seeder
             'price' => 400,
             'language_id' => 1,
             'domain_id' => 2,
-            'book_rack_id' => 1,
+            'rack_id' => 1,
         ]);
         Book::create([
             'title' => 'The Earth',
@@ -92,7 +92,7 @@ class BookSeeder extends Seeder
             'price' => 400,
             'language_id' => 1,
             'domain_id' => 2,
-            'book_rack_id' => 1,
+            'rack_id' => 1,
         ]);
         Book::create([
             'title' => 'Eating Habits',
@@ -102,7 +102,7 @@ class BookSeeder extends Seeder
             'price' => 400,
             'language_id' => 1,
             'domain_id' => 2,
-            'book_rack_id' => 1,
+            'rack_id' => 1,
         ]);
         Book::create([
             'title' => 'Sleep Early, Live Long',
@@ -112,7 +112,7 @@ class BookSeeder extends Seeder
             'price' => 400,
             'language_id' => 1,
             'domain_id' => 2,
-            'book_rack_id' => 1,
+            'rack_id' => 1,
         ]);
     }
 }

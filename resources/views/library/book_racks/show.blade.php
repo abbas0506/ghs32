@@ -1,7 +1,7 @@
 @extends('layouts.library')
 @section('page-content')
 <div class="custom-container">
-    <h2>Book Rack: {{$book_rack->label}}</h2>
+    <h2>Book Rack: {{$rack->label}}</h2>
     <div class="bread-crumb">
         <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
@@ -18,7 +18,7 @@
                 <i class="bx bx-search absolute top-2 right-2"></i>
             </div>
             <div class="flex flex-col justify-center items-center">
-                <a href="{{route('library.qrcodes.books.preview',$book_rack)}}" target="_blank"><i class="bi bi-qr-code"></i></a>
+                <a href="{{route('library.qrcodes.books.preview',$rack)}}" target="_blank"><i class="bi bi-qr-code"></i></a>
                 <label for="">Print QRCode</label>
             </div>
         </div>
@@ -42,7 +42,7 @@
             </thead>
             <tbody>
 
-                @foreach($book_rack->books->sortByDesc('updated_at') as $book)
+                @foreach($rack->books->sortByDesc('updated_at') as $book)
                 <tr class="tr">
                     <td>{{$sr++}}</td>
                     <td class="text-left">

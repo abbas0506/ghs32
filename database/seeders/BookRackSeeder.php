@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\BookRack;
+use App\Models\rack;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BookRackSeeder extends Seeder
+class RackSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,24 +14,24 @@ class BookRackSeeder extends Seeder
     public function run(): void
     {
         //
-        BookRack::create(['label' => 'A1']);
-        BookRack::create(['label' => 'A2']);
-        BookRack::create(['label' => 'A3']);
-        BookRack::create(['label' => 'A4']);
+        Rack::create(['label' => 'A1']);
+        Rack::create(['label' => 'A2']);
+        Rack::create(['label' => 'A3']);
+        Rack::create(['label' => 'A4']);
 
-        BookRack::create(['label' => 'B1']);
-        BookRack::create(['label' => 'B2']);
-        BookRack::create(['label' => 'B3']);
-        BookRack::create(['label' => 'B4']);
+        Rack::create(['label' => 'B1']);
+        Rack::create(['label' => 'B2']);
+        Rack::create(['label' => 'B3']);
+        Rack::create(['label' => 'B4']);
 
-        BookRack::create(['label' => 'C1']);
-        BookRack::create(['label' => 'C2']);
-        BookRack::create(['label' => 'C3']);
-        BookRack::create(['label' => 'C4']);
+        Rack::create(['label' => 'C1']);
+        Rack::create(['label' => 'C2']);
+        Rack::create(['label' => 'C3']);
+        Rack::create(['label' => 'C4']);
 
-        BookRack::create(['label' => 'D1']);
-        BookRack::create(['label' => 'D2']);
-        BookRack::create(['label' => 'D3']);
-        BookRack::create(['label' => 'D4']);
+        Rack::create(['label' => 'D1']);
+        Rack::create(['label' => 'D2']);
+        Rack::create(['label' => 'D3']);
+        Rack::create(['label' => 'D4']);
     }
 }

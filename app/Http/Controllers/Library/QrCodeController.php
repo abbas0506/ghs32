@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Library;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Domain;
-use App\Models\BookRack;
+use App\Models\rack;
 use Exception;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -19,8 +19,8 @@ class QrCodeController extends Controller
     public function index()
     {
         //
-        $bookRacks = BookRack::has('books')->get();
-        return view('library.qrcodes.index', compact('bookRacks'));
+        $racks = Rack::has('books')->get();
+        return view('library.qrcodes.index', compact('racks'));
     }
 
     /**
@@ -75,10 +75,10 @@ class QrCodeController extends Controller
         $request->validate([
             'from' => 'required',
             'to' => 'required',
-            'book_rack_id' => 'required',
+            'rack_id' => 'required',
         ]);
         try {
-            $books = Book::whereBetween('id', [$request->from, $request->to])->where('book_rack_id', $request->book_rack_id)->get();
+            $books = Book::whereBetween('id', [$request->from, $request->to])->where('rack_id', $request->rack_id)->get();
             return redirect()->route('library.qr.range.preview')->with('books', $books);
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
@@ -129,7 +129,7 @@ class QrCodeController extends Controller
     public function previewBooksQrByRack($id)
     {
 
-        $rack = BookRack::find($id);
+        $rack = Rack::find($id);
         $books = $rack->books;
         $pdf = PDF::loadView('library.qrcodes.preview', compact('books', 'rack'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);

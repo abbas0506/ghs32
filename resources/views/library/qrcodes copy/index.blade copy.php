@@ -24,8 +24,8 @@
                 <h2 class="py-2 bg-slate-50 text-center">Books <span class="text-xs font-normal text-slate-600">(choose a rack)</span></h2>
 
                 <div class="grid grid-cols-4 md:grid-cols-4 gap-2 p-4 text-sm text-center">
-                    @foreach($book_racks as $book_rack)
-                    <a href="{{route('library.book_racks.show',$book_rack)}}" class="link">{{$book_rack->label}}</a>
+                    @foreach($racks as $rack)
+                    <a href="{{route('library.racks.show',$rack)}}" class="link">{{$rack->label}}</a>
                     @endforeach
                 </div>
             </div>

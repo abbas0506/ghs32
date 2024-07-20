@@ -4,7 +4,7 @@ namespace App\Http\Controllers\assistant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
-use App\Models\BookRack;
+use App\Models\rack;
 use App\Models\Clas;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -16,10 +16,10 @@ class QRCodeController extends Controller
 
     public function index()
     {
-        $book_racks = BookRack::has('books')->get();
+        $racks = Rack::has('books')->get();
         $classes = Clas::all();
         $teachers = Teacher::all();
-        return view('assistant.qrcodes.index', compact('book_racks', 'classes', 'teachers'));
+        return view('assistant.qrcodes.index', compact('racks', 'classes', 'teachers'));
     }
     /**
      * Display a listing of the resource.
@@ -27,8 +27,8 @@ class QRCodeController extends Controller
     public function previewBooksQr(string $id)
     {
         //
-        $book_rack = BookRack::find($id);
-        $pdf = PDF::loadView('assistant.qrcodes.books.preview', compact('book_rack'))->setPaper('a4', 'portrait');
+        $rack = Rack::find($id);
+        $pdf = PDF::loadView('assistant.qrcodes.books.preview', compact('rack'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
 
         $file = "QRCode.pdf";

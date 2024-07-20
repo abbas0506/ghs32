@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BookRack extends Model
+class Rack extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -14,7 +14,7 @@ class BookRack extends Model
 
     public function domain()
     {
-        return $this->belongsTo(BookRack::class, 'domain_id');
+        return $this->belongsTo(Rack::class, 'domain_id');
     }
 
     public function books()

@@ -50,7 +50,7 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-xl font-bold">QR Codes - {{$book_rack->label}} </td>
+                            <td class="text-center text-xl font-bold">QR Codes - {{$rack->label}} </td>
                         </tr>
                         <tr>
                             <td class="text-center text-sm">Govt. Higher Secondary School Chak Bedi, Pakpattan</td>
@@ -64,7 +64,7 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr class="text-xs">
-                            <td class="text-left">Book Rack: {{ $book_rack->label }} </td>
+                            <td class="text-left">Book Rack: {{ $rack->label }} </td>
                             <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
                         </tr>
                     </tbody>
@@ -84,7 +84,7 @@ $roman = config('global.romans');
                 </thead>
                 <tbody>
                     @php $copy_sr=''; @endphp
-                    @foreach($book_rack->books as $book)
+                    @foreach($rack->books as $book)
                     @for($copy_sr=1; $copy_sr<=$book->num_of_copies;$copy_sr++)
 
                         <tr class="border text-sm">

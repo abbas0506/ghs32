@@ -21,12 +21,12 @@ return new class extends Migration
 
             $table->unsignedBigInteger('language_id');
             $table->unsignedBigInteger('domain_id');
-            $table->unsignedBigInteger('book_rack_id');
+            $table->unsignedBigInteger('rack_id');
             $table->unsignedBigInteger('assistant_id')->nullable();
 
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
             $table->foreign('domain_id')->references('id')->on('domains')->onDelete('cascade');
-            $table->foreign('book_rack_id')->references('id')->on('book_racks')->onDelete('cascade');
+            $table->foreign('rack_id')->references('id')->on('racks')->onDelete('cascade');
             $table->foreign('assistant_id')->references('id')->on('assistants')->onDelete('cascade');
 
             $table->timestamps();

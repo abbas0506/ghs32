@@ -5,9 +5,9 @@
     <div class="bread-crumb">
         <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
-        <a href="{{route('library.book-racks.index')}}">Book Racks</a>
+        <a href="{{route('library.racks.index')}}">Book Racks</a>
         <div>/</div>
-        <div>{{ $bookRack->label }}</div>
+        <div>{{ $rack->label }}</div>
         <div>/</div>
         <div>All</div>
     </div>
@@ -28,19 +28,19 @@
         <div class="flex items-center flex-wrap gap-4">
             <form action="{{route('library.qr.range.create')}}" method="post" class="flex items-center flex-wrap gap-x-4">
                 @csrf
-                <input type="number" name='from' placeholder="From" value="{{$bookRack->books->first()->serial()}}" class="custom-input text-center w-16 lg:w-24 text-xs py-2">
+                <input type="number" name='from' placeholder="From" value="{{$rack->books->first()->serial()}}" class="custom-input text-center w-16 lg:w-24 text-xs py-2">
                 <label>-</label>
-                <input type="number" name='to' placeholder="To" value="{{$bookRack->books->last()->serial()}}" class="custom-input text-center w-16 lg:w-24 text-xs py-2">
+                <input type="number" name='to' placeholder="To" value="{{$rack->books->last()->serial()}}" class="custom-input text-center w-16 lg:w-24 text-xs py-2">
                 <button type="submit" class="btn-orange py-1"><i class="bi-qr-code"></i></button>
-                <input type="hidden" name="book_rack_id" value="{{$bookRack->id}}">
+                <input type="hidden" name="rack_id" value="{{$rack->id}}">
             </form>
         </div>
         <div class="flex flex-wrap justify-center items-center space-x-2 w-32">
-            <a href="{{route('library.qrcodes.books.preview', $bookRack)}}" target="_blank"><i class="bi-qr-code text-blue-600"></i></a>
-            <label>({{ $bookRack->books->sum('num_of_copies') }})</label>
+            <a href="{{route('library.qrcodes.books.preview', $rack)}}" target="_blank"><i class="bi-qr-code text-blue-600"></i></a>
+            <label>({{ $rack->books->sum('num_of_copies') }})</label>
             <label>|</label>
-            <a href="{{route('library.book-racks.print',$bookRack)}}" target="_blank"><i class="bi bi-printer text-slate-600"></i></a>
-            <label>({{ $bookRack->books->count() }})</label>
+            <a href="{{route('library.racks.print',$rack)}}" target="_blank"><i class="bi bi-printer text-slate-600"></i></a>
+            <label>({{ $rack->books->count() }})</label>
         </div>
     </div>
     @php
@@ -60,7 +60,7 @@
             </thead>
             <tbody>
 
-                @foreach($bookRack->books as $book)
+                @foreach($rack->books as $book)
                 <tr class="tr">
 
                     <td>{{$sr++}}</td>

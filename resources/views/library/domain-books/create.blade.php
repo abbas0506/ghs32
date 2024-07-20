@@ -58,10 +58,10 @@
 
                 <div>
                     <label>Book Rack *</label>
-                    <select name="book_rack_id" id="" class="custom-input">
+                    <select name="rack_id" id="" class="custom-input">
                         <option value="">Select --</option>
-                        @foreach($book_racks as $book_rack)
-                        <option value="{{$book_rack->id}}" @selected($book_rack->id==session("recent_rack_id"))>{{$book_rack->label}}</option>
+                        @foreach($racks as $rack)
+                        <option value="{{$rack->id}}" @selected($rack->id==session("recent_rack_id"))>{{$rack->label}}</option>
                         @endforeach
                     </select>
                 </div>
