@@ -84,7 +84,7 @@ $roman = config('global.romans');
                 </thead>
                 <tbody>
                     @php $copy_sr=''; @endphp
-                    @foreach($rack->books as $book)
+                    @foreach($rack->books->take(5) as $book)
                     @for($copy_sr=1; $copy_sr<=$book->num_of_copies;$copy_sr++)
 
                         <tr class="border text-sm">
