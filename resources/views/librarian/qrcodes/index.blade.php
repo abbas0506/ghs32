@@ -3,7 +3,7 @@
 <div class="custom-container">
     <h2>Specific Qr</h2>
     <div class="bread-crumb">
-        <a href="{{url('librarian')}}">Home</a>
+        <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
         <div>Specific Qr</div>
     </div>

@@ -3,7 +3,7 @@
 <div class="custom-container">
     <h2>Books</h2>
     <div class="bread-crumb">
-        <a href="{{url('librarian')}}">Home</a>
+        <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
         <div>Books</div>
         <div>/</div>
@@ -34,10 +34,10 @@
                         ({{$books->count()}})
                     </span>
                 </div>
-                @foreach($bookDomains as $bookDomain)
+                @foreach($domains as $domain)
 
-                <div id='{{$bookDomain->id}}' class="filterOption" onclick="filter('{{$bookDomain->id}}')">
-                    <span class="desc">{{$bookDomain->name}}</span>
+                <div id='{{$domain->id}}' class="filterOption" onclick="filter('{{$domain->id}}')">
+                    <span class="desc">{{$domain->name}}</span>
                     <span class="ml-1 text-sm text-slate-600">
                     </span>
                 </div>

@@ -4,7 +4,7 @@
     <div class="mt-12">
         <ul class="space-y-2">
             <li>
-                <a href="{{url('librarian')}}" class="flex items-center p-2">
+                <a href="{{url('library')}}" class="flex items-center p-2">
                     <i class="bi-house"></i>
                     <span class="ml-3">Home</span>
                 </a>
@@ -16,7 +16,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('book-domains.index')}}" class="flex items-center p-2">
+                <a href="{{route('domains.index')}}" class="flex items-center p-2">
                     <i class="bi-diagram-3"></i>
                     <span class="ml-3">Domains</span>
                 </a>

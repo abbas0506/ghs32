@@ -3,7 +3,7 @@
 <div class="custom-container">
     <h2>Book Domains</h2>
     <div class="bread-crumb">
-        <a href="{{url('librarian')}}">Home</a>
+        <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
         <div>Book Domains</div>
         <div>/</div>
@@ -25,9 +25,9 @@
         <x-message></x-message>
         @endif
         <div class="flex flex-row items-center justify-between mt-8">
-            <div class="text-gray-400">({{ $bookDomains->count() }}) records found</div>
+            <div class="text-gray-400">({{ $domains->count() }}) records found</div>
 
-            <a href="{{route('library.book-domains.create')}}" class="btn-teal rounded-sm">New</a>
+            <a href="{{route('library.domains.create')}}" class="btn-teal rounded-sm">New</a>
 
         </div>
         @php $sr=1; @endphp
@@ -44,19 +44,19 @@
                 <tbody>
 
 
-                    @foreach($bookDomains->sortByDesc('updated_at') as $bookDomain)
+                    @foreach($domains->sortByDesc('updated_at') as $domain)
                     <tr class="tr">
 
                         <td>{{$sr++}}</td>
                         <td class="text-left">
-                            <a href="{{route('library.book-domains.show', $bookDomain)}}" class="link">{{$bookDomain->name}}</a>
+                            <a href="{{route('library.domains.show', $domain)}}" class="link">{{$domain->name}}</a>
                         </td>
-                        <td>{{$bookDomain->books->count()}}</td>
+                        <td>{{$domain->books->count()}}</td>
                         <td>
                             <div class="flex items-center justify-center">
-                                <a href="{{route('library.book-domains.edit',$bookDomain)}}"><i class="bx bx-pencil text-green-600"></i></a>
+                                <a href="{{route('library.domains.edit',$domain)}}"><i class="bx bx-pencil text-green-600"></i></a>
                                 <span class="text-slate-300 px-2">|</span>
-                                <form action="{{route('library.book-domains.destroy',$bookDomain)}}" method="post" onsubmit="return confirmDel(event)">
+                                <form action="{{route('library.domains.destroy',$domain)}}" method="post" onsubmit="return confirmDel(event)">
                                     @csrf
                                     @method('DELETE')
                                     <button><i class="bx bx-trash text-red-600"></i></button>

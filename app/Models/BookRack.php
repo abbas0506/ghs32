@@ -14,7 +14,7 @@ class BookRack extends Model
 
     public function domain()
     {
-        return $this->belongsTo(BookRack::class, 'book_domain_id');
+        return $this->belongsTo(BookRack::class, 'domain_id');
     }
 
     public function books()

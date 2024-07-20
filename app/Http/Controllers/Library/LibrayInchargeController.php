@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Library;
 use App\Http\Controllers\Controller;
 use App\Models\Assistant;
 use App\Models\Book;
-use App\Models\BookDomain;
+use App\Models\Domain;
+use App\Models\BookIssuance;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +22,10 @@ class LibrayInchargeController extends Controller
         $user = Auth::user();
         $assistants = Assistant::all();
         $books = Book::all();
-        return view('library.dashboard', compact('user', 'assistants', 'books'));
+        $bookIssuances = BookIssuance::whereNull('return_date')->get();
+        $defaulters_array = BookIssuance::whereNull('return_date')->where('due_date', '<', today())->pluck('user_id')->toArray();
+        $defaulters = User::whereIn('id', $defaulters_array)->get();
+        return view('library.dashboard', compact('user', 'books', 'bookIssuances', 'defaulters'));
     }
 
     /**

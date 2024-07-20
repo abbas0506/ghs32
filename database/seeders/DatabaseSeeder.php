@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             GradeSeeder::class,
             ClassSeeder::class,
             UserSeeder::class,
-            // BookDomainSeeder::class,
+            // domainSeeder::class,
             LibraryRuleSeeder::class,
             // BookRackSeeder::class,
             TeacherEvaluationItemSeeder::class,

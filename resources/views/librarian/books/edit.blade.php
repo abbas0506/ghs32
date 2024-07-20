@@ -3,7 +3,7 @@
 <div class="custom-container">
     <h2>Edit Book</h2>
     <div class="bread-crumb">
-        <a href="{{url('librarian')}}">Home</a>
+        <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
         <a href="{{route('library.books.index')}}">Books</a>
         <div>/</div>
@@ -53,10 +53,10 @@
                 </div>
                 <div>
                     <label>Book Domain *</label>
-                    <select name="book_domain_id" id="" class="custom-input">
+                    <select name="domain_id" id="" class="custom-input">
                         <option value="">Select --</option>
-                        @foreach($book_domains as $book_domain)
-                        <option value="{{$book_domain->id}}" @selected($book->book_domain_id==$book_domain->id)>{{$book_domain->name}}</option>
+                        @foreach($domains as $domain)
+                        <option value="{{$domain->id}}" @selected($book->domain_id==$domain->id)>{{$domain->name}}</option>
                         @endforeach
                     </select>
                 </div>

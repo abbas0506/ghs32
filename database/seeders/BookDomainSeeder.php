@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\BookDomain;
+use App\Models\Domain;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BookDomainSeeder extends Seeder
+class domainSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +14,11 @@ class BookDomainSeeder extends Seeder
     public function run(): void
     {
         //
-        BookDomain::create(['name' => 'Science']);
-        BookDomain::create(['name' => 'Religion']);
-        BookDomain::create(['name' => 'Literature']);
-        BookDomain::create(['name' => 'Kids Corner']);
-        BookDomain::create(['name' => 'History']);
-        BookDomain::create(['name' => 'Encyclopedia']);
+        Domain::create(['name' => 'Science']);
+        Domain::create(['name' => 'Religion']);
+        Domain::create(['name' => 'Literature']);
+        Domain::create(['name' => 'Kids Corner']);
+        Domain::create(['name' => 'History']);
+        Domain::create(['name' => 'Encyclopedia']);
     }
 }

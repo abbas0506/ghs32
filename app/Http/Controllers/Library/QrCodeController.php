@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
-use App\Models\BookDomain;
+use App\Models\Domain;
 use App\Models\BookRack;
 use Exception;
 use Illuminate\Http\Request;
@@ -126,15 +126,14 @@ class QrCodeController extends Controller
         }
     }
 
-
-
     public function previewBooksQrByRack($id)
     {
-        $bookRack = BookRack::find($id);
-        $books = $bookRack->books;
-        $pdf = PDF::loadView('library.qrcodes.preview', compact('books'))->setPaper('a4', 'portrait');
+
+        $rack = BookRack::find($id);
+        $books = $rack->books;
+        $pdf = PDF::loadView('library.qrcodes.preview', compact('books', 'rack'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
-        $file = Str::lower($bookRack->label) . "-qr.pdf";
+        $file = Str::lower($rack->label) . "-qr.pdf";
         return $pdf->stream($file);
     }
 }

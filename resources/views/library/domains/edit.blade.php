@@ -3,9 +3,9 @@
 <div class="custom-container">
     <h2>Edit Book Domain</h2>
     <div class="bread-crumb">
-        <a href="{{url('librarian')}}">Home</a>
+        <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
-        <a href="{{route('library.book-domains.index')}}">Book Domains</a>
+        <a href="{{route('library.domains.index')}}">Book Domains</a>
         <div>/</div>
         <div>Edit</div>
     </div>
@@ -18,13 +18,13 @@
             <x-message></x-message>
             @endif
 
-            <form action="{{route('library.book-domains.update', $bookDomain)}}" method='post' class="mt-4" onsubmit="return validate(event)">
+            <form action="{{route('library.domains.update', $domain)}}" method='post' class="mt-4" onsubmit="return validate(event)">
                 @csrf
                 @method('PATCH')
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-1">
                     <div class="col-span-2 md:col-span-3">
                         <label>Book Domain *</label>
-                        <input type="text" name='name' class="custom-input" placeholder="Type here" value="{{$bookDomain->name}}">
+                        <input type="text" name='name' class="custom-input" placeholder="Type here" value="{{$domain->name}}">
                     </div>
                     <div class="flex mt-4">
                         <button type="submit" class="btn-teal rounded p-2">Update Now</button>

@@ -3,7 +3,7 @@
 <div class="custom-container">
     <h2>Edit Book</h2>
     <div class="bread-crumb">
-        <a href="{{url('librarian')}}">Home</a>
+        <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
         <a href="{{route('library.books.index')}}">Books</a>
         <div>/</div>
@@ -18,7 +18,7 @@
         <x-message></x-message>
         @endif
 
-        <form action="{{route('library.books.update', $book)}}" method='post' class="mt-4" onsubmit="return validate(event)">
+        <form action="{{route('library.domain.books.update', [$domain, $book])}}" method='post' class="mt-4" onsubmit="return validate(event)">
             @csrf
             @method('PATCH')
             <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-1">
@@ -52,15 +52,6 @@
                     </select>
                 </div>
                 <div>
-                    <label>Book Domain *</label>
-                    <select name="book_domain_id" id="" class="custom-input">
-                        <option value="">Select --</option>
-                        @foreach($book_domains as $book_domain)
-                        <option value="{{$book_domain->id}}" @selected($book->book_domain_id==$book_domain->id)>{{$book_domain->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div>
                     <label>Book Rack *</label>
                     <select name="book_rack_id" id="" class="custom-input">
                         <option value="">Select --</option>
@@ -69,11 +60,11 @@
                         @endforeach
                     </select>
 
-
                 </div>
-                <div class="flex mt-4">
-                    <button type="submit" class="btn-teal rounded p-2">Update Now</button>
-                </div>
+            </div>
+            <div class="flex mt-4">
+                <button type="submit" class="btn-teal rounded p-2">Update Now</button>
+            </div>
         </form>
 
     </div>

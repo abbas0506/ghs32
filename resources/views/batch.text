@@ -1,17 +1,17 @@
 insert into eschool.book_domains
-SELECT * from college.book_domains;
+SELECT * from temp.domains;
 
 insert into eschool.book_racks
-SELECT * from college.book_racks;
+SELECT * from temp.book_racks;
 
 insert into eschool.languages
-SELECT * from college.languages;
+SELECT * from temp.languages;
 
 insert into eschool.books
-select * from college.books;
+select * from temp.books;
 
 insert into eschool.teachers
-select * from college.teachers where id>4;
+select * from temp.teachers where id>4;
 
 
 

@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\BookDomain;
+use App\Models\Domain;
 use Exception;
 use Illuminate\Http\Request;
 
-class BookDomainController extends Controller
+class DomainController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class BookDomainController extends Controller
     public function index()
     {
         //
-        $bookDomains = BookDomain::all();
-        return view('library.book-domains.index', compact('bookDomains'));
+        $domains = Domain::all();
+        return view('library.domains.index', compact('domains'));
     }
 
     /**
@@ -26,7 +26,7 @@ class BookDomainController extends Controller
     public function create()
     {
         //
-        return view('library.book-domains.create');
+        return view('library.domains.create');
     }
 
     /**
@@ -39,8 +39,8 @@ class BookDomainController extends Controller
             'name' => 'required',
         ]);
         try {
-            BookDomain::create($request->all());
-            return redirect()->route('library.book-domains.index')->with('success', 'Successfully updated');
+            Domain::create($request->all());
+            return redirect()->route('library.domains.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -50,33 +50,33 @@ class BookDomainController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BookDomain $bookDomain)
+    public function show(domain $domain)
     {
         //
-        return view('library.book-domains.show', compact('bookDomain'));
+        return view('library.domains.show', compact('domain'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BookDomain $bookDomain)
+    public function edit(domain $domain)
     {
         //
-        return view('library.book-domains.edit', compact('bookDomain'));
+        return view('library.domains.edit', compact('domain'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BookDomain $bookDomain)
+    public function update(Request $request, domain $domain)
     {
         //
         $request->validate([
             'name' => 'required',
         ]);
         try {
-            $bookDomain->update($request->all());
-            return redirect()->route('library.book-domains.index')->with('success', 'Successfully updated');
+            $domain->update($request->all());
+            return redirect()->route('library.domains.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -86,11 +86,11 @@ class BookDomainController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BookDomain $bookDomain)
+    public function destroy(domain $domain)
     {
         //
         try {
-            $bookDomain->delete();
+            $domain->delete();
             return redirect()->back()->with('success', 'Successfully deleted!');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());

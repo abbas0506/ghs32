@@ -4,7 +4,7 @@ namespace App\Http\Controllers\assistant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
-use App\Models\BookDomain;
+use App\Models\Domain;
 use App\Models\BookRack;
 use App\Models\Language;
 use Exception;
@@ -32,10 +32,10 @@ class BookController extends Controller
     {
         //
         $languages = Language::all();
-        $book_domains = BookDomain::all();
+        $domains = Domain::all();
         $book_racks = BookRack::all();
         $books = Book::all();
-        return view('assistant.books.create', compact('languages', 'book_domains', 'book_racks', 'books'));
+        return view('assistant.books.create', compact('languages', 'domains', 'book_racks', 'books'));
     }
 
     /**
@@ -51,7 +51,7 @@ class BookController extends Controller
             'language_id' => 'required',
             'num_of_copies' => 'required',
             'price' => 'required|min:0',
-            'book_domain_id' => 'required',
+            'domain_id' => 'required',
             'book_rack_id' => 'required',
             'language_id' => 'required',
         ]);
@@ -64,7 +64,7 @@ class BookController extends Controller
                 [
                     'success' => 'Successfully added',
                     'recent_language_id' => $book->language_id,
-                    'recent_domain_id' => $book->book_domain_id,
+                    'recent_domain_id' => $book->domain_id,
                     'recent_rack_id' => $book->book_rack_id,
                 ]
             );
@@ -92,9 +92,9 @@ class BookController extends Controller
         //
         $book = Book::find($id);
         $languages = Language::all();
-        $book_domains = BookDomain::all();
+        $domains = Domain::all();
         $book_racks = BookRack::all();
-        return view('assistant.books.edit', compact('book', 'languages', 'book_domains', 'book_racks'));
+        return view('assistant.books.edit', compact('book', 'languages', 'domains', 'book_racks'));
     }
 
     /**
@@ -110,14 +110,14 @@ class BookController extends Controller
             'language_id' => 'required',
             'num_of_copies' => 'required',
             'price' => 'required|min:0',
-            'book_domain_id' => 'required',
+            'domain_id' => 'required',
             'book_rack_id' => 'required',
             'language_id' => 'required',
         ]);
         try {
             $book = Book::find($id);
             $book->update($request->all());
-            return redirect()->route('library.assistant.books.index')->with('success', 'Successfully updated');
+            return redirect()->route('library.books.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -134,6 +134,6 @@ class BookController extends Controller
     public function postSearch(Request $request)
     {
         $books = Book::where('title', 'like', '%' . $request->searchby . '%')->get();
-        return redirect()->route('library.assistant.book.search')->with('books', $books);
+        return redirect()->route('library.book.search')->with('books', $books);
     }
 }

@@ -9,6 +9,7 @@
         <div class="flex-1 space-x-4 text-center text-sm">
             <a href="{{route('library.books.edit', $book)}}" class="text-green-600">Edit <i class="bx bx-pencil"></i></a>
             <a href="{{route('library.books.index')}}" class="text-blue-600">Cancel</a>
+
         </div>
     </div>
 

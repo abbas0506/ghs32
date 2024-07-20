@@ -21,7 +21,7 @@ class BookSeeder extends Seeder
             'num_of_copies' => 2,
             'price' => 400,
             'language_id' => 1,
-            'book_domain_id' => 2,
+            'domain_id' => 2,
             'book_rack_id' => 1,
         ]);
         Book::create([
@@ -31,7 +31,7 @@ class BookSeeder extends Seeder
             'num_of_copies' => 2,
             'price' => 400,
             'language_id' => 1,
-            'book_domain_id' => 2,
+            'domain_id' => 2,
             'book_rack_id' => 1,
         ]);
         Book::create([
@@ -41,7 +41,7 @@ class BookSeeder extends Seeder
             'num_of_copies' => 2,
             'price' => 400,
             'language_id' => 1,
-            'book_domain_id' => 2,
+            'domain_id' => 2,
             'book_rack_id' => 1,
         ]);
         Book::create([
@@ -51,7 +51,7 @@ class BookSeeder extends Seeder
             'num_of_copies' => 2,
             'price' => 400,
             'language_id' => 1,
-            'book_domain_id' => 2,
+            'domain_id' => 2,
             'book_rack_id' => 1,
         ]);
         Book::create([
@@ -61,7 +61,7 @@ class BookSeeder extends Seeder
             'num_of_copies' => 2,
             'price' => 400,
             'language_id' => 1,
-            'book_domain_id' => 2,
+            'domain_id' => 2,
             'book_rack_id' => 1,
         ]);
         Book::create([
@@ -71,7 +71,7 @@ class BookSeeder extends Seeder
             'num_of_copies' => 2,
             'price' => 400,
             'language_id' => 1,
-            'book_domain_id' => 2,
+            'domain_id' => 2,
             'book_rack_id' => 1,
         ]);
         Book::create([
@@ -81,7 +81,7 @@ class BookSeeder extends Seeder
             'num_of_copies' => 2,
             'price' => 400,
             'language_id' => 1,
-            'book_domain_id' => 2,
+            'domain_id' => 2,
             'book_rack_id' => 1,
         ]);
         Book::create([
@@ -91,7 +91,7 @@ class BookSeeder extends Seeder
             'num_of_copies' => 2,
             'price' => 400,
             'language_id' => 1,
-            'book_domain_id' => 2,
+            'domain_id' => 2,
             'book_rack_id' => 1,
         ]);
         Book::create([
@@ -101,7 +101,7 @@ class BookSeeder extends Seeder
             'num_of_copies' => 2,
             'price' => 400,
             'language_id' => 1,
-            'book_domain_id' => 2,
+            'domain_id' => 2,
             'book_rack_id' => 1,
         ]);
         Book::create([
@@ -111,7 +111,7 @@ class BookSeeder extends Seeder
             'num_of_copies' => 2,
             'price' => 400,
             'language_id' => 1,
-            'book_domain_id' => 2,
+            'domain_id' => 2,
             'book_rack_id' => 1,
         ]);
     }

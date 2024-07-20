@@ -2,10 +2,10 @@
     <div class="flex flex-wrap w-full h-16 items-center justify-between px-4 md:px-12">
 
         <div class="flex items-center">
-            <a href="{{url('/')}}">
+            <a href="{{url('library')}}">
                 <img alt="logo" src="{{asset('images/logo/app_logo_transparent.png')}}" class="w-10 h-10">
             </a>
-            <div class="text-base md:text-xl font-semibold ml-2">Library Portal</div>
+            <div class="text-base md:text-xl font-semibold ml-2">Library System</div>
         </div>
         <!-- right sided current user info -->
         <div id="current-user-area" class="flex space-x-3 items-center justify-center relative">

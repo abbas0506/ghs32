@@ -1,4 +1,4 @@
-@extends('layouts.assistant')
+@extends('layouts.library')
 @section('page-content')
 <div class="container bg-slate-100">
     <!--welcome  -->
@@ -18,7 +18,7 @@
 
     <!-- pallets -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-        <a href="{{route('library.assistant.book.search')}}" class="pallet-box">
+        <a href="{{route('library.book.search')}}" class="pallet-box">
             <div class="flex-1 ">
                 <div class="title">Search for Book</div>
                 <div class="h2">{{$books->count()}}</div>
@@ -27,7 +27,7 @@
                 <i class="bi bi-search text-teal-600"></i>
             </div>
         </a>
-        <a href="{{route('library.assistant.book-issuance.issued')}}" class="pallet-box">
+        <a href="{{route('library.book-issuance.issued')}}" class="pallet-box">
             <div class="flex-1 ">
                 <div class="title">Issued Books</div>
                 <div class="h2">{{$bookIssuances->count()}}</div>
@@ -36,7 +36,7 @@
                 <i class="bi bi-upc text-blue-600"></i>
             </div>
         </a>
-        <a href="{{route('library.assistant.book-issuance.delayed')}}" class="pallet-box">
+        <a href="{{route('library.book-issuance.delayed')}}" class="pallet-box">
             <div class="flex-1">
                 <div class="title">Delayed Books</div>
                 <div class="h2">{{$bookIssuances->where('due_date', '<' , today())->count()}}</div>
@@ -45,7 +45,7 @@
                 <i class="bi bi-clock-history text-green-600"></i>
             </div>
         </a>
-        <a href="{{route('library.assistant.book-issuance.default')}}" class="pallet-box">
+        <a href="{{route('library.book-issuance.default')}}" class="pallet-box">
             <div class="flex-1">
                 <div class="title">Defaulters</div>
                 <div class="h2">{{$defaulters->count()}}</div>

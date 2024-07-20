@@ -3,11 +3,11 @@
 <div class="custom-container">
     <div class="flex items-center">
         <div class="w-5/6">
-            <h2>New Book</h2>
+            <h2>New Domain</h2>
             <div class="bread-crumb">
-                <a href="{{url('librarian')}}">Home</a>
+                <a href="{{url('library')}}">Dashoboard</a>
                 <div>/</div>
-                <a href="{{route('library.book-domains.index')}}">Book Domains</a>
+                <a href="{{route('library.domains.index')}}">Book Domains</a>
                 <div>/</div>
                 <div>New</div>
             </div>
@@ -23,7 +23,7 @@
             <x-message></x-message>
             @endif
 
-            <form action="{{route('library.book-domains.store')}}" method='post' class="mt-4" onsubmit="return validate(event)">
+            <form action="{{route('library.domains.store')}}" method='post' class="mt-4" onsubmit="return validate(event)">
                 @csrf
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-1">
 

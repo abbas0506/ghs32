@@ -1,27 +1,25 @@
 @extends('layouts.library')
 @section('page-content')
 <div class="custom-container">
-    <h2>Book Domains</h2>
+    <h2>Domains</h2>
     <div class="bread-crumb">
-        <a href="{{url('librarian')}}">Home</a>
+        <a href="{{url('library')}}">Dashboard</a>
         <div>/</div>
-        <div>Book Domains</div>
-        <div>/</div>
-        <div>{{ $bookDomain->name }}</div>
-        <div>/</div>
-        <div>All</div>
+        <div>Domains ({{ $domains->count()}})</div>
     </div>
 
-    <div class="mt-8">
-        <div class="flex items-center flex-wrap justify-between mt-8">
-            <!-- search -->
+    <div class="mt-8 bg-white p-5 md:p-8">
+
+        <!-- search -->
+        <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex relative w-full md:w-1/3">
                 <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
                 <i class="bx bx-search absolute top-2 right-2"></i>
             </div>
-            <h1 class="text-green-600  text-4xl">{{$bookDomain->books->count()}}</h1>
-            <!-- <a href="" class="btn-teal rounded">Create New</a> -->
+            <a href="{{route('library.domains.create')}}" class="btn-teal rounded-sm">New</a>
         </div>
+
+
         <!-- page message -->
         @if($errors->any())
         <x-message :errors='$errors'></x-message>
@@ -29,57 +27,34 @@
         <x-message></x-message>
         @endif
 
-        <div class="flex items-center flex-wrap justify-between mt-8">
-            <div class="text-gray-400">({{ $bookDomain->books->count() }}) records found</div>
-            <div id="filterSection" class="hidden border border-slate-200 p-4 mt-4">
-                <div class="grid grid-col-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                    <div id='all' class="filterOption active" onclick="filter('all')">
-                        <span class="desc">All</span>
-                        <span class="ml-1 text-sm text-slate-600">
-                            ({{$bookDomain->books->count()}})
-                        </span>
-                    </div>
-
-                </div>
-            </div>
-        </div>
         @php $sr=1; @endphp
-        <div class="overflow-x-auto w-full">
-            <table class="table-fixed w-full mt-1">
+        <div class="overflow-x-auto w-full mt-5">
+            <table class="table-fixed borderless w-full">
                 <thead>
-                    <tr class="border-b border-slate-200">
+                    <tr class="">
                         <th class="w-12">Sr</th>
-                        <th class="w-40">Title/Author</th>
-                        <th class="w-16">Ref.</th>
-                        <th class="w-24">Published</th>
-                        <th class="w-24">Copies</th>
-                        <th class="w-24">Action</th>
-
+                        <th class="w-48 text-left">Name</th>
+                        <th class="w-16">Action</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($bookDomain->books->sortByDesc('updated_at') as $book)
-                    <tr class="tr">
 
+                    @foreach($domains->sortByDesc('updated_at') as $domain)
+                    <tr class="tr">
                         <td>{{$sr++}}</td>
-                        <td class="text-left">
-                            <div>{{$book->title}}</div>
-                            <span class="text-xs text-slate-600">{{$book->author}}</span>
-                        </td>
-                        <td>{{$book->reference()}}</td>
-                        <td>{{$book->publish_year}}</td>
-                        <td>{{$book->num_of_copies}}</td>
+                        <td class="text-left">{{$domain->name}}</td>
                         <td>
                             <div class="flex items-center justify-center">
-                                <a href="{{route('library.books.edit',$book)}}"><i class="bx bx-pencil text-green-600"></i></a>
+                                <a href="{{route('library.domains.edit',$domain)}}"><i class="bx bx-pencil text-green-600"></i></a>
                                 <span class="text-slate-300 px-2">|</span>
-                                <form action="{{route('library.books.destroy',$book)}}" method="post" onsubmit="return confirmDel(event)">
+                                <form action="{{route('library.domains.destroy',$domain)}}" method="post" onsubmit="return confirmDel(event)">
                                     @csrf
                                     @method('DELETE')
                                     <button><i class="bx bx-trash text-red-600"></i></button>
                                 </form>
                             </div>
+
                         </td>
                     </tr>
                     @endforeach
@@ -125,4 +100,5 @@
         })
     }
 </script>
+
 @endsection

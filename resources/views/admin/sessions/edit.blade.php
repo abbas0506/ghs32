@@ -4,7 +4,7 @@
 <div class="custom-container">
     <h1>Session Management</h1>
     <div class="bread-crumb">
-        <a href="{{url('admin')}}">Home</a>
+        <a href="{{url('admin')}}">Dashoboard</a>
         <div>/</div>
         <a href="{{route('admin.sessions.index')}}">Sessions</a>
         <div>/</div>

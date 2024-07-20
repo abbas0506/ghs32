@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
-use App\Models\BookDomain;
+use App\Models\Domain;
 use App\Models\BookRack;
 use App\Models\Language;
 use Exception;
@@ -25,8 +25,8 @@ class BookController extends Controller
         } else
             $books = Book::all();
 
-        $bookDomains = BookDomain::all();
-        return view('library.books.index', compact('books', 'bookDomains', 'filtered'));
+        $domains = Domain::all();
+        return view('library.books.index', compact('books', 'domains', 'filtered'));
     }
 
     /**
@@ -35,6 +35,7 @@ class BookController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -43,6 +44,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
@@ -50,8 +52,6 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        $book = Book::find($id);
-        return view('library.books.show', compact('book'));
     }
 
     /**
@@ -60,11 +60,7 @@ class BookController extends Controller
     public function edit(string $id)
     {
         //
-        $book = Book::find($id);
-        $languages = Language::all();
-        $book_domains = BookDomain::all();
-        $book_racks = BookRack::all();
-        return view('library.books.edit', compact('book', 'languages', 'book_domains', 'book_racks'));
+
     }
 
     /**
@@ -73,25 +69,7 @@ class BookController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $request->validate([
-            'title' => 'required',
-            'author' => 'required',
-            'publish_year' => 'required',
-            'language_id' => 'required',
-            'num_of_copies' => 'required',
-            'price' => 'required|min:0',
-            'book_domain_id' => 'required',
-            'book_rack_id' => 'required',
-            'language_id' => 'required',
-        ]);
-        try {
-            $book = Book::find($id);
-            $book->update($request->all());
-            return redirect()->back()->with('success', 'Successfully updated');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors($e->getMessage());
-            // something went wrong
-        }
+
     }
 
 

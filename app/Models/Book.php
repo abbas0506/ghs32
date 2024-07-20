@@ -17,7 +17,7 @@ class Book extends Model
         'price',
 
         'language_id',
-        'book_domain_id',
+        'domain_id',
         'book_rack_id',
         'assistant_id',
     ];
@@ -28,7 +28,7 @@ class Book extends Model
     }
     public function domain()
     {
-        return $this->belongsTo(BookDomain::class, 'book_domain_id');
+        return $this->belongsTo(Domain::class, 'domain_id');
     }
     public function rack()
     {

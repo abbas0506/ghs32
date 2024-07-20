@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\assistant;
+namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +23,7 @@ class BookIssuanceController extends Controller
     public function scan()
     {
         //
-        return view('assistant.book-issuance.scan');
+        return view('library.book-issuance.scan');
     }
 
     /**
@@ -40,7 +40,7 @@ class BookIssuanceController extends Controller
             'book_ref' => $request->book_ref,
             'user_cnic' => $request->user_cnic,
         ]);
-        return redirect()->route('library.assistant.book-issuance.confirm');
+        return redirect()->route('library.book-issuance.confirm');
     }
 
     public function confirm()
@@ -109,7 +109,7 @@ class BookIssuanceController extends Controller
         ]);
         try {
             $bookIssuance = BookIssuance::create($request->all());
-            return redirect()->route('library.assistant.book-issuance.scan')->with('success', 'Book has been issued successfully ');
+            return redirect()->route('library.book-issuance.scan')->with('success', 'Book has been issued successfully ');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong

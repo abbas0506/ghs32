@@ -3,7 +3,7 @@
 <div class="custom-container">
     <h2>Edit Teacher</h2>
     <div class="bread-crumb">
-        <a href="{{url('assistant')}}">Home</a>
+        <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
         <a href="{{route('admin.teachers.index')}}">Teachers</a>
         <div>/</div>

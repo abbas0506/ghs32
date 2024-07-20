@@ -3,11 +3,11 @@
 <div class="custom-container">
     <h2>Book Domains</h2>
     <div class="bread-crumb">
-        <a href="{{url('librarian')}}">Home</a>
+        <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
         <div>Book Domains</div>
         <div>/</div>
-        <div>{{ $bookDomain->name }}</div>
+        <div>{{ $domain->name }}</div>
         <div>/</div>
         <div>All</div>
     </div>
@@ -19,7 +19,7 @@
                 <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
                 <i class="bx bx-search absolute top-2 right-2"></i>
             </div>
-            <h1 class="text-green-600  text-4xl">{{$bookDomain->books->count()}}</h1>
+            <h1 class="text-green-600  text-4xl">{{$domain->books->count()}}</h1>
             <!-- <a href="" class="btn-teal rounded">Create New</a> -->
         </div>
         <!-- page message -->
@@ -30,13 +30,13 @@
         @endif
 
         <div class="flex items-center flex-wrap justify-between mt-8">
-            <div class="text-gray-400">({{ $bookDomain->books->count() }}) records found</div>
+            <div class="text-gray-400">({{ $domain->books->count() }}) records found</div>
             <div id="filterSection" class="hidden border border-slate-200 p-4 mt-4">
                 <div class="grid grid-col-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                     <div id='all' class="filterOption active" onclick="filter('all')">
                         <span class="desc">All</span>
                         <span class="ml-1 text-sm text-slate-600">
-                            ({{$bookDomain->books->count()}})
+                            ({{$domain->books->count()}})
                         </span>
                     </div>
 
@@ -59,7 +59,7 @@
                 </thead>
                 <tbody>
 
-                    @foreach($bookDomain->books->sortByDesc('updated_at') as $book)
+                    @foreach($domain->books->sortByDesc('updated_at') as $book)
                     <tr class="tr">
 
                         <td>{{$sr++}}</td>

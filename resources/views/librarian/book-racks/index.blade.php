@@ -3,7 +3,7 @@
 <div class="custom-container">
     <h2>Book Racks</h2>
     <div class="bread-crumb">
-        <a href="{{url('librarian')}}">Home</a>
+        <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
         <div>Book Racks</div>
         <div>/</div>

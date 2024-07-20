@@ -3,7 +3,7 @@
 <div class="custom-container">
     <h2>Specific Qr</h2>
     <div class="bread-crumb">
-        <a href="{{url('librarian')}}">Home</a>
+        <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
         <div>Specific Qr</div>
     </div>
@@ -15,8 +15,6 @@
         @else
         <x-message></x-message>
         @endif
-
-
         <form action="{{route('library.qr.specific.create')}}" method="post" class="flex items-center justify-between gap-x-4 w-full md:w-1/2">
             @csrf
             <input type="text" name='qr' placeholder="Exact Qr Code" class="custom-input text-center">

@@ -5,7 +5,7 @@
         <div class="w-5/6">
             <h2>New Rack</h2>
             <div class="bread-crumb">
-                <a href="{{url('librarian')}}">Home</a>
+                <a href="{{url('library')}}">Dashoboard</a>
                 <div>/</div>
                 <a href="{{route('library.book-racks.index')}}">Book Racks</a>
                 <div>/</div>

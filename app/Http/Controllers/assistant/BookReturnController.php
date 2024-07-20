@@ -26,7 +26,7 @@ class BookReturnController extends Controller
         session([
             'book_ref' => $request->book_ref,
         ]);
-        return redirect()->route('library.assistant.book-return.confirm');
+        return redirect()->route('library.book-return.confirm');
     }
 
     // return confirm
@@ -81,7 +81,7 @@ class BookReturnController extends Controller
         try {
             $book_issuance->return_date = date('Y/m/d');
             $book_issuance->update();
-            return redirect()->route('library.assistant.book-return.scan')->with('success', 'Book has been returned successfully ');
+            return redirect()->route('library.book-return.scan')->with('success', 'Book has been returned successfully ');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
