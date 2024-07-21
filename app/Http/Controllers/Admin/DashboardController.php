@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Imports\StudentImport;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Application;
+use App\Models\Book;
 use App\Models\Clas;
+use App\Models\Grade;
 use App\Models\Student;
-use Exception;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +19,13 @@ class StudentController extends Controller
     public function index()
     {
         //
+        $classes = Clas::all();
+        $teachers = Teacher::all();
+        $students = Student::all();
+        $books = Book::all();
+        $applications = Application::all();
 
+        return view('admin.dashboard', compact('classes', 'students', 'teachers', 'books', 'applications'));
     }
 
     /**
@@ -43,8 +50,6 @@ class StudentController extends Controller
     public function show(string $id)
     {
         //
-        $student = Student::find($id);
-        return view('admin.students.show', compact('student'));
     }
 
     /**
@@ -69,26 +74,5 @@ class StudentController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-    /**
-     * Show the form for data import from excel
-     */
-    public function import($id)
-    {
-        session(['clas_id' => $id]);
-        $clas = Clas::find($id);
-        return view('admin.students.import', compact('clas'));
-    }
-    /**
-     * import data from excel
-     */
-    public function postImport(Request $request)
-    {
-        try {
-            Excel::import(new StudentImport, $request->file('file'));
-            return redirect()->route('admin.classes.index')->with('success', 'Students imported successfully');
-        } catch (Exception $ex) {
-            return redirect()->back()->withErrors($ex->getMessage());
-        }
     }
 }

@@ -49,11 +49,14 @@ class AuthController extends Controller
         // 
         if (Auth::attempt($credentials)) {
             //user verified
-            if (Auth::user()->hasRole('admission')) {
+            if (Auth::user()->hasRole('admin')) {
+                session(['role' => 'admin']);
+                return redirect('admin');
+            } else if (Auth::user()->hasRole('admission')) {
                 session(['role' => 'admission']);
                 return redirect('admission');
-            } else if (Auth::user()->hasRole('librarian')) {
-                session(['role' => 'librarian']);
+            } else if (Auth::user()->hasRole('library')) {
+                session(['role' => 'library']);
                 return redirect('library');
             }
 

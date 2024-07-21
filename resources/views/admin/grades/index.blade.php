@@ -30,7 +30,7 @@
                     <td>
 
                         @foreach($grade->classes as $clas)
-                        <a href="{{route('admin.classes.show',$clas)}}" class="w-4 link">{{$clas->section_label}}</a>
+                        <a href="{{route('admin.class.students.index',$clas)}}" class="w-4 link">{{$clas->section_label}}</a>
                         @endforeach
 
                     </td>

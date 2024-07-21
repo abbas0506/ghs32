@@ -8,7 +8,8 @@
         <a href="{{url('admin')}}">Cancel & Go Back</a>
     </div>
 
-    <div class="mt-12 w-4/5 mx-auto">
+    <div class="content-section relative  p-5 md:p-12">
+        <a href="{{route('admin.class.students.index',$clas)}}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
         <!-- page message -->
         @if($errors->any())
         <x-message :errors='$errors'></x-message>
@@ -31,28 +32,21 @@
                         <tr class="text-sm">
                             <th>rollno</th>
                             <th>name</th>
-                            <th>father</th>
-                            <th>dob</th>
                             <th>cnic</th>
-                            <th>phone</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
                             <td>Ali Hamza</td>
-                            <td>Sharif</td>
-                            <td>23.5.2003</td>
                             <td>3640212345670</td>
-                            <td>03001234567</td>
 
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
+
                         </tr>
 
                     </tbody>
@@ -60,8 +54,7 @@
 
             </div>
         </div>
-
-        <form action="{{url('admin/students/import')}}" method="POST" enctype="multipart/form-data" class="flex flex-col w-full">
+        <form action="{{url('admin/students/import')}}" method="POST" enctype="multipart/form-data" class="flex flex-col">
             @csrf
 
             <div class="flex flex-col border rounded-sm bg-gray-100 p-3">

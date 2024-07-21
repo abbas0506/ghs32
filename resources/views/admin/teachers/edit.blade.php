@@ -9,10 +9,12 @@
         <div>/</div>
         <div>Edit</div>
     </div>
-    <div class="content-section">
-        <label>Please edit the following information and submit</label>
-        <div class="divider my-3"></div>
-        <div class="w-full md:w-3/4 mx-auto mt-4">
+
+    <div class="content-section relative">
+        <!-- close button -->
+        <a href="{{ route('admin.teachers.index') }}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
+
+        <div class="w-full md:w-3/4 mx-auto mt-8">
             <!-- page message -->
             @if($errors->any())
             <x-message :errors='$errors'></x-message>
@@ -28,13 +30,13 @@
                         <label>Name *</label>
                         <input type="text" name='name' class="custom-input" placeholder="Type here" value="{{$teacher->name}}">
                     </div>
-                    <div class="sm:col-span-2">
-                        <label>Father *</label>
-                        <input type="text" name='father' class="custom-input" placeholder="Type here" value="{{$teacher->father}}">
+                    <div class="">
+                        <label>Designation *</label>
+                        <input type="text" name='designation' class="custom-input" placeholder="Type here" value="{{$teacher->designation}}">
                     </div>
                     <div class="">
-                        <label>Birth Date *</label>
-                        <input type="date" name='dob' class="custom-input" placeholder="Type here" value="@if($teacher->dob){{$teacher->dob->format('Y-m-d')}}@endif">
+                        <label>BPS *</label>
+                        <input type="number" name='bps' class="custom-input" placeholder="Type here" value="{{$teacher->bps}}">
                     </div>
                     <div class="">
                         <label>CNIC *</label>
@@ -48,35 +50,11 @@
                         <label>Email *</label>
                         <input type="text" name='email' class="custom-input" placeholder="Type here" value="{{$teacher->email}}">
                     </div>
-                    <div class="sm:col-span-2">
-                        <label>Address</label>
-                        <input type="text" name='address' class="custom-input" placeholder="Type here" value="{{$teacher->address}}">
-                    </div>
                     <div class="">
                         <label>Qualification</label>
                         <input type="text" name='qualification' class="custom-input" placeholder="Type here" value="{{$teacher->qualification}}">
                     </div>
-                    <div class="">
-                        <label>Designation *</label>
-                        <input type="text" name='designation' class="custom-input" placeholder="Type here" value="{{$teacher->designation}}">
-                    </div>
-                    <div class="">
-                        <label>BPS *</label>
-                        <input type="number" name='bps' class="custom-input" placeholder="Type here" value="{{$teacher->bps}}">
-                    </div>
-                    <div class="">
-                        <label>Personal # *</label>
-                        <input type="text" name='personal_no' class="custom-input" placeholder="Type here" value="{{$teacher->personal_no}}">
-                    </div>
 
-                    <div class="">
-                        <label>Appointed On</label>
-                        <input type="date" name='appointed_on' class="custom-input" placeholder="Type here" value="@if($teacher->appointed_on){{$teacher->appointed_on->format('Y-m-d')}}@endif">
-                    </div>
-                    <div class="">
-                        <label>Joined On (this school)</label>
-                        <input type="date" name='joined_on' class="custom-input" placeholder="Type here" value="@if($teacher->joined_on){{$teacher->joined_on->format('Y-m-d')}}@endif">
-                    </div>
                     <div class="text-right mt-4 col-span-2">
                         <button type="submit" class="btn-teal rounded p-2">Update Now</button>
                     </div>

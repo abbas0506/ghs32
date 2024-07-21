@@ -1,48 +1,63 @@
 @extends('layouts.admin')
 @section('page-content')
-
 <div class="custom-container">
-    <h1>Classes Management</h1>
+    <h2>Classes / Edit</h2>
     <div class="bread-crumb">
         <a href="{{url('admin')}}">Dashoboard</a>
         <div>/</div>
         <a href="{{route('admin.classes.index')}}">Classes</a>
         <div>/</div>
-        <div>{{ $clas->short }}</div>
-        <div>/</div>
         <div>Edit</div>
     </div>
 
-    <div class="flex items-center justify-center w-full h-full">
+    <!-- page message -->
+    @if($errors->any())
+    <x-message :errors='$errors'></x-message>
+    @else
+    <x-message></x-message>
+    @endif
 
-        <div class="flex flex-col w-full md:w-3/4 mt-16">
-            <p><i class="bi bi-gear mr-2"></i><span class="text-lg font-semibold">Session {{$session->title()}}</span></p>
-            <hr class="my-3">
+    <div class="w-full md:w-3/4 mx-auto mt-8">
+        <h1 class="text-teal-600 mt-8">Edit Clas</h1>
+        <form action="{{route('admin.classes.update', $clas)}}" method='post' class="mt-4" onsubmit="return validate(event)">
+            @csrf
+            @method('PATCH')
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <label>Class Grade</label>
+                    <select name="grade_id" id="" class="custom-input p-2">
+                        @forelse($grades as $grade)
+                        <option value="{{$grade->id}}" @selected($clas->grade_id==$grade->id)>{{ $grade->roman_name }}</option>
+                        @empty
+                        <option value="">No group available</option>
+                        @endforelse
+                    </select>
+                </div>
+                <div>
+                    <label>Section Label </label>
+                    <input type="text" name='section_label' class="custom-input" placeholder="e.g A" value="{{ $clas->section_label }}">
+                </div>
 
-            <div class="flex justify-between items-center">
-                <div class="flex items-center w-full">
-                    <label class="mr-2">Current Status:</label>
-                    <div class="flex flex-1 justify-between items-center">
-
-                        @if($session->active==1)
-                        <i class="bi bi-toggle2-on text-teal-600 text-lg"></i>
-                        <form action="{{route('admin.sessions.update', $session)}}" method='post'>
-                            @csrf
-                            @method('PATCH')
-                            <button type="submmit" class="btn-red">Lock session</button>
-                        </form>
-                        @else
-                        <i class="bi bi-toggle2-off text-red-600 text-lg"></i>
-                        <form action="{{route('admin.sessions.update', $session)}}" method='post'>
-                            @csrf
-                            @method('PATCH')
-                            <button type="submmit" class="btn-teal">Unlock session</button>
-                        </form>
-                        @endif
-                    </div>
-
+                <div>
+                    <label>Induction Year</label>
+                    <input type="number" name='induction_year' class="custom-input" placeholder="Type here" value="{{date('Y')}}" min="2018" max="{{date('Y')}}">
+                </div>
+                <div>
+                    <label>Incharge</label>
+                    <select name="incharge_id" id="" class="custom-input p-2">
+                        @forelse($teachers as $teacher)
+                        <option value="{{$teacher->id}}" @selected($clas->incharge_id == $teacher->id)>{{ $teacher->name }}</option>
+                        @empty
+                        <option value="">No teacher available</option>
+                        @endforelse
+                    </select>
                 </div>
             </div>
-        </div>
+            <div class="flex mt-4">
+                <button type="submit" class="btn-teal rounded p-2">Update Now</button>
+            </div>
+        </form>
+
     </div>
-    @endsection
+</div>
+@endsection

@@ -42,10 +42,9 @@ class TeacherController extends Controller
         //
         $request->validate([
             'name' => 'required',
-            'father' => 'required',
-            'cnic' => 'required',
             'phone' => 'required',
             'email' => 'required|email',
+            'cnic' => 'required',
             'designation' => 'required',
             'bps' => 'required',
         ]);
@@ -97,15 +96,11 @@ class TeacherController extends Controller
         //
         $request->validate([
             'name' => 'required',
-            'father' => 'required',
-            'dob' => 'required',
-            'cnic' => 'required',
             'phone' => 'required',
             'email' => 'required|email',
+            'cnic' => 'required',
             'designation' => 'required',
             'bps' => 'required',
-            'appointed_on' => 'required',
-            'joined_on' => 'required',
         ]);
 
         try {

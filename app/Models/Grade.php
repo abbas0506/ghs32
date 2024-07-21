@@ -18,16 +18,8 @@ class Grade extends Model
     {
         return $this->hasMany(Clas::class);
     }
-    public function subjects()
-    {
-        return $this->hasMany(Subject::class);
-    }
     public function students()
     {
         return $this->hasManyThrough(Student::class, Clas::class);
-    }
-    public function questions()
-    {
-        return Question::whereRelation('chapter.subject.grade', 'id', $this->id);
     }
 }

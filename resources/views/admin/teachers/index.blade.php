@@ -11,9 +11,6 @@
         <div>All</div>
     </div>
     <div class="content-section">
-        <label>List of all teachers</label>
-        <div class="divider my-3"></div>
-
         <!-- search -->
         <div class="flex items-center justify-between mt-8">
             <div class="flex relative w-full md:w-1/3">

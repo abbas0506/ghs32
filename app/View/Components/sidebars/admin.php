@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\principal;
+namespace App\View\Components\sidebars;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class header extends Component
+class admin extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class header extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.principal.header');
+        return view('components.sidebars.admin');
     }
 }

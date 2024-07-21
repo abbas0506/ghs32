@@ -19,24 +19,11 @@ class StudentImport implements ToCollection, WithHeadingRow
     {
         foreach ($rows as $row) {
             $student = Student::create([
+                'name' => $row['name'],
+                'cnic' => $row['cnic'],
                 'clas_id' => session('clas_id'),
                 'rollno' => $row['rollno'],
-                'name' => $row['name'],
-                'father' => $row['father'],
-                'dob' => \Carbon\Carbon::createFromFormat('d.m.Y', $row['dob']),
-                'cnic' => $row['bform'],
-                'address' => $row['address'],
-                'phone' => $row['phone'],
-                'group_id' => 2,
             ]);
-
-            $user = User::create([
-                'login_id' => $student->cnic,
-                'password' => Hash::make('password'),
-                'userable_id' => $student->id,
-                'userable_type' => 'App\Models\Student',
-            ]);
-            $user->assignRole('student');
         }
     }
 }

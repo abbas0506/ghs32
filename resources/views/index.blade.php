@@ -33,7 +33,7 @@
 </section>
 <div class="flex justify-center w-full bg-teal-200">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-x-24 p-5 text-center">
-        <a href="" class="flex flex-col justify-center items-center">
+        <a href="{{url('login/admin')}}" class="flex flex-col justify-center items-center">
             <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
                 <i class="bi bi-tools text-2xl text-cyan-400"></i>
             </div>

@@ -21,19 +21,14 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             RoleSeeder::class,
-            // LanguageSeeder::class,
+            LanguageSeeder::class,
             GroupSeeder::class,
             GradeSeeder::class,
             ClassSeeder::class,
             UserSeeder::class,
             // DomainSeeder::class,
             LibraryRuleSeeder::class,
-            // RackSeeder::class,
-            TeacherEvaluationItemSeeder::class,
-            // BookSeeder::class,
-            SubjectSeeder::class,
-            ChapterSeeder::class,
-            QuestionSeeder::class,
+
         ]);
     }
 }

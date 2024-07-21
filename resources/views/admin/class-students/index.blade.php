@@ -2,13 +2,30 @@
 @section('page-content')
 
 <div class="custom-container">
-    <h1>Classes</h1>
+    <h1>{{$clas->roman()}}</h1>
     <div class="bread-crumb">
-        <a href="/">Dashboard</a>
+        <a href="{{url('admin')}}">Dashoboard</a>
         <div>/</div>
-        <div>Classes</div>
+        <a href="{{route('admin.classes.index')}}">Classes</a>
         <div>/</div>
-        <div>All</div>
+        <div>{{$clas->roman()}}</div>
+    </div>
+
+    <!-- search -->
+    <div class="flex items-center justify-between mt-12">
+        <div class="flex relative w-full md:w-1/3">
+            <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
+            <i class="bx bx-search absolute top-2 right-2"></i>
+        </div>
+        <div class="flex space-x-3">
+            <a href="{{route('admin.class.students.create', $clas)}}" class="text-sm p-2 border hover:bg-teal-400">New <i class="bi bi-person-add text-teal-600"></i></a>
+            <a href="{{url('admin/students/import',$clas)}}" class="text-sm p-2 border hover:bg-teal-50">Import from Excel <i class="bi bi-file-earmark-excel text-teal-600"></i></a>
+            <form action="{{ route('admin.classes.clean', $clas) }}" method="post" onsubmit="return confirmClean(event)">
+                @csrf
+                <button class="btn-orange rounded"><i class="bx bx-recycle text-base"></i></button>
+            </form>
+        </div>
+
     </div>
 
     <!-- page message -->
@@ -18,51 +35,28 @@
     <x-message></x-message>
     @endif
 
-    <!-- search -->
-    <div class="flex items-center justify-between mt-8">
-        <div class="flex relative w-full md:w-1/3">
-            <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
-            <i class="bx bx-search absolute top-2 right-2"></i>
-        </div>
-        <a href="{{route('admin.classes.create')}}" class="text-sm p-2 btn-teal rounded">Add New Class <i class="bi bi-plus"></i></a>
-    </div>
+    <div class="overflow-x-auto bg-white w-full mt-8">
 
-    @php $sr=1; @endphp
-    <div class="overflow-x-auto w-full mt-8">
-
-        <table class="table-fixed w-full">
+        <table class="table-auto borderless w-full">
             <thead>
                 <tr>
-                    <th class="w-12">Sr</th>
-                    <th class="w-40">Class</th>
-                    <th class="w-12"><i class="bi-people-fill"></i></th>
-                    <th class="w-12">Import</th>
-                    <th class="w-12">Clean</th>
-                    <th class="w-12">Action</th>
+                    <th class="w-10">Roll No</th>
+                    <th class="w-40 text-left">Name</th>
+                    <th class="w-24">BForm</th>
+                    <th class="w-24">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($classes as $clas)
-                <tr class="tr text-sm">
-                    <td>{{$sr++}}</td>
-                    <td>
-                        <a href="{{route('admin.class.students.index',$clas)}}" class="link">{{$clas->roman()}}</a>
-                    </td>
-                    <td>{{$clas->students->count()}}</td>
-                    <td><a href="{{ route('admin.class.students.index',$clas) }}" class="link"><i class="bi bi-file-earmark-excel text-teal-600"></i></a></td>
-                    <td>
-                        <form action="{{ route('admin.classes.clean', $clas) }}" method="post" onsubmit="return confirmClean(event)">
-                            @csrf
-                            <button><i class="bx bx-recycle text-base text-orange-500"></i></button>
-                        </form>
-
-                    </td>
-
+                @foreach($clas->students as $student)
+                <tr class="tr">
+                    <td>{{$student->rollno}}</td>
+                    <td class="text-left"><a href="{{route('admin.class.students.show', [$clas, $student])}}" class="link">{{$student->name}}</a></td>
+                    <td>{{$student->cnic}}</td>
                     <td>
                         <div class="flex items-center justify-center">
-                            <a href="{{route('admin.classes.edit',$clas)}}"><i class="bx bx-pencil text-green-600"></i></a>
+                            <a href="{{route('admin.class.students.edit',[$clas, $student])}}"><i class="bx bx-pencil text-green-600"></i></a>
                             <span class="text-slate-300 px-2">|</span>
-                            <form action="{{route('admin.classes.destroy',$clas)}}" method="post" onsubmit="return confirmDel(event)">
+                            <form action="{{route('admin.class.students.destroy',[$clas, $student])}}" method="post" onsubmit="return confirmDel(event)">
                                 @csrf
                                 @method('DELETE')
                                 <button><i class="bx bx-trash text-red-600"></i></button>

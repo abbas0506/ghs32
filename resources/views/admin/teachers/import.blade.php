@@ -29,46 +29,27 @@
                 <table class="table-auto w-full">
                     <thead>
                         <tr class="text-xs">
-                            <th>sr</th>
                             <th>name</th>
-                            <th>father</th>
-                            <th>dob</th>
+                            <th>designation</th>
+                            <th>bps</th>
                             <th>cnic</th>
                             <th>phone</th>
                             <th>email</th>
-                            <th>address</th>
                             <th>qualification</th>
-                            <th>designation</th>
-                            <th>bps</th>
-                            <th>personal</th>
-                            <th>appointed_on</th>
-                            <th>joined_on</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td>05.06.1978</td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td>353011912343</td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td>08.05.2009</td>
-                            <td>10.03.2014</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

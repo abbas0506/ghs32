@@ -60,8 +60,7 @@ class ClassController extends Controller
     {
         //
 
-        $clas = Clas::find($id);
-        return view('admin.classes.show', compact('clas'));
+
     }
 
     /**
@@ -69,8 +68,10 @@ class ClassController extends Controller
      */
     public function edit(string $id)
     {
-        $model = Clas::find($id);
-        return view('admin.classes.edit', compact('model'));
+        $grades = Grade::where('id', '>', 5)->get();
+        $teachers = Teacher::all();
+        $clas = Clas::find($id);
+        return view('admin.classes.edit', compact('clas', 'grades', 'teachers'));
     }
 
     /**
@@ -80,8 +81,10 @@ class ClassController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required',
-            'short' => 'required',
+            'grade_id' => 'required|numeric',
+            'section_label' => 'required',
+            'induction_year' => 'required|numeric',
+            'incharge_id' => 'nullable|numeric',
         ]);
 
         $model = Clas::find($id);
@@ -101,6 +104,20 @@ class ClassController extends Controller
         $model = Clas::findOrFail($id);
         try {
             $model->delete();
+            return redirect()->back()->with('success', 'Successfully deleted');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+            // something went wrong
+        }
+    }
+
+    // remove all students
+    public function clean(Request $request, $clasId)
+    {
+        //
+        $model = Clas::findOrFail($clasId);
+        try {
+            $model->students()->delete();
             return redirect()->back()->with('success', 'Successfully deleted');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());

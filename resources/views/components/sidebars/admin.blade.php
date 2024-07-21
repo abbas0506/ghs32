@@ -15,12 +15,7 @@
                     <span class="ml-3">Grades</span>
                 </a>
             </li>
-            <li>
-                <a href="{{route('admin.subjects.index')}}" class="flex items-center p-2">
-                    <i class="bi-book"></i>
-                    <span class="ml-3">Subjects</span>
-                </a>
-            </li>
+
             <li>
                 <a href="{{route('admin.classes.index')}}" class="flex items-center p-2">
                     <i class="bi-people"></i>
@@ -34,15 +29,9 @@
                 </a>
             </li>
             <li>
-                <a href="" class="flex items-center p-2">
-                    <i class="bi bi-building-gear"></i>
-                    <span class="ml-3">Institutions Management</span>
-                </a>
-            </li>
-            <li>
                 <a href="{{route('admin.users.index')}}" class="flex items-center p-2">
                     <i class="bi bi-person-gear"></i>
-                    <span class="ml-3">User Management</span>
+                    <span class="ml-3">Users</span>
                 </a>
             </li>
 

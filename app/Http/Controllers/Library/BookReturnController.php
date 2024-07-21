@@ -15,7 +15,7 @@ class BookReturnController extends Controller
     //
     public function scan()
     {
-        return view('assistant.book-return.scan');
+        return view('library.book-return.scan');
     }
     public function postScan(Request $request)
     {
@@ -53,7 +53,7 @@ class BookReturnController extends Controller
                         ->where('copy_no', $copy_no)
                         ->whereNull('return_date')->first();
                     if ($bookIssuance) {
-                        return view('assistant.book-return.confirm', compact('bookIssuance'));
+                        return view('library.book-return.confirm', compact('bookIssuance'));
                     } else {
                         $warning_message = "Book already in rack!";
                     }
@@ -65,7 +65,7 @@ class BookReturnController extends Controller
             $warning_message = "Book reference missing";
         }
         // if there exists warning
-        return view('assistant.book-return.warning', compact('warning_message'));
+        return view('library.book-return.warning', compact('warning_message'));
     }
 
     /**

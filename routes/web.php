@@ -2,12 +2,11 @@
 
 use App\Http\Controllers\AuthController;
 
-use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ClassController;
+use App\Http\Controllers\Admin\ClassStudentsController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\GroupController;
-use App\Http\Controllers\Admin\StudentController;
-use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\UserController;
 
@@ -17,7 +16,6 @@ use App\Http\Controllers\Admission\FeeController as AdmissionFeeController;
 use App\Http\Controllers\Admission\GroupApplicationController;
 use App\Http\Controllers\Admission\HighAchieverController;
 use App\Http\Controllers\Admission\ObjectionController as AdmissionObjectionController;
-use App\Http\Controllers\AjaxController;
 
 use App\Http\Controllers\Library\BookController;
 use App\Http\Controllers\Library\BookIssuanceController;
@@ -26,43 +24,12 @@ use App\Http\Controllers\Library\BookReturnController;
 use App\Http\Controllers\Library\DashboardController as LibraryDashboardController;
 use App\Http\Controllers\Library\DomainBooksController;
 use App\Http\Controllers\Library\DomainController;
-use App\Http\Controllers\Library\LibrayInchargeController;
-use App\Http\Controllers\Library\QrCodeController;
 use App\Http\Controllers\Library\LibraryRuleController;
-use App\Http\Controllers\Library\PdfController;
 use App\Http\Controllers\Library\PrintController;
 use App\Http\Controllers\Library\RackBooksController;
 use App\Http\Controllers\Library\TeacherController as LibraryTeacherController;
-use App\Http\Controllers\principal\PrincipalController;
 
-use App\Http\Controllers\principal\TeacherController as PrincipalTeacherController;
-use App\Http\Controllers\principal\TeacherEvaluationController;
-use App\Http\Controllers\student_services\SelfTestController;
-use App\Http\Controllers\teacher\AdvanceShortController;
-use App\Http\Controllers\teacher\AnswerKeyController;
-use App\Http\Controllers\teacher\ChapterController;
-use App\Http\Controllers\teacher\ChapterLongController;
-use App\Http\Controllers\teacher\ChapterMcqController;
-use App\Http\Controllers\teacher\ChapterShortController;
-use App\Http\Controllers\teacher\GradeController as TeacherGradeController;
-use App\Http\Controllers\teacher\GradeSubjectController;
-use App\Http\Controllers\teacher\LongQuestionController;
-use App\Http\Controllers\teacher\McqController;
-use App\Http\Controllers\teacher\QbankController;
-use App\Http\Controllers\teacher\QuestionController;
-use App\Http\Controllers\teacher\ShortQuestionController;
-use App\Http\Controllers\teacher\SubjectChapterController;
-use App\Http\Controllers\teacher\SubjectController as TeacherSubjectController;
-use App\Http\Controllers\teacher\TeacherController as TeacherTeacherController;
-use App\Http\Controllers\teacher\TestController;
-use App\Http\Controllers\teacher\TestPdfController;
-use App\Http\Controllers\teacher\TestQuestionController;
-use App\Http\Controllers\teacher\TestQuestionPartController;
-use App\Models\rack;
-use App\Models\TestQuestionPart;
-use FontLib\Table\Type\cmap;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -93,7 +60,7 @@ Route::view('login', 'login');
 
 Route::resource('applications', AdmissionApplicationController::class);
 Route::post('login', [AuthController::class, 'login']);
-Route::view('login/library', 'login.library');
+Route::view('login/admin', 'login.admin');
 Route::view('login/admission-portal', 'login.admission-portal');
 Route::view('login/library', 'login.library');
 
@@ -101,31 +68,24 @@ Route::post('login/as', [AuthController::class, 'loginAs'])->name('login.as');
 Route::get('signout', [AuthController::class, 'signout'])->name('signout');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:admin']], function () {
-    Route::get('/', [AdminController::class, 'index']);
+    Route::get('/', [AdminDashboardController::class, 'index']);
     Route::resource('grades', GradeController::class)->only('index');
     Route::resource('classes', ClassController::class);
-    Route::resource('subjects', SubjectController::class);
-    Route::resource('students', StudentController::class);
-    Route::resource('teachers', TeacherController::class);
+    Route::post('classes/{clas}/clean', [ClassController::class, 'clean'])->name('classes.clean');
+    Route::resource('class.students', ClassStudentsController::class);
 
+    Route::get('students/import/{clas}', [ClassStudentsController::class, 'import']);
+    Route::post('students/import', [ClassStudentsController::class, 'postImport']);
+
+    Route::resource('teachers', TeacherController::class);
     Route::get('more/teachers/import', [TeacherController::class, 'import'])->name('teachers.import');
     Route::post('more/teachers/import', [TeacherController::class, 'postImport'])->name('teachers.import.post');
-
-    Route::get('students/import/{clas}', [StudentController::class, 'import']);
-    Route::post('students/import', [StudentController::class, 'postImport']);
 
     Route::view('change/password', 'admin.change_password');
     Route::post('change/password', [AuthController::class, 'changePassword'])->name('change.password');
 
     Route::resource('groups', GroupController::class);
     Route::resource('users', UserController::class);
-});
-
-Route::group(['prefix' => 'principal', 'as' => 'principal.', 'middleware' => ['role:principal']], function () {
-    Route::get('/', [PrincipalController::class, 'index']);
-    Route::get('teachers', [PrincipalTeacherController::class, 'index'])->name('teachers.index');
-    Route::resource('teachers.evaluation', TeacherEvaluationController::class);
-    Route::get('teacher-evaluation-add/{teacher}', [TeacherEvaluationController::class, 'add'])->name('teacher-evaluation.add');
 });
 
 Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {
@@ -138,7 +98,7 @@ Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['r
 });
 
 Route::group(
-    ['prefix' => 'library', 'as' => 'library.', 'middleware' => ['role:librarian']],
+    ['prefix' => 'library', 'as' => 'library.', 'middleware' => ['role:library']],
     function () {
         Route::get('/', [LibraryDashboardController::class, 'index']);
         Route::resource('books', BookController::class);

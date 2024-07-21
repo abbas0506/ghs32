@@ -1,11 +1,11 @@
 @extends('layouts.basic')
 
 @section('header')
-<x-auth.header></x-auth.header>
+<x-headers.admin></x-headers.admin>
 @endsection
 
 @section('sidebar')
-<x-admin.sidebar></x-admin.sidebar>
+<x-sidebars.admin></x-sidebars.admin>
 @endsection
 
 

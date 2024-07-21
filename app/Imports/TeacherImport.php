@@ -21,18 +21,13 @@ class TeacherImport implements ToCollection, WithHeadingRow
 
             $teacher = Teacher::create([
                 'name' => $row['name'],
-                'father' => $row['father'],
-                'dob' => \Carbon\Carbon::createFromFormat('d.m.Y', $row['dob']),
-                'cnic' => $row['cnic'],
-                'phone' => $row['phone'],
-                'email' => $row['email'],
-                'address' => $row['address'],
-                'qualification' => $row['qualification'],
                 'designation' => $row['designation'],
                 'bps' => $row['bps'],
-                'personal_no' => $row['personal'],
-                'appointed_on' => \Carbon\Carbon::createFromFormat('d.m.Y', $row['appointed_on']),
-                'joined_on' => \Carbon\Carbon::createFromFormat('d.m.Y', $row['joined_on']),
+                'qualification' => $row['qualification'],
+                'phone' => $row['phone'],
+                'email' => $row['email'],
+                'cnic' => $row['cnic'],
+
             ]);
             $user = User::create([
                 'login_id' => $teacher->cnic,

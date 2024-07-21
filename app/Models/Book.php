@@ -19,7 +19,6 @@ class Book extends Model
         'language_id',
         'domain_id',
         'rack_id',
-        'assistant_id',
     ];
 
     public function language()
@@ -34,10 +33,7 @@ class Book extends Model
     {
         return $this->belongsTo(Rack::class, 'rack_id');
     }
-    public function assistant()
-    {
-        return $this->belongsTo(Assistant::class);
-    }
+
     public function book_issuances()
     {
         return $this->hasMany(BookIssuance::class);
