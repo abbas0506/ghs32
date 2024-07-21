@@ -35,9 +35,6 @@
                         </td>
                         <td>{{$rack->books->count()}}</td>
                         <td>{{$rack->books->sum('num_of_copies')}}</td>
-                        <!-- <td>
-                            <a href="{{route('library.qrcodes.books.preview', $rack)}}" target="_blank"><i class="bi-qr-code text-blue-600"></i></a>
-                        </td> -->
                         <td>
                             <div class="flex items-center justify-center">
                                 <a href="{{route('library.print.rack-books.list',$rack)}}" target="_blank"><i class="bi bi-printer text-slate-600"></i></a>
