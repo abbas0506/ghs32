@@ -1,17 +1,11 @@
-insert into eschool.book_domains
-SELECT * from temp.domains;
+insert into eschool.domains
+SELECT * from temp.book_domains;
 
 insert into eschool.racks
-SELECT * from temp.racks;
+SELECT * from temp.book_racks;
 
-insert into eschool.languages
-SELECT * from temp.languages;
-
-insert into eschool.books
-select * from temp.books;
-
-insert into eschool.teachers
-select * from temp.teachers where id>4;
+insert into eschool.books(id,title,author,publish_year,num_of_copies,price,language_id,domain_id,rack_id,created_at,updated_at)
+select id,title,author,publish_year,num_of_copies,price,language_id,book_domain_id,book_rack_id,created_at,updated_at from temp.books;
 
 
 
