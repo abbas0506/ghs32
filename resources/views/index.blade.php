@@ -14,7 +14,7 @@
 @endif
 
 <section class="w-screen h-screen">
-    <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full pt-16 bg-teal-800">
+    <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full pt-16 bg-app">
         <div class="flex flex-1 justify-end items-center">
             <img src="{{ url(asset('images/hero/book-0.png')) }}" alt="" class="w-48 h-48 md:w-96 md:h-96">
 
@@ -57,8 +57,6 @@
             </div>
             <h3 class="mt-3 text-lg">Self Assessment</h3>
         </a>
-
-
     </div>
 
 </div>
@@ -219,18 +217,21 @@
             <img src="{{asset('images/library/library-1.png')}}" alt="" class="md:w-3/4 md:float-left">
         </div>
         <div class="flex-1">
-            <h2 class="text-2xl text-slate-800">Computerized Library System</h2>
+            <h2 class="text-2xl text-slate-800">Computerized Library</h2>
             <p class="mt-3 text-slate-600 leading-relaxed">
-                We have a lot of books covering all subject domains like religion, science, culture, literature, history, etc. These books are free for all students. Thanks to our web application that keeps track of all the readers and books.
+                We have 1500+ books covering all subject domains like religion, science, culture, literature, history, etc.
+                These books are free for all students. Student may read books in library as well. Students must have to follows library rules regarding book safety and return policy.
+                Thanks to our web application that keeps track of all the readers and books.
             </p>
         </div>
 
     </div>
     <div class="flex flex-col md:flex-row gap-y-6 mt-6 md:mt-16 w-full justify-between">
         <div class="flex-1">
-            <h2 class="text-2xl text-slate-800">Moral Care</h2>
+            <h2 class="text-2xl text-slate-800">Character Building</h2>
             <p class="mt-3 text-slate-600 leading-relaxed">
-                We own our students in real sense. We show them the right way that can lead to their destination. We provide them evironment where they learn how to become good citizens of the nation.
+                We pay special focus on the social development of our students. We provide healthy environment where student grow to become morally good citizens.
+                We show them the right way that can lead to their destination.
             </p>
         </div>
         <div class="flex-1">
@@ -251,54 +252,29 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mt-12">
             <div class="flex flex-1">
-                <div id="default-carousel" class="relative w-full" data-carousel="slide">
-                    <!-- Carousel wrapper -->
-                    <div class="relative h-48 md:h-80 overflow-hidden  bg-slate-600">
-                        <!-- Item 1 -->
-                        <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
-                            <img src="{{asset('images/events/events-1.png')}}" class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 opacity-50" alt="...">
-                            <p class="absolute top-20 left-0 text-center w-full h-full opacity-80 text-white text-lg z-30">It is description of the event</p>
-                        </div>
-                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src="{{asset('images/events/events-2.png')}}" class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                        </div>
-                        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                            <img src="{{asset('images/events/events-3.png')}}" class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <div class="relative">
+                    <div class="slider-container">
+                        <div class="slides">
+                            <img src="{{asset('images/events/event-1.png')}}" alt="Image 1" class="w-96 h-64">
+                            <img src="{{asset('images/events/event-2.png')}}" alt="Image 2" class="w-96 h-64">
+                            <img src="{{asset('images/events/event-3.png')}}" alt="Image 3" class="w-96 h-64">
+                            <!-- Add more images as needed -->
+                            <img src="{{asset('images/events/event-4.png')}}" alt="Image 1" class="w-96 h-64">
+                            <img src="{{asset('images/events/event-5.png')}}" alt="Image 2" class="w-96 h-64">
+                            <img src="{{asset('images/events/event-6.png')}}" alt="Image 3" class="w-96 h-64">
+                            <!-- Add more images as needed -->
                         </div>
                     </div>
-                    <!-- Slider indicators -->
-                    <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-                        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-                        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-                    </div>
-                    <!-- Slider controls -->
-                    <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                            </svg>
-                            <span class="sr-only">Previous</span>
-                        </span>
-                    </button>
-                    <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                            <span class="sr-only">Next</span>
-                        </span>
-                    </button>
+                    <button class="prev absolute top-1/2 transform -translate-y-1/2 left-4 bg-white p-2 rounded-full shadow-md text-gray-600" onclick="changeSlide(-1)">❮</button>
+                    <button class="next absolute top-1/2 transform -translate-y-1/2 right-4 bg-white p-2 rounded-full shadow-md text-gray-600" onclick="changeSlide(1)">❯</button>
                 </div>
             </div>
 
             <div class="flex flex-col flex-1">
-                <h2 class="text-slate-800">Seminars</h2>
-                <p class="text-slate-600">We have great seminars for you. Click here to read which seminars are waiting for your click</p>
-                <h2 class="text-slate-800 mt-6">Workshops</h2>
-                <p class="text-slate-600">We have great seminars for you. Click here to read which seminars are waiting for your click</p>
-                <h2 class="text-slate-800 mt-6">Trainings</h2>
-                <p class="text-slate-600">We have great seminars for you. Click here to read which seminars are waiting for your click</p>
+                <h2>Days Celebrations</h2>
+                <p>We are a team and every activity is performed in a team spirit. We celebrate welcomes, farewells and national days and provide our students an opertunity to showcase their abilities </p>
+                <h2 class="mt-4">Student Promotion</h2>
+                <p>We promote our students' physical capacities in grounds. We arrange sports competitions to give them an oppertunity to be selected in national games ultimately. </p>
             </div>
         </div>
     </div>
@@ -331,59 +307,31 @@
 @endsection
 
 @section('script')
-<script lang="javascript">
-    import {
-        Carousel
-    }
-    from 'flowbite';
-    const options = {
-        defaultPosition: 1,
-        interval: 3000,
+<script>
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slides img');
+    const totalSlides = slides.length;
 
-        indicators: {
-            activeClasses: 'bg-white dark:bg-gray-800',
-            inactiveClasses: 'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800',
-            items: [{
-                    position: 0,
-                    el: document.getElementById('carousel-indicator-1')
-                },
-                {
-                    position: 1,
-                    el: document.getElementById('carousel-indicator-2')
-                },
-                {
-                    position: 2,
-                    el: document.getElementById('carousel-indicator-3')
-                },
-                {
-                    position: 3,
-                    el: document.getElementById('carousel-indicator-4')
-                },
-            ]
+    function changeSlide(n) {
+        slideIndex += n;
+        if (slideIndex >= totalSlides) {
+            slideIndex = 0;
+        } else if (slideIndex < 0) {
+            slideIndex = totalSlides - 1;
         }
+        updateSlides();
     }
 
-    const carousel = new Carousel(items, options);
-
-    // const $prevButton = document.getElementById('data-carousel-prev');
-    // const $nextButton = document.getElementById('data-carousel-next');
-
-
-    // $prevButton.addEventListener('click', () => {
-    //     carousel.prev();
-    // });
-
-    // $nextButton.addEventListener('click', () => {
-    //     carousel.next();
-    // });
-    animateSlide()
-    setTimeout(animateSlide, 3000);
-
-    function animateSlide() {
-
-        // slide1 = document.getElementById('slide1');
-        // slide1.toggleClass('active')
-        $('#slide1').toggleClass('active');
+    function updateSlides() {
+        slides.forEach((slide, index) => {
+            if (index === slideIndex) {
+                slide.classList.remove('hidden');
+            } else {
+                slide.classList.add('hidden');
+            }
+        });
     }
+
+    updateSlides();
 </script>
 @endsection

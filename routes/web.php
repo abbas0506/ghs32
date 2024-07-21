@@ -53,10 +53,8 @@ Route::get('/', function () {
 
 
 Route::view('about', 'about');
-Route::view('services', 'services');
-Route::view('team', 'team');
-Route::view('blogs', 'blogs');
-Route::view('login', 'login');
+Route::view('contact', 'contact');
+Route::view('gallary', 'gallary');
 
 Route::resource('applications', AdmissionApplicationController::class);
 Route::post('login', [AuthController::class, 'login']);
