@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
-use App\Models\rack;
-use App\Models\domain;
+use App\Models\Rack;
+use App\Models\Domain;
 use App\Models\Language;
 use Egulias\EmailValidator\Parser\DomainPart;
 use Exception;
