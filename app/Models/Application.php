@@ -12,6 +12,7 @@ class Application extends Model
     protected $fillable = [
         'name',
         'father',
+        'bform',
         'phone',
         'adddress',
         'bise_name',

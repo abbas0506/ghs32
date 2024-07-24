@@ -22,7 +22,7 @@
         <div class="flex flex-col flex-1 gap-y-2 justify-center text-slate-100">
             <div class="text-3xl md:text-5xl">Admission Open</div>
             <p class="text-slate-300">Welcome to our online admission portal. Join us to get quality education in any of three disciplines: Pre Engineering, ICS & Humanities (Arts group). </p>
-            <a href="{{route('applications.create')}}">
+            <a href="{{url('apply')}}">
                 <button class="btn-orange mt-5">Apply Now <i class="bi-arrow-right"></i></button>
             </a>
         </div>

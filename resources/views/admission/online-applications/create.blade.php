@@ -13,8 +13,9 @@
             <ul class="list-none text-right">
                 <li class="text-red-600 font-bold">اہم ہدایات</li>
                 <li>
-                    عزیز طلبا، دیے گئے فارم کو احتیاط سے پر کریں، غلط ڈیٹا کی صورت میں آپکا ایڈمشن کینسل بھی ہو سکتا ہے جس کی تمام تر ذمہ داری آپ پر ہو گی، فارم سبمٹ کرنے سے پہلے خاص طور پر اپنا ب فارم نمبر اور میٹرک کے مارکس ضرور چیک کر لیں
+                    عزیز طلبا، دیے گئے فارم کو احتیاط سے پر کریں، غلط ڈیٹا کی صورت میں آپکا ایڈمشن کینسل بھی ہو سکتا ہے جس کی تمام تر ذمہ داری آپ پر ہوگی
                 </li>
+                <li>فارم سبمٹ کرنے سے پہلے خاص طور پر اپنا ب فارم نمبر اور میٹرک کے مارکس ضرور چیک کر لیں</li>
             </ul>
 
         </div>
@@ -26,7 +27,7 @@
         <x-message></x-message>
         @endif
 
-        <form action="{{route('applications.store')}}" method="post" class="mt-8">
+        <form action="{{url('apply')}}" method="post" class="mt-8">
             @csrf
             <h2>Choose your desired group</h2>
             <div class="grid gap-y-2 mt-3">

@@ -39,6 +39,7 @@ class ApplicationController extends Controller
         $request->validate([
             'name' => 'required',
             'father' => 'required',
+            'bform' => 'required',
             'phone' => 'required',
             'bise_name' => 'required',
             'rollno' => 'required',
@@ -55,7 +56,7 @@ class ApplicationController extends Controller
         ]);
         try {
             Application::create($request->all());
-            return redirect()->back()->with('success', 'Application successfully submitted');
+            return redirect('congratulate');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -92,6 +93,7 @@ class ApplicationController extends Controller
         $request->validate([
             'name' => 'required',
             'father' => 'required',
+            'bform' => 'required',
             'phone' => 'required',
             'bise_name' => 'required',
             'rollno' => 'required',
@@ -120,5 +122,16 @@ class ApplicationController extends Controller
     public function destroy(string $id)
     {
         //
+        try {
+            $application = Application::find($id);
+            $application->delete();
+            return redirect()->route('admission.applications.index')->with('success', 'Successfully deleted!');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
+    }
+    public function congratulate()
+    {
+        return view('admission.applications.congrats');
     }
 }

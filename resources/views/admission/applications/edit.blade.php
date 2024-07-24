@@ -54,6 +54,10 @@
                 <input type="text" name="father" class="custom-input" placeholder="Father name" value="{{ $application->father }}">
             </div>
             <div>
+                <label for="">BForm</label>
+                <input type="text" name="bform" class="custom-input" placeholder="B Form" value="{{ $application->bform }}">
+            </div>
+            <div>
                 <label for="">Phone No</label>
                 <input type="text" name="phone" class="custom-input" placeholder="Phone No." value="{{ $application->phone }}">
             </div>

@@ -28,7 +28,7 @@ use App\Http\Controllers\Library\LibraryRuleController;
 use App\Http\Controllers\Library\PrintController;
 use App\Http\Controllers\Library\RackBooksController;
 use App\Http\Controllers\Library\TeacherController as LibraryTeacherController;
-
+use App\Http\Controllers\OnlineApplicationController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,6 +61,10 @@ Route::post('login', [AuthController::class, 'login']);
 Route::view('login/admin', 'login.admin');
 Route::view('login/admission-portal', 'login.admission-portal');
 Route::view('login/library', 'login.library');
+Route::get('apply', [OnlineApplicationController::class, 'create']);
+Route::post('apply', [OnlineApplicationController::class, 'store']);
+// Route::resource('online-applications', OnlineApplicationController::class);
+Route::get('applied/{application}', [OnlineApplicationController::class, 'applied'])->name('applied');
 
 Route::post('login/as', [AuthController::class, 'loginAs'])->name('login.as');
 Route::get('signout', [AuthController::class, 'signout'])->name('signout');

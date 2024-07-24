@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('father', 50);
+            $table->string('bform', 15);
             $table->string('phone', 16);
             $table->string('address', 100)->nullable();
             $table->string('bise_name', 20);
