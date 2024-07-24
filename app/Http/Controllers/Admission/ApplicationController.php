@@ -56,7 +56,7 @@ class ApplicationController extends Controller
         ]);
         try {
             Application::create($request->all());
-            return redirect('congratulate');
+            return redirect()->route('admission.applications.index')->with('success', 'Successfully submitted!');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong

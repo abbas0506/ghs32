@@ -27,13 +27,13 @@
         <x-message></x-message>
         @endif
 
-        <form action="{{url('apply')}}" method="post" class="mt-8">
+        <form action="{{url('apply')}}" method="post" class="mt-8" onsubmit="return validate(event)">
             @csrf
             <h2>Choose your desired group</h2>
             <div class="grid gap-y-2 mt-3">
                 @foreach($groups as $group)
                 <div>
-                    <input type="checkbox" id='group_id' name="group_id" value="{{ $group->id }}" class="rounded mr-2">
+                    <input type="checkbox" id='group_id' name="group_id" value="{{ $group->id }}" class="chk-group rounded mr-2">
                     <label for="group_id">{{ $group->name }} ({{ $group->subjects_list }})</label>
                 </div>
                 @endforeach
@@ -50,19 +50,19 @@
             <div class="grid md:grid-cols-2 gap-4 mt-8">
                 <div class="md:col-span-2">
                     <label for="">Your Name (میٹرک کے رزلٹ کارڈ کے مطابق)</label>
-                    <input type="text" name="name" class="custom-input" placeholder="Your name">
+                    <input type="text" name="name" class="custom-input" placeholder="Your name" required>
                 </div>
                 <div class="md:col-span-2">
                     <label for="">Father name</label>
-                    <input type="text" name="father" class="custom-input" placeholder="Father name">
+                    <input type="text" name="father" class="custom-input" placeholder="Father name" required>
                 </div>
                 <div>
                     <label for="">BForm (ب فارم)</label>
-                    <input type="text" name="bform" class="custom-input" placeholder="B Form">
+                    <input type="text" name="bform" class="custom-input" pattern="\d{13}" placeholder="B Form wituout dashes" required>
                 </div>
                 <div>
                     <label for="">Phone No</label>
-                    <input type="text" name="phone" class="custom-input" placeholder="Phone No.">
+                    <input type="text" name="phone" class="custom-input" placeholder="phone no">
                 </div>
                 <div>
                     <label for="">Board Name</label>
@@ -73,15 +73,15 @@
                 </div>
                 <div>
                     <label for="">Matric Roll No.</label>
-                    <input type="number" name="rollno" class="custom-input" placeholder="Roll number" min='0'>
+                    <input type="number" name="rollno" class="custom-input" placeholder="Roll number" min='0' required>
                 </div>
                 <div>
                     <label for="">Obtanied Marks</label>
-                    <input type="number" name="obtained" class="custom-input" placeholder="Obtained marks" min='0'>
+                    <input type="number" name="obtained" id='obtained' class="custom-input" placeholder="Obtained marks" min='0' required>
                 </div>
                 <div>
                     <label for="">Total Marks</label>
-                    <select name="total" id="" class="custom-input">
+                    <select name="total" id="total" class="custom-input">
                         <option value="1100">1100</option>
                         <option value="1200" selected>1200</option>
                     </select>
@@ -100,4 +100,68 @@
 
 <!-- footer -->
 <x-footer></x-footer>
+@endsection
+
+@section('script')
+<script type="module">
+    $(document).ready(function() {
+        $('.chk-group').click(function() {
+            // Uncheck all checkboxes
+            $('.chk-group').prop('checked', false);
+            // Check the clicked checkbox
+            $(this).prop('checked', true);
+        });
+    });
+</script>
+<script>
+    function validate(event) {
+        var validated = true;
+        var group_checked = false;
+        $('.chk-group').each(function() {
+            if ($(this).is(':checked'))
+                group_checked = true;
+        });
+
+        if (!group_checked) {
+            event.preventDefault();
+            Swal.fire({
+                title: "Warning",
+                text: "Please, select a group",
+                icon: "warning",
+                showConfirmButton: false,
+                timer: 1500
+
+            });
+        }
+        // if (group_checked) {
+        //     // then compare obtained and total marks
+        //     var obtainded = $('#obtained').val()
+        //     var total = $('#total').val()
+        //     if (obtainded > total) {
+        //         validated = false
+        //         Swal.fire({
+        //             title: "Warning",
+        //             text: "Obtained marks wrong",
+        //             icon: "warning",
+        //             showConfirmButton: false,
+        //             timer: 1500
+
+        //         });
+        //     } else {
+        //         validated = false
+        //         Swal.fire({
+        //             title: "Warning",
+        //             text: "Please check a group",
+        //             icon: "warning",
+        //             showConfirmButton: false,
+        //             timer: 1500
+
+        //         });
+        //     }
+        // }
+        return validated;
+        // return false;
+
+    }
+</script>
 @endsection
