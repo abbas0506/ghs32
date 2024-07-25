@@ -49,8 +49,8 @@
             <!-- student info -->
             <div class="grid md:grid-cols-2 gap-4 mt-8">
                 <div class="md:col-span-2">
-                    <label for="">Your Name (میٹرک کے رزلٹ کارڈ کے مطابق)</label>
-                    <input type="text" name="name" class="custom-input" placeholder="Your name" required>
+                    <label for="">Student Name (میٹرک کے رزلٹ کارڈ کے مطابق)</label>
+                    <input type="text" name="name" class="custom-input" placeholder="Student name" required>
                 </div>
                 <div class="md:col-span-2">
                     <label for="">Father name</label>
