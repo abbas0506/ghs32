@@ -12,9 +12,10 @@
                 <li class="float-right md:hidden" onclick="toggleNavbarMobile()">
                     <i class="bi-x-lg text-xl text-orange-300 hover:-rotate-90 transition duration-500 ease-in-out"></i>
                 </li>
+                <li><a href="{{ url('/') }}" class="nav-item">Home</a></li>
                 <li><a href="{{ url('about') }}" class="nav-item">About</a></li>
                 <li><a href="" class="nav-item">Faculty</a></li>
-                <li><a href="#" class="nav-item">Alumni</a></li>
+                <!-- <li><a href="#" class="nav-item">Alumni</a></li> -->
                 <li><a href="{{ url('gallary') }}" class="nav-item">Gallary</a></li>
                 <li><a href="{{ url('contact') }}" class="nav-item">Contact Us</a></li>
             </ul>

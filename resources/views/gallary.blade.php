@@ -15,13 +15,18 @@
     <div class="mt-5 md:mt-16 md:w-1/2 flex justify-center items-center mx-auto relative">
         <div class="slider-container">
             <div class="slides">
-                <img src="{{asset('images/events/event-1.png')}}" alt="Image 1" class="w-96 h-64">
-                <img src="{{asset('images/events/event-2.png')}}" alt="Image 2" class="w-96 h-64">
-                <img src="{{asset('images/events/event-3.png')}}" alt="Image 3" class="w-96 h-64">
+                <img src="{{asset('images/events/event-000.png')}}" alt="Image 1" class="w-96 h-64">
+                <img src="{{asset('images/events/event-001.png')}}" alt="Image 1" class="w-96 h-64">
+                <img src="{{asset('images/events/event-004.png')}}" alt="Image 2" class="w-96 h-64">
+                <img src="{{asset('images/events/event-005.png')}}" alt="Image 3" class="w-96 h-64">
                 <!-- Add more images as needed -->
-                <img src="{{asset('images/events/event-4.png')}}" alt="Image 1" class="w-96 h-64">
-                <img src="{{asset('images/events/event-5.png')}}" alt="Image 2" class="w-96 h-64">
-                <img src="{{asset('images/events/event-6.png')}}" alt="Image 3" class="w-96 h-64">
+                <img src="{{asset('images/events/event-006.png')}}" alt="Image 1" class="w-96 h-64">
+                <img src="{{asset('images/events/event-007.png')}}" alt="Image 2" class="w-96 h-64">
+                <img src="{{asset('images/events/event-008.png')}}" alt="Image 3" class="w-96 h-64">
+
+                <img src="{{asset('images/events/event-010.png')}}" alt="Image 3" class="w-96 h-64">
+                <img src="{{asset('images/events/event-011.png')}}" alt="Image 3" class="w-96 h-64">
+                <img src="{{asset('images/events/event-012.png')}}" alt="Image 3" class="w-96 h-64">
                 <!-- Add more images as needed -->
             </div>
         </div>

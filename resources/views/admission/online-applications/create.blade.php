@@ -33,8 +33,8 @@
             <div class="grid gap-y-2 mt-3">
                 @foreach($groups as $group)
                 <div>
-                    <input type="checkbox" id='group_id' name="group_id" value="{{ $group->id }}" class="chk-group rounded mr-2">
-                    <label for="group_id">{{ $group->name }} ({{ $group->subjects_list }})</label>
+                    <input type="checkbox" id='group_id_{{$group->id}}' name="group_id" value="{{ $group->id }}" class="chk-group rounded mr-2">
+                    <label for="group_id_{{$group->id}}">{{ $group->name }} ({{ $group->subjects_list }})</label>
                 </div>
                 @endforeach
             </div>
@@ -58,11 +58,11 @@
                 </div>
                 <div>
                     <label for="">BForm (ب فارم)</label>
-                    <input type="text" name="bform" class="custom-input" pattern="\d{13}" placeholder="B Form wituout dashes" required>
+                    <input type="text" name="bform" class="custom-input" placeholder="B Form wituout dashes" required>
                 </div>
                 <div>
                     <label for="">Phone No</label>
-                    <input type="text" name="phone" class="custom-input" placeholder="phone no">
+                    <input type="text" name="phone" class="custom-input" placeholder="Phone number" required>
                 </div>
                 <div>
                     <label for="">Board Name</label>
@@ -73,11 +73,11 @@
                 </div>
                 <div>
                     <label for="">Matric Roll No.</label>
-                    <input type="number" name="rollno" class="custom-input" placeholder="Roll number" min='0' required>
+                    <input type="number" name="rollno" class="custom-input" placeholder="Roll number" min=0 required>
                 </div>
                 <div>
                     <label for="">Obtanied Marks</label>
-                    <input type="number" name="obtained" id='obtained' class="custom-input" placeholder="Obtained marks" min='0' required>
+                    <input type="number" name="obtained" id='obtained' class="custom-input" placeholder="Obtained marks" min='0' max='1200' required>
                 </div>
                 <div>
                     <label for="">Total Marks</label>
@@ -94,8 +94,6 @@
             </div>
         </form>
     </div>
-
-
 </section>
 
 <!-- footer -->

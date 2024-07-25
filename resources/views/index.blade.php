@@ -145,7 +145,7 @@
 </section>
 
 <!-- testimonial section -->
-<section class="testimonials pt-0" data-aos="fade-up">
+<!-- <section class="testimonials pt-0" data-aos="fade-up">
     <div class="mt-24 px-4 md:px-16 md:w-3/4 mx-auto">
         <h2 class="text-4xl text-center">Our Faculty</h2>
         <p class="text-gray-600 text-center mt-8">
@@ -191,7 +191,37 @@
         <div class="swiper-pagination"></div>
     </div>
 
+</section> -->
+<!-- End Ttstimonials Section -->
+
+
+<section class="pt-0" data-aos="fade-up">
+    <div class="mt-24 px-4 md:px-16 md:w-3/4 mx-auto">
+        <h2 class="text-4xl text-center">Message</h2>
+        <!-- <p class="text-gray-600 text-center mt-8">
+            We have highly skilled and qualified teaching faculty who consistently demonstrate a passion for fostering student growth through innovative teaching methods and personalized support
+        </p> -->
+        <div class="h-1 w-24 bg-teal-800 mx-auto mt-6"></div>
+    </div>
+    <div class="w-full md:w-3/4 mx-auto mt-12">
+        <div class="flex justify-center items-center flex-col">
+            <img src="{{asset('images/principal.jpeg')}}" class="w-64" alt="">
+            <h2 class="mt-3">Abdul Majeed SSS(Economics)</h2>
+            <h2>Principal</h2>
+            <p class="mt-3 text-lg text-center">
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                "We are committed to achieve academic excellence, character education, and inclusive community engagement. we empower our students to become lifelong learners, compassionate leaders, and contributors to a globally connected society."
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+        </div>
+
+
+    </div>
+
+
 </section><!-- End Ttstimonials Section -->
+
+
 
 <section id='key_features' class="mt-12 md:mt-24 px-4 md:px-24">
     <div class="md:w-3/4 mx-auto">
@@ -255,13 +285,14 @@
                 <div class="relative">
                     <div class="slider-container">
                         <div class="slides">
-                            <img src="{{asset('images/events/event-1.png')}}" alt="Image 1" class="w-96 h-64">
-                            <img src="{{asset('images/events/event-2.png')}}" alt="Image 2" class="w-96 h-64">
-                            <img src="{{asset('images/events/event-3.png')}}" alt="Image 3" class="w-96 h-64">
+                            <img src="{{asset('images/events/event-001.png')}}" alt="Image 1" class="w-96 h-64">
+                            <img src="{{asset('images/events/event-004.png')}}" alt="Image 2" class="w-96 h-64">
+                            <!-- <img src="{{asset('images/events/event-005.png')}}" alt="Image 3" class="w-96 h-64"> -->
                             <!-- Add more images as needed -->
-                            <img src="{{asset('images/events/event-4.png')}}" alt="Image 1" class="w-96 h-64">
-                            <img src="{{asset('images/events/event-5.png')}}" alt="Image 2" class="w-96 h-64">
-                            <img src="{{asset('images/events/event-6.png')}}" alt="Image 3" class="w-96 h-64">
+                            <img src="{{asset('images/events/event-006.png')}}" alt="Image 1" class="w-96 h-64">
+                            <img src="{{asset('images/events/event-007.png')}}" alt="Image 2" class="w-96 h-64">
+                            <img src="{{asset('images/events/event-010.png')}}" alt="Image 3" class="w-96 h-64">
+                            <img src="{{asset('images/events/event-013.png')}}" alt="Image 3" class="w-96 h-64">
                             <!-- Add more images as needed -->
                         </div>
                     </div>
