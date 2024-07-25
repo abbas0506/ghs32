@@ -58,7 +58,7 @@
                 </div>
                 <div>
                     <label for="">BForm (ب فارم)</label>
-                    <input type="text" name="bform" class="custom-input" placeholder="B Form wituout dashes" required>
+                    <input type="text" name="bform" class="custom-input" placeholder="B Form without dashes" required>
                 </div>
                 <div>
                     <label for="">Phone No</label>
