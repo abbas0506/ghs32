@@ -132,7 +132,7 @@
                 </ul>
                 <ul class="flex mt-3">
                     <li><i class="bi-check2-circle pr-3"></i></li>
-                    <li> *RUNNER UP*: Hock Tournament Sahiwal Division, 2023-24</li>
+                    <li> *RUNNER UP*: Hockey Tournament Sahiwal Division, 2023-24</li>
                 </ul>
                 <ul class="flex mt-3">
                     <li><i class="bi-check2-circle pr-3"></i></li>
@@ -317,7 +317,7 @@
         <div class="p-4 md:p-8 text-center">
             <img src="{{url(asset('images/donor.png'))}}" alt="" class="w-40 h-40 rounded-full mx-auto">
             <h2 class="mt-3">Rao Zahoor Ahmad</h2>
-            <p class="text-slate-600 text-sm mt-2">A well known charity person of village Chak Bedi, who donated his 9 acres land for the establisment of school. May his sould rest in peace!</p>
+            <p class="text-slate-600 text-sm mt-2">A well known charity person of village Chak Bedi, who donated his 9 acres land for the establisment of school. May his soul rest in peace!</p>
         </div>
 
         <div class="overflow-x-hidden">
