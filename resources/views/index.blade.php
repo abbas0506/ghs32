@@ -128,7 +128,7 @@
                 </ul>
                 <ul class="flex mt-3">
                     <li><i class="bi-check2-circle pr-3"></i></li>
-                    <li> *WINNER*: Hock Tournament Sahiwal Division, 2022-23</li>
+                    <li> *WINNER*: Hockey Tournament Sahiwal Division, 2022-23</li>
                 </ul>
                 <ul class="flex mt-3">
                     <li><i class="bi-check2-circle pr-3"></i></li>
