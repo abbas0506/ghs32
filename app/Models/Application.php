@@ -31,7 +31,7 @@ class Application extends Model
 
     ];
 
-    protected $dateFormat = 'Y-m-d';
+    // protected $dateFormat = 'Y-m-d';
     protected $dates = ['paid_at'];
 
     public function clas()

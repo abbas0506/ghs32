@@ -19,12 +19,13 @@
             <label for="">Application #</label>
             <div class="flex flex-wrap items-center gap-x-4">
                 <h2>{{ $application->rollno }}</h2>
-                <p>dated {{ $application->created_at->format('d/m/Y h:m') }}</p>
+                <p>dated {{ $application->created_at}}</p>
             </div>
         </div>
         <div>
             <label for="">Name</label>
             <h2>{{ $application->name }} s/o {{ $application->father }}</h2>
+            <p class="text-slate-600 text-sm">{{ $application->bform }}, {{ $application->phone }}</p>
         </div>
         <div>
             <label for="">Group</label>
