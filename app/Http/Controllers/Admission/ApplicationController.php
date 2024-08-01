@@ -55,8 +55,15 @@ class ApplicationController extends Controller
             'concession' => 0,
         ]);
         try {
-            Application::create($request->all());
-            return redirect()->route('admission.applications.index')->with('success', 'Successfully submitted!');
+            $duplicate = Application::where('rollno', $request->rollno)->where('pass_year', $request->pass_year)->first();
+            if ($duplicate) {
+                // duplicate record;
+                return redirect()->back()->with('warning', 'Application alrady exists');
+            } else {
+                // not duplicating
+                Application::create($request->all());
+                return redirect()->route('admission.applications.index')->with('success', 'Successfully submitted!');
+            }
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong

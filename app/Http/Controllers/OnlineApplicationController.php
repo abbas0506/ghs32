@@ -54,8 +54,15 @@ class OnlineApplicationController extends Controller
             'concession' => 0,
         ]);
         try {
-            $application = Application::create($request->all());
-            return redirect()->route('applied', $application);
+            $duplicate = Application::where('rollno', $request->rollno)->where('pass_year', $request->pass_year)->first();
+            if ($duplicate) {
+                // duplicate record;
+                return redirect()->back()->with('warning', 'Application alrady exists');
+            } else {
+                // not duplicating
+                $application = Application::create($request->all());
+                return redirect()->route('applied', $application);
+            }
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
