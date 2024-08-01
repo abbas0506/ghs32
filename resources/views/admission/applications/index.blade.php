@@ -48,7 +48,7 @@
                     <td>
                         <a href="{{ route('admission.applications.show', $application) }}" class="link">{{ $application->rollno }}</a>
                     </td>
-                    <td class="text-left">{{ $application->name }} <br> <span class="text-slate-600 text-xs">{{ $application->rollno }}</span></td>
+                    <td class="text-left">{{ $application->name }}</td>
                     <td>{{ $application->group->name }}</td>
                     <td>{{ $application->obtained }}</td>
                     <td>{{ $application->obtainedPercentage() }}</td>
