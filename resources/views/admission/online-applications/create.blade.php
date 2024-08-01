@@ -17,9 +17,11 @@
                 </li>
                 <li>فارم سبمٹ کرنے سے پہلے خاص طور پر اپنا ب فارم نمبر اور میٹرک کے مارکس ضرور چیک کر لیں</li>
             </ul>
-
         </div>
 
+        <div class=" bg-slate-800 text-orange-300 mt-8 p-2">
+            Last date to apply : 15/8/2024
+        </div>
         <!-- page message -->
         @if($errors->any())
         <x-message :errors='$errors'></x-message>
