@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $numOfApplicationsToday = Application::whereDate('created_at', today())->count();
         $sumOfFeeToday = Application::whereDate('paid_at', today())->sum('fee_paid');
         $numOfObjectionsToday = Application::whereNotNull('objection')->count();
-        $numOfHighAchieversToday = Application::where('obtained', '>=', 1000)->count();
+        $numOfHighAchieversToday = Application::where('obtained', '>=', 1000)->whereDate('created_at', today())->count();
 
         $groups = Group::all();
 
