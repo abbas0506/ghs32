@@ -19,8 +19,10 @@
                 <div class="title">Applications</div>
                 <div class="flex items-center">
                     <div class="h2 mr-8">{{ $applications->count() }}</div>
+                    @if($numOfApplicationsToday)
                     <i class="bi-arrow-up text-green-700 text-sm"></i>
-                    <p class="text-green-700 text-sm">{{ $applications->where('created_at', today())->count() }}</p>
+                    <p class="text-green-700 text-sm">{{ $numOfApplicationsToday }}</p>
+                    @endif
                 </div>
             </div>
             <div class="ico bg-teal-100">
@@ -32,8 +34,10 @@
                 <div class="title">Fee</div>
                 <div class="flex items-center">
                     <div class="h2 mr-8"> {{ $applications->sum('fee_paid') }}</div>
+                    @if($sumOfFeeToday>0)
                     <i class="bi-arrow-up text-green-700 text-sm"></i>
-                    <p class="text-green-700 text-sm">{{ $applications->where('paid_at', today())->sum('fee_paid') }}</p>
+                    <p class="text-green-700 text-sm">{{ $sumOfFeeToday }}</p>
+                    @endif
                 </div>
             </div>
             <div class="ico bg-sky-100">
@@ -45,8 +49,10 @@
                 <div class="title">Objections</div>
                 <div class="flex items-center">
                     <div class="h2 mr-8"> {{ $applications->whereNotNull('objection')->count() }}</div>
+                    @if($numOfObjectionsToday>0)
                     <i class="bi-arrow-up text-red-600 text-sm"></i>
-                    <p class="text-red-600 text-sm">{{ $applications->where('created_at', today())->whereNotNull('objection')->count() }}</p>
+                    <p class="text-red-600 text-sm">{{ $numOfObjectionsToday }}</p>
+                    @endif
                 </div>
             </div>
             <div class="ico bg-red-100">
@@ -58,8 +64,10 @@
                 <div class="title">High Achievers</div>
                 <div class="flex items-center">
                     <div class="h2 mr-8"> {{ $applications->where('obtained','>=',1000)->count() }}</div>
+                    @if($numOfHighAchieversToday)
                     <i class="bi-arrow-up text-green-700 text-sm"></i>
-                    <p class="text-green-700 text-sm">{{ $applications->where('created_at', today())->where('obtained','>=',1000)->count() }}</p>
+                    <p class="text-green-700 text-sm">{{ $numOfHighAchieversToday }}</p>
+                    @endif
                 </div>
             </div>
             <div class="ico bg-green-100">

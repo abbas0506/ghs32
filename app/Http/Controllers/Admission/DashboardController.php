@@ -16,9 +16,14 @@ class DashboardController extends Controller
     {
         //
         $applications = Application::orderBy('id', 'desc')->get();
+        $numOfApplicationsToday = Application::whereDate('created_at', today())->count();
+        $sumOfFeeToday = Application::whereDate('paid_at', today())->sum('fee_paid');
+        $numOfObjectionsToday = Application::whereNotNull('objection')->count();
+        $numOfHighAchieversToday = Application::where('obtained', '>=', 1000)->count();
+
         $groups = Group::all();
 
-        return view('admission.dashboard', compact('applications', 'groups'));
+        return view('admission.dashboard', compact('applications', 'groups', 'numOfApplicationsToday', 'sumOfFeeToday', 'numOfObjectionsToday', 'numOfHighAchieversToday'));
     }
 
     /**

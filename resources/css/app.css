@@ -97,7 +97,7 @@
         @apply  text-2xl md:text-4xl;
     }
     .bg-app{
-        @apply bg-teal-700;
+        @apply bg-teal-900;
     }
     .text-xxs {
         font-size: 0.5rem;

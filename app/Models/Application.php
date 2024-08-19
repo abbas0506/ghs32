@@ -46,7 +46,7 @@ class Application extends Model
     {
         $status = '';    //under process
         if ($this->objection != null) $status = $this->objection; //objection over
-        elseif ($this->fee_paid != null) $status = 'finalized';   //fee paid
+        elseif ($this->fee_paid != null && $this->fee_paid > 0) $status = 'finalized';   //fee paid
         return $status;
     }
 

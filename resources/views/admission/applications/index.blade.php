@@ -37,7 +37,7 @@
                     <th class="w-24">Group</th>
                     <th class="w-16">Marks</th>
                     <th class="w-16">%</th>
-                    <th class="w-16">Status</th>
+                    <th class="w-16">Fee</th>
                     <th class="w-16">Action</th>
                 </tr>
             </thead>
@@ -52,16 +52,18 @@
                     <td>{{ $application->group->name }}</td>
                     <td>{{ $application->obtained }}</td>
                     <td>{{ $application->obtainedPercentage() }}</td>
-                    <td>{{ $application->status() }}</td>
+                    <td>{{ $application->fee_paid }}</td>
                     <td>
                         <div class="flex items-center justify-center">
                             <a href="{{route('admission.applications.edit',$application)}}"><i class="bx bx-pencil text-green-600"></i></a>
+                            @if($application->status() != 'finalized')
                             <span class="text-slate-300 px-2">|</span>
                             <form action="{{route('admission.applications.destroy',$application)}}" method="post" onsubmit="return confirmDel(event)">
                                 @csrf
                                 @method('DELETE')
                                 <button><i class="bx bx-trash text-red-600"></i></button>
                             </form>
+                            @endif
                         </div>
                     </td>
                 </tr>

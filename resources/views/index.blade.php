@@ -16,7 +16,7 @@
 <section class="w-screen h-screen">
     <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full pt-16 bg-app">
         <div class="flex flex-1 justify-end items-center">
-            <img src="{{ url(asset('images/hero/book-0.png')) }}" alt="" class="w-48 h-48 md:w-96 md:h-96">
+            <img src="{{ url(asset('images/hero/student-1.png')) }}" alt="" class="w-48 h-48 md:w-96 md:h-96">
 
         </div>
         <div class="flex flex-col flex-1 gap-y-2 justify-center text-slate-100">
@@ -37,25 +37,25 @@
             <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
                 <i class="bi bi-tools text-2xl text-cyan-400"></i>
             </div>
-            <h3 class="mt-3 text-lg">Site Administration</h3>
+            <h3 class="mt-3 md:text-lg">Site Admin.</h3>
         </a>
         <a href="{{url('login/admission-portal')}}" class="flex flex-col justify-center items-center">
             <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
                 <i class="bi bi-person-gear text-2xl text-green-400"></i>
             </div>
-            <h3 class="mt-3 text-lg">Admission Portal</h3>
+            <h3 class="mt-3 md:text-lg">Admission Portal</h3>
         </a>
         <a href="{{ url('login/library') }}" class="flex flex-col justify-center items-center">
             <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
                 <i class="bi bi-book text-2xl text-orange-400"></i>
             </div>
-            <h3 class="mt-3 text-lg">Library System</h3>
+            <h3 class="mt-3 md:text-lg">Library System</h3>
         </a>
         <a href="" class="flex flex-col justify-center items-center">
             <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
                 <i class="bi bi-laptop text-2xl text-blue-400"></i>
             </div>
-            <h3 class="mt-3 text-lg">Self Assessment</h3>
+            <h3 class="mt-3 md:text-lg">Self Assessment</h3>
         </a>
     </div>
 
