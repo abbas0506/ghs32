@@ -100,7 +100,7 @@
                     </td>
                     <td>{{ $group->applications()->count() }} @if($group->applications()->today()->count()) <span class="text-green-600 text-xs pl-2">{{ $group->applications()->today()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
                     <td>{{ $group->applications()->objectioned()->count() }}</td>
-                    <td>{{ $group->applications()->recentlyPaid()->count() }} @if($group->applications()->feepaid()->recentlyPaid()->count())<span class="text-green-600 text-xs pl-2">{{ $group->applications()->today()->feepaid()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
+                    <td>{{ $group->applications()->feepaid()->count() }} @if($group->applications()->feepaid()->count())<span class="text-green-600 text-xs pl-2">{{ $group->applications()->recentlyPaid()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
                 </tr>
                 @endforeach
             </tbody>
