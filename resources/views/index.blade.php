@@ -32,12 +32,12 @@
 
 </section>
 <div class="flex justify-center w-full bg-teal-200">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-x-24 p-5 text-center">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-x-24 p-5 text-center">
         <a href="{{url('login/admin')}}" class="flex flex-col justify-center items-center">
             <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
                 <i class="bi bi-tools text-2xl text-cyan-400"></i>
             </div>
-            <h3 class="mt-3 md:text-lg">Site Admin.</h3>
+            <h3 class="mt-3 md:text-lg">Administration</h3>
         </a>
         <a href="{{url('login/admission-portal')}}" class="flex flex-col justify-center items-center">
             <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
@@ -51,7 +51,7 @@
             </div>
             <h3 class="mt-3 md:text-lg">Library System</h3>
         </a>
-        <a href="" class="flex flex-col justify-center items-center">
+        <a href="{{ url('https://www.exampixel.com/') }}" target="_blank" class="flex flex-col justify-center items-center">
             <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
                 <i class="bi bi-laptop text-2xl text-blue-400"></i>
             </div>

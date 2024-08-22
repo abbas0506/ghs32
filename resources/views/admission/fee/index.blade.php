@@ -55,7 +55,7 @@
                     <td>{{ $application->fee_paid }}</td>
                     <td>
                         <div class="flex items-center justify-center btn-teal rounded">
-                            <a href="{{route('admission.fee.edit',$application)}}">Edit</a>
+                            <a href="{{route('admission.fee.edit',$application)}}">Pay</a>
                         </div>
                     </td>
                 </tr>

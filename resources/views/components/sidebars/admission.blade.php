@@ -22,6 +22,12 @@
                     <span class="ml-3">Sections</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admission.cards.index') }}" class="flex items-center p-2">
+                    <i class="bi-person-badge"></i>
+                    <span class="ml-3">Student Cards</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

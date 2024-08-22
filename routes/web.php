@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\UserController;
 
 use App\Http\Controllers\Admission\ApplicationController as AdmissionApplicationController;
+use App\Http\Controllers\Admission\CardController;
 use App\Http\Controllers\Admission\DashboardController;
 use App\Http\Controllers\Admission\FeeController as AdmissionFeeController;
 use App\Http\Controllers\Admission\GroupApplicationController;
@@ -97,6 +98,8 @@ Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['r
     Route::resource('fee', AdmissionFeeController::class);
     Route::resource('objections', AdmissionObjectionController::class);
     Route::resource('high-achievers', HighAchieverController::class);
+    Route::resource('cards', CardController::class);
+    Route::get('print/cards', [CardController::class, 'print'])->name('cards.print');
 });
 
 Route::group(
