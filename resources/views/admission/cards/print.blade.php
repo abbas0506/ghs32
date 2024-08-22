@@ -86,9 +86,9 @@ $roman = config('global.romans');
                 <tbody class="data">
                     @foreach($applications as $application)
                     @if($i%$numOfCardsPerRow==0)<tr class="text-sm">@endif
-                        <td class="p-7">
+                        <td class="p-6">
                             <div class="border p-2">
-                                <div class="text-base">{{ $application->name }}</div>
+                                <div class="font-semibold">{{ $application->name }}</div>
                                 <div class="border w-20 h-20 m-auto mt-2"></div>
                                 <div class="mt-2">Session 2024-26</div>
                                 <div class="font-bold text-lg mt-2">{{ $application->group->name }}</div>
