@@ -88,14 +88,14 @@ $roman = config('global.romans');
                     @if($i%$numOfCardsPerRow==0)<tr class="text-sm">@endif
                         <td class="p-6">
                             <div class="border p-2">
-                                <div class="font-semibold">{{ $application->name }}</div>
-                                <div class="border w-20 h-20 m-auto mt-2"></div>
-                                <div class="mt-2">Session 2024-26</div>
-                                <div class="font-bold text-lg mt-2">{{ $application->group->name }}</div>
-                                <div class="flex flex-col m-auto mt-1">
-                                    <div id='qr' style="margin-left:65px">{!! DNS2D::getBarcodeHTML($application->bform,'QRCODE',3,3) !!}</div>
-                                    <p class="text-xs mt-1">Valid up to: August 2026</p>
-                                    <p class="text-xs mt-2">Govt Higher Secondary School Chak Bedi Pakpattan</p>
+                                <div class="font-semibold mt-1">{{ $application->name }}</div>
+                                <div class="border w-20 h-20 m-auto mt-3"></div>
+                                <div class="text-xs mt-2">Session 2024-26</div>
+                                <div class="font-bold text-lg mt-1">{{ $application->group->name }}</div>
+                                <div class="flex flex-col m-auto mt-2">
+                                    <div id='qr' style="margin-left:76px">{!! DNS2D::getBarcodeHTML($application->bform,'QRCODE',2,2) !!}</div>
+                                    <p class="text-xs mt-2">Valid up to: August 2026</p>
+                                    <p class="text-xs mt-2">Govt. Higher Secondary School Chak Bedi, Pakpattan</p>
 
                                 </div>
                             </div>
