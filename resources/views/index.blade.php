@@ -27,7 +27,7 @@
             </a>
         </div> -->
         <div class="flex flex-col flex-1 gap-y-2 justify-center text-slate-100">
-            <div class="text-3xl md:text-4xl">OUR MISSION</div>
+            <div class="text-3xl md:text-4xl">Our Mission</div>
             <p class="text-slate-300 text-lg leading-relaxed mt-4">We are committed to unlocking the unique potential within every student. Our dynamic and supportive environment is designed to foster creativity, critical thinking, and personal growth.</p>
             <!-- <a href="">
                 <button class="btn-orange mt-5 rounded py-2">Explore Us <i class="bi-arrow-right"></i></button>
@@ -68,8 +68,10 @@
 
 </div>
 <!-- features section -->
-<section id='features' class="md:mt-24 px-4 md:px-24">
-    <h2 class="text-4xl text-center">Why Us</h2>
+<section id='features' class="md:mt-24 px-4 md:px-24 mt-12">
+    <h2 class="text-2xl md:text-4xl text-center">WELCOME TO</h2>
+    <p class="text-center text-sm md:text-lg mt-3">Govt Higher Secondary School Chak Bedi, Pakpattan</p>
+    <div class="h-1 w-24 bg-teal-800 mx-auto mt-6"></div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
         <div class="feature-box hover:border-pink-300 hover:bg-pink-50">
             <div class="flex items-center justify-center bg-pink-100 rounded-full w-16 h-16">
