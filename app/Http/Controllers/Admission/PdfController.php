@@ -44,4 +44,13 @@ class PdfController extends Controller
         $file = "serial-no.pdf";
         return $pdf->stream($file);
     }
+
+    public function printObjections()
+    {
+        $applicationsHavingObjection = Application::whereNotNull('objection')->get();
+        $pdf = PDF::loadview('admission.pdf.objections', compact('applicationsHavingObjection'))->setPaper('a4', 'portrait');
+        $pdf->set_option("isPhpEnabled", true);
+        $file = "objections.pdf";
+        return $pdf->stream($file);
+    }
 }

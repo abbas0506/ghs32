@@ -3,23 +3,27 @@
 <div class="container bg-slate-100">
     <!-- Title     -->
     <h1>Objections</h1>
-    <div class="flex items-center space-x-2">
-        <div class="flex-1">
-            <div class="bread-crumb">
-                <a href="{{ url('/') }}">Dashboard</a>
-                <div>/</div>
-                <div>Objections</div>
-                <div>/</div>
-                <div>Applications ( {{ $applications->count() }} )</div>
-            </div>
-        </div>
+
+    <div class="bread-crumb">
+        <a href="{{ url('/') }}">Dashboard</a>
+        <div>/</div>
+        <div>Objections ( {{ $applications->count() }} )</div>
+    </div>
+
+
+    <div class="flex mt-4">
         <!-- search -->
         <div class="flex relative w-full md:w-1/3">
             <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
             <i class="bx bx-search absolute top-2 right-2"></i>
         </div>
-    </div>
+        <div class="flex justify-end w-full">
+            <div class="flex w-12 h-12 items-center justify-center rounded-full bg-orange-100 hover:bg-orange-200">
+                <a href="{{ route('admission.print.objections') }}" target="_blank"><i class="bi-printer"></i></a>
+            </div>
+        </div>
 
+    </div>
     <!-- page message -->
     @if($errors->any())
     <x-message :errors='$errors'></x-message>
@@ -38,6 +42,7 @@
                     <th class="w-40 text-left">Student Name</th>
                     <th class="w-24">Group</th>
                     <th class="w-12">Marks</th>
+                    <th class="w-12">Fee</th>
                     <th class="w-24">Objection</th>
                     <th class="w-12">Action</th>
                 </tr>
@@ -50,6 +55,7 @@
                     <td class="text-left">{{ $application->name }}</td>
                     <td>{{ $application->group->name }}</td>
                     <td>{{ $application->obtained }}</td>
+                    <td>{{ $application->fee_paid }}</td>
                     <td>{{ $application->objection }}</td>
                     <td>
                         <div class="flex items-center justify-center btn-orange rounded">

@@ -15,7 +15,7 @@ class FeeController extends Controller
     public function index()
     {
         //
-        $applications = Application::whereNull('objection')->get();
+        $applications = Application::all();
         return view('admission.fee.index', compact('applications'));
     }
 

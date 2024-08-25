@@ -2,24 +2,31 @@
 @section('page-content')
 <div class="container bg-slate-100">
     <!--Title  -->
-    <h1>Fee</h1>
-    <div class="flex flex-wrap items-center gap-2">
-        <div class="flex-1">
+    <div class="flex justify-between items-baseline">
+        <div>
+            <h1>Fee</h1>
+
             <div class="bread-crumb">
                 <a href="{{ url('/') }}">Dashboard</a>
                 <div>/</div>
-                <div>Fee</div>
-                <div>/</div>
-                <div>Applications ( {{ $applications->count() }} )</div>
+                <div>Fee Paid</div>
             </div>
         </div>
+        <div>
+            {{ $applications->whereNotNull('fee_paid')->count()}} / {{ $applications->count()}}
+        </div>
+    </div>
+
+    <div class="flex mt-4">
         <!-- search -->
-        <div class="flex flex-col md:flex-row items-center justify-between">
-            <div class="flex relative w-full md:w-1/3">
-                <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
-                <i class="bx bx-search absolute top-2 right-2"></i>
+        <div class="flex relative w-full md:w-1/3">
+            <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
+            <i class="bx bx-search absolute top-2 right-2"></i>
+        </div>
+        <div class="flex justify-end w-full">
+            <div class="flex w-12 h-12 items-center justify-center rounded-full bg-orange-100 hover:bg-orange-200">
+                <a href="{{ route('admission.print.fee') }}" target="_blank"><i class="bi-printer"></i></a>
             </div>
-            <a href="{{route('admission.print.fee')}}" class="btn-teal rounded">Print Fee <i class="bi-print"></i></a>
         </div>
 
     </div>

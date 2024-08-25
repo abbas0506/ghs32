@@ -113,10 +113,13 @@ Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['r
 
     Route::resource('cards', CardController::class);
     Route::get('print/cards', [CardController::class, 'print'])->name('cards.print');
+
     Route::get('sections/{section}/print/students-list', [PdfController::class, 'printListOfStudents'])->name('sections.print.listOfStudents');
     Route::get('sections/{section}/print/attendance-list', [PdfController::class, 'printAttendanceList'])->name('sections.print.attendanceList');
     Route::get('sections/{section}/print/serial-list', [PdfController::class, 'printListOfSrNo'])->name('sections.print.listOfSrNo');
+
     Route::get('print/fee', [PdfController::class, 'printFee'])->name('print.fee');
+    Route::get('print/objections', [PdfController::class, 'printObjections'])->name('print.objections');
 });
 
 Route::group(
