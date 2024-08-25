@@ -19,7 +19,7 @@
             <label for="">Application #</label>
             <div class="flex flex-wrap items-center gap-x-4">
                 <h2>{{ $application->rollno }}</h2>
-                <p>dated {{ $application->created_at}}</p>
+                <p>dated {{ $application->created_at->addHours(5)}}</p>
             </div>
         </div>
         <div>

@@ -1,18 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admission;
 
 use App\Http\Controllers\Controller;
-use App\Models\Application;
-use App\Models\Book;
-use App\Models\Clas;
-use App\Models\Grade;
-use App\Models\Section;
-use App\Models\Student;
-use App\Models\Teacher;
+use App\Models\Group;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,13 +14,6 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        $sections = Section::all();
-        $teachers = Teacher::all();
-        $students = Student::all();
-        $books = Book::all();
-        $applications = Application::all();
-
-        return view('admin.dashboard', compact('sections', 'students', 'teachers', 'books', 'applications'));
     }
 
     /**
@@ -51,6 +38,8 @@ class DashboardController extends Controller
     public function show(string $id)
     {
         //
+        $group = Group::find($id);
+        return view('admission.groups.show', compact('group'));
     }
 
     /**

@@ -21,7 +21,7 @@ class StudentImport implements ToCollection, WithHeadingRow
             $student = Student::create([
                 'name' => $row['name'],
                 'cnic' => $row['cnic'],
-                'clas_id' => session('clas_id'),
+                'section_id' => session('section_id'),
                 'rollno' => $row['rollno'],
             ]);
         }

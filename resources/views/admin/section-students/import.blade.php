@@ -3,13 +3,13 @@
 
 
 <div class="custom-container">
-    <h2>Import Students to {{ $clas->roman() }}</h2>
+    <h2>Import Students to {{ $section->roman() }}</h2>
     <div class="bread-crumb">
         <a href="{{url('admin')}}">Cancel & Go Back</a>
     </div>
 
     <div class="content-section relative  p-5 md:p-12">
-        <a href="{{route('admin.class.students.index',$clas)}}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
+        <a href="{{route('admin.section.students.index',$section)}}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
         <!-- page message -->
         @if($errors->any())
         <x-message :errors='$errors'></x-message>

@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Clas;
 use App\Models\Grade;
+use App\Models\Section;
 use App\Models\Teacher;
 use Exception;
 use Illuminate\Http\Request;
 
-class ClassController extends Controller
+class SectionController extends Controller
 {
     public function index()
     {
         //
-        $classes = Clas::query()->active()->get();
-        return view('admin.classes.index', compact('classes'));
+        $sections = Section::query()->active()->get();
+        return view('admin.sections.index', compact('sections'));
     }
 
     /**
@@ -26,7 +26,7 @@ class ClassController extends Controller
         //
         $grades = Grade::where('id', '>', 5)->get();
         $teachers = Teacher::all();
-        return view('admin.classes.create', compact('grades', 'teachers'));
+        return view('admin.sections.create', compact('grades', 'teachers'));
     }
 
     /**
@@ -38,15 +38,15 @@ class ClassController extends Controller
 
         $request->validate([
             'grade_id' => 'required|numeric',
-            'section_label' => 'required',
+            'name' => 'required',
             'induction_year' => 'required|numeric',
             'incharge_id' => 'nullable|numeric',
         ]);
 
 
         try {
-            Clas::create($request->all());
-            return redirect()->route('admin.classes.index')->with('success', 'Successfully created');
+            Section::create($request->all());
+            return redirect()->route('admin.sections.index')->with('success', 'Successfully created');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -70,8 +70,8 @@ class ClassController extends Controller
     {
         $grades = Grade::where('id', '>', 5)->get();
         $teachers = Teacher::all();
-        $clas = Clas::find($id);
-        return view('admin.classes.edit', compact('clas', 'grades', 'teachers'));
+        $section = Section::find($id);
+        return view('admin.sections.edit', compact('section', 'grades', 'teachers'));
     }
 
     /**
@@ -82,15 +82,15 @@ class ClassController extends Controller
         //
         $request->validate([
             'grade_id' => 'required|numeric',
-            'section_label' => 'required',
+            'name' => 'required',
             'induction_year' => 'required|numeric',
             'incharge_id' => 'nullable|numeric',
         ]);
 
-        $model = Clas::find($id);
+        $model = Section::find($id);
         try {
             $model->update($request->all());
-            return redirect()->route('admin.classes.index')->with('success', 'Successfully updated');
+            return redirect()->route('admin.sections.index')->with('success', 'Successfully updated');
         } catch (Exception $ex) {
             return redirect()->back()->withErrors($ex->getMessage());
         }
@@ -101,7 +101,7 @@ class ClassController extends Controller
     public function destroy(string $id)
     {
         //
-        $model = Clas::findOrFail($id);
+        $model = Section::findOrFail($id);
         try {
             $model->delete();
             return redirect()->back()->with('success', 'Successfully deleted');
@@ -112,10 +112,10 @@ class ClassController extends Controller
     }
 
     // remove all students
-    public function clean(Request $request, $clasId)
+    public function clean(Request $request, $sectionId)
     {
         //
-        $model = Clas::findOrFail($clasId);
+        $model = Section::findOrFail($sectionId);
         try {
             $model->students()->delete();
             return redirect()->back()->with('success', 'Successfully deleted');

@@ -34,9 +34,9 @@ class Application extends Model
     // protected $dateFormat = 'Y-m-d';
     protected $dates = ['paid_at'];
 
-    public function clas()
+    public function section()
     {
-        return $this->belongsTo(Clas::class);
+        return $this->belongsTo(Section::class);
     }
     public function group()
     {

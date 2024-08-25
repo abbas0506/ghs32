@@ -14,12 +14,12 @@ class Grade extends Model
         'roman_name',            //IX
     ];
 
-    public function classes()
+    public function sections()
     {
-        return $this->hasMany(Clas::class);
+        return $this->hasMany(Section::class);
     }
     public function students()
     {
-        return $this->hasManyThrough(Student::class, Clas::class);
+        return $this->hasManyThrough(Student::class, Section::class);
     }
 }

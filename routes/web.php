@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\ClassStudentsController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\GroupController;
+use App\Http\Controllers\Admin\SectionController as AdminSectionController;
+use App\Http\Controllers\Admin\SectionStuedentsController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\UserController;
 
@@ -15,9 +17,13 @@ use App\Http\Controllers\Admission\CardController;
 use App\Http\Controllers\Admission\DashboardController;
 use App\Http\Controllers\Admission\FeeController as AdmissionFeeController;
 use App\Http\Controllers\Admission\GroupApplicationController;
+use App\Http\Controllers\Admission\GroupController as AdmissionGroupController;
 use App\Http\Controllers\Admission\HighAchieverController;
+use App\Http\Controllers\Admission\ImportStudentsController;
 use App\Http\Controllers\Admission\ObjectionController as AdmissionObjectionController;
-
+use App\Http\Controllers\Admission\SectionController;
+use App\Http\Controllers\Admission\SectionImportController;
+use App\Http\Controllers\Admission\SectionStudentsController;
 use App\Http\Controllers\Library\BookController;
 use App\Http\Controllers\Library\BookIssuanceController;
 use App\Http\Controllers\Library\RackController;
@@ -73,12 +79,12 @@ Route::get('signout', [AuthController::class, 'signout'])->name('signout');
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:admin']], function () {
     Route::get('/', [AdminDashboardController::class, 'index']);
     Route::resource('grades', GradeController::class)->only('index');
-    Route::resource('classes', ClassController::class);
-    Route::post('classes/{clas}/clean', [ClassController::class, 'clean'])->name('classes.clean');
-    Route::resource('class.students', ClassStudentsController::class);
+    Route::resource('sections', AdminSectionController::class);
+    Route::post('sections/{section}/clean', [AdminSectionController::class, 'clean'])->name('sections.clean');
+    Route::resource('section.students', SectionStuedentsController::class);
 
-    Route::get('students/import/{clas}', [ClassStudentsController::class, 'import']);
-    Route::post('students/import', [ClassStudentsController::class, 'postImport']);
+    Route::get('students/import/{section}', [SectionStuedentsController::class, 'import']);
+    Route::post('students/import', [SectionStuedentsController::class, 'postImport']);
 
     Route::resource('teachers', TeacherController::class);
     Route::get('more/teachers/import', [TeacherController::class, 'import'])->name('teachers.import');
@@ -94,10 +100,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:admi
 Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {
     Route::get('/', [DashboardController::class, 'index']);
     Route::resource('applications', AdmissionApplicationController::class);
-    Route::resource('group.applications', GroupApplicationController::class);
+    Route::resource('groups', AdmissionGroupController::class);
     Route::resource('fee', AdmissionFeeController::class);
     Route::resource('objections', AdmissionObjectionController::class);
     Route::resource('high-achievers', HighAchieverController::class);
+    Route::resource('sections', SectionController::class);
+    Route::resource('section.students', SectionStudentsController::class);
+
+    Route::get('section/{section}/students/import', [SectionStudentsController::class, 'import'])->name('section.students.import');
+
+    Route::post('sections/{section}/clean', [SectionController::class, 'clean'])->name('sections.clean');
+
     Route::resource('cards', CardController::class);
     Route::get('print/cards', [CardController::class, 'print'])->name('cards.print');
 });

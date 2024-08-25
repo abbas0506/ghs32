@@ -2,13 +2,13 @@
 @section('page-content')
 
 <div class="custom-container">
-    <h1>{{$clas->roman()}}</h1>
+    <h1>{{$section->roman()}}</h1>
     <div class="bread-crumb">
         <a href="{{url('admin')}}">Dashoboard</a>
         <div>/</div>
-        <a href="{{route('admin.classes.index')}}">Classes</a>
+        <a href="{{route('admin.sections.index')}}">Sections</a>
         <div>/</div>
-        <div>{{$clas->roman()}}</div>
+        <div>{{$section->roman()}}</div>
     </div>
 
     <!-- search -->
@@ -18,7 +18,7 @@
             <i class="bx bx-search absolute top-2 right-2"></i>
         </div>
         <div class="flex flex-col justify-center items-center">
-            <a href="{{route('library.qrcodes.students.preview',$clas)}}" target="_blank"><i class="bi bi-qr-code"></i></a>
+            <a href="{{route('library.qrcodes.students.preview',$section)}}" target="_blank"><i class="bi bi-qr-code"></i></a>
             <label for="">Print QRCode</label>
         </div>
     </div>
@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($clas->students as $student)
+                @foreach($section->students as $student)
                 <tr class="tr text-sm">
                     <td>
                         <a href="{{route('admin.students.show', $student)}}" class="link">

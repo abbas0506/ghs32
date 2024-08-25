@@ -17,9 +17,9 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
         <a href="#" class="pallet-box">
             <div class="flex-1">
-                <div class="title">Classes</div>
+                <div class="title">Sections</div>
                 <div class="flex items-center">
-                    <div class="h2">{{ $classes->count() }}</div>
+                    <div class="h2">{{ $sections->count() }}</div>
                     <i class="bi-person-circle text-sm ml-4"></i>
                     <p class="text-sm ml-1">{{ $students->count() }}</p>
                 </div>

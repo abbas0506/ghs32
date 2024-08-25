@@ -10,16 +10,18 @@ class Student extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'cnic',
+        'father',
+        'bform',
+        'phone',
         'can_borrow_books',
 
         //school tag
-        'clas_id',
+        'section_id',
         'rollno',
     ];
 
-    public function clas()
+    public function section()
     {
-        return $this->belongsTo(Clas::class);
+        return $this->belongsTo(Section::class);
     }
 }

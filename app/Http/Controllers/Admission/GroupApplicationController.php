@@ -15,8 +15,7 @@ class GroupApplicationController extends Controller
     public function index($groupId)
     {
         //
-        $group = Group::find($groupId);
-        return view('admission.group-applications.index', compact('group'));
+
     }
 
     /**

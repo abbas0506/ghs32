@@ -1,14 +1,12 @@
-@extends('layouts.admin')
+@extends('layouts.admission')
 @section('page-content')
 
 <div class="custom-container">
-    <h1>Classes</h1>
+    <h1>Sections</h1>
     <div class="bread-crumb">
         <a href="/">Dashboard</a>
         <div>/</div>
-        <div>Classes</div>
-        <div>/</div>
-        <div>All</div>
+        <div>Sections</div>
     </div>
 
     <!-- page message -->
@@ -17,15 +15,6 @@
     @else
     <x-message></x-message>
     @endif
-
-    <!-- search -->
-    <div class="flex items-center justify-between mt-8">
-        <div class="flex relative w-full md:w-1/3">
-            <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
-            <i class="bx bx-search absolute top-2 right-2"></i>
-        </div>
-        <a href="{{route('admin.classes.create')}}" class="text-sm p-2 btn-teal rounded">Add New Class <i class="bi bi-plus"></i></a>
-    </div>
 
     @php $sr=1; @endphp
     <div class="overflow-x-auto w-full mt-8">
@@ -38,36 +27,25 @@
                     <th class="w-12"><i class="bi-people-fill"></i></th>
                     <th class="w-12">Import</th>
                     <th class="w-12">Clean</th>
-                    <th class="w-12">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($classes as $clas)
+                @foreach($sections->sortBy('grade_id') as $section)
                 <tr class="tr text-sm">
                     <td>{{$sr++}}</td>
                     <td>
-                        <a href="{{route('admin.class.students.index',$clas)}}" class="link">{{$clas->roman()}}</a>
+                        <a href="{{route('admission.sections.show',$section)}}" class="link">{{$section->grade->grade_no}}-{{ $section->name}}</a>
                     </td>
-                    <td>{{$clas->students->count()}}</td>
-                    <td><a href="{{ route('admin.class.students.index',$clas) }}" class="link"><i class="bi bi-file-earmark-excel text-teal-600"></i></a></td>
+                    <td>{{$section->students->count()}}</td>
                     <td>
-                        <form action="{{ route('admin.classes.clean', $clas) }}" method="post" onsubmit="return confirmClean(event)">
+                        <a href="{{route('admission.section.students.create',$section)}}" class="text-teal-600 hover:text-teal-800"><i class="bi bi-upload"></i></a>
+                    </td>
+                    <td>
+                        <form action="{{ route('admission.sections.clean', $section) }}" method="post" onsubmit="return confirmClean(event)">
                             @csrf
                             <button><i class="bx bx-recycle text-base text-orange-500"></i></button>
                         </form>
 
-                    </td>
-
-                    <td>
-                        <div class="flex items-center justify-center">
-                            <a href="{{route('admin.classes.edit',$clas)}}"><i class="bx bx-pencil text-green-600"></i></a>
-                            <span class="text-slate-300 px-2">|</span>
-                            <form action="{{route('admin.classes.destroy',$clas)}}" method="post" onsubmit="return confirmDel(event)">
-                                @csrf
-                                @method('DELETE')
-                                <button><i class="bx bx-trash text-red-600"></i></button>
-                            </form>
-                        </div>
                     </td>
                 </tr>
                 @endforeach
@@ -122,7 +100,6 @@
         var str = 0;
         $('.tr').each(function() {
             if (!(
-                    $(this).children().eq(0).prop('outerText').toLowerCase().includes(searchtext) ||
                     $(this).children().eq(1).prop('outerText').toLowerCase().includes(searchtext)
                 )) {
                 $(this).addClass('hidden');

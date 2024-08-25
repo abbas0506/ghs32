@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admission;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
-use App\Models\Book;
-use App\Models\Clas;
-use App\Models\Grade;
 use App\Models\Section;
-use App\Models\Student;
-use App\Models\Teacher;
+use Exception;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class SectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,13 +16,8 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        $sections = Section::all();
-        $teachers = Teacher::all();
-        $students = Student::all();
-        $books = Book::all();
-        $applications = Application::all();
-
-        return view('admin.dashboard', compact('sections', 'students', 'teachers', 'books', 'applications'));
+        $sections = Section::where('grade_id', 11)->get();
+        return view('admission.sections.index', compact('sections'));
     }
 
     /**
@@ -51,6 +42,8 @@ class DashboardController extends Controller
     public function show(string $id)
     {
         //
+        $section = Section::find($id);
+        return view('admission.sections.show', compact('section'));
     }
 
     /**
@@ -75,5 +68,17 @@ class DashboardController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function clean(Request $request, $sectionId)
+    {
+        //
+        $model = Section::findOrFail($sectionId);
+        try {
+            $model->students()->delete();
+            return redirect()->back()->with('success', 'Successfully cleaned');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+            // something went wrong
+        }
     }
 }

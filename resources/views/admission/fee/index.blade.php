@@ -54,8 +54,8 @@
                     <td>{{ $application->obtainedPercentage() }}</td>
                     <td>{{ $application->fee_paid }}</td>
                     <td>
-                        <div class="flex items-center justify-center btn-teal rounded">
-                            <a href="{{route('admission.fee.edit',$application)}}">Pay</a>
+                        <div class="flex items-center justify-center">
+                            <a href="{{route('admission.fee.edit',$application)}}" class="btn-teal rounded">Pay</a>
                         </div>
                     </td>
                 </tr>

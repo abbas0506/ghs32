@@ -2,9 +2,9 @@
 @section('page-content')
 <div class="custom-container">
 
-    <h1>{{$clas->roman()}} / Student </h1>
+    <h1>{{$section->roman()}} / Student </h1>
     <div class="content-section relative">
-        <a href="{{route('admin.class.students.index',$clas)}}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
+        <a href="{{route('admin.section.students.index',$section)}}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
         <h2 class="p-4 border border-dashed border-slate-200">{{ $student->name }}</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 w-full md:w-3/4 mx-auto mt-8">

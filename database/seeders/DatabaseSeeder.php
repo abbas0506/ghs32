@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,
             GroupSeeder::class,
             GradeSeeder::class,
-            ClassSeeder::class,
+            SectionSeeder::class,
+
             UserSeeder::class,
             // DomainSeeder::class,
             LibraryRuleSeeder::class,

@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->string('cnic', 15)->unique();
-            $table->boolean('can_borrow_books')->default(1);
+            $table->string('father', 50)->nullable();
+            $table->string('bform', 15)->unique();
+            $table->string('phone', 15)->nullable();
 
-            $table->unsignedBigInteger('clas_id');
+            $table->boolean('can_borrow_books')->default(1);
+            $table->foreignId('section_id')->constrained()->cascadeOnDelete();
             $table->string('rollno');
-            $table->foreign('clas_id')->references('id')->on('clas')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
         });

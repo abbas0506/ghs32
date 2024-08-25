@@ -85,10 +85,9 @@
             <thead>
                 <tr class="border-b">
                     <th class="w-8">Sr</th>
-                    <th class="w-40 text-left">Group</th>
-                    <th class="w-16">Total</th>
-                    <th class="w-12">Objectioned</th>
-                    <th class="w-12">Finalized</th>
+                    <th class="w-64 text-left">Group</th>
+                    <th class="w-20">Finalized</th>
+                    <th class="w-12"></th>
                 </tr>
             </thead>
             <tbody>
@@ -96,11 +95,11 @@
                 <tr class="tr text-sm border-b">
                     <td>{{$sr++}}</td>
                     <td class="text-left">
-                        <a href="{{ route('admission.group.applications.index',$group) }}" class="link">{{ $group->name }}</a>
+                        <a href="{{ route('admission.groups.show',$group) }}" class="link">{{ $group->name }}</a>
+                        @if($group->applications()->today()->count()) <span class="text-green-600 text-xs pl-2">{{ $group->applications()->today()->count() }} <i class="bi-arrow-up"></i></span>@endif
                     </td>
-                    <td>{{ $group->applications()->count() }} @if($group->applications()->today()->count()) <span class="text-green-600 text-xs pl-2">{{ $group->applications()->today()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
-                    <td>{{ $group->applications()->objectioned()->count() }}</td>
-                    <td>{{ $group->applications()->feepaid()->count() }} @if($group->applications()->feepaid()->count())<span class="text-green-600 text-xs pl-2">{{ $group->applications()->recentlyPaid()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
+                    <td>{{ $group->applications()->count() }} / {{ $group->applications()->feepaid()->count() }} </td>
+                    <td>@if($group->applications()->feepaid()->count())<span class="text-green-600 text-xs pl-2">{{ $group->applications()->recentlyPaid()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
                 </tr>
                 @endforeach
             </tbody>

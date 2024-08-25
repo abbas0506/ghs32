@@ -17,9 +17,9 @@
             </li>
 
             <li>
-                <a href="{{route('admin.classes.index')}}" class="flex items-center p-2">
+                <a href="{{route('admin.sections.index')}}" class="flex items-center p-2">
                     <i class="bi-people"></i>
-                    <span class="ml-3">Classes</span>
+                    <span class="ml-3">Sections</span>
                 </a>
             </li>
             <li>

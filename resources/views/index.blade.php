@@ -19,12 +19,19 @@
             <img src="{{ url(asset('images/hero/student-1.png')) }}" alt="student" class="w-48 h-48 md:w-96 md:h-96">
 
         </div>
-        <div class="flex flex-col flex-1 gap-y-2 justify-center text-slate-100">
+        <!-- <div class="flex flex-col flex-1 gap-y-2 justify-center text-slate-100">
             <div class="text-3xl md:text-5xl">Admission Open</div>
             <p class="text-slate-300">Welcome to our online admission portal. Join us to get quality education in any of three disciplines: Pre Engineering, ICS & Humanities (Arts group). </p>
             <a href="{{url('apply')}}">
                 <button class="btn-orange mt-5">Apply Now <i class="bi-arrow-right"></i></button>
             </a>
+        </div> -->
+        <div class="flex flex-col flex-1 gap-y-2 justify-center text-slate-100">
+            <div class="text-3xl md:text-4xl">OUR MISSION</div>
+            <p class="text-slate-300 text-lg leading-relaxed mt-4">We are committed to unlocking the unique potential within every student. Our dynamic and supportive environment is designed to foster creativity, critical thinking, and personal growth.</p>
+            <!-- <a href="">
+                <button class="btn-orange mt-5 rounded py-2">Explore Us <i class="bi-arrow-right"></i></button>
+            </a> -->
         </div>
 
     </div>

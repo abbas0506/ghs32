@@ -1,20 +1,20 @@
 @extends('layouts.admin')
 @section('page-content')
 <div class="custom-container">
-    <h1>{{$clas->roman()}} / New Student </h1>
+    <h1>{{$section->roman()}} / New Student </h1>
     <div class="bread-crumb">
         <a href="{{url('admin')}}">Dashoboard</a>
         <div>/</div>
-        <a href="{{route('admin.classes.index')}}">Classes</a>
+        <a href="{{route('admin.sections.index')}}">Sections</a>
         <div>/</div>
-        <a href="{{route('admin.class.students.index', $clas)}}">{{$clas->roman()}}</a>
+        <a href="{{route('admin.section.students.index', $section)}}">{{$section->roman()}}</a>
         <div>/</div>
         <div>Students / New</div>
     </div>
 
     <div class="content-section relative">
         <!-- close button -->
-        <a href="{{ route('admin.class.students.index', $clas) }}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
+        <a href="{{ route('admin.section.students.index', $section) }}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
 
         <div class="w-full md:w-3/4 mx-auto mt-8">
             <!-- page message -->
@@ -24,7 +24,7 @@
             <x-message></x-message>
             @endif
 
-            <form action="{{route('admin.class.students.store', $clas)}}" method='post' class="mt-4" onsubmit="return validate(event)">
+            <form action="{{route('admin.section.students.store', $section)}}" method='post' class="mt-4" onsubmit="return validate(event)">
                 @csrf
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="sm:col-span-2">

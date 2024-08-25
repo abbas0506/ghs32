@@ -1,14 +1,14 @@
-@extends('layouts.admin')
+@extends('layouts.admission')
 @section('page-content')
 
 <div class="custom-container">
-    <h1>{{$clas->roman()}}</h1>
+    <h1>{{$section->roman()}}</h1>
     <div class="bread-crumb">
-        <a href="{{url('admin')}}">Dashoboard</a>
+        <a href="{{url('/')}}">Dashoboard</a>
         <div>/</div>
-        <a href="{{route('admin.classes.index')}}">Classes</a>
+        <a href="{{route('admission.sections.index')}}">Sections</a>
         <div>/</div>
-        <div>{{$clas->roman()}}</div>
+        <div>{{$section->roman()}}</div>
     </div>
 
     <!-- search -->
@@ -18,9 +18,8 @@
             <i class="bx bx-search absolute top-2 right-2"></i>
         </div>
         <div class="flex space-x-3">
-            <a href="{{route('admin.class.students.create', $clas)}}" class="text-sm p-2 border hover:bg-teal-400">New <i class="bi bi-person-add text-teal-600"></i></a>
-            <a href="{{url('admin/students/import',$clas)}}" class="text-sm p-2 border hover:bg-teal-50">Import from Excel <i class="bi bi-file-earmark-excel text-teal-600"></i></a>
-            <form action="{{ route('admin.classes.clean', $clas) }}" method="post" onsubmit="return confirmClean(event)">
+            <a href="{{route('admission.section.students.create',$section)}}" class="btn-teal">Import &nbsp <i class="bi bi-upload"></i></a>
+            <form action="{{ route('admission.sections.clean', $section) }}" method="post" onsubmit="return confirmClean(event)">
                 @csrf
                 <button class="btn-orange rounded"><i class="bx bx-recycle text-base"></i></button>
             </form>
@@ -42,26 +41,24 @@
                 <tr>
                     <th class="w-10">Roll No</th>
                     <th class="w-40 text-left">Name</th>
+                    <th class="w-40 text-left">Father</th>
                     <th class="w-24">BForm</th>
                     <th class="w-24">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($clas->students as $student)
+                @foreach($section->students as $student)
                 <tr class="tr">
                     <td>{{$student->rollno}}</td>
-                    <td class="text-left"><a href="{{route('admin.class.students.show', [$clas, $student])}}" class="link">{{$student->name}}</a></td>
-                    <td>{{$student->cnic}}</td>
+                    <td class="text-left"><a href="{{route('admin.section.students.show', [$section, $student])}}" class="link">{{$student->name}}</a></td>
+                    <td class="text-left">{{ $student->father }}</td>
+                    <td>{{$student->bform}}</td>
                     <td>
-                        <div class="flex items-center justify-center">
-                            <a href="{{route('admin.class.students.edit',[$clas, $student])}}"><i class="bx bx-pencil text-green-600"></i></a>
-                            <span class="text-slate-300 px-2">|</span>
-                            <form action="{{route('admin.class.students.destroy',[$clas, $student])}}" method="post" onsubmit="return confirmDel(event)">
-                                @csrf
-                                @method('DELETE')
-                                <button><i class="bx bx-trash text-red-600"></i></button>
-                            </form>
-                        </div>
+                        <form action="{{route('admission.section.students.destroy',[$student, $section])}}" method="post" onsubmit="return confirmDel(event)">
+                            @csrf
+                            @method('DELETE')
+                            <button><i class="bx bx-x text-red-600"></i></button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

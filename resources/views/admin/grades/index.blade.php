@@ -14,10 +14,8 @@
         <table class="table-fixed w-full mt-12 text-sm">
             <thead>
                 <tr>
-                    <th class="w-16">Grade #</th>
-                    <th class="w-32">Engllish</th>
-                    <th class="w-16">Roman</th>
-                    <th class="w-24">Sections</th>
+                    <th class="w-16">Grade</th>
+                    <th class="w-24 text-left">Sections</th>
                     <th class="w-16"><i class="bi-people-fill"></i></th>
                 </tr>
             </thead>
@@ -25,12 +23,10 @@
                 @foreach($grades as $grade)
                 <tr class="text-sm">
                     <td>{{$grade->grade_no}}</td>
-                    <td>{{$grade->english_name}}</td>
-                    <td>{{$grade->roman_name}}</td>
-                    <td>
+                    <td class="text-left">
 
-                        @foreach($grade->classes as $clas)
-                        <a href="{{route('admin.class.students.index',$clas)}}" class="w-4 link">{{$clas->section_label}}</a>
+                        @foreach($grade->sections as $section)
+                        <a href="{{route('admin.section.students.index',$section)}}" class="w-16 rounded btn-teal">{{$section->name}} <span class="text-xs"> ({{ $section->students->count() }})</span></a>
                         @endforeach
 
                     </td>

@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clas', function (Blueprint $table) {
+        Schema::create('sections', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 20);
             $table->unsignedBigInteger('grade_id');  //
-            $table->string('section_label', 20);
-            $table->year('induction_year');
             $table->unsignedBigInteger('incharge_id')->nullable();
+            $table->year('induction_year');
             $table->timestamps();
 
-            $table->unique(['grade_id', 'section_label', 'induction_year']); //disallow same section name within a class
+            $table->unique(['name', 'grade_id', 'induction_year']); //disallow same section name within a class
             $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
             $table->foreign('incharge_id')->references('id')->on('teachers')->onDelete('cascade');
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clas');
+        Schema::dropIfExists('sections');
     }
 };
