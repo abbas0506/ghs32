@@ -85,7 +85,7 @@
             <div class="flex items-center justify-center bg-orange-100 rounded-full w-16 h-16">
                 <i class="bi-laptop text-2xl text-orange-400"></i>
             </div>
-            <h3 class="mt-3 text-lg">IT Skills</h3>
+            <h3 class="mt-3 text-lg">N. Computing IT Lab</h3>
             <p class="text-sm text-center">Students learn basic IT skills using state of art NComputing lab. </p>
         </div>
 

@@ -21,7 +21,8 @@
                 <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
                 <i class="bx bx-search absolute top-2 right-2"></i>
             </div>
-            <div class="flex justify-end w-full">
+            <div class="flex justify-end w-full items-center">
+                <div id="chkCount" class="w-6 h-6 flex justify-center items-center text-xs  text-slate-600 rounded-full"></div>
                 <div class="flex w-12 h-12 items-center justify-center rounded-full bg-orange-100 hover:bg-orange-200">
                     <button type="submit"><i class="bi-upload"></i></button>
                 </div>
@@ -48,7 +49,7 @@
                         <th class="w-16">Marks</th>
                         <th class="w-16">%</th>
                         <th class="w-16">Fee</th>
-                        <th class="w-16">Action</th>
+                        <th class="w-16"> <input type="checkbox" id='chkAll' class="rounded" onclick="checkAll()"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,9 +65,7 @@
                         <td>{{ $application->obtainedPercentage() }}</td>
                         <td>{{ $application->fee_paid }}</td>
                         <td>
-                            <div class="flex items-center justify-center">
-                                <input type="checkbox" class="w-4 h-4 rounded" name="application_ids_array[]" value="{{ $application->id }}">
-                            </div>
+                            <input type="checkbox" class="rounded" name="application_ids_array[]" value="{{ $application->id }}" onclick="updateChkCount()">
                         </td>
                     </tr>
                     @endforeach
@@ -79,38 +78,42 @@
 @endsection
 @section('script')
 <script type="text/javascript">
+    function updateChkCount() {
+        var chkArray = [];
+        var chks = document.getElementsByName('application_ids_array[]');
+        chks.forEach((chk) => {
+            if (chk.checked) chkArray.push(chk.value);
+        })
+
+        document.getElementById("chkCount").innerHTML = chkArray.length;
+    }
+
+    function checkAll() {
+
+        $('.tr').each(function() {
+            if (!$(this).hasClass('hidden'))
+                $(this).children().find('input[type=checkbox]').prop('checked', $('#chkAll').is(':checked'));
+            updateChkCount()
+        });
+    }
+
+
+
     function search(event) {
         // var searchtext = event.target.value.toLowerCase();
         var searchtext = $('#searchby').val().toLowerCase();
         var str = 0;
         $('.tr').each(function() {
             if (!(
-                    $(this).children().eq(1).prop('outerText').toLowerCase().includes(searchtext)
+                    // search by form no or group name
+                    $(this).children().eq(1).prop('outerText').toLowerCase().includes(searchtext) ||
+                    $(this).children().eq(3).prop('outerText').toLowerCase().includes(searchtext)
                 )) {
                 $(this).addClass('hidden');
             } else {
                 $(this).removeClass('hidden');
             }
         });
-    }
-
-    function confirmDel(event) {
-        event.preventDefault(); // prevent form submit
-        var form = event.target; // storing the form
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.value) {
-                form.submit();
-            }
-        })
     }
 </script>
 @endsection

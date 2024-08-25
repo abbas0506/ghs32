@@ -30,7 +30,7 @@ class SectionStudentsController extends Controller
         $alreadyIncluded = Student::join('sections', 'section_id', 'sections.id')->where('grade_id', 11)->pluck('bform');
 
         $applications = Application::whereNotIn('bform', $alreadyIncluded)->whereNotNull('fee_paid')->get();
-        return view('admission.section-students.import', compact('applications', 'section'));
+        return view('admission.section-students.create', compact('applications', 'section'));
     }
 
     /**
@@ -50,12 +50,14 @@ class SectionStudentsController extends Controller
             $applicationIdsArray = $request->application_ids_array;
             $applications = Application::whereIn('id', $applicationIdsArray)->get();
             $rollno = 1;
-            foreach ($applications as $application) {
+            foreach ($applications->sortByDesc('obtained') as $application) {
                 $section->students()->create([
                     'name' => $application->name,
                     'father' => $application->father,
                     'bform' => $application->bform,
                     'phone' => $application->phone,
+                    'group_id' => $application->group_id,
+                    'marks' => $application->obtained,
                     'rollno' => $rollno++,
                 ]);
             }

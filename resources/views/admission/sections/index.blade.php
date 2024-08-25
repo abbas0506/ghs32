@@ -18,39 +18,50 @@
 
     @php $sr=1; @endphp
     <div class="overflow-x-auto w-full mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 bg-white gap-6">
+            @foreach($sections as $section)
+            <div class="border p-8">
+                <div class="flex items-center bg-slate-100">
+                    <a href="{{route('admission.sections.show',$section)}}" class="link text-lg font-bold">{{$section->grade->grade_no}}-{{ $section->name}}</a>
+                    <div class="ml-8"> <i class="bi-people"></i> {{$section->students->count()}}</div>
+                </div>
 
-        <table class="table-fixed w-full">
-            <thead>
-                <tr>
-                    <th class="w-12">Sr</th>
-                    <th class="w-40">Class</th>
-                    <th class="w-12"><i class="bi-people-fill"></i></th>
-                    <th class="w-12">Import</th>
-                    <th class="w-12">Clean</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($sections->sortBy('grade_id') as $section)
-                <tr class="tr text-sm">
-                    <td>{{$sr++}}</td>
-                    <td>
-                        <a href="{{route('admission.sections.show',$section)}}" class="link">{{$section->grade->grade_no}}-{{ $section->name}}</a>
-                    </td>
-                    <td>{{$section->students->count()}}</td>
-                    <td>
-                        <a href="{{route('admission.section.students.create',$section)}}" class="text-teal-600 hover:text-teal-800"><i class="bi bi-upload"></i></a>
-                    </td>
-                    <td>
-                        <form action="{{ route('admission.sections.clean', $section) }}" method="post" onsubmit="return confirmClean(event)">
-                            @csrf
-                            <button><i class="bx bx-recycle text-base text-orange-500"></i></button>
-                        </form>
+                <div class="flex items-center border-b py-2">
+                    <p class="flex-1">Import Students</p>
+                    <a href="{{route('admission.section.students.create',$section)}}" class="text-teal-600 hover:text-teal-800"><i class="bi bi-upload"></i></a>
+                </div>
 
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                <div class="flex items-center border-b py-2">
+                    <p class="flex-1">Clean Section</p>
+                    <form action="{{ route('admission.sections.clean', $section) }}" method="post" onsubmit="return confirmClean(event)">
+                        @csrf
+                        <button><i class="bx bx-recycle text-base text-orange-500"></i></button>
+                    </form>
+                </div>
+
+                <div class="flex items-center border-b py-2">
+                    <p class="flex-1">Refresh Roll Nos </p>
+                    <a href="{{ route('admission.sections.refresh.rollno', $section) }}"><i class="bi bi-repeat text-blue-600"></i></a>
+                </div>
+
+                <div class="flex items-center border-b py-2">
+                    <p class="flex-1">Students List </p>
+                    <a href="{{ route('admission.sections.print.listOfStudents', $section) }}" target="_blank"><i class="bi bi-printer text-blue-600"></i></a>
+                </div>
+
+                <div class="flex items-center border-b py-2">
+                    <p class="flex-1">Attendance List </p>
+                    <a href="{{ route('admission.sections.print.attendanceList', $section) }}" target="_blank"><i class="bi bi-printer text-blue-600"></i></a>
+                </div>
+
+                <div class="flex items-center border-b py-2">
+                    <p class="flex-1">List of Serial Nos.</p>
+                    <a href="{{ route('admission.sections.print.listOfSrNo', $section) }}"><i class="bi bi-printer text-blue-600"></i></a>
+                </div>
+            </div>
+
+            @endforeach
+        </div>
     </div>
 
 </div>

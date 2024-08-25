@@ -13,15 +13,22 @@ class Student extends Model
         'father',
         'bform',
         'phone',
+        'group_id',
+        'marks',
         'can_borrow_books',
 
         //school tag
         'section_id',
         'rollno',
+        'serial_no',
     ];
 
     public function section()
     {
         return $this->belongsTo(Section::class);
+    }
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
     }
 }

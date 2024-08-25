@@ -1,12 +1,11 @@
-insert into eschool.domains
-SELECT * from temp.book_domains;
+insert into ghsscb.domains
+SELECT * from temp.domains;
 
-insert into eschool.racks
-SELECT * from temp.book_racks;
+insert into ghsscb.racks
+SELECT * from temp.racks;
 
-insert into eschool.books(id,title,author,publish_year,num_of_copies,price,language_id,domain_id,rack_id,created_at,updated_at)
-select id,title,author,publish_year,num_of_copies,price,language_id,book_domain_id,book_rack_id,created_at,updated_at from temp.books;
+insert into ghsscb.books
+SELECT * from temp.books;
 
-
-
-
+insert into ghsscb.applications
+SELECT * from temp.applications;

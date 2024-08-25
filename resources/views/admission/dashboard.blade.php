@@ -98,8 +98,8 @@
                         <a href="{{ route('admission.groups.show',$group) }}" class="link">{{ $group->name }}</a>
                         @if($group->applications()->today()->count()) <span class="text-green-600 text-xs pl-2">{{ $group->applications()->today()->count() }} <i class="bi-arrow-up"></i></span>@endif
                     </td>
-                    <td>{{ $group->applications()->count() }} / {{ $group->applications()->feepaid()->count() }} </td>
-                    <td>@if($group->applications()->feepaid()->count())<span class="text-green-600 text-xs pl-2">{{ $group->applications()->recentlyPaid()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
+                    <td>{{ $group->applications()->feepaid()->count() }} / {{ $group->applications()->count() }}</td>
+                    <td>@if($group->applications()->recentlyPaid()->count())<span class="text-green-600 text-xs pl-2">{{ $group->applications()->recentlyPaid()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
                 </tr>
                 @endforeach
             </tbody>

@@ -17,10 +17,14 @@ return new class extends Migration
             $table->string('father', 50)->nullable();
             $table->string('bform', 15)->unique();
             $table->string('phone', 15)->nullable();
+            $table->unsignedInteger('marks')->nullable();
+
+            $table->foreignId('section_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('group_id')->constrained()->cascadeOnDelete();
+            $table->string('rollno');
+            $table->string('serial_no')->nullable()->unique();
 
             $table->boolean('can_borrow_books')->default(1);
-            $table->foreignId('section_id')->constrained()->cascadeOnDelete();
-            $table->string('rollno');
 
             $table->timestamps();
         });
