@@ -26,7 +26,8 @@ class OnlineApplicationController extends Controller
     {
         //
         $groups = Group::all();
-        return view('admission.online-applications.create', compact('groups'));
+        echo "Sorry, you are late. Contact admission office";
+        // return view('admission.online-applications.create', compact('groups'));
     }
 
     /**
@@ -68,9 +69,7 @@ class OnlineApplicationController extends Controller
             // something went wrong
         }
     }
-    public function show($id)
-    {
-    }
+    public function show($id) {}
 
     public function applied($id)
     {
