@@ -207,7 +207,7 @@
     </div>
     <div class="w-full md:w-3/4 mx-auto mt-12">
         <div class="flex justify-center items-center flex-col">
-            <img src="{{asset('images/principal.jpeg')}}" class="w-64" alt="">
+            <img src="{{asset('images/principal.jpeg')}}" class="w-64 rounded-full" alt="">
             <h2 class="mt-3">Abdul Majeed SSS(Economics)</h2>
             <h2>Principal</h2>
             <p class="mt-3 text-lg text-center">
