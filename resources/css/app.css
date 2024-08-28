@@ -50,7 +50,7 @@
         @apply text-sm text-slate-600;
     }
     /* header */
-    header {
+    /* header {
         @apply w-full fixed top-0 z-20 bg-white text-slate-700;
     }
     header .current-user-dropdown {
@@ -58,7 +58,7 @@
     }
     header .current-user-dropdown a:hover {
         @apply text-orange-700;
-    }
+    } */
 
     aside {
         @apply fixed top-16 z-10 md:flex flex-col w-60 -translate-x-60 md:translate-x-0 h-full px-4 text-slate-300 transition-all duration-500 ease-in-out;
@@ -118,7 +118,7 @@
     .header {
         @apply fixed top-12 md:top-10 left-0 w-full h-16 z-50 bg-transparent transition-all duration-500 ease-in-out;
     }
-    .header.scrolled {
+    .scrolled {
         @apply top-0 bg-green-200 border-b-[1px] text-slate-800;
     }
     .custom-input {
@@ -159,7 +159,7 @@
         @apply bg-orange-200 hover:bg-orange-300 duration-200 px-3 py-1 text-slate-600;
     }
     .icon-gray {
-        @apply text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white;
+        @apply text-gray-500 transition duration-75 dark:text-gray-400 hover:text-gray-900 dark:group-hover:text-white;
     }
     .alert-success {
         @apply flex items-center bg-green-100 text-green-700 text-sm p-4;
@@ -300,7 +300,7 @@
     /*  */
     /* sticky header */
     .sticky-header {
-        @apply fixed flex items-center justify-between top-0 z-50 px-5 md:px-20 w-full h-16 bg-transparent text-slate-300 transition-all duration-500 ease-in-out;
+        @apply fixed flex items-center justify-between top-0 z-50 px-5 md:px-20 w-full h-16 bg-transparent text-slate-800 transition-all duration-500 ease-in-out;
     }
 
     .sticky-header.scrolled-down {

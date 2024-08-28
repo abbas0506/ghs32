@@ -18,6 +18,7 @@
                 <!-- <li><a href="#" class="nav-item">Alumni</a></li> -->
                 <li><a href="{{ url('gallary') }}" class="nav-item">Gallary</a></li>
                 <li><a href="{{ url('contact') }}" class="nav-item">Contact Us</a></li>
+                <li><a href="{{ url('login') }}" class="nav-item">Login</a></li>
             </ul>
         </nav>
 

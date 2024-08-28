@@ -14,9 +14,9 @@
 @endif
 
 <section class="w-screen h-screen">
-    <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full pt-16 bg-app">
+    <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full pt-16">
         <div class="flex flex-1 justify-end items-center">
-            <img src="{{ url(asset('images/hero/student-1.png')) }}" alt="student" class="w-48 h-48 md:w-96 md:h-96">
+            <img src="{{ url(asset('images/small/world.png')) }}" alt="student" class="w-48 h-48 md:w-96 md:h-96">
 
         </div>
         <!-- <div class="flex flex-col flex-1 gap-y-2 justify-center text-slate-100">
@@ -26,47 +26,40 @@
                 <button class="btn-orange mt-5">Apply Now <i class="bi-arrow-right"></i></button>
             </a>
         </div> -->
-        <div class="flex flex-col flex-1 gap-y-2 justify-center text-slate-100">
-            <div class="text-3xl md:text-4xl">Our Mission</div>
-            <p class="text-slate-300 text-lg leading-relaxed mt-4">We are committed to unlocking the unique potential within every student. Our dynamic and supportive environment is designed to foster creativity, critical thinking, and personal growth.</p>
-            <!-- <a href="">
-                <button class="btn-orange mt-5 rounded py-2">Explore Us <i class="bi-arrow-right"></i></button>
-            </a> -->
+        <div class="flex flex-col flex-1 gap-y-2 justify-center">
+            <p>Explore</p>
+            <h2 class="text-3xl md:text-4xl font-bold">OUR LIBRARY</h2>
+            <p class="text-slate-600 text-lg leading-relaxed mt-4">We have established a state-of-the-art library, fully managed by a web-based application. It consists of 1000+ books from various domains like religion, science, history, literature, and more. </p>
+            <a href="">
+                <button class="btn-teal mt-5 rounded py-2">Start Exploring <i class="bi-arrow-right"></i></button>
+            </a>
         </div>
 
     </div>
-
-
 </section>
-<div class="flex justify-center w-full bg-teal-200">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-x-24 p-5 text-center">
-        <a href="{{url('login/admin')}}" class="flex flex-col justify-center items-center">
-            <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
-                <i class="bi bi-tools text-2xl text-cyan-400"></i>
+<section class="mt-5 md:mt-0">
+    <div class="flex justify-center w-full bg-teal-100">
+        <div class="flex flex-col md:flex-row items-center p-5 md:p-16">
+            <div class="w-1/3 grid place-items-center">
+                <img src="{{ url('images/small/paper-0.png') }}" alt="test" class="w-32">
             </div>
-            <h3 class="mt-3 md:text-lg">Administration</h3>
-        </a>
-        <a href="{{url('login/admission-portal')}}" class="flex flex-col justify-center items-center">
-            <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
-                <i class="bi bi-person-gear text-2xl text-green-400"></i>
-            </div>
-            <h3 class="mt-3 md:text-lg">Admission Portal</h3>
-        </a>
-        <a href="{{ url('login/library') }}" class="flex flex-col justify-center items-center">
-            <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
-                <i class="bi bi-book text-2xl text-orange-400"></i>
-            </div>
-            <h3 class="mt-3 md:text-lg">Library System</h3>
-        </a>
-        <a href="{{ url('https://www.exampixel.com/') }}" target="_blank" class="flex flex-col justify-center items-center">
-            <div class="flex items-center justify-center bg-cyan-100 rounded-full w-16 h-16">
-                <i class="bi bi-laptop text-2xl text-blue-400"></i>
-            </div>
-            <h3 class="mt-3 md:text-lg">Self Assessment</h3>
-        </a>
-    </div>
+            <div class="">
+                <h3 class="text-xl md:text-2xl">Self Assessment</h3>
+                <p class="text-lg mt-1">Self assessment improves your underdtanding about the subject, helps you identify your deficiency areas and gauage your performance. We offer self assement from grade 9 to 12 </p>
+                <div class="mt-6">
+                    <a href="{{ url('https://www.exampixel.com/') }}" target="_blank" class="bg-teal-600 hover:bg-teal-800 text-slate-100 rounded-full duration-200 px-6 py-2">
+                        Start Self Testing
+                    </a>
+                </div>
 
-</div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</section>
 <!-- features section -->
 <section id='features' class="md:mt-24 px-4 md:px-24 mt-12">
     <h2 class="text-2xl md:text-4xl text-center">WELCOME TO</h2>
@@ -241,41 +234,34 @@
         <div class="h-1 w-24 bg-teal-800 mx-auto mt-6"></div>
     </div>
 
-    <div class="flex flex-col md:flex-row gap-y-6 mt-16 w-full justify-between">
-        <div class="flex-1">
+    <div class="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-6 mt-16 w-full justify-between">
+        <div class="bg-teal-100 p-5">
             <h2 class="text-2xl text-slate-800">Planned Testing</h2>
             <p class="mt-3 text-slate-600 leading-relaxed">We conduct well planned series of tests in order to get our students ready for their final exams. Our online assessment system also helps specially the brilliant students to perform their self assessment and identify their deficiencies properly.</p>
         </div>
-        <div class="flex-1">
+        <div class="">
             <img src="{{asset('images/sports/shield.png')}}" alt="" class="md:w-3/4 md:float-right">
         </div>
-    </div>
-
-    <div class="flex flex-col-reverse md:flex-row gap-y-6 mt-6 md:mt-16 w-full justify-between">
-        <div class="flex-1">
+        <div class="">
             <img src="{{asset('images/library/library-1.png')}}" alt="" class="md:w-3/4 md:float-left">
         </div>
-        <div class="flex-1">
-            <h2 class="text-2xl text-slate-800">Computerized Library</h2>
+        <div class="bg-teal-100 p-5">
+            <h2 class="text-2xl text-slate-800">Books Library</h2>
             <p class="mt-3 text-slate-600 leading-relaxed">
-                We have 1500+ books covering all subject domains like religion, science, culture, literature, history, etc.
-                These books are free for all students. Student may read books in library as well. Students must have to follows library rules regarding book safety and return policy.
-                Thanks to our web application that keeps track of all the readers and books.
+                We have established a state-of-the-art library, fully managed by a web-based application. It consists of 1000+ books from various domains like religion, science, history, literature, and more. Students can find their desired books using our web application.
             </p>
         </div>
-
-    </div>
-    <div class="flex flex-col md:flex-row gap-y-6 mt-6 md:mt-16 w-full justify-between">
-        <div class="flex-1">
+        <div class="bg-teal-100 p-5">
             <h2 class="text-2xl text-slate-800">Character Building</h2>
             <p class="mt-3 text-slate-600 leading-relaxed">
                 We pay special focus on the social development of our students. We provide healthy environment where student grow to become morally good citizens.
                 We show them the right way that can lead to their destination.
             </p>
         </div>
-        <div class="flex-1">
+        <div class="">
             <img src="{{asset('images/events/prayer.png')}}" alt="" class="md:w-3/4 md:float-right">
         </div>
+
     </div>
 
 </section>

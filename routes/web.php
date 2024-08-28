@@ -64,10 +64,16 @@ Route::view('contact', 'contact');
 Route::view('gallary', 'gallary');
 
 Route::resource('applications', AdmissionApplicationController::class);
+
+Route::view('login', 'login');
+
 Route::post('login', [AuthController::class, 'login']);
 Route::view('login/admin', 'login.admin');
 Route::view('login/admission-portal', 'login.admission-portal');
 Route::view('login/library', 'login.library');
+
+
+
 Route::get('apply', [OnlineApplicationController::class, 'create']);
 Route::post('apply', [OnlineApplicationController::class, 'store']);
 // Route::resource('online-applications', OnlineApplicationController::class);
