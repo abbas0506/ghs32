@@ -88,8 +88,8 @@ $roman = config('global.romans');
                     @if($i%$numOfCardsPerRow==0)<tr class="text-sm">@endif
                         <td class="p-6">
                             <div class="border p-2">
-                                <div class="font-semibold mt-1">{{ $application->name }}</div>
-                                <div class="border w-20 h-20 m-auto mt-3"></div>
+                                <div class="font-bold mt-1">{{ $application->name }}</div>
+                                <div class="border w-24 h-24 m-auto mt-3"></div>
                                 <div class="text-xs mt-2">Session 2024-26</div>
                                 <div class="font-bold text-lg mt-1">{{ $application->group->name }}</div>
                                 <div class="flex flex-col m-auto mt-2">
