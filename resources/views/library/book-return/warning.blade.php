@@ -1,11 +1,11 @@
 @extends('layouts.library')
 @section('page-content')
 <div class="custom-container">
-    <h2>Issue Book</h2>
+    <h2>Book Return</h2>
     <div class="bread-crumb">
         <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
-        <div>Issue Book</div>
+        <div>Return</div>
         <div>/</div>
         <div>Warning</div>
     </div>

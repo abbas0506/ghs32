@@ -50,13 +50,4 @@ class User extends Authenticatable
     {
         return $this->morphTo();
     }
-
-    public function bookIssuances()
-    {
-        return $this->hasMany(BookIssuance::class);
-    }
-    public function  tests()
-    {
-        return $this->hasMany(Test::class);
-    }
 }

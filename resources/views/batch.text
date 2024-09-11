@@ -9,3 +9,6 @@ SELECT * from temp.books;
 
 insert into ghsscb.applications
 SELECT * from temp.applications;
+
+insert into ghsscb.students
+SELECT * from temp.students;

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('marks')->nullable();
 
             $table->foreignId('section_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('group_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('group_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('rollno');
             $table->string('serial_no')->nullable()->unique();
 

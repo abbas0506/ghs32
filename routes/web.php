@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ClassStudentsController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\GroupController;
+use App\Http\Controllers\Admin\SectionCardController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
 use App\Http\Controllers\Admin\SectionStuedentsController;
 use App\Http\Controllers\Admin\TeacherController;
@@ -88,6 +89,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:admi
     Route::resource('sections', AdminSectionController::class);
     Route::post('sections/{section}/clean', [AdminSectionController::class, 'clean'])->name('sections.clean');
     Route::resource('section.students', SectionStuedentsController::class);
+    Route::resource('section.cards', SectionCardController::class);
+    Route::get('section/student-cards/print', [SectionCardController::class, 'print'])->name('section.cards.print');
 
     Route::get('students/import/{section}', [SectionStuedentsController::class, 'import']);
     Route::post('students/import', [SectionStuedentsController::class, 'postImport']);

@@ -46,13 +46,13 @@
                         <span class="text-xs text-slate-600">{{$bookIssuance->book->reference()}}-{{$bookIssuance->copy_no}} @ {{$bookIssuance->book->author}}</span>
                     </td>
                     <td class="text-left">
-                        {{$bookIssuance->user->userable->name}}
+                        {{$bookIssuance->reader->name}}
                         <br>
                         <label for="">
-                            @if($bookIssuance->user->userable_type=='App\Models\Student')
-                            {{$bookIssuance->user->userable->clas->roman()}} ({{$bookIssuance->user->userable->rollno}})
+                            @if($bookIssuance->user_type=='App\Models\Student')
+                            {{$bookIssuance->reader->section->roman()}} ({{$bookIssuance->reader->rollno}})
                             @else
-                            {{$bookIssuance->user->userable->designation}}
+                            {{$bookIssuance->reader->designation}}
                             @endif
                         </label>
                     </td>

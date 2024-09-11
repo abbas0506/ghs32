@@ -68,13 +68,15 @@ class BookIssuanceController extends Controller
                     $warning_message = "Requested book has already been issued!";
                 } else {
                     //book can be issued
-                    $reader = Student::where('cnic', session('user_cnic'))->first();
+                    $reader = Student::where('bform', session('user_cnic'))->first();
                     if ($reader) {
-                        return view('library.book-issuance.confirm', compact('book', 'copy_no', 'reader'));
+                        $readerType = 'App\Models\Student';
+                        return view('library.book-issuance.confirm', compact('book', 'copy_no', 'reader', 'readerType'));
                     } else {
                         $reader = Teacher::where('cnic', session('user_cnic'))->first();
                         if ($reader) {
-                            return view('library.book-issuance.confirm', compact('book', 'copy_no', 'reader'));
+                            $readerType = 'App\Models\Teacher';
+                            return view('library.book-issuance.confirm', compact('book', 'copy_no', 'reader', 'readerType'));
                         } else {
                             $warning_message = "Reader reference - invalid";
                         }
@@ -100,10 +102,11 @@ class BookIssuanceController extends Controller
             'book_id' => 'required',
             'copy_no' => 'required',
             'user_id' => 'required',
+            'user_type' => 'required',
         ]);
         //
         $user = User::find($request->user_id);
-        $libraryRule = LibraryRule::where('user_type', $user->userable_type)->first();
+        $libraryRule = LibraryRule::where('user_type', $request->user_type)->first();
         $request->merge([
             'due_date' => Carbon::now()->addDays($libraryRule->max_days)->format('Y/m/d'),
         ]);

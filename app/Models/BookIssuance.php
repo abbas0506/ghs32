@@ -13,6 +13,7 @@ class BookIssuance extends Model
         'book_id',
         'copy_no',
         'user_id',  //reader
+        'user_type', //student or teacher
         'due_date',
         'return_date',
         'book_status', //return book status
@@ -29,9 +30,12 @@ class BookIssuance extends Model
         return $this->belongsTo(Book::class);
     }
 
-    public function user()
+    public function reader()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        if ($this->user_type == 'App\Models\Student')
+            return $this->belongsTo(Student::class, 'user_id');
+        else
+            return $this->belongsTo(Teacher::class, 'user_id');
     }
 
     public function scopePending($query)

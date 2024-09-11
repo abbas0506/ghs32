@@ -24,6 +24,7 @@
                 @csrf
                 <button class="btn-orange rounded"><i class="bx bx-recycle text-base"></i></button>
             </form>
+            <a href="{{ route('admin.section.cards.index',$section) }}" class="p-2 border rounded hover:bg-indigo-400"><i class="bi-person-badge text-indigo-600"></i></a>
         </div>
 
     </div>
@@ -51,7 +52,7 @@
                 <tr class="tr">
                     <td>{{$student->rollno}}</td>
                     <td class="text-left"><a href="{{route('admin.section.students.show', [$section, $student])}}" class="link">{{$student->name}}</a></td>
-                    <td>{{$student->cnic}}</td>
+                    <td>{{$student->bform}}</td>
                     <td>
                         <div class="flex items-center justify-center">
                             <a href="{{route('admin.section.students.edit',[$section, $student])}}"><i class="bx bx-pencil text-green-600"></i></a>

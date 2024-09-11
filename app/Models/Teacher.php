@@ -21,9 +21,13 @@ class Teacher extends Model
         //bise tag will be in separate model
     ];
 
-
     public function user()
     {
         return $this->morphOne(User::class, 'userable');
+    }
+
+    public function bookIssuances()
+    {
+        return $this->hasMany(BookIssuance::class, 'user_id');
     }
 }

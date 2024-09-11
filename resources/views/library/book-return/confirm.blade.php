@@ -1,11 +1,13 @@
 @extends('layouts.library')
 @section('page-content')
 <div class="custom-container">
-    <h2>Issue Book</h2>
+    <h2>Confirm Return</h2>
     <div class="bread-crumb">
         <a href="{{url('library')}}">Dashoboard</a>
         <div>/</div>
-        <div>Issue Book</div>
+        <div>Return</div>
+        <div>/</div>
+        <div>Confirm</div>
     </div>
 
     <div class="w-full md:w-3/4 mx-auto mt-16">
@@ -36,12 +38,12 @@
                     <i class="bi bi-person"></i>
                 </div>
                 <div class="flex-1 p-5">
-                    <p for="">{{$bookIssuance->user->userable->name}}</p>
+                    <p for="">{{$bookIssuance->reader->name}}</p>
                     <label for="">
-                        @if($bookIssuance->user->userable_type=='App\Models\Student')
-                        {{$bookIssuance->user->userable->clas->roman()}} ({{$bookIssuance->user->userable->rollno}})
+                        @if($bookIssuance->user_type=='App\Models\Student')
+                        {{$bookIssuance->reader->section->roman()}} ({{$bookIssuance->reader->rollno}})
                         @else
-                        {{$bookIssuance->user->userable->designation}}
+                        {{$bookIssuance->reader->designation}}
                         @endif
                     </label>
                 </div>

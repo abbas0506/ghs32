@@ -21,7 +21,8 @@
 
             <input type="hidden" name='book_id' value="{{$book->id}}">
             <input type="hidden" name='copy_no' value="{{$copy_no}}">
-            <input type="hidden" name='user_id' value="{{$reader->user->id}}">
+            <input type="hidden" name='user_id' value="{{$reader->id}}">
+            <input type="hidden" name='user_type' value="{{$readerType}}">
 
             <div class="flex flex-col md:flex-row bg-green-50">
                 <div class="w-24 flex justify-center items-center bg-green-100">
@@ -39,16 +40,16 @@
                 </div>
                 <div class="flex-1 p-5">
                     <p for="">{{$reader->name}}</p>
-                    @if($reader->user->userable_type=='App\Models\Student')
-                    <label>{{$reader->clas->roman()}} ({{$reader->rollno}})</label>
+                    @if($reader instanceof App\Models\Student)
+                    Student
                     @else
-                    <label>{{$reader->designation}}</label>
+                    Teacher
                     @endif
                 </div>
             </div>
             <div class="mt-6 relative">
-                <label for="">Already in possession: {{$reader->user->bookIssuances()->inPossession()->count()}} book(s) </label>
-                @if($reader->user->bookIssuances()->inPossession()->exists())
+                <label for="">Already in possession: {{$reader->bookIssuances()->inPossession()->count()}} book(s) </label>
+                @if($reader->bookIssuances()->inPossession()->exists())
                 <div class="overflow-x-auto w-full ">
                     @php $sr=1; @endphp
                     <table class="table-auto w-full mt-2 xs">
@@ -63,7 +64,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($reader->user->bookIssuances()->inPossession()->get()->sortByDesc('created_at') as $book_issuance)
+                            @foreach($reader->bookIssuances()->inPossession()->get()->sortByDesc('created_at') as $book_issuance)
                             <tr class="tr">
                                 <td class="">{{$sr++}}</td>
                                 <td class="text-left">{{$book_issuance->book->title}}</td>
