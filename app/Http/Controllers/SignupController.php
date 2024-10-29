@@ -84,9 +84,9 @@ class SignupController extends Controller
 
                 // send password to given email for verification
                 $email = $request->email;
-                Mail::raw('Password sent by exampixel.com : ' . $code, function ($message) use ($code, $email) {
+                Mail::raw('Password sent by ghsscb.edu.pk : ' . $code, function ($message) use ($code, $email) {
                     $message->to($email);
-                    $message->subject('Signup on exampixel');
+                    $message->subject('Signup on ghsscb');
                 });
             }
 
