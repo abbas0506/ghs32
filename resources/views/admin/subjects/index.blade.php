@@ -30,9 +30,9 @@
         @endif
 
         @php $sr=1; @endphp
-        <table class="table-auto w-full mt-3">
+        <table class="table-auto borderless w-full mt-3">
             <thead>
-                <tr class="border-b border-slate-200">
+                <tr class="">
                     <th class="w-16">Sr</th>
                     <th>Subject</th>
                     <th class="w-24">Action</th>
@@ -47,14 +47,14 @@
                     <td>
                         <div class="flex justify-center items-center space-x-3">
                             <a href="{{route('admin.subjects.edit', $subject)}}">
-                                <i class="bi bi-pencil-square text-green-600"></i>
+                                <i class="bx bx-pencil text-green-600"></i>
                             </a>
                             <span class="text-slate-400">|</span>
                             <form action="{{route('admin.subjects.destroy',$subject)}}" method="POST" id='del_form{{$subject->id}}'>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-transparent p-0 border-0" onclick="delme('{{$subject->id}}')">
-                                    <i class="bi bi-trash3 text-red-600"></i>
+                                    <i class="bx bx-trash text-red-600"></i>
                                 </button>
                             </form>
                         </div>

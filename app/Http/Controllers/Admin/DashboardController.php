@@ -10,6 +10,7 @@ use App\Models\Grade;
 use App\Models\Section;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -21,7 +22,7 @@ class DashboardController extends Controller
     {
         //
         $sections = Section::all();
-        $teachers = Teacher::all();
+        $teachers = User::whereRelation('roles', 'name', 'teacher')->get();
         $students = Student::all();
         $books = Book::all();
         $applications = Application::all();

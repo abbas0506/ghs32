@@ -28,7 +28,7 @@
                         @foreach($grade->sections as $section)
                         <a href="{{route('admin.section.students.index',$section)}}" class="w-16 rounded btn-teal">{{$section->name}} <span class="text-xs"> ({{ $section->students->count() }})</span></a>
                         @endforeach
-
+                        <a href="{{route('admin.grade.sections.create',$grade)}}" class="w-16 rounded btn-teal"><i class="bi-plus-lg"></i></a>
                     </td>
                     <td>{{$grade->students->count()}}</td>
                 </tr>

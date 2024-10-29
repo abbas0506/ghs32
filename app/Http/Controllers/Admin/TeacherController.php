@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\TeacherImport;
+use App\Models\Profile;
 use App\Models\Teacher;
 use App\Models\User;
 use Carbon\Exceptions\EndLessPeriodException;
@@ -21,8 +22,8 @@ class TeacherController extends Controller
     public function index()
     {
         //
-        $teachers = Teacher::all();
-        return view('admin.teachers.index', compact('teachers'));
+        $users = User::whereRelation('roles', 'name', 'teacher')->get();
+        return view('admin.teachers.index', compact('users'));
     }
 
     /**
@@ -51,9 +52,9 @@ class TeacherController extends Controller
 
         DB::beginTransaction();
         try {
-            $teacher = Teacher::create($request->all());
+            $teacher = Profile::create($request->all());
             $user = User::create([
-                'login_id' => $teacher->cnic,
+                'email' => $teacher->cnic,
                 'password' => Hash::make('password'),
                 'userable_id' => $teacher->id,
                 'userable_type' => 'App\Models\Teacher',
@@ -74,7 +75,7 @@ class TeacherController extends Controller
     public function show(string $id)
     {
         //
-        $teacher = Teacher::find($id);
+        $teacher = Profile::findOrFail($id);
         return view('admin.teachers.show', compact('teacher'));
     }
 
@@ -84,7 +85,7 @@ class TeacherController extends Controller
     public function edit(string $id)
     {
         //
-        $teacher = Teacher::find($id);
+        $teacher = Profile::findOrFail($id);
         return view('admin.teachers.edit', compact('teacher'));
     }
 
@@ -104,7 +105,7 @@ class TeacherController extends Controller
         ]);
 
         try {
-            $teacher = Teacher::find($id);
+            $teacher = Profile::findOrFail($id);
             $teacher->update($request->all());
             return redirect()->route('admin.teachers.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {
@@ -119,7 +120,7 @@ class TeacherController extends Controller
     public function destroy(string $id)
     {
         //
-        $model = Teacher::findOrFail($id);
+        $model = Profile::findOrFail($id);
         try {
             $model->delete();
             return redirect()->back()->with('success', 'Successfully deleted');

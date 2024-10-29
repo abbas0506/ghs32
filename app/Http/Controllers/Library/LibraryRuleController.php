@@ -49,7 +49,7 @@ class LibraryRuleController extends Controller
     public function edit(string $id)
     {
         //
-        $libraryRule = LibraryRule::find($id);
+        $libraryRule = LibraryRule::findOrFail($id);
         return view('library.library-rules.edit', compact('libraryRule'));
     }
 
@@ -65,7 +65,7 @@ class LibraryRuleController extends Controller
             'fine_per_day' => 'required',
         ]);
         try {
-            $libraryRule = LibraryRule::find($id);
+            $libraryRule = LibraryRule::findOrFail($id);
             $libraryRule->update($request->all());
             return redirect()->route('library.library-rules.index')->with('success', 'Successfully updated');
         } catch (Exception $e) {

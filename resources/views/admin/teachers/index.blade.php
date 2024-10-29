@@ -2,11 +2,11 @@
 @section('page-content')
 
 <div class="custom-container">
-    <h1>Teachers</h1>
+    <h1>users</h1>
     <div class="bread-crumb">
         <a href="{{url('admin')}}">Dashoboard</a>
         <div>/</div>
-        <div>Teachers</div>
+        <div>users</div>
         <div>/</div>
         <div>All</div>
     </div>
@@ -18,8 +18,8 @@
                 <i class="bx bx-search absolute top-2 right-2"></i>
             </div>
             <div class="flex space-x-3">
-                <a href="{{route('admin.teachers.create')}}" class="text-sm p-2 border hover:bg-teal-400">New <i class="bi bi-person-add text-teal-600"></i></a>
-                <a href="{{route('admin.teachers.import')}}" class="text-sm p-2 border hover:bg-teal-400">Import from Excel <i class="bi bi-file-earmark-excel text-teal-600"></i></a>
+                <a href="{{route('admin.users.create')}}" class="text-sm p-2 border hover:bg-teal-400">New <i class="bi bi-person-add text-teal-600"></i></a>
+                <a href="{{route('admin.users.import')}}" class="text-sm p-2 border hover:bg-teal-400">Import <i class="bi bi-file-earmark-excel text-teal-600"></i></a>
             </div>
         </div>
 
@@ -36,23 +36,23 @@
                 <thead>
                     <tr>
                         <th class="w-12">Cnic</th>
-                        <th class="w-36">Teacher</th>
+                        <th class="w-36">user</th>
                         <th class="w-36">Phone/email</th>
                         <th class="w-12">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($teachers as $teacher)
+                    @foreach($users as $user)
                     <tr class="tr text-sm">
 
-                        <td>{{$sr++}}</td>
-                        <td class="text-left pl-3 text-slate-800"><a href="{{route('admin.teachers.show', $teacher)}}" class="link">{{$teacher->name}} </a><br><span class="text-xs text-slate-500">{{$teacher->designation}}, BPS {{$teacher->bps}}</span></td>
-                        <td>{{$teacher->phone}}<br><span class="text-xs text-slate-500">{{$teacher->email}}</span></td>
+                        <td>{{ $loop->index+1 }}</td>
+                        <td class="text-left pl-3 text-slate-800"><a href="{{route('admin.users.show', $user)}}" class="link">{{$user->profile->name}} </a><br><span class="text-xs text-slate-500">{{$user->profile->designation}}, BPS {{$user->profile->bps}}</span></td>
+                        <td>{{$user->profile->phone}}<br><span class="text-xs text-slate-500">{{$user->email}}</span></td>
                         <td>
                             <div class="flex items-center justify-center">
-                                <a href="{{route('admin.teachers.edit',$teacher)}}"><i class="bx bx-pencil text-green-600"></i></a>
+                                <a href="{{route('admin.users.edit',$user)}}"><i class="bx bx-pencil text-green-600"></i></a>
                                 <span class="text-slate-300 px-2">|</span>
-                                <form action="{{route('admin.teachers.destroy',$teacher)}}" method="post" onsubmit="return confirmDel(event)">
+                                <form action="{{route('admin.users.destroy',$user)}}" method="post" onsubmit="return confirmDel(event)">
                                     @csrf
                                     @method('DELETE')
                                     <button><i class="bx bx-trash text-red-600"></i></button>

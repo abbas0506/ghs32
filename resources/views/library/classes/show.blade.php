@@ -51,7 +51,7 @@
                     </td>
                     <td>{{$student->name}}</td>
                     <td>{{$student->father}}</td>
-                    <td>{{$student->cnic}}</td>
+                    <td>{{$student->bform}}</td>
                 </tr>
                 @endforeach
             </tbody>

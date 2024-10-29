@@ -18,8 +18,8 @@ class SectionStuedentsController extends Controller
     public function index($id)
     {
         //
-        $section = Section::find($id);
-        return view('admin.section-students.index', compact('section'));
+        $section = Section::findOrFail($id);
+        return view('admin.students.index', compact('section'));
     }
 
     /**
@@ -28,8 +28,8 @@ class SectionStuedentsController extends Controller
     public function create($sectionId)
     {
         //
-        $section = Section::find($sectionId);
-        return view('admin.section-students.create', compact('section'));
+        $section = Section::findOrFail($sectionId);
+        return view('admin.students.create', compact('section'));
     }
 
     /**
@@ -40,13 +40,13 @@ class SectionStuedentsController extends Controller
         //
         $request->validate([
             'name' => 'required',
-            'cnic' => 'required',
+            'bform' => 'required',
             'rollno' => 'required',
         ]);
 
         try {
 
-            $section = Section::find($sectionId);
+            $section = Section::findOrFail($sectionId);
             $section->students()->create($request->all());
             return redirect()->route('admin.section.students.index', $section)->with('success', 'Successfully created');
         } catch (Exception $e) {
@@ -61,9 +61,9 @@ class SectionStuedentsController extends Controller
     public function show($sectionId, string $id)
     {
         //
-        $section = Section::find($sectionId);
-        $student = Student::find($id);
-        return view('admin.section-students.show', compact('section', 'student'));
+        $section = Section::findOrFail($sectionId);
+        $student = Student::findOrFail($id);
+        return view('admin.students.show', compact('section', 'student'));
     }
 
     /**
@@ -72,9 +72,9 @@ class SectionStuedentsController extends Controller
     public function edit($sectionId, string $id)
     {
         //
-        $section = Section::find($sectionId);
-        $student = Student::find($id);
-        return view('admin.section-students.edit', compact('section', 'student'));
+        $section = Section::findOrFail($sectionId);
+        $student = Student::findOrFail($id);
+        return view('admin.students.edit', compact('section', 'student'));
     }
 
     /**
@@ -91,7 +91,7 @@ class SectionStuedentsController extends Controller
 
         try {
 
-            $section = Section::find($sectionId);
+            $section = Section::findOrFail($sectionId);
             $section->students()->find($id)->update($request->all());
             return redirect()->route('admin.section.students.index', $section)->with('success', 'Successfully updated');
         } catch (Exception $e) {
@@ -107,7 +107,7 @@ class SectionStuedentsController extends Controller
     {
         //
         try {
-            $student = Student::find($id);
+            $student = Student::findOrFail($id);
             $student->delete();
             return redirect()->route('admin.section.students.index', $sectionId)->with('success', 'Successfully deleted!');
         } catch (Exception $e) {
@@ -120,8 +120,8 @@ class SectionStuedentsController extends Controller
 
         // save selected class for later usage at students import actually
         session(['section_id' => $id]);
-        $section = Section::find($id);
-        return view('admin.section-students.import', compact('section'));
+        $section = Section::findOrFail($id);
+        return view('admin.students.import', compact('section'));
     }
     /**
      * import data from excel

@@ -26,11 +26,11 @@ class SectionStudentsController extends Controller
     public function create($id)
     {
         //
-        $section = Section::find($id);
+        $section = Section::findOrFail($id);
         $alreadyIncluded = Student::join('sections', 'section_id', 'sections.id')->where('grade_id', 11)->pluck('bform');
 
         $applications = Application::whereNotIn('bform', $alreadyIncluded)->whereNotNull('fee_paid')->get();
-        return view('admission.section-students.create', compact('applications', 'section'));
+        return view('admission.students.create', compact('applications', 'section'));
     }
 
     /**
@@ -45,7 +45,7 @@ class SectionStudentsController extends Controller
         DB::beginTransaction();
 
         try {
-            $section = Section::find($sectionId);
+            $section = Section::findOrFail($sectionId);
             $applicationIdsArray = array();
             $applicationIdsArray = $request->application_ids_array;
             $applications = Application::whereIn('id', $applicationIdsArray)->get();
@@ -101,7 +101,7 @@ class SectionStudentsController extends Controller
     {
         //
         try {
-            $section = Section::find($sectionId);
+            $section = Section::findOrFail($sectionId);
             $section->students()->find($studentId)->delete();
             return redirect()->route('admission.sections.show', $section)->with('success', 'Successfully deleted!');
         } catch (Exception $e) {

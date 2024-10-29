@@ -64,7 +64,7 @@ class GroupController extends Controller
     public function edit(string $id)
     {
         //
-        $group = Group::find($id);
+        $group = Group::findOrFail($id);
         return view('admin.groups.edit', compact('group'));
     }
 
@@ -80,7 +80,7 @@ class GroupController extends Controller
             'fee' => 'required|numeric|min:0'
         ]);
 
-        $model = Group::find($id);
+        $model = Group::findOrFail($id);
         try {
             $model->update($request->all());
             return redirect()->route('admin.groups.index')->with('success', 'Successfully updated');

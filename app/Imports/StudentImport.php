@@ -19,12 +19,12 @@ class StudentImport implements ToCollection, WithHeadingRow
     {
         foreach ($rows as $row) {
             $student = Student::create([
+                'rollno' => $row['rollno'],
                 'name' => $row['name'],
                 'father' => $row['father'],
                 'bform' => $row['bform'],
                 // 'group_id' => 2,
                 'section_id' => session('section_id'),
-                'rollno' => $row['rollno'],
             ]);
         }
     }

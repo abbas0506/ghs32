@@ -22,10 +22,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             LanguageSeeder::class,
+            SessionSeeder::class,
             GroupSeeder::class,
             GradeSeeder::class,
+            SubjectSeeder::class,
             SectionSeeder::class,
-
             UserSeeder::class,
             // DomainSeeder::class,
             LibraryRuleSeeder::class,

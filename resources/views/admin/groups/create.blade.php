@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('page-content')
-<div class="custom-container">
+@section('body')
+<div class="responsive-container">
     <h2>Groups</h2>
     <div class="bread-crumb">
         <a href="/">Home</a>

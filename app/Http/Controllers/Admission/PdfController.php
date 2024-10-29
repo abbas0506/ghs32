@@ -13,7 +13,7 @@ class PdfController extends Controller
     //
     public function printListOfStudents($id)
     {
-        $section = Section::find($id);
+        $section = Section::findOrFail($id);
         $pdf = PDF::loadview('admission.pdf.students-list', compact('section'))->setPaper('a4', 'landscape');
         $pdf->set_option("isPhpEnabled", true);
         $file = "phone-list.pdf";
@@ -22,7 +22,7 @@ class PdfController extends Controller
 
     public function printAttendanceList($id)
     {
-        $section = Section::find($id);
+        $section = Section::findOrFail($id);
         $pdf = PDF::loadview('admission.pdf.attendance-list', compact('section'))->setPaper('a4', 'landscape');
         $pdf->set_option("isPhpEnabled", true);
         $file = "phone-list.pdf";
@@ -38,7 +38,7 @@ class PdfController extends Controller
     }
     public function printListOfSrNo($id)
     {
-        $section = Section::find($id);
+        $section = Section::findOrFail($id);
         $pdf = PDF::loadview('admission.pdf.serial-no', compact('section'))->setPaper('a4', 'landscape');
         $pdf->set_option("isPhpEnabled", true);
         $file = "serial-no.pdf";

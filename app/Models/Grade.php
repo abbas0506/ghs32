@@ -22,4 +22,8 @@ class Grade extends Model
     {
         return $this->hasManyThrough(Student::class, Section::class);
     }
+    public function allocations()
+    {
+        return $this->hasManyThrough(Allocation::class, Section::class);
+    }
 }

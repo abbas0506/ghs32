@@ -51,7 +51,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         //
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return view('admin.users.edit', compact('user'));
     }
 
@@ -65,7 +65,7 @@ class UserController extends Controller
             'new' => 'required',
         ]);
         try {
-            $user = User::find($id);
+            $user = User::findOrFail($id);
             $user->password = Hash::make($request->new);
             $user->save();
             return redirect()->back()->with('success', 'successfuly changed');
@@ -81,5 +81,16 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function  switchAs($roleName)
+    {
+        if (Auth::user()->hasRole($roleName)) {
+            session([
+                'role' => $roleName,
+            ]);
+            return redirect($roleName);
+        } else {
+            echo "Invalid role selected!";
+        }
     }
 }

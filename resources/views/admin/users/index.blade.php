@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('page-content')
+@section('body')
 
 <div class="custom-container">
     <h1>Users</h1>
@@ -26,7 +26,7 @@
                 @foreach($users as $user)
                 @php $i=0; @endphp
                 <tr class="">
-                    <td class="text-left py-3">{{$user->login_id}}</td>
+                    <td class="text-left py-3">{{$user->email}}</td>
                     <td>
                         <a href="{{ route('admin.users.edit', $user) }}" class="link">
                             Reset Password

@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -17,23 +20,51 @@ class AuthController extends Controller
         //signup  process
         $request->validate([
             'name' => 'required',
-            'phone' => 'required',
-            'password' => 'required',
-
+            'email' => 'required',
+            'suspicious' => 'nullable',
         ]);
 
+
+        DB::beginTransaction();
         try {
 
-            $user = User::create([
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-            Auth::login($user);
+            $code = Str::random(5);
 
-            return redirect('/');
+            if (!empty($request->suspicious))
+                return redirect()->back()->with('warning', 'Registeration rejected!');
+            else {
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($code),
+                ]);
+
+                $user->assignRole('user');
+
+                $user->sales()->create([
+                    'coins' => 500,
+                    'price' => 0,
+                    'expiry_at' => now()->addDays(365),
+                    'remarks' => 'Sign up bonus',
+
+                ]);
+
+                // send password to given email for verification
+                $email = $request->email;
+                Mail::raw('Password sent by exampixel.com : ' . $code, function ($message) use ($code, $email) {
+                    $message->to($email);
+                    $message->subject('Signup on exampixel');
+                });
+            }
+
+
+
+            DB::commit();
+
+            // go to related dashboard
+            return redirect('signup/success');
         } catch (Exception $e) {
+            DB::rollBack();
             return redirect()->back()->withErrors($e->getMessage());
         }
     }
@@ -47,27 +78,21 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'login_id' => 'required',
+            'email' => 'required',
             'password' => 'required',
 
         ]);
 
         // 
         if (Auth::attempt($credentials)) {
-            //user verified
-            if (Auth::user()->hasRole('admin')) {
-                session(['role' => 'admin']);
-                return redirect('admin');
-            } else if (Auth::user()->hasRole('admission')) {
-                session(['role' => 'admission']);
-                return redirect('admission');
-            } else if (Auth::user()->hasRole('library')) {
-                session(['role' => 'library']);
-                return redirect('library');
-            }
+            //user verified, now redirect to his/her dashboard
+            $role = Auth::user()->roles->first()->name;
+            session([
+                'role' => $role,
+            ]);
 
-            // return  redirect('login/as');
-            // echo "validated";
+            // go to related dashboard
+            return redirect($role);
         } else {
             //user not verified
             return redirect()->back()->with(['warning' => 'User credentials incorrect !']);
@@ -146,6 +171,35 @@ class AuthController extends Controller
             return redirect()->back()
                 ->withErrors($e->getMessage());
             // something went wrong
+        }
+    }
+    public function  forgot(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+        $email = $request->email;
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $code = Str::random(5);
+
+            $user->update([
+                'password' => Hash::make($code),
+            ]);
+
+            try {
+
+                Mail::raw('Password has been reset by exampixel.com : ' . $code, function ($message) use ($email) {
+                    $message->to($email);
+                    $message->subject('Password reset');
+                });
+
+                return redirect('login')->with('success', 'Password sent to your email');
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+        } else {
+            return redirect()->back()->with('warning', 'The email does not exist in record');
         }
     }
 }

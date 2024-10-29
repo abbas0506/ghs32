@@ -49,7 +49,7 @@ class ObjectionController extends Controller
     public function edit(string $id)
     {
         //
-        $application = Application::find($id);
+        $application = Application::findOrFail($id);
         return view('admission.objections.edit', compact('application'));
     }
 
@@ -63,7 +63,7 @@ class ObjectionController extends Controller
             'objection' => 'nullable',
         ]);
 
-        $application = Application::find($id);
+        $application = Application::findOrFail($id);
         try {
             $application->update($request->all());
             return redirect()->route('admission.objections.index')->with('success', 'Objection on ' . $application->rollno . ' Successfully updated ');

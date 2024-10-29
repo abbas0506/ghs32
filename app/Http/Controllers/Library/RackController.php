@@ -65,7 +65,7 @@ class RackController extends Controller
     public function edit($id)
     {
         //
-        $rack = Rack::find($id);
+        $rack = Rack::findOrFail($id);
         return view('library.racks.edit', compact('rack'));
     }
 
@@ -103,7 +103,7 @@ class RackController extends Controller
 
     public function print($id)
     {
-        $rack = Rack::find($id);
+        $rack = Rack::findOrFail($id);
 
         $pdf = PDF::loadview('library.pdf.rack-wise-books', compact('rack'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);

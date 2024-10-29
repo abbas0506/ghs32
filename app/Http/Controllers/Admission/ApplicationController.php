@@ -76,7 +76,7 @@ class ApplicationController extends Controller
     public function show(string $id)
     {
         //
-        $application = Application::find($id);
+        $application = Application::findOrFail($id);
         return view('admission.applications.show', compact('application'));
     }
 
@@ -86,7 +86,7 @@ class ApplicationController extends Controller
     public function edit(string $id)
     {
         //
-        $application = Application::find($id);
+        $application = Application::findOrFail($id);
         $groups = Group::all();
         return view('admission.applications.edit', compact('application', 'groups'));
     }
@@ -113,7 +113,7 @@ class ApplicationController extends Controller
         ]);
 
         try {
-            $application = Application::find($id);
+            $application = Application::findOrFail($id);
 
             $application->update($request->all());
             return redirect()->route('admission.applications.index')->with('success', 'Application # ' . $application->rollno . ' successfully updated');
@@ -130,7 +130,7 @@ class ApplicationController extends Controller
     {
         //
         try {
-            $application = Application::find($id);
+            $application = Application::findOrFail($id);
             $application->delete();
             return redirect()->route('admission.applications.index')->with('success', 'Successfully deleted!');
         } catch (Exception $e) {

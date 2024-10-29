@@ -20,7 +20,7 @@
             @csrf
             @method('PATCH')
 
-            <h2>User: {{ $user->login_id }}</h2>
+            <h2>User: {{ $user->email }}</h2>
 
             <!-- page message -->
             @if($errors->any())

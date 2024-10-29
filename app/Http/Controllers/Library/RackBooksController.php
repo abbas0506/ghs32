@@ -18,7 +18,7 @@ class RackBooksController extends Controller
     public function index($id)
     {
         //
-        $rack = Rack::find($id);
+        $rack = Rack::findOrFail($id);
         return view('library.rack-books.index', compact('rack'));
     }
 
@@ -44,8 +44,8 @@ class RackBooksController extends Controller
     public function show($rackId, string $id)
     {
         //
-        $book = Book::find($id);
-        $rack = Rack::find($rackId);
+        $book = Book::findOrFail($id);
+        $rack = Rack::findOrFail($rackId);
         return view('library.rack-books.show', compact('rack', 'book'));
     }
 
@@ -55,8 +55,8 @@ class RackBooksController extends Controller
     public function edit($rackId, string $id)
     {
         //
-        $rack = Rack::find($rackId);
-        $book = Book::find($id);
+        $rack = Rack::findOrFail($rackId);
+        $book = Book::findOrFail($id);
         $languages = Language::all();
         $domains = Domain::all();
         return view('library.rack-books.edit', compact('rack', 'book', 'languages', 'domains'));
@@ -79,7 +79,7 @@ class RackBooksController extends Controller
             'language_id' => 'required',
         ]);
         try {
-            $rack = rack::find($rackId);
+            $rack = rack::findOrFail($rackId);
             $book = $rack->books()->find($id)->update($request->all());
             return redirect()->route('library.rack.books.index', $rackId)->with('success', 'Successfully updated');
         } catch (Exception $e) {
@@ -95,7 +95,7 @@ class RackBooksController extends Controller
     {
         //
         try {
-            $book = Book::find($id);
+            $book = Book::findOrFail($id);
             $book->delete();
             return redirect()->route('library.rack.books.index', $rackId)->with('success', 'Successfully deleted!');
         } catch (Exception $e) {

@@ -74,7 +74,7 @@ class OnlineApplicationController extends Controller
     public function applied($id)
     {
 
-        $application = Application::find($id);
+        $application = Application::findOrFail($id);
         return view('admission.online-applications.success', compact('application'));
     }
 }

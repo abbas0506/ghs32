@@ -1,7 +1,7 @@
 @extends('layouts.basic')
 
 @section('header')
-<x-headers.admission></x-headers.admission>
+<x-headers.user></x-headers.user>
 @endsection
 
 @section('sidebar')

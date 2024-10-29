@@ -20,10 +20,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         // 'user_id',
-        'login_id',
+        'email',
         'password',
-        'userable_id',
-        'userable_type',
     ];
 
     /**
@@ -46,8 +44,21 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function userable()
+    public function profile()
     {
-        return $this->morphTo();
+        return $this->hasOne(Profile::class, 'user_id');
+    }
+
+    public function allocations()
+    {
+        return $this->hasMany(Allocation::class, 'teacher_id', 'id');
+    }
+    public function testAllocations()
+    {
+        return $this->hasManyThrough(TestAllocation::class, Allocation::class, 'teacher_id');
+    }
+    public function tests()
+    {
+        return $this->hasMany(Test::class);
     }
 }

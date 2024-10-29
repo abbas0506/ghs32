@@ -19,7 +19,7 @@ class DomainBooksController extends Controller
     public function index($domainId)
     {
         //
-        $domain = Domain::find($domainId);
+        $domain = Domain::findOrFail($domainId);
         return view('library.domain-books.index', compact('domain'));
     }
 
@@ -29,7 +29,7 @@ class DomainBooksController extends Controller
     public function create($domainId)
     {
         //
-        $domain = Domain::find($domainId);
+        $domain = Domain::findOrFail($domainId);
         $languages = Language::all();
         $racks = Rack::all();
         return view('library.domain-books.create', compact('domain', 'languages', 'racks'));
@@ -52,7 +52,7 @@ class DomainBooksController extends Controller
             'language_id' => 'required',
         ]);
         try {
-            $domain = Domain::find($domainId);
+            $domain = Domain::findOrFail($domainId);
             $book = $domain->books()->create($request->all());
             return redirect()->route('library.domain.books.index', $domainId)->with(
                 [
@@ -73,8 +73,8 @@ class DomainBooksController extends Controller
     public function show($domainId, string $id)
     {
         //
-        $book = Book::find($id);
-        $domain = Domain::find($domainId);
+        $book = Book::findOrFail($id);
+        $domain = Domain::findOrFail($domainId);
         return view('library.domain-books.show', compact('domain', 'book'));
     }
 
@@ -84,8 +84,8 @@ class DomainBooksController extends Controller
     public function edit($domainId, string $id)
     {
         //
-        $book = Book::find($id);
-        $domain = Domain::find($domainId);
+        $book = Book::findOrFail($id);
+        $domain = Domain::findOrFail($domainId);
         $languages = Language::all();
         $racks = Rack::all();
         return view('library.domain-books.edit', compact('domain', 'book', 'languages', 'racks'));
@@ -108,7 +108,7 @@ class DomainBooksController extends Controller
             'language_id' => 'required',
         ]);
         try {
-            $domain = Domain::find($domainId);
+            $domain = Domain::findOrFail($domainId);
             $book = $domain->books()->find($id)->update($request->all());
             return redirect()->route('library.domain.books.index', $domainId)->with('success', 'Successfully updated');
         } catch (Exception $e) {
@@ -124,7 +124,7 @@ class DomainBooksController extends Controller
     {
         //
         try {
-            $book = Book::find($id);
+            $book = Book::findOrFail($id);
             $book->delete();
             return redirect()->route('library.domain.books.index', $domainId)->with('success', 'Successfully deleted!');
         } catch (Exception $e) {

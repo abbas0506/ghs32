@@ -44,7 +44,7 @@ class SectionController extends Controller
     public function show(string $id)
     {
         //
-        $section = Section::find($id);
+        $section = Section::findOrFail($id);
         return view('admission.sections.show', compact('section'));
     }
 
@@ -96,7 +96,7 @@ class SectionController extends Controller
 
         DB::beginTransaction();
         try {
-            $section = Section::find($id);
+            $section = Section::findOrFail($id);
             $students = $section->students->sortByDesc('marks');
 
             foreach ($students as $student) {
@@ -120,7 +120,7 @@ class SectionController extends Controller
         $srNo = 1;
         DB::beginTransaction();
         try {
-            $section = Section::find($id);
+            $section = Section::findOrFail($id);
             $students = $section->students->sortByDesc('marks')->sortBy('group_id');
 
             foreach ($students as $student) {

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Grade;
 use App\Models\Section;
 use App\Models\Teacher;
+use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -14,39 +16,45 @@ class SectionController extends Controller
     public function index()
     {
         //
-        $sections = Section::query()->active()->get();
-        return view('admin.sections.index', compact('sections'));
+        $grades = Grade::where('id', '>', 8)->get();
+        return view('admin.grades.index', compact('grades'));
+        //     $sections = Section::query()->active()->get();
+        //     return view('admin.sections.index', compact('sections'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
         //
-        $grades = Grade::where('id', '>', 5)->get();
-        $teachers = Teacher::all();
-        return view('admin.sections.create', compact('grades', 'teachers'));
+        $grade = Grade::findOrFail($id);
+        $users = User::whereRelation('roles', 'name', 'teacher')->get();
+        return view('admin.sections.create', compact('grade', 'users'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         //
 
         $request->validate([
-            'grade_id' => 'required|numeric',
             'name' => 'required',
-            'induction_year' => 'required|numeric',
+            'starts_at' => 'required|date',
             'incharge_id' => 'nullable|numeric',
         ]);
 
+        $request->merge([
+            'ends_at' => Carbon::parse($request->starts_at)->addYears(2),
+        ]);
+        $grade = Grade::findOrFail($id);
 
         try {
-            Section::create($request->all());
-            return redirect()->route('admin.sections.index')->with('success', 'Successfully created');
+            $grade->sections()->create($request->all());
+            // Section::create($request->all());
+            return redirect()->route('admin.grades.index')->with('success', 'Successfully created');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -69,8 +77,8 @@ class SectionController extends Controller
     public function edit(string $id)
     {
         $grades = Grade::where('id', '>', 5)->get();
-        $teachers = Teacher::all();
-        $section = Section::find($id);
+        $teachers = Profile::all();
+        $section = Section::findOrFail($id);
         return view('admin.sections.edit', compact('section', 'grades', 'teachers'));
     }
 
@@ -83,11 +91,11 @@ class SectionController extends Controller
         $request->validate([
             'grade_id' => 'required|numeric',
             'name' => 'required',
-            'induction_year' => 'required|numeric',
+            'starts_at' => 'required|numeric',
             'incharge_id' => 'nullable|numeric',
         ]);
 
-        $model = Section::find($id);
+        $model = Section::findOrFail($id);
         try {
             $model->update($request->all());
             return redirect()->route('admin.sections.index')->with('success', 'Successfully updated');

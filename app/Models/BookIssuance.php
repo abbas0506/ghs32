@@ -35,7 +35,7 @@ class BookIssuance extends Model
         if ($this->user_type == 'App\Models\Student')
             return $this->belongsTo(Student::class, 'user_id');
         else
-            return $this->belongsTo(Teacher::class, 'user_id');
+            return $this->belongsTo(Profile::class, 'user_id');
     }
 
     public function scopePending($query)

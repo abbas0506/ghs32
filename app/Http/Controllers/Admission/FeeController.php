@@ -49,7 +49,7 @@ class FeeController extends Controller
     public function edit(string $id)
     {
         //
-        $application = Application::find($id);
+        $application = Application::findOrFail($id);
         return view('admission.fee.edit', compact('application'));
     }
 
@@ -66,7 +66,7 @@ class FeeController extends Controller
             'paid_at' => now(),
         ]);
 
-        $application = Application::find($id);
+        $application = Application::findOrFail($id);
         try {
             $application->update($request->all());
             return redirect()->route('admission.fee.index')->with('success', 'Fee for ' . $application->rollno . ' Successfully updated ');

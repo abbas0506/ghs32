@@ -12,10 +12,12 @@ class Section extends Model
     protected $fillable = [
         'name',    //section label A, B, C
         'grade_id',
-        'induction_year',
         'incharge_id',
+        'starts_at',
+        'ends_at',
     ];
 
+    protected $dates = ['starts_at', 'ends_at'];
     public function grade()
     {
         return $this->belongsTo(Grade::class);
@@ -30,6 +32,10 @@ class Section extends Model
     {
         return $this->hasMany(Student::class);
     }
+    public function allocations()
+    {
+        return $this->hasMany(Allocation::class);
+    }
 
     public function roman()
     {
@@ -39,6 +45,18 @@ class Section extends Model
     {
         $duration = ($this->grade_no < 9 ? 3 : 2);
 
-        return $query->where('induction_year', '>=', date('y') - $duration);
+        return $query->where('starts_at', '>=', date('y') - $duration);
+    }
+    public function  studentRank($sortedPercentages, $specificId)
+    {
+        $index = $sortedPercentages->search(function ($student) use ($specificId) {
+            return $student['id'] === $specificId;
+        });
+
+        if ($index !== false) {
+            return $index + 1;
+        } else {
+            return '';
+        }
     }
 }

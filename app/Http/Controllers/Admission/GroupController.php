@@ -38,7 +38,7 @@ class GroupController extends Controller
     public function show(string $id)
     {
         //
-        $group = Group::find($id);
+        $group = Group::findOrFail($id);
         return view('admission.groups.show', compact('group'));
     }
 

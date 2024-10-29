@@ -41,7 +41,7 @@ class BookReturnController extends Controller
             $book_id = (int)$book_ref_parts[1];
             $copy_no = (int) $book_ref_parts[2];
 
-            $book = Book::find($book_id);
+            $book = Book::findOrFail($book_id);
 
             if ($book) {
                 //check forgery in each fragment of book ref
@@ -77,7 +77,7 @@ class BookReturnController extends Controller
         $request->validate([
             'book_issuance_id' => 'required',
         ]);
-        $book_issuance = BookIssuance::find($id);
+        $book_issuance = BookIssuance::findOrFail($id);
         try {
             $book_issuance->return_date = date('Y/m/d');
             $book_issuance->update();

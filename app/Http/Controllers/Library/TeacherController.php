@@ -14,7 +14,7 @@ class TeacherController extends Controller
     public function index()
     {
         //
-        $teachers = Teacher::all();
+        $teachers = Profile::all();
         return view('library.teachers.index', compact('teachers'));
     }
 

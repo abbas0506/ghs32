@@ -1,29 +1,30 @@
 <?php
 
+use App\Http\Controllers\Admin\AllocationController;
 use App\Http\Controllers\AuthController;
 
-use App\Http\Controllers\Admin\ClassController;
-use App\Http\Controllers\Admin\ClassStudentsController;
+use App\Http\Controllers\Admin\CollectiveTestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\SectionCardController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
+use App\Http\Controllers\Admin\SectionResultCardController;
+use App\Http\Controllers\Admin\SectionResultController;
 use App\Http\Controllers\Admin\SectionStuedentsController;
+use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\TestSectionController as AdminTestSectionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admission\PdfController;
 use App\Http\Controllers\Admission\ApplicationController as AdmissionApplicationController;
 use App\Http\Controllers\Admission\CardController;
 use App\Http\Controllers\Admission\DashboardController;
 use App\Http\Controllers\Admission\FeeController as AdmissionFeeController;
-use App\Http\Controllers\Admission\GroupApplicationController;
 use App\Http\Controllers\Admission\GroupController as AdmissionGroupController;
 use App\Http\Controllers\Admission\HighAchieverController;
-use App\Http\Controllers\Admission\ImportStudentsController;
 use App\Http\Controllers\Admission\ObjectionController as AdmissionObjectionController;
 use App\Http\Controllers\Admission\SectionController;
-use App\Http\Controllers\Admission\SectionImportController;
 use App\Http\Controllers\Admission\SectionStudentsController;
 use App\Http\Controllers\Library\BookController;
 use App\Http\Controllers\Library\BookIssuanceController;
@@ -37,6 +38,15 @@ use App\Http\Controllers\Library\PrintController;
 use App\Http\Controllers\Library\RackBooksController;
 use App\Http\Controllers\Library\TeacherController as LibraryTeacherController;
 use App\Http\Controllers\OnlineApplicationController;
+use App\Http\Controllers\Teacher\AllocationController as TeacherAllocationController;
+use App\Http\Controllers\Teacher\CombinedTestController;
+use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
+use App\Http\Controllers\Teacher\ImportStudentController;
+use App\Http\Controllers\Teacher\TestAllocationController;
+use App\Http\Controllers\Teacher\TestAllocationResultController;
+use App\Http\Controllers\Teacher\TestController;
+use App\Http\Controllers\Teacher\TestSectionController;
+use App\Http\Controllers\Teacher\TestSectionStudentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,6 +77,13 @@ Route::view('gallary', 'gallary');
 Route::resource('applications', AdmissionApplicationController::class);
 
 Route::view('login', 'login');
+Route::get('switch/as/{role}', [UserController::class, 'switchAs']);
+
+Route::view('signup/me', 'signup');
+Route::view('signup/success', 'signup-success');
+
+Route::view('forgot', 'forgot');
+Route::post('forgot', [AuthController::class, 'forgot']);
 
 Route::post('login', [AuthController::class, 'login']);
 Route::view('login/admin', 'login.admin');
@@ -86,24 +103,36 @@ Route::get('signout', [AuthController::class, 'signout'])->name('signout');
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:admin']], function () {
     Route::get('/', [AdminDashboardController::class, 'index']);
     Route::resource('grades', GradeController::class)->only('index');
+    Route::resource('subjects', SubjectController::class);
     Route::resource('sections', AdminSectionController::class);
+    Route::resource('grade.sections', AdminSectionController::class);
+
+    Route::resource('section.lecture.allocations', AllocationController::class);
+
     Route::post('sections/{section}/clean', [AdminSectionController::class, 'clean'])->name('sections.clean');
     Route::resource('section.students', SectionStuedentsController::class);
     Route::resource('section.cards', SectionCardController::class);
     Route::get('section/student-cards/print', [SectionCardController::class, 'print'])->name('section.cards.print');
 
+
+
     Route::get('students/import/{section}', [SectionStuedentsController::class, 'import']);
     Route::post('students/import', [SectionStuedentsController::class, 'postImport']);
 
     Route::resource('teachers', TeacherController::class);
-    Route::get('more/teachers/import', [TeacherController::class, 'import'])->name('teachers.import');
-    Route::post('more/teachers/import', [TeacherController::class, 'postImport'])->name('teachers.import.post');
+    Route::get('more/teachers/import', [TeacherController::class, 'import'])->name('users.import');
+    Route::post('more/teachers/import', [TeacherController::class, 'postImport'])->name('users.import.post');
 
     Route::view('change/password', 'admin.change_password');
     Route::post('change/password', [AuthController::class, 'changePassword'])->name('change.password');
 
     Route::resource('groups', GroupController::class);
     Route::resource('users', UserController::class);
+    Route::resource('tests', CollectiveTestController::class);
+
+    Route::resource('test.sections', AdminTestSectionController::class);
+
+    Route::resource('test.section.results', SectionResultController::class);
 });
 
 Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {
@@ -132,7 +161,7 @@ Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['r
 });
 
 Route::group(
-    ['prefix' => 'library', 'as' => 'library.', 'middleware' => ['role:library']],
+    ['prefix' => 'library', 'as' => 'library.', 'middleware' => ['role:librarian']],
     function () {
         Route::get('/', [LibraryDashboardController::class, 'index']);
         Route::resource('books', BookController::class);
@@ -166,3 +195,11 @@ Route::group(
         Route::patch('book-return/confirm/{book_issuance}', [BookReturnController::class, 'postConfirm'])->name('book-return.confirm.post');
     }
 );
+
+Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['role:teacher']], function () {
+    Route::get('/', [TeacherDashboardController::class, 'index']);
+    Route::resource('tests', TestController::class);
+    Route::resource('test.test-allocations', TestAllocationController::class);
+    Route::resource('test-allocation.results', TestAllocationResultController::class);
+    Route::resource('test-allocation.import-students', ImportStudentController::class);
+});

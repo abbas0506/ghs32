@@ -57,7 +57,7 @@ class BookIssuanceController extends Controller
             $book_id = (int)$book_ref_parts[1];
             $copy_no = $book_ref_parts[2];
 
-            $book = Book::find($book_id);
+            $book = Book::findOrFail($book_id);
 
             if ($book) {
                 //check forgery in each fragment of book ref
@@ -73,7 +73,7 @@ class BookIssuanceController extends Controller
                         $readerType = 'App\Models\Student';
                         return view('library.book-issuance.confirm', compact('book', 'copy_no', 'reader', 'readerType'));
                     } else {
-                        $reader = Teacher::where('cnic', session('user_cnic'))->first();
+                        $reader = Profile::where('cnic', session('user_cnic'))->first();
                         if ($reader) {
                             $readerType = 'App\Models\Teacher';
                             return view('library.book-issuance.confirm', compact('book', 'copy_no', 'reader', 'readerType'));
@@ -105,7 +105,7 @@ class BookIssuanceController extends Controller
             'user_type' => 'required',
         ]);
         //
-        $user = User::find($request->user_id);
+        $user = User::findOrFail($request->user_id);
         $libraryRule = LibraryRule::where('user_type', $request->user_type)->first();
         $request->merge([
             'due_date' => Carbon::now()->addDays($libraryRule->max_days)->format('Y/m/d'),

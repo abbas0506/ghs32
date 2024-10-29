@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\Profile;
 use App\Models\Teacher;
 use App\Models\User;
 use Carbon\Carbon;
@@ -19,7 +20,7 @@ class TeacherImport implements ToCollection, WithHeadingRow
     {
         foreach ($rows as $row) {
 
-            $teacher = Teacher::create([
+            $teacher = Profile::create([
                 'name' => $row['name'],
                 'designation' => $row['designation'],
                 'bps' => $row['bps'],
@@ -30,7 +31,7 @@ class TeacherImport implements ToCollection, WithHeadingRow
 
             ]);
             $user = User::create([
-                'login_id' => $teacher->cnic,
+                'email' => $teacher->cnic,
                 'password' => Hash::make('password'),
                 'userable_id' => $teacher->id,
                 'userable_type' => 'App\Models\Teacher',

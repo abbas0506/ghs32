@@ -24,7 +24,7 @@ class PrintController extends Controller
     // Simple lists of teachers
     public function printTeachersList()
     {
-        $teachers = Teacher::all();
+        $teachers = Profile::all();
         $pdf = PDF::loadview('library.print.teachers.list', compact('teachers'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = "teachers.pdf";
@@ -35,7 +35,7 @@ class PrintController extends Controller
     // Simple lists of Rack Books
     public function printRackBooksList($id)
     {
-        $rack = Rack::find($id);
+        $rack = Rack::findOrFail($id);
         $pdf = PDF::loadview('library.print.rack-books.list', compact('rack'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = "teachers.pdf";
@@ -54,7 +54,7 @@ class PrintController extends Controller
         try {
             $from = $request->from;
             $to = $request->to;
-            $teachers = Teacher::whereBetween('cnic', [$from, $to])->get();
+            $teachers = Profile::whereBetween('cnic', [$from, $to])->get();
 
             $pdf = PDF::loadview('library.print.teachers.qr', compact('teachers'))->setPaper('a4', 'portrait');
             $pdf->set_option("isPhpEnabled", true);
@@ -75,7 +75,7 @@ class PrintController extends Controller
             'to' => 'required',
         ]);
         try {
-            $rack = Rack::find($id);
+            $rack = Rack::findOrFail($id);
             $from = $request->from;
             $to = $request->to;
             $books = $rack->books->whereBetween('id', [$from, $to]);

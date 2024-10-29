@@ -16,12 +16,14 @@ return new class extends Migration
             $table->string('name', 20);
             $table->unsignedBigInteger('grade_id');  //
             $table->unsignedBigInteger('incharge_id')->nullable();
-            $table->year('induction_year');
+            $table->date('starts_at');
+            $table->date('ends_at'); //will pass out
+
             $table->timestamps();
 
-            $table->unique(['name', 'grade_id', 'induction_year']); //disallow same section name within a class
+            // $table->unique(['name', 'grade_id', 'starts_at']); //disallow same section name within a class
             $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
-            $table->foreign('incharge_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->foreign('incharge_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
