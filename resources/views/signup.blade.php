@@ -2,15 +2,15 @@
 @section('title', 'Signup')
 @section('body')
 
-<div class="grid grid-cols-1 md:grid-cols-2 md:h-screen place-items-center bg-white p-5">
+<div class="grid grid-cols-1 md:h-screen place-items-center bg-white p-5">
 
-    <div><img src="{{ url('images/small/key.png') }}" alt="key" class=""></div>
+    <div><img src="{{ url('images/small/key.png') }}" alt="key" class="w-32"></div>
     <div class="grid place-items-center w-full md:w-1/2 mx-auto">
 
-        <h2 class="text-4xl font-bold">NEW USER</h2>
-        <label for="">https://www.exampixel.com</label>
+        <h2 class="text-4xl font-bold">SIGN UP</h2>
+        <label for="">https://www.ghsscb.edu.pk</label>
 
-        <form action="{{ url('signup') }}" method="post" class="w-full mt-8">
+        <form action="{{route('signup.store') }}" method="post" class="w-full mt-6">
             @csrf
 
             <!-- page message -->
@@ -20,23 +20,49 @@
             <x-message></x-message>
             @endif
 
-
-            <div class="grid gap-2">
-                <div class="flex items-center w-full relative">
-                    <i class="bi bi-person absolute left-2 text-slate-600"></i>
-                    <input type="text" id="name" name="name" class="w-full custom-input px-8"
-                        placeholder="Your name">
-                </div>
-                <div class="flex items-center w-full relative">
-                    <i class="bi bi-at absolute left-2 text-slate-600"></i>
-                    <input type="text" id="email" name="email" class="w-full custom-input px-8"
-                        placeholder="Email address">
+            <div class="grid md:grid-cols-2 gap-2 mt-3">
+                <div class="col-span-full">
+                    <label for="">Your Name</label>
+                    <div class="flex items-center w-full relative">
+                        <i class="bi bi-person absolute left-2 text-slate-600"></i>
+                        <input type="text" id="name" name="name" class="w-full custom-input px-8"
+                            placeholder="Your name">
+                    </div>
                 </div>
                 <div>
-                    <label for="" class="text-red-600">Leave empty if you are human*</label>
-                    <input type="text" name="suspicious" class="custom-input">
+                    <label for="">Email</label>
+                    <div class="flex items-center w-full relative">
+                        <i class="bi bi-at absolute left-2 text-slate-600"></i>
+                        <input type="text" id="email" name="email" class="w-full custom-input px-8"
+                            placeholder="Email address">
+                    </div>
                 </div>
-                <button type="submit" class="w-full mt-6 btn-teal p-2">Sign Up</button>
+                <div>
+                    <label for="">CNIC (without dashes)</label>
+                    <div class="flex items-center w-full relative">
+                        <i class="bi bi-person-vcard absolute left-2 text-slate-600"></i>
+                        <input type="text" id="cnic" name="cnic" class="w-full custom-input px-8"
+                            placeholder="Without dashes">
+                    </div>
+                </div>
+                <div>
+                    <label for="">Designation</label>
+                    <div class="flex items-center w-full relative">
+                        <i class="bi bi-layers absolute left-2 text-slate-600"></i>
+                        <input type="text" id="bps" name="designation" class="w-full custom-input px-8"
+                            placeholder="e.g SS, SST, EST">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="" class="text-red-600">What is the answer of {{$numA}}+{{$numB}}=?</label>
+                    <input type="text" name="secret_code" class="custom-input">
+                </div>
+                <input type="hidden" name="num_a" value="{{ $numA }}">
+                <input type="hidden" name="num_b" value="{{ $numB }}">
+            </div>
+            <div class="mt-8 text-center">
+                <button type="submit" class="btn-teal rounded px-4 p-2">Sign Up Now</button>
             </div>
 
         </form>

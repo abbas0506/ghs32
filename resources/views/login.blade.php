@@ -6,20 +6,23 @@
     </div>
     <div class="text-center w-full md:w-1/2 mx-auto">
         <!-- page message -->
-        @if($errors->any())
-        <x-message :errors='$errors'></x-message>
-        @else
-        <x-message></x-message>
-        @endif
 
         <form action="{{url('login')}}" method="post" class="grid gap-4">
             @csrf
+
 
             <div>
                 <h2 class="text-4xl font-bold">WELCOME</h2>
                 <label for="">https://wwww.ghsscb.edu.pk</label>
             </div>
 
+            <div class="text-left">
+                @if($errors->any())
+                <x-message :errors='$errors'></x-message>
+                @else
+                <x-message></x-message>
+                @endif
+            </div>
             <div class="relative">
                 <i class="bi bi-at absolute left-2 top-3 text-slate-600"></i>
                 <input type="text" id="email" name="email" class="w-full custom-input px-8" placeholder="Email address">
@@ -42,7 +45,7 @@
         </div>
         <!-- </div> -->
         <div class="text-center text-xs">
-            Dont have an account?<a href="{{ url('signup/me') }}" class="font-bold ml-2 link">Signup</a>
+            Dont have an account?<a href="{{ route('signup.create') }}" class="font-bold ml-2 link">Signup</a>
         </div>
     </div>
 </div>

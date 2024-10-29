@@ -38,6 +38,7 @@ use App\Http\Controllers\Library\PrintController;
 use App\Http\Controllers\Library\RackBooksController;
 use App\Http\Controllers\Library\TeacherController as LibraryTeacherController;
 use App\Http\Controllers\OnlineApplicationController;
+use App\Http\Controllers\SignupController;
 use App\Http\Controllers\Teacher\AllocationController as TeacherAllocationController;
 use App\Http\Controllers\Teacher\CombinedTestController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
@@ -79,8 +80,8 @@ Route::resource('applications', AdmissionApplicationController::class);
 Route::view('login', 'login');
 Route::get('switch/as/{role}', [UserController::class, 'switchAs']);
 
-Route::view('signup/me', 'signup');
-Route::view('signup/success', 'signup-success');
+Route::resource('signup', SignupController::class);
+Route::view('signup-success', 'signup-success');
 
 Route::view('forgot', 'forgot');
 Route::post('forgot', [AuthController::class, 'forgot']);

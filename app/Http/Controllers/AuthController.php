@@ -15,59 +15,7 @@ use Illuminate\Support\Facades\DB;
 class AuthController extends Controller
 {
     //
-    public function signup(Request $request)
-    {
-        //signup  process
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'suspicious' => 'nullable',
-        ]);
-
-
-        DB::beginTransaction();
-        try {
-
-            $code = Str::random(5);
-
-            if (!empty($request->suspicious))
-                return redirect()->back()->with('warning', 'Registeration rejected!');
-            else {
-                $user = User::create([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => Hash::make($code),
-                ]);
-
-                $user->assignRole('user');
-
-                $user->sales()->create([
-                    'coins' => 500,
-                    'price' => 0,
-                    'expiry_at' => now()->addDays(365),
-                    'remarks' => 'Sign up bonus',
-
-                ]);
-
-                // send password to given email for verification
-                $email = $request->email;
-                Mail::raw('Password sent by exampixel.com : ' . $code, function ($message) use ($code, $email) {
-                    $message->to($email);
-                    $message->subject('Signup on exampixel');
-                });
-            }
-
-
-
-            DB::commit();
-
-            // go to related dashboard
-            return redirect('signup/success');
-        } catch (Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors($e->getMessage());
-        }
-    }
+    public function signup(Request $request) {}
 
     public function  viewLogin()
     {
