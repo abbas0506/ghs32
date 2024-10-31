@@ -1,66 +1,61 @@
 @extends('layouts.admin')
-@section('page-content')
 
-<div class="custom-container">
-    <h2>Reset Password</h2>
+@section('page-content')
+<div class="container">
     <div class="bread-crumb">
-        <a href="/">Dashboard</a>
-        <div>/</div>
-        <a href="{{ route('admin.users.index') }}">Users</a>
-        <div>/</div>
-        <div>Reset Password</div>
+        <a href="{{url('admin')}}">Home</a>
+        <i class="bx bx-chevron-right"></i>
+        <a href="{{route('admin.users.index')}}">Users</a>
+        <i class="bx bx-chevron-right"></i>
+        <div>Edit</div>
     </div>
 
-    <div class="content-section relative mt-8">
-
-        <!-- close button  -->
-        <a href="{{route('admin.users.index')}}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
-
-        <form action="{{route('admin.users.update', $user)}}" method="post" class="flex flex-col md:w-2/3 mx-auto mt-12" onsubmit="return validate(event)">
+    <!-- page message -->
+    @if($errors->any())
+    <x-message :errors='$errors'></x-message>
+    @else
+    <x-message></x-message>
+    @endif
+    <div class="container-light">
+        <form action="{{route('admin.users.update',$user)}}" method='post' class="">
             @csrf
             @method('PATCH')
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <h2 class="md:col-span-2 text-green-600">Edit User <i class="bi-person-check"></i></h2>
+                <div class="md:col-span-2">
+                    <label for="">User Name</label>
+                    <input type="text" id='' name='name' class="custom-input-borderless" placeholder="User name" value="{{$user->profile?->name}}">
+                </div>
 
-            <h2>User: {{ $user->email }}</h2>
+                <div>
+                    <label for="">Email</label>
+                    <input type="text" id='' name='email' class="custom-input-borderless" placeholder="User email" value="{{$user->email}}">
+                </div>
+                <!-- <div>
+                    <label for="">Status</label>
+                    <select name="is_active" id="" class="custom-input-borderless py-1">
+                        <option value="1" @selected($user->is_active) >Enabled</option>
+                        <option value="0" @selected(!$user->is_active)>Disabled</option>
+                    </select>
+                </div> -->
 
-            <!-- page message -->
-            @if($errors->any())
-            <x-message :errors='$errors'></x-message>
-            @else
-            <x-message></x-message>
-            @endif
+                <h2 class="md:col-span-2">Role(s)</h2>
+                <div class="grid gap-2">
+                    @foreach($roles as $role)
+                    <div class="flex item checkable-row">
+                        <label for="role{{$role->id}}" class="text-base hover:cursor-pointer text-slate-800 text-left py-1 flex-1">{{ ucfirst($role->name) }}</label>
+                        <input type="checkbox" id='role{{$role->id}}' name='role_names_array[]' class="custom-input w-4 h-4 rounded" value="{{ $role->name }}" @checked($user->hasRole($role->name))>
+                        <i class="bx bx-check"></i>
+                    </div>
+                    @endforeach
+                </div>
 
-            <label for="" class="mt-6">Password</label>
-            <input type="password" id="new" name="new" class="w-full custom-input" placeholder="------" required>
-
-            <label for="" class="mt-3">Confirm Password</label>
-            <input type="password" id="confirmpw" class="w-full custom-input" placeholder="------" required>
-
-            <button type="submit" class="mt-6 btn-teal p-2 w-32">Update Now</button>
-
+                <div class="md:col-span-2 text-right">
+                    <button type="submit" class="btn-green rounded">Update</button>
+                </div>
+            </div>
         </form>
     </div>
-
 </div>
-@endsection
-@section('script')
-<script lang="javascript">
-    function validate(event) {
-        var validated = true;
-        if ($('#new').val() != $('#confirmpw').val()) {
-            validated = false;
-            event.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Confirm password not matched',
-                showConfirmButton: false,
-                timer: 1500,
-            })
-
-        }
-
-        return validated;
-        // return false;
-
-    }
-</script>
+</div>
 @endsection
