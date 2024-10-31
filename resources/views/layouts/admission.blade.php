@@ -10,7 +10,7 @@
 
 @section('body')
 
-<div class="responsive-body">
+<div class="responsive-container">
     @yield('page-content')
 </div>
 

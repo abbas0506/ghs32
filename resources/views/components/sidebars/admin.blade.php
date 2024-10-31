@@ -1,6 +1,9 @@
 <aside aria-label="Sidebar" id='sidebar'>
-    <div class="mt-24 font-bold text-center text-orange-300 uppercase tracking-wider">Admin Panel</div>
-    <label class="text-xs text-center">GHSS Chak Bedi, Pakpattan</label>
+    <div class="flex justify-center items-center h-24 mt-6">
+        <img src="{{asset('images/logo/app_logo_transparent.png')}}" alt="logo" class="w-20">
+    </div>
+    <div class="mt-8 font-bold text-center text-orange-300 uppercase tracking-wider">Teacher Panel</div>
+    <label class="text-xs text-center text-teal-600">GHSS Chak Bedi, Pakpattan</label>
 
     @if(Auth::user()->roles->count()>1)
     <div class="grid gap-2 mt-4 text">
@@ -11,6 +14,7 @@
         @endforeach
     </div>
     @endif
+
 
     <div class="mt-12">
 
