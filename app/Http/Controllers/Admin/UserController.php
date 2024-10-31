@@ -20,7 +20,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users = User::where('id', '<=', 3)->get();
+        $users = User::where('id')->get();
         return view('admin.users.index', compact('users'));
     }
 
