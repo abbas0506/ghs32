@@ -1,5 +1,5 @@
 <header class="sticky-header" id='header'>
-    <div class="flex flex-wrap w-full h-16 items-center justify-between shadow-sm">
+    <div class="flex flex-wrap w-full h-16 items-center justify-between shadow-sm bg-white">
 
         <div class="flex items-center">
             <a href="{{url('/')}}" class="flex justify-center">
