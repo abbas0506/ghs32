@@ -56,4 +56,11 @@ class TestAllocation extends Model
             $query->where('is_open', true);
         });
     }
+    public function hasBeenSubmitted()
+    {
+        if ($this->result_date != null)
+            return true;
+        else
+            return false;
+    }
 }
