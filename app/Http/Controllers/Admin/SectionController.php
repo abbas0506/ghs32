@@ -19,20 +19,12 @@ class SectionController extends Controller
         //
         $grades = Grade::where('id', '>', 8)->get();
         return view('admin.grades.index', compact('grades'));
-        //     $sections = Section::query()->active()->get();
-        //     return view('admin.sections.index', compact('sections'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
-    {
-        //
-        $grade = Grade::findOrFail($id);
-        $users = User::whereRelation('roles', 'name', 'teacher')->get();
-        return view('admin.sections.create', compact('grade', 'users'));
-    }
+    public function create($id) {}
 
     /**
      * Store a newly created resource in storage.
@@ -41,25 +33,6 @@ class SectionController extends Controller
     {
         //
 
-        $request->validate([
-            'name' => 'required',
-            'starts_at' => 'required|date',
-            'incharge_id' => 'nullable|numeric',
-        ]);
-
-        $request->merge([
-            'ends_at' => Carbon::parse($request->starts_at)->addYears(2),
-        ]);
-        $grade = Grade::findOrFail($id);
-
-        try {
-            $grade->sections()->create($request->all());
-            // Section::create($request->all());
-            return redirect()->route('admin.grades.index')->with('success', 'Successfully created');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors($e->getMessage());
-            // something went wrong
-        }
     }
 
     /**
@@ -75,13 +48,7 @@ class SectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        $grades = Grade::where('id', '>', 5)->get();
-        $teachers = Profile::all();
-        $section = Section::findOrFail($id);
-        return view('admin.sections.edit', compact('section', 'grades', 'teachers'));
-    }
+    public function edit(string $id) {}
 
     /**
      * Update the specified resource in storage.
@@ -89,20 +56,7 @@ class SectionController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $request->validate([
-            'grade_id' => 'required|numeric',
-            'name' => 'required',
-            'starts_at' => 'required|numeric',
-            'incharge_id' => 'nullable|numeric',
-        ]);
 
-        $model = Section::findOrFail($id);
-        try {
-            $model->update($request->all());
-            return redirect()->route('admin.sections.index')->with('success', 'Successfully updated');
-        } catch (Exception $ex) {
-            return redirect()->back()->withErrors($ex->getMessage());
-        }
     }
     /**
      * Remove the specified resource from storage.

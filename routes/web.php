@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\CollectiveTestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GradeController;
+use App\Http\Controllers\Admin\GradeSectionController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\SectionCardController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
@@ -103,11 +104,10 @@ Route::get('signout', [AuthController::class, 'signout'])->name('signout');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:admin']], function () {
     Route::get('/', [AdminDashboardController::class, 'index']);
-    Route::resource('grades', GradeController::class)->only('index');
+    Route::resource('groups', GroupController::class);
     Route::resource('subjects', SubjectController::class);
     Route::resource('sections', AdminSectionController::class);
-    Route::resource('grade.sections', AdminSectionController::class);
-
+    Route::resource('grade.sections', GradeSectionController::class);
     Route::resource('section.lecture.allocations', AllocationController::class);
 
     Route::post('sections/{section}/clean', [AdminSectionController::class, 'clean'])->name('sections.clean');
@@ -115,24 +115,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:admi
     Route::resource('section.cards', SectionCardController::class);
     Route::get('section/student-cards/print', [SectionCardController::class, 'print'])->name('section.cards.print');
 
-
-
     Route::get('students/import/{section}', [SectionStuedentsController::class, 'import']);
     Route::post('students/import', [SectionStuedentsController::class, 'postImport']);
-
-    Route::resource('teachers', TeacherController::class);
-    Route::get('more/teachers/import', [TeacherController::class, 'import'])->name('users.import');
-    Route::post('more/teachers/import', [TeacherController::class, 'postImport'])->name('users.import.post');
 
     Route::view('change/password', 'admin.change_password');
     Route::post('change/password', [AuthController::class, 'changePassword'])->name('change.password');
 
-    Route::resource('groups', GroupController::class);
     Route::resource('users', UserController::class);
     Route::resource('tests', CollectiveTestController::class);
-
     Route::resource('test.sections', AdminTestSectionController::class);
-
     Route::resource('test.section.results', SectionResultController::class);
 });
 

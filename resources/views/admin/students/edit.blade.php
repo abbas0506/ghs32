@@ -28,23 +28,27 @@
                 <form action="{{route('admin.section.students.update', [$section, $student])}}" method='post' class="mt-4" onsubmit="return validate(event)">
                     @csrf
                     @method('PATCH')
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="sm:col-span-2">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
                             <label>Name *</label>
-                            <input type="text" name='name' class="custom-input" placeholder="Type here" value="{{$student->name}}">
+                            <input type="text" name='name' class="custom-input" placeholder="Type here" value="{{ $student->name }}">
+                        </div>
+                        <div>
+                            <label>Father</label>
+                            <input type="text" name='father' class="custom-input" placeholder="Type here" value="{{ $student->father }}">
                         </div>
                         <div class="">
-                            <label>CNIC *</label>
-                            <input type="text" name='cnic' class="custom-input" placeholder="Type here" value="{{$student->bform}}">
+                            <label>Bform *</label>
+                            <input type="text" name='bform' class="custom-input" placeholder="Type here" value="{{ $student->bform }}">
                         </div>
                         <div class="">
                             <label>Roll No *</label>
-                            <input type="text" name='rollno' class="custom-input" placeholder="Type here" value="{{$student->rollno}}">
+                            <input type="text" name='rollno' class="custom-input" placeholder="Type here" value="{{ $student->rollno }}">
                         </div>
-
-                        <div class="text-right mt-4 col-span-2">
-                            <button type="submit" class="btn-teal rounded p-2">Update Now</button>
-                        </div>
+                    </div>
+                    <div class="text-right mt-8">
+                        <button type="submit" class="btn-teal rounded p-2">Update Now</button>
+                    </div>
                 </form>
 
             </div>

@@ -26,7 +26,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.grades.index')}}" class="flex items-center p-2">
+                <a href="{{route('admin.sections.index')}}" class="flex items-center p-2">
                     <i class="bi-activity"></i>
                     <span class="ml-3">Classes</span>
                 </a>

@@ -85,7 +85,7 @@ class SectionStuedentsController extends Controller
         //
         $request->validate([
             'name' => 'required',
-            'cnic' => 'required',
+            'bform' => 'required',
             'rollno' => 'required',
         ]);
 

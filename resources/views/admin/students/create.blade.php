@@ -17,7 +17,7 @@
             <!-- close button -->
             <a href="{{ route('admin.section.students.index', $section) }}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
 
-            <div class="w-full md:w-3/4 mx-auto mt-8">
+            <div class="w-full md:w-2/3 mx-auto mt-8">
                 <!-- page message -->
                 @if($errors->any())
                 <x-message :errors='$errors'></x-message>
@@ -27,10 +27,14 @@
 
                 <form action="{{route('admin.section.students.store', $section)}}" method='post' class="mt-4" onsubmit="return validate(event)">
                     @csrf
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="sm:col-span-2">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
                             <label>Name *</label>
                             <input type="text" name='name' class="custom-input" placeholder="Type here">
+                        </div>
+                        <div>
+                            <label>Father</label>
+                            <input type="text" name='father' class="custom-input" placeholder="Type here">
                         </div>
                         <div class="">
                             <label>CNIC *</label>
@@ -40,10 +44,10 @@
                             <label>Roll No *</label>
                             <input type="text" name='rollno' class="custom-input" placeholder="Type here">
                         </div>
-
-                        <div class="text-right mt-4 col-span-2">
-                            <button type="submit" class="btn-teal rounded p-2">Update Now</button>
-                        </div>
+                    </div>
+                    <div class="text-right mt-8">
+                        <button type="submit" class="btn-teal rounded p-2">Create Now</button>
+                    </div>
                 </form>
 
             </div>

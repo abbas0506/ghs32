@@ -49,6 +49,7 @@
                 <tr>
                     <th class="w-10">Roll No</th>
                     <th class="w-40 text-left">Name</th>
+                    <th class="w-40 text-left">Father</th>
                     <th class="w-24">BForm</th>
                     <th class="w-24">Actions</th>
                 </tr>
@@ -58,6 +59,7 @@
                 <tr class="tr">
                     <td>{{$student->rollno}}</td>
                     <td class="text-left"><a href="{{route('admin.section.students.show', [$section, $student])}}" class="link">{{$student->name}}</a></td>
+                    <td class="text-left">{{$student->father}}</td>
                     <td>{{$student->bform}}</td>
                     <td>
                         <div class="flex items-center justify-center">
