@@ -21,14 +21,20 @@
             <form action="{{route('admin.subjects.update',$subject)}}" method='post' class="w-full" onsubmit="return validate(event)">
                 @csrf
                 @method('PATCH')
-                <div>
-                    <label>Full Name</label>
-                    <input type="text" name='name' class="custom-input" placeholder="Subject name" value="{{$subject->name}}">
+                <div class="grid gap-4">
+                    <div class="w-1/2">
+                        <label>Short Name</label>
+                        <input type="text" name='short_name' class="custom-input" placeholder="Short name" value="{{$subject->short_name}}">
+                    </div>
+                    <div>
+                        <label>Full Name</label>
+                        <input type="text" name='name' class="custom-input" placeholder="Full name" value="{{$subject->name}}">
+                    </div>
+                    <div>
+                        <button type="submmit" class="btn-teal rounded p-2 w-32">Update Now</button>
+                    </div>
                 </div>
-
-                <button type="submmit" class="btn-teal rounded p-2 w-32 mt-3">Create Now</button>
             </form>
-
         </div>
     </div>
     @endsection

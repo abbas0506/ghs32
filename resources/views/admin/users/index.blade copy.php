@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('body')
+@section('page')
 
 <div class="custom-container">
     <h1>Users</h1>

@@ -51,7 +51,7 @@
             <tr>
                 <td class="font-semibold">{{ $section->roman()}}</td>
                 @foreach(range(0,8) as $lecture_no)
-                <td class="p-0">
+                <td class="p-1">
                     @foreach($section->allocations()->havingLectureNo($lecture_no)->get() as $allocation)
                     <div class="text-sm bg-teal-50">
                         <a href="{{ route('admin.section.lecture.allocations.edit', [$section, $lecture_no, $allocation]) }}" class="link">{{ $allocation->subject->short_name }}</a>

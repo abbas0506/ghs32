@@ -20,12 +20,20 @@
             @endif
             <form action="{{route('admin.subjects.store')}}" method='post' class="w-full grid gap-6" onsubmit="return validate(event)">
                 @csrf
-                <div>
-                    <label>Full Name</label>
-                    <input type="text" name='name' class="custom-input" placeholder="Subject name" value="">
+                <div class="grid gap-4">
+                    <div class="w-1/2">
+                        <label>Short Name</label>
+                        <input type="text" name='short_name' class="custom-input" placeholder="Short name" value="">
+                    </div>
+                    <div>
+                        <label>Full Name</label>
+                        <input type="text" name='name' class="custom-input" placeholder="Full name" value="">
+                    </div>
+                    <div>
+                        <button type="submmit" class="btn-teal rounded p-2 w-32">Create Now</button>
+                    </div>
                 </div>
 
-                <button type="submmit" class="btn-teal rounded p-2 w-32 mt-3">Create Now</button>
             </form>
 
         </div>

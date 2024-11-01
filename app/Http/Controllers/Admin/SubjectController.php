@@ -36,6 +36,7 @@ class SubjectController extends Controller
         //
         $request->validate([
             'name' => 'required',
+            'short_name' => 'required',
         ]);
 
         try {
@@ -74,6 +75,7 @@ class SubjectController extends Controller
         //
         $request->validate([
             'name' => 'required',
+            'short_name' => 'required',
         ]);
 
         $model = Subject::findOrFail($id);

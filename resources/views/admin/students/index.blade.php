@@ -26,6 +26,11 @@
                 @csrf
                 <button class="btn-red rounded p-2"><i class="bx bx-recycle text-base"></i></button>
             </form>
+            <form action="{{ route('admin.sections.destroy', $section) }}" method="post" onsubmit="return confirmDel(event)">
+                @csrf
+                @method('delete')
+                <button class="btn-red rounded p-2"><i class="bx bx-trash text-base"></i></button>
+            </form>
         </div>
 
     </div>

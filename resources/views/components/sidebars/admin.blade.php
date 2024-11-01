@@ -33,27 +33,8 @@
             </li>
             <li>
                 <a href="{{route('admin.subjects.index')}}" class="flex items-center p-2">
-                    <i class="bi-activity"></i>
+                    <i class="bi-book"></i>
                     <span class="ml-3">Subjects</span>
-                </a>
-            </li>
-
-            <!-- <li>
-                <a href="{{route('admin.sections.index')}}" class="flex items-center p-2">
-                    <i class="bi-people"></i>
-                    <span class="ml-3">Sections</span>
-                </a>
-            </li> -->
-            <li>
-                <a href="{{route('admin.teachers.index')}}" class="flex items-center p-2">
-                    <i class="bi-person"></i>
-                    <span class="ml-3">Teachers</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{route('admin.section.lecture.allocations.index',[0,0])}}" class="flex items-center p-2">
-                    <i class="bi-person"></i>
-                    <span class="ml-3">Allocations</span>
                 </a>
             </li>
             <li>
@@ -63,8 +44,14 @@
                 </a>
             </li>
             <li>
+                <a href="{{route('admin.section.lecture.allocations.index',[0,0])}}" class="flex items-center p-2">
+                    <i class="bi-clock"></i>
+                    <span class="ml-3">Time Table</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.tests.index') }}" class="flex items-center p-2">
-                    <i class="bi bi-person-gear"></i>
+                    <i class="bi bi-clipboard-check"></i>
                     <span class="ml-3">Tests</span>
                 </a>
             </li>

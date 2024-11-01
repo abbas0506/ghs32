@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Grade;
+use App\Models\Profile;
 use App\Models\Section;
 use App\Models\Teacher;
 use App\Models\User;
@@ -112,7 +113,7 @@ class SectionController extends Controller
         $model = Section::findOrFail($id);
         try {
             $model->delete();
-            return redirect()->back()->with('success', 'Successfully deleted');
+            return redirect()->route('admin.sections.index')->with('success', 'Successfully deleted');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
