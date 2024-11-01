@@ -32,7 +32,7 @@
     @csrf
     @method('patch')
     <div class="flex flex-wrap items-center gap-x-16 gap-y-3 mt-8">
-        <h2 class="text-teal-600">RESULT</h2>
+        <h2 class="text-teal-600">{{ $testAllocation->allocation->subject->name }}, {{ $testAllocation->allocation->section->roman() }}</h2>
         <div class="flex space-x-3 items-center">
             <h3 class="text-red-600">Total Marks *</h3>
             <input type="number" name="total_marks" value="50" class="custom-input-borderless w-16 h-8 text-center px-0" min='0' max='100'>

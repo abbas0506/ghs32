@@ -28,7 +28,7 @@
 <div class="flex flex-wrap justify-between gap-3 items-center mt-8">
     <div>
         <h2 class="text-teal-600">{{ $testAllocation->test->title }}</h2>
-        <p>{{ $testAllocation->allocation->subject->name }} - {{ $testAllocation->allocation->section->grade->grade_no }}</p>
+        <p class="text-teal-600">{{ $testAllocation->allocation->subject->name }} , {{ $testAllocation->allocation->section->roman() }}</p>
     </div>
 
     <div class="flex items-center gap-3">
