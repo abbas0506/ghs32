@@ -55,7 +55,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($section->students as $student)
+                @foreach($section->students->sortBy('rollno') as $student)
                 <tr class="tr">
                     <td>{{$student->rollno}}</td>
                     <td class="text-left"><a href="{{route('admin.section.students.show', [$section, $student])}}" class="link">{{$student->name}}</a></td>
