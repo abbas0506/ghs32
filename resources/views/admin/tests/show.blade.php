@@ -28,7 +28,7 @@
         </thead>
         <tbody>
 
-            @foreach($test->testAllocations->sortBy('test.section_id') as $testAllocation)
+            @foreach($test->testAllocations->sortBy('test.section_id')->sortBy('result_date') as $testAllocation)
             <tr class="tr">
                 <td>{{ $loop->index+1 }}</td>
                 <td>{{ $testAllocation->allocation->section->roman() }}</td>
