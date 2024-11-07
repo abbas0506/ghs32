@@ -15,7 +15,7 @@
 <div class="content-section  mt-8">
     <div class="flex items-center justify-between">
         <h2>Result Submission @if($test->testAllocations()->resultSubmitted()->today()->count()) <span class="text-teal-600 font-normal ml-8"> <i class="bi-arrow-up"></i>{{ $test->testAllocations()->resultSubmitted()->today()->count() }} @endif</span></h2>
-        <div class="flex justify-center items-center w-12 h-12 rounded-full bg-teal-100 text-teal-600">{{ round($test->testAllocations()->resultSubmitted()->count()/$test->testAllocations->count(),0) }}%</div>
+        <div class="flex justify-center items-center w-12 h-12 rounded-full bg-teal-100 text-teal-600">{{ round($test->testAllocations()->resultSubmitted()->count()/$test->testAllocations->count()*100,0) }}%</div>
 
     </div>
     <div class="overflow-auto">
