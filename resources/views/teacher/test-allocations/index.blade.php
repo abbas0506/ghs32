@@ -58,7 +58,7 @@ $colors=config('globals.colors');
                         <i class="bi-question text-slate-600"></i>
                         @endif
                     </td>
-                    <td><a href="#"><i class="bi-printer"></i></a></td>
+                    <td><a href="{{ route('teacher.test-allocation.result.print', $testAllocation) }}"><i class="bi-printer"></i></a></td>
                 </tr>
                 @endforeach
             </tbody>

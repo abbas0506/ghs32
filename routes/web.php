@@ -194,4 +194,5 @@ Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['role:
     Route::resource('test.test-allocations', TestAllocationController::class);
     Route::resource('test-allocation.results', TestAllocationResultController::class);
     Route::resource('test-allocation.import-students', ImportStudentController::class);
+    Route::get('test-allocation/{id}/result/print', [TestAllocationResultController::class, 'printResult'])->name('test-allocation.result.print');
 });

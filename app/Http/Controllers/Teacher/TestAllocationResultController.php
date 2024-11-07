@@ -10,8 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Models\Result;
 use Illuminate\Support\Facades\DB;
-
-use function PHPUnit\Framework\isEmpty;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class TestAllocationResultController extends Controller
 {
@@ -121,5 +120,14 @@ class TestAllocationResultController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
+    }
+
+    public function printResult($id)
+    {
+        $testAllocation = TestAllocation::findOrFail($id);
+        $pdf = PDF::loadview('teacher.pdf.subject-result', compact('testAllocation'))->setPaper('a4', 'portrait');
+        $pdf->set_option("isPhpEnabled", true);
+        $file = "subject result.pdf";
+        return $pdf->stream($file);
     }
 }

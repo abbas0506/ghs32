@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admission;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\Section;
+use App\Models\TestAllocation;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
