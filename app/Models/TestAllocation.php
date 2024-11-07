@@ -46,6 +46,10 @@ class TestAllocation extends Model
     {
         return $query->whereNotNull('result_date');
     }
+    public function scopeToday($query)
+    {
+        return $query->where('result_date', today());
+    }
     public function scopeResultPending($query)
     {
         return $query->whereNull('result_date');
