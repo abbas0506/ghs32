@@ -42,47 +42,40 @@
                     <i class="bi-check-lg text-green-600"></i>
                     @endif
                 </td>
+                <td> @if($testAllocation->result_date)
+                    <form action="{{ route('admin.test-allocations.unlock',$testAllocation) }}" method="post" onsubmit="return validate(event)">
+                        @csrf
+                        @method('patch')
+                        <button class="btn-blue" type="submit">Unlock</button>
+                    </form>
+                    @endif
+                </td>
             </tr>
             @endforeach
 
         </tbody>
     </table>
 </div>
-</div>
+@endsection
+@section('script')
 <script type="text/javascript">
-    function delme(formid) {
-
-        event.preventDefault();
+    function validate(event) {
+        event.preventDefault(); // prevent form submit
+        var form = event.target; // storing the form
 
         Swal.fire({
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            text: "Result will be unlocked!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, unlock it!'
         }).then((result) => {
             if (result.value) {
-                //submit corresponding form
-                $('#del_form' + formid).submit();
+                form.submit();
             }
-        });
-    }
-
-    function search(event) {
-        var searchtext = event.target.value.toLowerCase();
-        var str = 0;
-        $('.tr').each(function() {
-            if (!(
-                    $(this).children().eq(1).prop('outerText').toLowerCase().includes(searchtext)
-                )) {
-                $(this).addClass('hidden');
-            } else {
-                $(this).removeClass('hidden');
-            }
-        });
+        })
     }
 </script>
-
 @endsection

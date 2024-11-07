@@ -30,9 +30,16 @@
         <h2 class="text-teal-600">{{ $testAllocation->test->title }}</h2>
         <p>{{ $testAllocation->allocation->subject->name }} - {{ $testAllocation->allocation->section->grade->grade_no }}</p>
     </div>
-    <div class="flex justify-center items-center w-12 h-12 rounded-full bg-red-100">
-        <i class="bi-lock-fill text-red-600"></i>
-    </div>
+
+    <!-- <div class="flex items-center gap-3"> -->
+    <a href="{{ route('teacher.test-allocation.result.print',$testAllocation) }}" class="flex justify-center items-center w-12 h-12 rounded-full bg-blue-100">
+        <i class="bi-printer text-blue-600"></i>
+    </a>
+    <!-- <div class="flex justify-center items-center w-12 h-12 rounded-full bg-red-100">
+            <i class="bi-lock-fill text-red-600"></i>
+        </div>
+    </div> -->
+
 </div>
 
 <div class="overflow-x-auto w-full mt-8">

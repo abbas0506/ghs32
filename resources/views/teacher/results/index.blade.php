@@ -1,7 +1,7 @@
 @extends('layouts.teacher')
 @section('page-content')
 
-<h2>{{ $testAllocation->allocation->section->roman() }}</h2>
+<h2>{{ $testAllocation->allocation->subject->name }} , {{ $testAllocation->allocation->section->roman() }}</h2>
 <div class="bread-crumb">
     <a href="{{url('/')}}">Home</a>
     <div>/</div>
@@ -11,14 +11,15 @@
     <div>/</div>
     <div>Results</div>
 </div>
-
-<div class="flex flex-col md:flex-row md:items-center gap-x-2 mt-8">
-    <i class="bi bi-info-circle text-2xl w-8"></i>
-    <ul class="text-sm">
-        <li>If you find any student missing here, you can import from section </li>
-        <li>If you mistakenly added any student here, feel free to remove it </li>
+<div class="p-4 bg-blue-100 border border-blue-200 rounded">
+    <h2>How to submit result?</h2>
+    <ul class="text-xs list-outside ml-4 mt-3 list-disc">
+        <li><span class="font-bold">Step 1: </span>Import Students</li>
+        <li><span class="font-bold">Step 2: </span>Feed result</li>
+        <li><span class="font-bold">Step 3: </span>Make final submission</li>
     </ul>
 </div>
+
 <!-- page message -->
 @if($errors->any())
 <x-message :errors='$errors'></x-message>
@@ -26,16 +27,13 @@
 <x-message></x-message>
 @endif
 <div class="flex flex-wrap justify-between gap-3 items-center mt-8">
-    <div>
-        <h2 class="text-teal-600">{{ $testAllocation->test->title }}</h2>
-        <p class="text-teal-600">{{ $testAllocation->allocation->subject->name }} , {{ $testAllocation->allocation->section->roman() }}</p>
-    </div>
+    <h2 class="text-center">Appearing Students: <i class="bx bx-group mr-2"></i>{{ $testAllocation->appearingStudents->count() }}/{{ $testAllocation->allocation->section->students->count() }}</h2>
 
     <div class="flex items-center gap-3">
-        <h2 class="text-slate-600 text-center"><i class="bi-people"></i> {{ $testAllocation->appearingStudents->count() }}/{{ $testAllocation->allocation->section->students->count() }}</h2>
-        <a href="{{route('teacher.test-allocation.import-students.index',$testAllocation)}}" class="btn-blue rounded">Import <i class="bi bi-file-earmark-excel text-teal-200"></i></a>
+
+        <a href="{{route('teacher.test-allocation.import-students.index',$testAllocation)}}" class="btn-blue rounded text-sm py-2 px-4">Import <i class="bi bi-file-earmark-excel"></i></a>
         @if($testAllocation->appearingStudents->count())
-        <a href="{{route('teacher.test-allocation.results.edit',[$testAllocation,0])}}" class="btn-teal rounded">Feed Result</i></a>
+        <a href="{{route('teacher.test-allocation.results.edit',[$testAllocation,0])}}" class="btn-teal rounded text-sm py-2 px-4">Feed Result</i></a>
         @endif
     </div>
 </div>

@@ -125,6 +125,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:admi
     Route::resource('tests', CollectiveTestController::class);
     Route::resource('test.sections', AdminTestSectionController::class);
     Route::resource('test.section.results', SectionResultController::class);
+    Route::patch('test-allocations/{id}/unlock', [TestAllocationResultController::class, 'unlock'])->name('test-allocations.unlock');
 });
 
 Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {

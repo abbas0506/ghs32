@@ -74,7 +74,7 @@ class TestAllocationResultController extends Controller
         //
 
         $request->validate([
-            'total_marks' => 'required|min:0|max:100',
+            'total_marks' => 'required|numeric|min:1|max:100',
             'result_ids_array' => 'required',
             'obtained_marks_array' => 'required',
         ]);
@@ -129,5 +129,20 @@ class TestAllocationResultController extends Controller
         $pdf->set_option("isPhpEnabled", true);
         $file = "subject result.pdf";
         return $pdf->stream($file);
+    }
+
+    public function unlock(Request $request, $id)
+    {
+
+        $testAllocation = TestAllocation::findOrFail($id);
+
+        try {
+            $testAllocation->update([
+                'result_date' => null,
+            ]);
+            return redirect()->route('admin.tests.show', $testAllocation->test)->with('success', 'Successfully deleted!');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
 }

@@ -35,7 +35,7 @@
         <h2 class="text-teal-600">{{ $testAllocation->allocation->subject->name }}, {{ $testAllocation->allocation->section->roman() }}</h2>
         <div class="flex space-x-3 items-center">
             <h3 class="text-red-600">Total Marks *</h3>
-            <input type="number" name="total_marks" value="50" class="custom-input-borderless w-16 h-8 text-center px-0" min='0' max='100'>
+            <input type="number" name="total_marks" value="{{ $testAllocation->total_marks }}" class="custom-input-borderless w-16 h-8 text-center px-0" min='0' max='100'>
         </div>
     </div>
     <div class="overflow-x-auto w-full mt-6">
