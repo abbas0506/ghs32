@@ -83,7 +83,7 @@ $roman = config('global.romans');
                         <td class="text-left">{{ $result->student->name }}</td>
                         <td>{{ $result->student->rollno }}</td>
                         <td>{{ $result->obtained_marks }}</td>
-                        <td>{{ round($result->obtained_marks/$testAllocation->total_marks,1) }} %</td>
+                        <td>{{ round($result->obtained_marks/$testAllocation->total_marks*100,1) }} %</td>
 
                     </tr>
                     @endforeach
