@@ -53,12 +53,16 @@ $colors=config('globals.colors');
                     <td>{{ $testAllocation->appearingStudents->count() }}</td>
                     <td>
                         @if($testAllocation->hasBeenSubmitted())
-                        <i class="bi-check-lg text-green-600"></i>
+                        <i class="bi-check-lg text-teal-600"></i>
                         @else
-                        <i class="bi-question text-slate-600"></i>
+                        <i class="bi-question-lg text-red-600"></i>
                         @endif
                     </td>
-                    <td><a href="{{ route('teacher.test-allocation.result.print', $testAllocation) }}"><i class="bi-printer"></i></a></td>
+                    <td>
+                        @if($testAllocation->hasBeenSubmitted())
+                        <a href="{{ route('teacher.test-allocation.result.print', $testAllocation) }}"><i class="bi-printer"></i></a>
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

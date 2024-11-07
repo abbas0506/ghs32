@@ -24,6 +24,7 @@
                 <th class="text-left">Teacher</th>
                 <th>Studens</th>
                 <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -46,7 +47,7 @@
                     <form action="{{ route('admin.test-allocations.unlock',$testAllocation) }}" method="post" onsubmit="return validate(event)">
                         @csrf
                         @method('patch')
-                        <button class="btn-blue" type="submit">Unlock</button>
+                        <button class="btn-blue rounded-full text-xs" type="submit">Unlock</button>
                     </form>
                     @endif
                 </td>
