@@ -40,6 +40,12 @@ class Student extends Model
     {
         return $this->hasMany(Result::class);
     }
+
+    public function testAllocations()
+    {
+        return $this->hasManyThrough(TestAllocation::class, Result::class);
+    }
+
     public function testRank($sortedPercentages)
     {
         $index = $sortedPercentages->search(function ($ranking) {
@@ -111,5 +117,19 @@ class Student extends Model
         } else {
             return '';
         }
+    }
+
+    public function maximumMarks($testId)
+    {
+        $sumMarks = $this  // Find the student by ID
+            ->results()  // Get the student's results
+            ->whereHas('testAllocation', function ($query) use ($testId) {
+                $query->where('test_id', $testId);  // Filter by test_id in the test_allocations
+            })
+            ->join('test_allocations', 'results.test_allocation_id', '=', 'test_allocations.id')  // Join test_allocations to results
+            ->sum('test_allocations.total_marks');  // Sum the total_marks from the test_allocations
+
+
+        return $sumMarks;
     }
 }

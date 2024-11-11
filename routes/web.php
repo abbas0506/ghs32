@@ -44,6 +44,7 @@ use App\Http\Controllers\Teacher\AllocationController as TeacherAllocationContro
 use App\Http\Controllers\Teacher\CombinedTestController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
 use App\Http\Controllers\Teacher\ImportStudentController;
+use App\Http\Controllers\Teacher\SectionResultController as TeacherSectionResultController;
 use App\Http\Controllers\Teacher\TestAllocationController;
 use App\Http\Controllers\Teacher\TestAllocationResultController;
 use App\Http\Controllers\Teacher\TestController;
@@ -196,4 +197,5 @@ Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['role:
     Route::resource('test-allocation.results', TestAllocationResultController::class);
     Route::resource('test-allocation.import-students', ImportStudentController::class);
     Route::get('test-allocation/{id}/result/print', [TestAllocationResultController::class, 'printResult'])->name('test-allocation.result.print');
+    Route::resource('test.section.results', TeacherSectionResultController::class);
 });

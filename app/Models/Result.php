@@ -28,4 +28,11 @@ class Result extends Model
             $query->where('test_id', $testId);
         });
     }
+
+    public function scopeForLectureNo($query, $lectureNo)
+    {
+        return $query->whereHas('testAllocation.allocation', function ($query) use ($lectureNo) {
+            $query->where('lecture_no', $lectureNo);
+        });
+    }
 }

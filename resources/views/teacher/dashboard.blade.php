@@ -9,15 +9,15 @@
             <div>Dashbaord</div>
         </div>
     </div>
-    <div class="text-slate-500">{{ today()->format('d/m/Y') }}</div>
+    <label class="text-slate-500">{{ today()->format('d/m/Y') }}</label>
 </div>
 
 <!-- pallets -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-    <a href="{{ route('teacher.tests.index') }}" class="pallet-box">
+    <a href="{{ route('teacher.tests.index') }}" class="pallet-box bg-gradient-to-r from-teal-50 to-white ">
         <div class="flex-1">
-            <h3>Combined Tests</h3>
-            <p class="text-sm text-slate-800 font-thin">Pendency:
+            <h3>Collective Tests</h3>
+            <p class="text-sm text-slate-600 font-thin">Pendency:
                 @if (Auth::user()->testAllocations()->active()->count())
                 {{100-round(Auth::user()->testAllocations()->combined()->active()->resultSubmitted()->count()/Auth::user()->testAllocations()->combined()->active()->count()*100,0)}} %
                 @else
@@ -26,14 +26,14 @@
 
             </p>
         </div>
-        <div class="ico bg-green-100 text-green-600">
+        <div class="ico bg-teal-100 text-teal-600">
             {{ $tests->whereNull('user_id')->where('is_open', true)->count() }}
         </div>
     </a>
-    <a href="#" class="pallet-box">
+    <a href="#" class="pallet-box bg-gradient-to-r from-indigo-50 to-white">
         <div class="flex-1">
             <h3>Individual Tests</h3>
-            <p class="text-sm text-slate-800 font-thin">Pendency: -</p>
+            <p class="text-sm text-slate-600 font-thin">Pendency: -</p>
         </div>
         <div class="ico bg-indigo-100 text-indigo-400">
             {{ Auth::user()->tests()->individual()->count() }}

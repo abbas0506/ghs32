@@ -11,6 +11,7 @@
     <div>/</div>
     <div>Results</div>
 </div>
+<div class="divider my-3"></div>
 <div class="p-4 bg-blue-100 border border-blue-200 rounded">
     <h2>How to submit result?</h2>
     <ul class="text-xs list-outside ml-4 mt-3 list-disc">

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Test extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'title',    //section label A, B, C
         'user_id',
@@ -19,14 +20,14 @@ class Test extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function allocations()
+    {
+        return $this->belongsToMany(Allocation::class, 'test_allocations', 'test_id', 'allocation_id');
+    }
+
     public function testAllocations()
     {
         return $this->hasMany(TestAllocation::class);
-    }
-    public function allocations()
-    {
-        return $this->belongsToMany(Allocation::class, 'test_allocations', 'test_id', 'allocation_id')
-            ->withTimestamps(); // Include timestamps if present
     }
 
     public function scopeCombined($query)

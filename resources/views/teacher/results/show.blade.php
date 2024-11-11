@@ -12,13 +12,15 @@
     <div>Results</div>
 </div>
 
-<div class="flex flex-col md:flex-row md:items-center gap-x-2 mt-8">
+<div class="divider my-3"></div>
+
+<div class="flex flex-row items-center gap-x-2">
     <i class="bi bi-info-circle text-2xl w-8"></i>
     <ul class="text-sm">
-        <li>Subject result has been locked, cant be edited more</li>
-        <li>If you want to edit after final submission, please contact admin </li>
+        <li>Subject result has been locked, cant be edited furhter, however, if you want to edit after final submission, please contact admin </li>
     </ul>
 </div>
+<div class="divider my-3"></div>
 <!-- page message -->
 @if($errors->any())
 <x-message :errors='$errors'></x-message>
@@ -31,10 +33,9 @@
         <p>{{ $testAllocation->allocation->subject->name }} - {{ $testAllocation->allocation->section->grade->grade_no }}</p>
     </div>
 
-    <a href="{{ route('teacher.test-allocation.result.print',$testAllocation) }}" class="flex justify-center items-center w-12 h-12 rounded-full bg-blue-100">
+    <a href="{{ route('teacher.test-allocation.result.print',$testAllocation) }}" target="_blank" class="flex justify-center items-center w-12 h-12 rounded-full bg-blue-100">
         <i class="bi-printer text-blue-600"></i>
     </a>
-
 </div>
 
 <div class="overflow-x-auto w-full mt-8">

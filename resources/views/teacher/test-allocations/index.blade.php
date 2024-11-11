@@ -13,7 +13,7 @@
     <div>/</div>
     <div>Subjects</div>
 </div>
-
+<div class="divider my-3"></div>
 @php
 $colors=config('globals.colors');
 @endphp
@@ -27,8 +27,8 @@ $colors=config('globals.colors');
     <x-message></x-message>
     @endif
 
-    <div class="overflow-x-auto w-full mt-8">
-        <h2 class="mb-4">My Allocations ({{ $testAllocations->count() }})</h2>
+    <h2 class="mt-8">My Allocations ({{ $testAllocations->count() }})</h2>
+    <div class="overflow-x-auto w-full mt-4">
         <table class="table-fixed borderless w-full">
             <thead>
                 <tr class="">
@@ -61,6 +61,8 @@ $colors=config('globals.colors');
                     <td>
                         @if($testAllocation->hasBeenSubmitted())
                         <a href="{{ route('teacher.test-allocation.result.print', $testAllocation) }}"><i class="bi-printer"></i></a>
+                        <a href="{{ route('teacher.test.section.results.index', [$testAllocation->test, $testAllocation->allocation->section]) }}" class="ml-2"><i class="bi-award"></i></a>
+
                         @endif
                     </td>
                 </tr>

@@ -1,15 +1,14 @@
 @extends('layouts.teacher')
 @section('page-content')
 
-<h1>Combined Tests</h1>
+<h1>Collective Tests</h1>
 <div class="bread-crumb">
     <a href="{{url('/')}}">Home</a>
     <div>/</div>
     <div>Tests</div>
 </div>
-
+<div class="divider my-3"></div>
 <div class="content-section">
-
     <!-- page message -->
     @if($errors->any())
     <x-message :errors='$errors'></x-message>
@@ -19,18 +18,17 @@
 
     <div class="grid gap-6 md:w-2/3 mx-auto mt-12">
         @foreach($tests as $test)
-        <div class="flex justify-between items-center p-3 border rounded-lg">
+        <a href="{{ route('teacher.test.test-allocations.index',$test) }}" class="flex justify-between items-center p-4 border rounded-lg bg-slate-50 hover:bg-slate-100">
             <p class="flex-1 text-slate-600">{{ $test->title }}</p>
-
             @if($test->is_open)
-            <a href="{{ route('teacher.test.test-allocations.index',$test) }}" class="round-tab"><i class="bi-arrow-right"></i></a>
+            <div class=""><i class="bi-arrow-right"></i></div>
             @else
-            <div class="w-12 h-12 bg-slate-100 rounded-full flex justify-center items-center">
+            <div class="w-12 h-12 rounded-full flex justify-center items-center">
                 <i class="bi-lock-fill text-red-600"></i>
             </div>
             @endif
 
-        </div>
+        </a>
         @endforeach
 
 
