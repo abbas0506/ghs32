@@ -27,7 +27,7 @@
 
         .data tr th,
         .data tr td {
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
             /* padding-bottom: 2px; */
             border: 0.5px solid;
@@ -58,12 +58,9 @@ $roman = config('global.romans');
                     </tbody>
                 </table>
             </div>
-
-
             <!-- table header -->
             <h4 class="mt-6 text-center">{{ $test->title }}</h4>
-
-            <table class="table-auto text-sm border w-full mt-2">
+            <table class="table-auto text-sm border w-full">
                 <thead>
                     <tr class="border text-sm">
                         <th>Roll#</th>
@@ -76,11 +73,11 @@ $roman = config('global.romans');
                         <th>Percentage</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach($section->students as $student)
+                <tbody class="data">
+                    @foreach($section->students->sortBy('rollno') as $student)
                     <tr class="tr">
                         <td>{{ $student->rollno }}</td>
-                        <td class="text-left">{{ $student->name }}</td>
+                        <td style="text-align: left; padding-left:8px;">{{ $student->name }}</td>
                         @foreach($lectureNos as $lectureNo)
                         <td>{{ $student->results()->test($test->id)->forLectureNo($lectureNo)->first()?->obtained_marks }}</td>
                         @endforeach
