@@ -79,8 +79,8 @@ class CollectiveTestController extends Controller
     public function show(string $id)
     {
         //
-        $test = Test::findOrFail($id);
-        return view('admin.tests.show', compact('test'));
+        // $test = Test::findOrFail($id);
+        // return view('admin.tests.show', compact('test'));
     }
 
     /**

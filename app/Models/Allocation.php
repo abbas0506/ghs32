@@ -20,6 +20,12 @@ class Allocation extends Model
     {
         return $this->belongsTo(Section::class);
     }
+
+    public function testAllocations()
+    {
+        return $this->hasMany(TestAllocation::class);
+    }
+
     public function subject()
     {
         return $this->belongsTo(Subject::class);

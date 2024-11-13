@@ -14,7 +14,7 @@
 
 <!-- pallets -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-    <a href="{{ route('teacher.tests.index') }}" class="pallet-box bg-gradient-to-r from-teal-50 to-white ">
+    <a href="{{ route('teacher.tests.index') }}" class="pallet-box bg-gradient-to-r from-teal-100 to-white ">
         <div class="flex-1">
             <h3>Collective Tests</h3>
             <p class="text-sm text-slate-600 font-thin">Pendency:
@@ -30,7 +30,7 @@
             {{ $tests->whereNull('user_id')->where('is_open', true)->count() }}
         </div>
     </a>
-    <a href="#" class="pallet-box bg-gradient-to-r from-indigo-50 to-white">
+    <a href="#" class="pallet-box bg-gradient-to-r from-indigo-100 to-white">
         <div class="flex-1">
             <h3>Individual Tests</h3>
             <p class="text-sm text-slate-600 font-thin">Pendency: -</p>
@@ -42,28 +42,18 @@
 
 </div>
 
-<h2 class="text-red-600 mt-12">My Subjects: {{ Auth::user()->allocations()->count() }}</h2>
-<div class="overflow-x-auto w-full mt-4">
-    <table class="table-fixed borderless w-full">
-        <thead>
-            <tr>
-                <th class="w-8">Sr</th>
-                <th class="w-40 text-left">Subject</th>
-                <th class="w-16">Class</th>
-                <th class="w-16">Lecture #</th>
-            </tr>
+<div class="grid w-full p-5 bg-gradient-to-b  from-sky-100 to-white border border-sky-200 rounded-lg text-xs md:text-sm mt-8">
+    <h2 class="text-left">Do you know?</h2>
+    <p class="text-left">Result submission requires following 6-steps process: </p>
+    <ul class="pl-5 list-roman leading-relaxed ">
+        <li>Select test type: combined or individual</li>
+        <li>Open the selected test and review your subjects </li>
+        <li>Open each subject and import the students list</li>
+        <li>After successful import, feed the result </li>
+        <li>Ensure total marks are updated correctly</li>
+        <li>Once all data is entered and reviewed, submit the final results</li>
+    </ul>
 
-        </thead>
-        <tbody>
-            @foreach(Auth::user()->allocations->sortBy('lecture_no') as $allocation)
-            <tr>
-                <td>{{ $loop->index + 1 }}</td>
-                <td class="text-left">{{ $allocation->subject->name }}</td>
-                <td>{{ $allocation->section->roman() }}</td>
-                <td>{{ $allocation->lecture_no }} </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
 </div>
+
 @endsection

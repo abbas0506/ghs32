@@ -61,4 +61,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Test::class);
     }
+    public function section()
+    {
+        return $this->hasOne(Section::class, 'incharge_id');
+    }
 }

@@ -36,7 +36,7 @@
         <div>
             <label>Teacher</label>
             <select name="teacher_id" id="" class="custom-input-borderless">
-                @foreach($users as $user)
+                @foreach($users->sortByDesc('profile.bps') as $user)
                 <option value="{{ $user->id }}">{{ $user->profile->name }}</option>
                 @endforeach
             </select>

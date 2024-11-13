@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 @section('page-content')
 
+<style>
+    table.sm tbody tr td,
+    table.sm tbody tr td div {
+        font-size: 12px;
+    }
+</style>
 <h1>Allocations</h1>
 <div class="bread-crumb">
     <a href="{{url('admin')}}">Dashoboard</a>
@@ -27,10 +33,11 @@
 
 <div class="overflow-x-auto bg-white w-full mt-8">
 
-    <table class="table-auto w-full">
+    <table class="table-auto sm w-full">
         <thead>
             <tr>
                 <th class="w-11">Section</th>
+                <th>Incharge</th>
                 <th>0</th>
                 <th>1</th>
                 <th>2</th>
@@ -50,6 +57,16 @@
             @foreach($sections as $section)
             <tr>
                 <td class="font-semibold">{{ $section->roman()}}</td>
+                <td class="">
+
+                    <a href="{{route('admin.incharges.edit', $section) }}" class="link">
+                        @if($section->incharge_id)
+                        {{ $section->incharge->profile->name }}
+                        @else
+                        <i class="bx bx-pencil"></i>
+                        @endif
+                    </a>
+                </td>
                 @foreach(range(0,8) as $lecture_no)
                 <td class="p-1">
                     @foreach($section->allocations()->havingLectureNo($lecture_no)->get() as $allocation)

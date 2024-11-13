@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\GradeSectionController;
 use App\Http\Controllers\Admin\GroupController;
+use App\Http\Controllers\Admin\InchargeController;
 use App\Http\Controllers\Admin\SectionCardController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
 use App\Http\Controllers\Admin\SectionResultCardController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Admin\SectionResultController;
 use App\Http\Controllers\Admin\SectionStuedentsController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\TestAllocationController as AdminTestAllocationController;
 use App\Http\Controllers\Admin\TestSectionController as AdminTestSectionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admission\PdfController;
@@ -39,7 +41,10 @@ use App\Http\Controllers\Library\PrintController;
 use App\Http\Controllers\Library\RackBooksController;
 use App\Http\Controllers\Library\TeacherController as LibraryTeacherController;
 use App\Http\Controllers\OnlineApplicationController;
+use App\Http\Controllers\ReportCardController;
+use App\Http\Controllers\ResultDetailController;
 use App\Http\Controllers\SignupController;
+use App\Http\Controllers\SubjectResultController;
 use App\Http\Controllers\Teacher\AllocationController as TeacherAllocationController;
 use App\Http\Controllers\Teacher\CombinedTestController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
@@ -50,6 +55,7 @@ use App\Http\Controllers\Teacher\TestAllocationResultController;
 use App\Http\Controllers\Teacher\TestController;
 use App\Http\Controllers\Teacher\TestSectionController;
 use App\Http\Controllers\Teacher\TestSectionStudentController;
+use App\Http\Controllers\TestPositionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -123,10 +129,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:admi
     Route::post('change/password', [AuthController::class, 'changePassword'])->name('change.password');
 
     Route::resource('users', UserController::class);
+    Route::resource('incharges', InchargeController::class);
     Route::resource('tests', CollectiveTestController::class);
     Route::resource('test.sections', AdminTestSectionController::class);
     Route::resource('test.section.results', SectionResultController::class);
+    Route::resource('test.allocations', AdminTestAllocationController::class);
     Route::patch('test-allocations/{id}/unlock', [TestAllocationResultController::class, 'unlock'])->name('test-allocations.unlock');
+
+    Route::get('test-allocation/{id}/result/print', [SubjectResultController::class, 'print'])->name('test-allocation.result.print');
+    Route::get('test/{t}/section/{s}/result/print', [ResultDetailController::class, 'print'])->name('test.section.result.print');
+    Route::get('test/{t}/section/{s}/positions/print', [TestPositionController::class, 'print'])->name('test.section.positions.print');
+    Route::get('test/{t}/section/{s}/report-cards/print', [ReportCardController::class, 'print'])->name('test.section.report-cards.print');
 });
 
 Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {
@@ -196,6 +209,9 @@ Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['role:
     Route::resource('test.test-allocations', TestAllocationController::class);
     Route::resource('test-allocation.results', TestAllocationResultController::class);
     Route::resource('test-allocation.import-students', ImportStudentController::class);
-    Route::get('test-allocation/{id}/result/print', [TestAllocationResultController::class, 'printResult'])->name('test-allocation.result.print');
-    Route::resource('test.section.results', TeacherSectionResultController::class);
+
+    Route::get('test-allocation/{id}/result/print', [SubjectResultController::class, 'print'])->name('test-allocation.result.print');
+    Route::get('test/{t}/section/{s}/result/print', [ResultDetailController::class, 'print'])->name('test.section.result.print');
+    Route::get('test/{t}/section/{s}/positions/print', [TestPositionController::class, 'print'])->name('test.section.positions.print');
+    Route::get('test/{t}/section/{s}/report-cards/print', [ReportCardController::class, 'print'])->name('test.section.report-cards.print');
 });

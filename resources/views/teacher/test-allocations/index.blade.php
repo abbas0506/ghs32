@@ -2,7 +2,12 @@
 @section('page-content')
 <style>
     tr.submitted td {
-        background-color: #dcfce7;
+        background-color: #f0f9f7;
+
+    }
+
+    tr.submitted {
+        border-bottom: 0.4px solid #a6e0e1;
     }
 </style>
 <h1>{{ $test->title }}</h1>
@@ -27,11 +32,36 @@ $colors=config('globals.colors');
     <x-message></x-message>
     @endif
 
-    <h2 class="mt-8">My Allocations ({{ $testAllocations->count() }})</h2>
+    @if(Auth::user()->section)
+    <h2 class="mt-8">My Section: ({{ Auth::user()->section->roman() }})</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 mt-3 gap-3 md:gap-8">
+        <div class='flex justify-between items-center px-4 py-3 bg-teal-400 rounded'>
+            <p>Result Detail</p>
+            <a href="{{ route('teacher.test.section.result.print', [$test, Auth::user()->section]) }}" target="_blank">
+                <i class="bi-printer"></i>
+            </a>
+        </div>
+        <div class='flex justify-between items-center px-4 py-3 bg-blue-400 rounded'>
+            <p>Position Detail</p>
+            <a href="{{ route('teacher.test.section.positions.print', [$test, Auth::user()->section]) }}" target="_blank">
+                <i class="bi-printer"></i>
+            </a>
+        </div>
+        <div class='flex justify-between items-center px-4 py-3 bg-orange-400  rounded'>
+            <p>Report Cards</p>
+            <a href="{{ route('teacher.test.section.report-cards.print', [$test, Auth::user()->section]) }}" target="_blank">
+                <i class="bi-printer"></i>
+            </a>
+        </div>
+
+    </div>
+    <div class="divider mt-8"></div>
+    @endif
+    <h2 class="mt-8">My Subjects ({{ $testAllocations->count() }})</h2>
     <div class="overflow-x-auto w-full mt-4">
         <table class="table-fixed borderless w-full">
             <thead>
-                <tr class="">
+                <tr>
                     <th class="w-8">Sr</th>
                     <th class="w-16">Class</th>
                     <th class="w-40 text-left">Subject</th>
@@ -60,9 +90,7 @@ $colors=config('globals.colors');
                     </td>
                     <td>
                         @if($testAllocation->hasBeenSubmitted())
-                        <a href="{{ route('teacher.test-allocation.result.print', $testAllocation) }}"><i class="bi-printer"></i></a>
-                        <a href="{{ route('teacher.test.section.results.index', [$testAllocation->test, $testAllocation->allocation->section]) }}" class="ml-2"><i class="bi-award"></i></a>
-
+                        <a href="{{ route('teacher.test-allocation.result.print', $testAllocation) }}" target="_blank"><i class="bi-printer"></i></a>
                         @endif
                     </td>
                 </tr>

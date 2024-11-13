@@ -9,4 +9,19 @@ export default {
         extend: {},
     },
     plugins: [require("@tailwindcss/forms")],
+    
+    // customized
+    theme: {
+        listStyleType: {
+        none: 'none',
+        disc: 'disc',
+        decimal: 'decimal',
+        square: 'square',
+        roman: 'lower-roman',
+        }
+      },
 };
+
+
+    
+  

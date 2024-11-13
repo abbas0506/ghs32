@@ -10,7 +10,6 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Models\Result;
 use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class TestAllocationResultController extends Controller
 {
@@ -122,15 +121,6 @@ class TestAllocationResultController extends Controller
         }
     }
 
-    public function printResult($id)
-    {
-        $testAllocation = TestAllocation::findOrFail($id);
-        $pdf = PDF::loadview('teacher.pdf.subject-result', compact('testAllocation'))->setPaper('a4', 'portrait');
-        $pdf->set_option("isPhpEnabled", true);
-        $file = "subject result.pdf";
-        return $pdf->stream($file);
-    }
-
     public function unlock(Request $request, $id)
     {
 
@@ -140,7 +130,7 @@ class TestAllocationResultController extends Controller
             $testAllocation->update([
                 'result_date' => null,
             ]);
-            return redirect()->route('admin.tests.show', $testAllocation->test)->with('success', 'Successfully deleted!');
+            return redirect()->route('admin.test.allocations.index', $testAllocation->test)->with('success', 'Successfully deleted!');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }

@@ -26,7 +26,7 @@ class AllocationController extends Controller
     {
         $section = Section::findOrFail($sectionId);
         $subjects = Subject::all();
-        $users = User::whereRelation('roles', 'name', 'teacher')->get();
+        $users = User::with('profile')->whereRelation('roles', 'name', 'teacher')->get();
         return view('admin.allocations.create', compact('section', 'subjects', 'users', 'lecture_no'));
     }
 

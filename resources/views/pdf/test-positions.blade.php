@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Section Result</title>
+    <title>Report Cards</title>
     <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
     <style>
         @page {
@@ -42,7 +42,6 @@
 $roman = config('global.romans');
 @endphp
 
-
 <body>
 
     <main>
@@ -55,39 +54,45 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-lg font-bold">Sectoin Result - {{ $section->roman() }}</td>
+                            <td class="text-center text-lg font-bold">Class Result - {{ $test->title }}</td>
                         </tr>
                         <tr>
-                            <td class="text-center text-base">Govt Higher Secondary School Chak Bedi, Pakpattan</td>
+                            <td class="text-center">Govt Higher Secondary School Chak Bedi, Pakpattan</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
-            <thead class="data">
-                <tr class="border">
-                    <th class="w-12">Roll No</th>
-                    <th class="">Student Name</th>
-                    <th class="w-12">1</th>
-                    <th class="w-12">1</th>
-                    <th class="w-12">2</th>
-                    <th class="w-12">3</th>
-                    <th class="w-12">4</th>
-                    <th class="w-12">5</th>
-                    <th class="w-12">6</th>
-                    <th class="w-12">7</th>
-                    <th class="w-16">Obtained</th>
-                    <th class="w-16">Total</th>
-                    <th class="w-16">Percentage</th>
-                </tr>
-            </thead>
-            <tbody class="data">
+            <h4 class="mt-8 underline text-center">Class: {{ $section->roman() }}</h4>
 
 
-            </tbody>
+            <table class="table-auto w-full mt-4" cellspacing="0">
+                <thead class="data">
+                    <tr class="border">
+                        <th class="w-12">Roll No</th>
+                        <th class="">Student Name</th>
+                        <th class="w-16">Total</th>
+                        <th class="w-16">Obtained</th>
+                        <th class="w-16">Percentage</th>
+                        <th class="w-16">Position</th>
+                    </tr>
+                </thead>
+                <tbody class="data">
+
+                    @foreach($sortedResult as $sortedPercentage)
+                    <tr class="border">
+                        <td>{{ $sortedPercentage['rollno'] }}</td>
+                        <td class="text-left">{{ $sortedPercentage['name'] }}</td>
+                        <td>{{ $sortedPercentage['total'] }}</td>
+                        <td>{{ $sortedPercentage['obtained'] }}</td>
+                        <td>{{ $sortedPercentage['percentage'] }} %</td>
+                        <td>{{ $sortedPercentage['position'] }}</td>
+
+
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
-
 
     </main>
 

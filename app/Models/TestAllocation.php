@@ -22,6 +22,11 @@ class TestAllocation extends Model
     {
         return $this->belongsTo(Test::class);
     }
+    // public function section()
+    // {
+    //     return $this->hasOneThrough(Allocation::class, Section::class);
+    // }
+
     public function allocation()
     {
         return $this->belongsTo(Allocation::class);

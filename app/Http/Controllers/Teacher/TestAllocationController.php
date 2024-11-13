@@ -17,6 +17,9 @@ class TestAllocationController extends Controller
     public function index($id)
     {
         //
+
+
+
         $test = Test::with('testAllocations')->findOrFail($id);
         $testAllocations = TestAllocation::where('test_id', $test->id)
             ->whereHas('allocation', function ($query) {

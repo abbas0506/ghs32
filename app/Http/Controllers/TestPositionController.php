@@ -1,22 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Section;
+use App\Models\Student;
 use App\Models\Test;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
-use Illuminate\Support\Facades\DB;
-use App\Models\Result;
-use App\Models\Student;
 
-class SectionResultController extends Controller
+class TestPositionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($testId, $sectionId)
+    public function print($testId, $sectionId)
     {
         //
         $section = Section::findOrFail($sectionId);
@@ -67,58 +64,9 @@ class SectionResultController extends Controller
             ]);
         }
 
-        $pdf = PDF::loadview('pdf.report-cards', compact('test', 'section', 'sortedResult'))->setPaper('a4', 'portrait');
+        $pdf = PDF::loadview('pdf.test-positions', compact('test', 'section', 'sortedResult'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
-        $file = "Report Cards - " . $section->roman() . ".pdf";
+        $file = "positions - " . $section->roman() . ".pdf";
         return $pdf->stream($file);
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

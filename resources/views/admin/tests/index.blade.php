@@ -32,7 +32,6 @@
                 <th class="w-16">Sr</th>
                 <th class="text-left">Test Title</th>
                 <th>Status</th>
-                <th>Result</th>
                 <th class="w-24">Action</th>
             </tr>
         </thead>
@@ -41,14 +40,13 @@
             @foreach($tests as $test)
             <tr class="tr">
                 <td>{{ $loop->index+1 }}</td>
-                <td class="text-left"><a href="{{ route('admin.tests.show', $test) }}" class="link">{{ $test->title }}</a></td>
+                <td class="text-left"><a href="{{ route('admin.test.allocations.index', $test) }}" class="link">{{ $test->title }}</a></td>
                 <td> @if($test->is_open)
                     <i class="bi-unlock-fill text-green-600"></i>
                     @else
                     <i class="bi-lock-fill text-red-600"></i>
                     @endif
                 </td>
-                <td><a href="{{ route('admin.test.sections.index', $test) }}"><i class="bi-printer"></i></a></td>
                 <td>
                     <div class="flex justify-center items-center space-x-3">
                         <a href="{{route('admin.tests.edit', $test)}}">

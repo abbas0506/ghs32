@@ -59,8 +59,28 @@ $roman = config('global.romans');
                 </table>
             </div>
             <!-- table header -->
-            <h4 class="mt-6 text-center">{{ $test->title }}</h4>
-            <table class="table-auto text-sm border w-full">
+            <h4 class="mt-6 text-center underline underline-offset-2">{{ $test->title }}</h4>
+            <div class="text-sm text-center">
+                @php $previousLectureNo = ''; @endphp
+
+                @foreach($allocations as $allocation)
+
+                <!-- for each next lecture  -->
+                @if($previousLectureNo != $allocation->lecture_no)
+                @if(!$loop->first)
+                <span class="mr-4"> </span>
+                @endif
+                {{ $allocation->lecture_no }}.
+                @else
+                ,<span class="mr-1"></span>
+                @endif
+                {{ $allocation->subject->short_name }}
+
+                @php $previousLectureNo = $allocation->lecture_no; @endphp
+
+                @endforeach
+            </div>
+            <table class="table-auto text-sm border w-full mt-1">
                 <thead>
                     <tr class="border text-sm">
                         <th>Roll#</th>
@@ -68,9 +88,9 @@ $roman = config('global.romans');
                         @foreach($lectureNos as $lectureNo)
                         <th>{{ $lectureNo }}</th>
                         @endforeach
-                        <th>Obtained</th>
+                        <th>Obt.</th>
                         <th>Total</th>
-                        <th>Percentage</th>
+                        <th>Overall %</th>
                     </tr>
                 </thead>
                 <tbody class="data">
@@ -79,7 +99,7 @@ $roman = config('global.romans');
                         <td>{{ $student->rollno }}</td>
                         <td style="text-align: left; padding-left:8px;">{{ $student->name }}</td>
                         @foreach($lectureNos as $lectureNo)
-                        <td>{{ $student->results()->test($test->id)->forLectureNo($lectureNo)->first()?->obtained_marks }}</td>
+                        <td class="w-8">{{ $student->results()->test($test->id)->forLectureNo($lectureNo)->first()?->obtained_marks }}</td>
                         @endforeach
                         <td>{{ $student->results()->test($test->id)->sum('obtained_marks') }}</td>
                         <td>{{ $student->maximumMarks($test->id) }}</td>
