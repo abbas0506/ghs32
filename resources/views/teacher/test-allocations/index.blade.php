@@ -35,25 +35,18 @@ $colors=config('globals.colors');
     @if(Auth::user()->section)
     <h2 class="mt-8">My Section: ({{ Auth::user()->section->roman() }})</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 mt-3 gap-3 md:gap-8">
-        <div class='flex justify-between items-center px-4 py-3 bg-teal-400 rounded'>
+        <a href="{{ route('teacher.test.section.result.print', [$test, Auth::user()->section]) }}" target="_blank" class='flex justify-between items-center px-4 py-3 bg-teal-200 rounded'>
             <p>Result Detail</p>
-            <a href="{{ route('teacher.test.section.result.print', [$test, Auth::user()->section]) }}" target="_blank">
-                <i class="bi-printer"></i>
-            </a>
-        </div>
-        <div class='flex justify-between items-center px-4 py-3 bg-blue-400 rounded'>
+            <i class="bi-printer"></i>
+        </a>
+        <a href="{{ route('teacher.test.section.positions.print', [$test, Auth::user()->section]) }}" target="_blank" class='flex justify-between items-center px-4 py-3 bg-blue-200 rounded'>
             <p>Position Detail</p>
-            <a href="{{ route('teacher.test.section.positions.print', [$test, Auth::user()->section]) }}" target="_blank">
-                <i class="bi-printer"></i>
-            </a>
-        </div>
-        <div class='flex justify-between items-center px-4 py-3 bg-orange-400  rounded'>
+            <i class="bi-printer"></i>
+        </a>
+        <a href="{{ route('teacher.test.section.report-cards.print', [$test, Auth::user()->section]) }}" target="_blank" class='flex justify-between items-center px-4 py-3 bg-orange-200  rounded'>
             <p>Report Cards</p>
-            <a href="{{ route('teacher.test.section.report-cards.print', [$test, Auth::user()->section]) }}" target="_blank">
-                <i class="bi-printer"></i>
-            </a>
-        </div>
-
+            <i class="bi-printer"></i>
+        </a>
     </div>
     <div class="divider mt-8"></div>
     @endif
