@@ -107,7 +107,7 @@ $roman = config('global.romans');
                         <th>Subject</th>
                         <th>Total</th>
                         <th>Marks</th>
-                        <th>%</th>
+                        <th>Percentage</th>
                         <th>Status</th>
                     </tr>
                 </thead>
