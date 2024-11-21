@@ -117,12 +117,16 @@ $roman = config('global.romans');
                     $total=0;
                     @endphp
                     @foreach($student->results()->test($test->id)->get() as $result)
+                    @php
+                    $percentage=round( $result->obtained_marks/$result->testAllocation->total_marks*100,0);
+                    @endphp
                     <tr class="border">
                         <td>{{ $loop->index+1 }}</td>
                         <td class="text-left">{{ $result->testAllocation->allocation->subject->name }}</td>
                         <td>{{ $result->testAllocation->total_marks }}</td>
                         <td>{{ $result->obtained_marks }}</td>
-                        <td>{{ round( $result->obtained_marks/$result->testAllocation->total_marks*100,0) }} %</td>
+                        <td>{{ $percentage }} %</td>
+                        <td>@if($percentage>=33) Pass @else Fail @enidf</td>
                     </tr>
                     @php
                     $total+=$result->testAllocation->total_marks;
