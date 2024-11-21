@@ -107,7 +107,8 @@ $roman = config('global.romans');
                         <th>Subject</th>
                         <th>Total</th>
                         <th>Marks</th>
-                        <th>Percentage</th>
+                        <th>%</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody class="data">
@@ -126,7 +127,7 @@ $roman = config('global.romans');
                         <td>{{ $result->testAllocation->total_marks }}</td>
                         <td>{{ $result->obtained_marks }}</td>
                         <td>{{ $percentage }} %</td>
-                        <td>@if($percentage>=33) Pass @else Fail @enidf</td>
+                        <td>@if($percentage>=33) P @else F @enidf</td>
                     </tr>
                     @php
                     $total+=$result->testAllocation->total_marks;
