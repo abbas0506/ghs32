@@ -127,14 +127,14 @@ $roman = config('global.romans');
                         <td>{{ $result->testAllocation->total_marks }}</td>
                         <td>{{ $result->obtained_marks }}</td>
                         <td>{{ $percentage }} %</td>
-                        <td class="border-b">@if($percentage>=33) P @else F @endif</td>
+                        <td>@if($percentage>=33) P @else F @endif</td>
                     </tr>
                     @php
                     $total+=$result->testAllocation->total_marks;
                     @endphp
                     @endforeach
                     <tr>
-                        <td colspan="5" style="padding-top:16px">
+                        <td colspan="6" style="padding-top:16px">
                             @if($total!=0)
                             <span class="font-bold">Overall Marks:</span> {{ $obtained }} / {{ $total }} = {{ round($obtained/$total*100,2) }} % <span class="text-white">-------</span> <span class="font-bold"> Class Position:</span> {{ $student->testRank($sortedResult) }}
                             @endif
@@ -145,7 +145,7 @@ $roman = config('global.romans');
                     </tr>
 
                     <tr>
-                        <td colspan="5">
+                        <td colspan="6">
                             <div class="p-4 text-left" style="border:solid 0.1px">Comments:</div>
                         </td>
                     </tr>
