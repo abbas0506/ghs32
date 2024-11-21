@@ -127,7 +127,7 @@ $roman = config('global.romans');
                         <td>{{ $result->testAllocation->total_marks }}</td>
                         <td>{{ $result->obtained_marks }}</td>
                         <td>{{ $percentage }} %</td>
-                        <td>@if($percentage>=33) P @else F @endif</td>
+                        <td>@if($percentage>=33) Pass @else Fail @endif</td>
                     </tr>
                     @php
                     $total+=$result->testAllocation->total_marks;
