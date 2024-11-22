@@ -73,17 +73,21 @@ $roman = config('global.romans');
                         <th class="w-12">Roll No</th>
                         <th class="w-16">Obtained</th>
                         <th class="w-16">Percentage</th>
+                        <th class="w-16">Status</th>
                     </tr>
                 </thead>
                 <tbody class="data">
 
                     @foreach($testAllocation->results->sortByDesc('obtained_marks') as $result)
+                    <!-- calculate percentage -->
+                    @php $percentage=round($result->obtained_marks/$testAllocation->total_marks*100,1); @endphp
                     <tr class="border">
                         <td>{{ $loop->index+1 }}</td>
                         <td class="text-left">{{ $result->student->name }}</td>
                         <td>{{ $result->student->rollno }}</td>
                         <td>{{ $result->obtained_marks }}</td>
-                        <td>{{ round($result->obtained_marks/$testAllocation->total_marks*100,1) }} %</td>
+                        <td>{{ $percentage }} %</td>
+                        <td>if($percentage >=33) Pass @else Fail @endif</td>
 
                     </tr>
                     @endforeach
