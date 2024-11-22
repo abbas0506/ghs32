@@ -87,7 +87,7 @@ $roman = config('global.romans');
                         <td>{{ $result->student->rollno }}</td>
                         <td>{{ $result->obtained_marks }}</td>
                         <td>{{ $percentage }} %</td>
-                        <td>if($percentage >=33) Pass @else Fail @endif</td>
+                        <td>@if($percentage >=33) Pass @else Fail @endif</td>
 
                     </tr>
                     @endforeach

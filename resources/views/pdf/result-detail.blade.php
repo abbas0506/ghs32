@@ -60,33 +60,25 @@ $roman = config('global.romans');
             </div>
             <!-- table header -->
             <h4 class="mt-6 text-center underline underline-offset-2">{{ $test->title }}</h4>
-            <div class="text-sm text-center">
-                @php $previousLectureNo = ''; @endphp
-
-                @foreach($allocations as $allocation)
-
-                <!-- for each next lecture  -->
-                @if($previousLectureNo != $allocation->lecture_no)
-                @if(!$loop->first)
-                <span class="mr-4"> </span>
-                @endif
-                {{ $allocation->lecture_no }}.
-                @else
-                ,<span class="mr-1"></span>
-                @endif
-                {{ $allocation->subject->short_name }}
-
-                @php $previousLectureNo = $allocation->lecture_no; @endphp
-
-                @endforeach
-            </div>
+            <!--  -->
             <table class="table-auto text-sm border w-full mt-1">
                 <thead>
                     <tr class="border text-sm">
                         <th>Roll#</th>
                         <th>Name</th>
                         @foreach($lectureNos as $lectureNo)
-                        <th>{{ $lectureNo }}</th>
+                        <th>
+                            @if($allocations->where('lecture_no', $lectureNo)->count()==1)
+                            {{ $allocations->where('lecture_no', $lectureNo)->first()->subject->short_name }}
+                            @else
+                            @foreach($allocations->where('lecture_no', $lectureNo) as $allocation)
+                            {{ $allocation->subject->short_name }}
+                            @if(!$loop->last)
+                            /
+                            @endif
+                            @endforeach
+                            @endif
+                        </th>
                         @endforeach
                         <th>Obt.</th>
                         <th>Total</th>
