@@ -14,11 +14,11 @@
 
         .footer {
             position: fixed;
-            bottom: 50px;
+            bottom: 20px;
             left: 0px;
             right: 0px;
             background-color: white;
-            height: 50px;
+            height: 20px;
         }
 
         .page-break {
@@ -50,7 +50,7 @@ $roman = config('global.romans');
 
             @foreach($section->students as $student)
             @if(($loop->index+1)%2==0)
-            <div class="mt-16"></div>
+            <div class="mt-12"></div>
             @endif
             <div class="w-1/2 mx-auto">
                 <div class="relative">
