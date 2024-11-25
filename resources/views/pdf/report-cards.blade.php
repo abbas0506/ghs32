@@ -50,7 +50,7 @@ $roman = config('global.romans');
 
             @foreach($section->students as $student)
             @if(($loop->index+1)%2==0)
-            <div class="mt-12"></div>
+            <div class="mt-16"></div>
             @endif
             <div class="w-1/2 mx-auto">
                 <div class="relative">
