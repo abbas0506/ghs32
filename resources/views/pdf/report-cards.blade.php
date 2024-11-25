@@ -50,7 +50,7 @@ $roman = config('global.romans');
 
             @foreach($section->students as $student)
             @if(($loop->index+1)%2==0)
-            <div class="mt-20"></div>
+            <div class="mt-16"></div>
             @endif
             <div class="w-1/2 mx-auto">
                 <div class="relative">
@@ -151,7 +151,7 @@ $roman = config('global.romans');
                     </tr>
                 </tbody>
             </table>
-            <table class="w-full mt-10">
+            <table class="w-full mt-2">
                 <thead>
                     <tr>
                         <th class="w-32"></th>
@@ -162,6 +162,11 @@ $roman = config('global.romans');
                     </tr>
                 </thead>
                 <tbody class="text-sm">
+                    <tr>
+                        <td></td>
+                        <td colspan="3"></td>
+                        <td><img src="{{public_path('/images/principal/sign.png')}}" alt="" class="w-12"></td>
+                    </tr>
                     <tr>
                         <td>
                             <div class="pt-2" style="border-top:solid 0.1px">Parents</div>
