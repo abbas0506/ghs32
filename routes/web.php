@@ -168,7 +168,7 @@ Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['r
 });
 
 Route::group(
-    ['prefix' => 'library', 'as' => 'library.', 'middleware' => ['role:librarian']],
+    ['prefix' => 'library', 'as' => 'library.', 'middleware' => ['role:library']],
     function () {
         Route::get('/', [LibraryDashboardController::class, 'index']);
         Route::resource('books', BookController::class);
