@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('page-content')
-<div class="container bg-slate-100">
+<div class="custom-container">
     <!-- Title     -->
     <h1>Section {{ $section->roman() }}</h1>
     <div class="flex flex-wrap items-center gap-2">

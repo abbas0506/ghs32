@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('body')
+@section('page-content')
 <div class="responsive-container">
     <h1>{{$section->roman()}} / Student </h1>
     <div class="container md:w-2/3 mx-auto mt-12">

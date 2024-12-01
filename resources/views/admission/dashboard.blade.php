@@ -1,6 +1,6 @@
 @extends('layouts.admission')
 @section('page-content')
-<div class="container bg-slate-100">
+<div class="custom-container">
     <!--welcome  -->
     <div class="flex items-center">
         <div class="flex-1">

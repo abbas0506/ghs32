@@ -26,15 +26,15 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.sections.index')}}" class="flex items-center p-2">
-                    <i class="bi-activity"></i>
-                    <span class="ml-3">Classes</span>
-                </a>
-            </li>
-            <li>
                 <a href="{{route('admin.subjects.index')}}" class="flex items-center p-2">
                     <i class="bi-book"></i>
                     <span class="ml-3">Subjects</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('admin.sections.index')}}" class="flex items-center p-2">
+                    <i class="bi-activity"></i>
+                    <span class="ml-3">Classes</span>
                 </a>
             </li>
             <li>
@@ -53,6 +53,12 @@
                 <a href="{{ route('admin.tests.index') }}" class="flex items-center p-2">
                     <i class="bi bi-clipboard-check"></i>
                     <span class="ml-3">Tests</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{url('signout')}}" class="flex items-center p-2">
+                    <i class="bi bi-power"></i>
+                    <span class="ml-3">Log Off</span>
                 </a>
             </li>
 

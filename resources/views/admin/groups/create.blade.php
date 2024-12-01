@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('body')
+@section('page-content')
 <div class="responsive-container">
     <h2>Groups</h2>
     <div class="bread-crumb">

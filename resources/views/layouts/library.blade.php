@@ -10,7 +10,7 @@
 
 @section('body')
 
-<div class="responsive-body">
+<div class="responsive-container">
     @yield('page-content')
 </div>
 
@@ -19,7 +19,7 @@
         $("aside").toggleClass('shown');
     });
 
-    $('.responsive-body').click(function(event) {
+    $('.responsive-container').click(function(event) {
         var box = $('#sidebar');
         if (!box.is(event.target) && box.has(event.target).length === 0) {
             box.removeClass('shown');

@@ -30,6 +30,12 @@
                     <span class="ml-3">Create Test</span>
                 </a>
             </li>
+            <li>
+                <a href="{{url('signout')}}" class="flex items-center p-2">
+                    <i class="bi bi-power"></i>
+                    <span class="ml-3">Log Off</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

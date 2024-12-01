@@ -1,6 +1,6 @@
 @extends('layouts.admission')
 @section('page-content')
-<div class="container bg-slate-100">
+<div class="custom-container">
     <!-- Title     -->
     <h1>Applications</h1>
     <div class="flex flex-wrap items-center gap-2">

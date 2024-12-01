@@ -4,7 +4,7 @@
 <x-header></x-header>
 @endsection
 
-@section('body')
+@section('page-content')
 <section>
 
     <div class="bg-teal-800 text-teal-50 mt-16 px-5 md:px-24 text-xl py-6">New Application</div>
