@@ -28,8 +28,8 @@
         </div> -->
         <div class="flex flex-col flex-1 gap-y-2 justify-center">
             <p>Explore</p>
-            <h2 class="text-3xl md:text-4xl font-bold">OUR LIBRARY</h2>
-            <p class="text-slate-600 text-lg leading-relaxed mt-4">We have established a state-of-the-art library, fully managed by a web-based application. It consists of 1000+ books from various domains like religion, science, history, literature, and more. </p>
+            <h2 class="text-2xl md:text-4xl font-bold">OUR LIBRARY</h2>
+            <p class="text-slate-600 text-sm md:text-lg leading-relaxed mt-4">We have established a state-of-the-art library, fully managed by a web-based application. It consists of 1000+ books from various domains like religion, science, history, literature, and more. </p>
             <a href="">
                 <button class="btn-teal mt-5 rounded py-2">Start Exploring <i class="bi-arrow-right"></i></button>
             </a>
@@ -45,7 +45,7 @@
             </div>
             <div class="">
                 <h3 class="text-xl md:text-2xl">Self Assessment</h3>
-                <p class="text-lg mt-1">Self assessment improves your underdtanding about the subject, helps you identify your deficiency areas and gauage your performance. We offer self assement from grade 9 to 12 </p>
+                <p class="text-sm md:text-lg mt-1">Self assessment improves your underdtanding about the subject, helps you identify your deficiency areas and gauage your performance. We offer self assement from grade 9 to 12 </p>
                 <div class="mt-6">
                     <a href="{{ url('https://www.exampixel.com/') }}" target="_blank" class="bg-teal-600 hover:bg-teal-800 text-slate-100 rounded-full duration-200 px-6 py-2">
                         Start Self Testing
@@ -122,23 +122,23 @@
             <div class="flex flex-1">
                 <img src="{{url('images/sports/trophy.png')}}" alt="sat" class="">
             </div>
-            <div class="flex flex-col flex-1">
+            <div class="flex flex-col flex-1 md:text-base text-sm">
                 <h2 class="text-xl">Our Achievements</h2>
                 <ul class="flex mt-3">
                     <li><i class="bi-check2-circle pr-3"></i></li>
-                    <li> *WINNER*: All Punjab Qirat Competition</li>
+                    <li> All Punjab Qirat Competition Winner</li>
                 </ul>
                 <ul class="flex mt-3">
                     <li><i class="bi-check2-circle pr-3"></i></li>
-                    <li> *WINNER*: Hockey Tournament Sahiwal Division, 2022-23</li>
+                    <li>Hockey Champion 2022-23, Sahiwal Division</li>
                 </ul>
                 <ul class="flex mt-3">
                     <li><i class="bi-check2-circle pr-3"></i></li>
-                    <li> *RUNNER UP*: Hockey Tournament Sahiwal Division, 2023-24</li>
+                    <li> Hockey Runner Up 2023-24, Sahiwal Division</li>
                 </ul>
                 <ul class="flex mt-3">
                     <li><i class="bi-check2-circle pr-3"></i></li>
-                    <li> *WINNER*: Speech Competition District Pakpattan, 2023-24</li>
+                    <li>Speech Competition Winner 2023-24, District Level</li>
                 </ul>
 
             </div>
@@ -146,71 +146,17 @@
     </div>
 </section>
 
-<!-- testimonial section -->
-<!-- <section class="testimonials pt-0" data-aos="fade-up">
-    <div class="mt-24 px-4 md:px-16 md:w-3/4 mx-auto">
-        <h2 class="text-4xl text-center">Our Faculty</h2>
-        <p class="text-gray-600 text-center mt-8">
-            We have highly skilled and qualified teaching faculty who consistently demonstrate a passion for fostering student growth through innovative teaching methods and personalized support
-        </p>
-        <div class="h-1 w-24 bg-teal-800 mx-auto mt-6"></div>
-    </div>
-    <div class="testimonials-carousel swiper w-full md:w-3/4 mx-auto mt-12">
-        <div class="swiper-wrapper">
-            <div class="testimonial-item swiper-slide">
-                <img src="{{asset('images/logo/app_logo.png')}}" class="testimonial-img" alt="">
-                <h3>Abdul Majeed</h3>
-                <h4>Principal</h4>
-                <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    "Through a commitment to academic excellence, character education, and inclusive community engagement, we empower our students to become lifelong learners, compassionate leaders, and contributors to a globally connected society."
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-            </div>
-
-            <div class="testimonial-item swiper-slide">
-                <img src="{{asset('images/logo/app_logo.png')}}" class="testimonial-img" alt="">
-                <h3>Rasheed Ahmad Khawar</h3>
-                <h4>Senior Subject Specialist (Physics)</h4>
-                <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    "Our mission at GHSS Chakbedi is to cultivate a dynamic learning environment that inspires intellectual curiosity, fosters critical thinking, and promotes the holistic development of each student."
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-            </div>
-            <div class="testimonial-item swiper-slide">
-                <img src="{{asset('images/logo/app_logo.png')}}" class="testimonial-img" alt="">
-                <h3>Dr. Ahmad Ali</h3>
-                <h4>Senior Subject Specialist (Biology)</h4>
-                <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    "We are committed to provide quality education to each and every student of this instiution. For this purpose, we leave no stone unturned to keep the confidence level maintained."
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-            </div>
-
-        </div>
-        <div class="swiper-pagination"></div>
-    </div>
-
-</section> -->
-<!-- End Ttstimonials Section -->
-
-
 <section class="pt-0" data-aos="fade-up">
     <div class="mt-24 px-4 md:px-16 md:w-3/4 mx-auto">
         <h2 class="text-4xl text-center">Message</h2>
-        <!-- <p class="text-gray-600 text-center mt-8">
-            We have highly skilled and qualified teaching faculty who consistently demonstrate a passion for fostering student growth through innovative teaching methods and personalized support
-        </p> -->
         <div class="h-1 w-24 bg-teal-800 mx-auto mt-6"></div>
     </div>
     <div class="w-full md:w-3/4 mx-auto mt-12">
         <div class="flex justify-center items-center flex-col">
-            <img src="{{asset('images/principal.jpeg')}}" class="w-64 rounded-full" alt="">
-            <h2 class="mt-3">Abdul Majeed SSS(Economics)</h2>
+            <img src="{{asset('images/principal/muzammil.png')}}" class="w-64 rounded-full" alt="">
+            <h2 class="mt-3">Muzammil Hussain SS(Chemistry)</h2>
             <h2>Principal</h2>
-            <p class="mt-3 text-lg text-center">
+            <p class="mt-3 text-sm md:text-lg text-center">
                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                 "We are committed to achieve academic excellence, character education, and inclusive community engagement. we empower our students to become lifelong learners, compassionate leaders, and contributors to a globally connected society."
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
@@ -227,8 +173,8 @@
 
 <section id='key_features' class="mt-12 md:mt-24 px-4 md:px-24">
     <div class="md:w-3/4 mx-auto">
-        <h2 class="text-4xl text-center">Key Features</h2>
-        <p class="text-gray-600 text-center mt-8">
+        <h2 class="text-2xl md:text-4xl text-center">Key Features</h2>
+        <p class="text-gray-600 text-center mt-8 text-sm md:text-lg">
             We have highly skilled and qualified teaching staff who consistently demonstrate a passion for fostering student growth through innovative teaching methods and personalized support
         </p>
         <div class="h-1 w-24 bg-teal-800 mx-auto mt-6"></div>

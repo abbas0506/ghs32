@@ -1,4 +1,4 @@
-<header class="sticky-header pl-16" id='header'>
+<header class="sticky-header no-auth" id='header'>
     <div class="flex flex-wrap w-full h-16 items-center justify-between px-4 md:px-6 shadow-sm">
         <a href="{{url('/')}}" class="flex text-xl font-bold items-center">
             <img src="{{asset('images/logo/app_logo_transparent.png')}}" alt="" class="w-8 md:w-12">
