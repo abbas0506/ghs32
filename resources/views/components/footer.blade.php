@@ -38,7 +38,7 @@
             <h3 class="text-orange-300">Contact Us</h3>
             <div class="text-sm">
                 <p>Govt Higher Secondary Chack Bedi, Distt. Pakpattan, Pakistan</p>
-                <p>+92 300 8754001</p>
+                <p>+92 300 0373004</p>
                 <div class="flex flex-row flex-wrap space-x-2 mt-2">
                     <a href="{{url('https://web.facebook.com/ghsschakbedi.pakpattan.1')}}" target="_blank"><i class="bi-facebook text-slate-400 w-4 h-4"></i></a>
                     <a href="{{url('https://web.facebook.com/ghsschakbedi.pakpattan.1')}}" target="_blank"><i class="bi-twitter text-slate-400 w-4 h-4"></i></a>
