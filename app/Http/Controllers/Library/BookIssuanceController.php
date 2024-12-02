@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\BookIssuance;
 use App\Models\BookReturnPolicy;
 use App\Models\LibraryRule;
+use App\Models\Profile;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
