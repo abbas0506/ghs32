@@ -20,12 +20,12 @@
                 <p>{{ $test->testAllocations()->resultSubmitted()->count() }} / {{ $testAllocations->count()}} ({{ round($test->testAllocations()->resultSubmitted()->count()/$test->testAllocations->count()*100,0) }}%)</p>
                 <p class="text-sm"><i class="bi-arrow-up"></i>{{ $test->testAllocations()->resultSubmitted()->today()->count() }}</p>
             </div>
-            <a href="{{ route('admin.test.sections.index', $test) }}" class="link text-sm">Print Result Cards &nbsp <i class="bi-printer"></i></a>
+            <a href="{{ route('admin.test.sections.index', $test) }}" class="link text-sm">Get Print &nbsp <i class="bi-printer"></i></a>
         </div>
-        <div class="flex items-center space-x-3 text-xs">
+        <div class="flex items-center space-x-3 text-sm">
             <i class="bi-filter"></i>
             <span class="text-slate-600 hover:cursor-pointer" onclick="filterBy('all')">All</span>
-            <span class="text-teal-600 hover:cursor-pointer" onclick="filterBy('submitted')">Submitted</span>
+            <span class="text-teal-600 hover:cursor-pointer" onclick="filterBy('submitted')">Submitted </span>
             <span class="text-red-600 hover:cursor-pointer" onclick="filterBy('pending')">Pending</span>
 
         </div>
@@ -64,9 +64,9 @@
                     <td>{{ $testAllocation->total_marks }}</td>
                     <td class="@if($testAllocation->result_date) submitted @else pending @endif">
                         @if($testAllocation->result_date)
-                        <a href="{{ route('admin.test-allocation.result.print',$testAllocation) }}" target="_blank"><i class="bi-printer"></i></a>
+                        <i class="bi-check-lg text-green-500 font-bold"></i>
                         @else
-                        ?
+                        <i class="bi-question text-red-600 font-bold"></i>
                         @endif
                     </td>
                     <td>

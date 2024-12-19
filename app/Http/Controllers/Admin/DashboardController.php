@@ -10,6 +10,7 @@ use App\Models\Grade;
 use App\Models\Section;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\Test;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,10 +25,10 @@ class DashboardController extends Controller
         $sections = Section::all();
         $teachers = User::whereRelation('roles', 'name', 'teacher')->get();
         $students = Student::all();
-        $books = Book::all();
+        $tests = Test::all();
         $applications = Application::all();
 
-        return view('admin.dashboard', compact('sections', 'students', 'teachers', 'books', 'applications'));
+        return view('admin.dashboard', compact('sections', 'students', 'teachers', 'tests', 'applications'));
     }
 
     /**

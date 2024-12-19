@@ -34,19 +34,15 @@ $colors=config('globals.colors');
 
     @if(Auth::user()->section)
     <h2 class="mt-8">My Section: ({{ Auth::user()->section->roman() }})</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 mt-3 gap-3 md:gap-8">
-        <a href="{{ route('teacher.test.section.result.print', [$test, Auth::user()->section]) }}" target="_blank" class='flex justify-between items-center px-4 py-3 bg-teal-200 rounded'>
-            <p>Result Detail</p>
-            <i class="bi-printer"></i>
-        </a>
-        <a href="{{ route('teacher.test.section.positions.print', [$test, Auth::user()->section]) }}" target="_blank" class='flex justify-between items-center px-4 py-3 bg-blue-200 rounded'>
-            <p>Position Detail</p>
-            <i class="bi-printer"></i>
-        </a>
-        <a href="{{ route('teacher.test.section.report-cards.print', [$test, Auth::user()->section]) }}" target="_blank" class='flex justify-between items-center px-4 py-3 bg-orange-200  rounded'>
-            <p>Report Cards</p>
-            <i class="bi-printer"></i>
-        </a>
+    <div class="flex flex-wrap items-center gap-4 mt-4">
+        <div class="rounded-full border flex justify-center items-center w-10 h-10 p-3">
+            <i class="bi-printer text-xl"></i>
+        </div>
+        <div class="flex flex-wrap items-center gap-4 text-sm">
+            <a href="{{ route('teacher.test.section.result.print', [$test, Auth::user()->section]) }}" target="_blank" class="link">Result Summary</a>|
+            <a href="{{ route('teacher.test.section.positions.print', [$test, Auth::user()->section]) }}" target="_blank" class="link">Class Positions</a>|
+            <a href="{{ route('teacher.test.section.report-cards.print', [$test, Auth::user()->section]) }}" target="_blank" class="link">Result Cards</a>
+        </div>
     </div>
     <div class="divider mt-8"></div>
     @endif

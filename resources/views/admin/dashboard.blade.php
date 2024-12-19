@@ -2,24 +2,21 @@
 @section('page-content')
 <!--welcome  -->
 <div class="flex items-center">
-    <div class="flex-1">
-        <div class="bread-crumb">
-            <div>Admin</div>
-            <div>/</div>
-            <div>Dashbaord</div>
-        </div>
+    <div class="bread-crumb">
+        <div>Admin</div>
+        <div>/</div>
+        <div><i class="bi-house"></i></div>
     </div>
-    <div class="text-slate-500">{{ today()->format('d/m/Y') }}</div>
 </div>
 
 <!-- pallets -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-8">
     <a href="{{ route('admin.sections.index') }}" class="pallet-box">
         <div class="flex-1">
-            <div class="title">Sections</div>
+            <div class="title">Classes</div>
             <div class="flex items-center">
                 <div class="h2">{{ $sections->count() }}</div>
-                <i class="bi-person-circle text-sm ml-4"></i>
+                <i class="bi-person text-sm ml-4"></i>
                 <p class="text-sm ml-1">{{ $students->count() }}</p>
             </div>
         </div>
@@ -27,35 +24,20 @@
             <i class="bi bi-layers text-green-600"></i>
         </div>
     </a>
-    <a href="#" class="pallet-box">
+    <a href="{{ route('admin.tests.index') }}" class="pallet-box">
         <div class="flex-1">
-            <div class="title">Teachers</div>
-            <div class="h2">{{ $teachers->count() }}</div>
+            <div class="title">Tests
+                @if($tests->where('is_open',1)->count())
+                <sup><i class="bi-circle-fill text-green-500 text-xxs"></i></sup>
+                @endif
+            </div>
+            <div class="h2">{{ $tests->count() }}</div>
         </div>
         <div class="ico bg-indigo-100">
-            <i class="bi bi-person text-indigo-400"></i>
+            <i class="bi bi-clipboard-check text-indigo-400"></i>
         </div>
     </a>
 
-    <a href="#" class="pallet-box">
-        <div class="flex-1">
-            <div class="title">Books</div>
-            <div class="h2"> {{ $books->count() }} </div>
-        </div>
-        <div class="ico bg-sky-100">
-            <i class="bi bi-book text-sky-600"></i>
-        </div>
-    </a>
-
-    <a href="#" class="pallet-box">
-        <div class="flex-1 ">
-            <div class="title">Applications</div>
-            <div class="h2"> {{ $applications->count() }} </div>
-        </div>
-        <div class="ico bg-teal-100">
-            <i class="bi bi-card-checklist text-teal-600"></i>
-        </div>
-    </a>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-3 mt-8 gap-6">

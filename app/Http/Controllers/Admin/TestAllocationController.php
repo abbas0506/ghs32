@@ -23,6 +23,7 @@ class TestAllocationController extends Controller
             ->join('sections', 'sections.id', '=', 'allocations.section_id')
             ->join('grades', 'grades.id', '=', 'sections.grade_id')
             ->orderBy('grades.grade_no', 'asc')  // Sorting by `grade_no` of the related `section`
+            ->where('test_id', $id)
             ->get('test_allocations.*');
         // $testAllocations = $test->testAllocations;
         return view('admin.tests.allocations.index', compact('test', 'testAllocations'));

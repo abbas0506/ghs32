@@ -18,7 +18,7 @@ class SectionController extends Controller
     {
         //
         $grades = Grade::where('id', '>', 8)->get();
-        return view('admin.grades.index', compact('grades'));
+        return view('admin.sections.index', compact('grades'));
     }
 
     /**
