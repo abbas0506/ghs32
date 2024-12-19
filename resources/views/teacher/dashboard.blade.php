@@ -43,7 +43,7 @@
 </div>
 
 <div class="grid w-full p-5 bg-gradient-to-b  from-sky-100 to-white border border-sky-200 rounded-lg text-xs md:text-sm mt-8">
-    <h2 class="text-left">Do you know?</h2>
+    <h2 class="text-left">Please Note</h2>
     <p class="text-left">Result submission requires following 6-steps process: </p>
     <ul class="pl-5 list-roman leading-relaxed ">
         <li>Select test type: combined or individual</li>
