@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Section;
 use App\Models\Student;
 use App\Models\Test;
+use App\Models\TestAllocation;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use LDAP\Result;
 
 class TestPositionController extends Controller
 {
@@ -28,11 +30,21 @@ class TestPositionController extends Controller
             ->where('section_id', $sectionId)
             ->get();
 
-        $studentPercentages = $students->map(function ($student) {
-            $obtained = $student->results->sum('obtained_marks');
-            $total = $student->results->sum(function ($result) {
-                return $result->testAllocation->total_marks;
-            });
+        $studentPercentages = $students->map(function ($student) use ($test) {
+            // obtained marks
+            $obtained = $student->results->where('testAllocation.test_id', $test->id)->sum('obtained_marks');
+
+            // $total = $student->results->sum(function ($result) {
+            //     return $result->testAllocation->total_marks;
+            // });
+
+            $total = $student->results->where('testAllocation.test_id', $test->id)->sum('testAllocation.total_marks');
+            // $total = Student::whereHas('results.testAllocation', function ($query) use ($test) {
+            //     return $query->where('test_id', $test->id);
+            // })->where('student_id', $student->id)
+            //     ->get()
+            //     ->sum('testAllocation.total_marks');
+
 
             // Avoid division by zero
             $percentage = $total > 0 ? ($obtained / $total) * 100 : 0;

@@ -95,11 +95,6 @@ Route::view('forgot', 'forgot');
 Route::post('forgot', [AuthController::class, 'forgot']);
 
 Route::post('login', [AuthController::class, 'login']);
-Route::view('login/admin', 'login.admin');
-Route::view('login/admission-portal', 'login.admission-portal');
-Route::view('login/library', 'login.library');
-
-
 
 Route::get('apply', [OnlineApplicationController::class, 'create']);
 Route::post('apply', [OnlineApplicationController::class, 'store']);
