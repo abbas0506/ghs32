@@ -68,24 +68,24 @@ $roman = config('global.romans');
             <table class="table-auto w-full mt-4" cellspacing="0">
                 <thead class="data">
                     <tr class="border">
+                        <th class="w-16">Position</th>
                         <th class="w-12">Roll No</th>
                         <th class="">Student Name</th>
                         <th class="w-16">Total</th>
                         <th class="w-16">Obtained</th>
                         <th class="w-16">Percentage</th>
-                        <th class="w-16">Position</th>
                     </tr>
                 </thead>
                 <tbody class="data">
 
                     @foreach($sortedResult as $sortedPercentage)
                     <tr class="border">
+                        <td>{{ $sortedPercentage['position'] }}</td>
                         <td>{{ $sortedPercentage['rollno'] }}</td>
-                        <td class="text-left">{{ $sortedPercentage['name'] }}</td>
+                        <td class="text-left">{{ ucwords(strtolower($sortedPercentage['name'])) }}</td>
                         <td>{{ $sortedPercentage['total'] }}</td>
                         <td>{{ $sortedPercentage['obtained'] }}</td>
                         <td>{{ $sortedPercentage['percentage'] }} %</td>
-                        <td>{{ $sortedPercentage['position'] }}</td>
 
 
                     </tr>

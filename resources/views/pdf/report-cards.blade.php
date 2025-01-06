@@ -81,12 +81,12 @@ $roman = config('global.romans');
                     <tr>
                         <td class="text-left">Student</td>
                         <td>:</td>
-                        <td class="text-left">{{ $student->name }}</td>
+                        <td class="text-left">{{ ucwords(strtolower($student->name)) }}</td>
                     </tr>
                     <tr>
                         <td class="text-left">Father</td>
                         <td>:</td>
-                        <td class="text-left">{{ $student->father }}</td>
+                        <td class="text-left">{{ ucwords(strtolower($student->father)) }}</td>
                     </tr>
                     <tr>
                         <td class="text-left">Class</td>

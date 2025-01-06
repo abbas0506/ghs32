@@ -31,20 +31,9 @@ class TestPositionController extends Controller
             ->get();
 
         $studentPercentages = $students->map(function ($student) use ($test) {
-            // obtained marks
+            // obtained marks, total marks
             $obtained = $student->results->where('testAllocation.test_id', $test->id)->sum('obtained_marks');
-
-            // $total = $student->results->sum(function ($result) {
-            //     return $result->testAllocation->total_marks;
-            // });
-
             $total = $student->results->where('testAllocation.test_id', $test->id)->sum('testAllocation.total_marks');
-            // $total = Student::whereHas('results.testAllocation', function ($query) use ($test) {
-            //     return $query->where('test_id', $test->id);
-            // })->where('student_id', $student->id)
-            //     ->get()
-            //     ->sum('testAllocation.total_marks');
-
 
             // Avoid division by zero
             $percentage = $total > 0 ? ($obtained / $total) * 100 : 0;

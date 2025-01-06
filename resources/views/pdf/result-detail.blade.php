@@ -89,7 +89,7 @@ $roman = config('global.romans');
                     @foreach($section->students->sortBy('rollno') as $student)
                     <tr class="tr">
                         <td>{{ $student->rollno }}</td>
-                        <td style="text-align: left; padding-left:8px;">{{ $student->name }}</td>
+                        <td style="text-align: left; padding-left:8px;">{{ ucwords(strtolower($student->name)) }}</td>
                         @foreach($lectureNos as $lectureNo)
                         <td class="w-8">{{ $student->results()->test($test->id)->forLectureNo($lectureNo)->first()?->obtained_marks }}</td>
                         @endforeach

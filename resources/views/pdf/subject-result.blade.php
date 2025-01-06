@@ -83,7 +83,7 @@ $roman = config('global.romans');
                     @php $percentage=round($result->obtained_marks/$testAllocation->total_marks*100,1); @endphp
                     <tr class="border">
                         <td>{{ $loop->index+1 }}</td>
-                        <td class="text-left">{{ $result->student->name }}</td>
+                        <td class="text-left">{{ ucwords(strtolower($result->student->name)) }}</td>
                         <td>{{ $result->student->rollno }}</td>
                         <td>{{ $result->obtained_marks }}</td>
                         <td>{{ $percentage }} %</td>
