@@ -78,7 +78,7 @@ $roman = config('global.romans');
                                 <div class="font-bold text-lg mt-2">{{ $student->section->roman() }}</div>
                                 <div class="flex flex-col m-auto mt-2">
                                     <div id='qr' style="margin-left:76px">{!! DNS2D::getBarcodeHTML($student->bform,'QRCODE',2,2) !!}</div>
-                                    <p class="text-xs mt-3">Valid up to: August 2025</p>
+                                    <p class="text-xs mt-3">Valid up to: March 2026</p>
                                     <p class="text-xs">Govt. Higher Secondary School Chak Bedi, Pakpattan</p>
 
                                 </div>
