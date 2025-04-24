@@ -72,30 +72,16 @@ $roman = config('global.romans');
                     @if($i%$numOfCardsPerRow==0)<tr class="text-sm">@endif
                         <td class="p-6">
                             <div class="border p-2">
+                                <div class="font-bold mt-2">{{ $student->name }}</div>
+                                <div class="border w-24 h-24 m-auto mt-4"></div>
+                                <!-- <div class="text-xs mt-2">2024</div> -->
+                                <div class="font-bold text-lg mt-2">{{ $student->section->roman() }}</div>
+                                <div class="flex flex-col m-auto mt-2">
+                                    <div id='qr' style="margin-left:76px">{!! DNS2D::getBarcodeHTML($student->bform,'QRCODE',2,2) !!}</div>
+                                    <p class="text-xs mt-3">Valid up to: March 2026</p>
+                                    <p class="text-xs">Govt. Higher Secondary School Chak Bedi, Pakpattan</p>
 
-                                <div><img src="{{public_path('images/logo/app_logo_transparent.png')}}" alt="logo" class="w-16"></div>
-
-                                <!-- image box -->
-                                <div class="border w-28 h-32 m-auto mt-4" style="color: #777"></div>
-
-                                <div class="font-bold mt-4 text-base">{{ $student->name }}</div>
-                                <div class="font-bold">{{ $student->section->roman() }} ({{ $student->rollno }})</div>
-
-                                <div class="mx-auto mt-1 mb-1 w-10" style="border:solid;border-width:1px;"></div>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div id='qr' class="" style="margin-left:6px">{!! DNS2D::getBarcodeHTML($student->bform,'QRCODE',2,2) !!}</div>
-                                            </td>
-                                            <td>
-                                                <!-- <div class="text-left ml-3 font-bold">{{ $student->section->roman() }} ({{ $student->rollno }})</div> -->
-                                                <div class="text-xs text-left ml-3">GHSS Chak Bedi, Pakpattan</div>
-                                                <div class="text-xs text-left ml-3">Valid up to: March 2026</div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                </div>
                             </div>
                         </td>
 
