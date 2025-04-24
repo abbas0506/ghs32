@@ -70,7 +70,7 @@ $roman = config('global.romans');
                 <tbody class="data">
                     @foreach($students as $student)
                     @if($i%$numOfCardsPerRow==0)<tr class="text-sm">@endif
-                        <td class="p-6">
+                        <td class="p-4">
                             <div class="border p-2">
 
                                 <div><img src="{{public_path('images/logo/app_logo_transparent.png')}}" alt="logo" class="w-16"></div>
@@ -90,8 +90,8 @@ $roman = config('global.romans');
                                             </td>
                                             <td>
                                                 <!-- <div class="text-left ml-3 font-bold">{{ $student->section->roman() }} ({{ $student->rollno }})</div> -->
-                                                <div class="text-xs text-left ml-3">GHSS Chak Bedi, Pakpattan</div>
-                                                <div class="text-xs text-left ml-3">Valid up to: March 2026</div>
+                                                <div class="text-xs text-left ml-2">GHSS Chak Bedi, Pakpattan</div>
+                                                <div class="text-xs text-left ml-2">Valid up to: March 2026</div>
                                             </td>
                                         </tr>
                                     </tbody>
