@@ -76,9 +76,9 @@ $roman = config('global.romans');
                                 <div><img src="{{public_path('images/logo/app_logo_transparent.png')}}" alt="logo" class="w-16"></div>
 
                                 <!-- image box -->
-                                <div class="border w-28 h-32 m-auto mt-4" style="color: #777"></div>
+                                <div class="border w-28 h-32 m-auto mt-2" style="color: #777"></div>
 
-                                <div class="font-bold mt-4 text-base">{{ $student->name }}</div>
+                                <div class="font-bold mt-2 text-base">{{ $student->name }}</div>
                                 <div class="font-bold">{{ $student->section->roman() }} ({{ $student->rollno }})</div>
 
                                 <div class="mx-auto mt-1 mb-1 w-10" style="border:solid;border-width:1px;"></div>
