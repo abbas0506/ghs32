@@ -100,7 +100,7 @@
 <section class="w-screen h-screen">
     <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full pt-16">
         <div class="flex flex-1 justify-end items-center">
-            <img src="{{ url(asset('images/small/admission-open.png')) }}" alt="student" class="w-48 h-48 md:w-96 md:h-96">
+            <img src="{{ url(asset('images/small/admission-1.png')) }}" alt="student" class="w-48 h-48 md:w-96 md:h-96">
 
         </div>
 
