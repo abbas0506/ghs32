@@ -26,8 +26,9 @@ class OnlineApplicationController extends Controller
     {
         //
         $groups = Group::all();
-        echo "Sorry, you are late. Contact admission office";
-        // return view('admission.online-applications.create', compact('groups'));
+        // echo "Sorry, you are late. Contact admission office";
+        // echo $groups;
+        return view('admission.online-applications.create', compact('groups'));
     }
 
     /**

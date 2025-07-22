@@ -5,6 +5,90 @@
 @endsection
 
 @section('body')
+<!-- Bootstrap Icons CDN -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"> -->
+
+<!-- Bootstrap Icons CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+    /* Container holds both button and floating pointer */
+    .button-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Button styling */
+    .click-demo-button {
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #0d9488;
+        background-color: transparent;
+        border: 2px solid #0d9488;
+        border-radius: 9999px;
+        cursor: pointer;
+        overflow: hidden;
+        transition: background-color 0.3s ease;
+        position: relative;
+        z-index: 1;
+    }
+
+    .click-demo-button:hover {
+        background-color: rgba(13, 148, 136, 0.1);
+    }
+
+    /* Pointer icon absolutely positioned OVER the button */
+    .pointer-icon {
+        position: absolute;
+        font-size: 24px;
+        color: #0d9488;
+        opacity: 0;
+        z-index: 10;
+        animation: flyClick 3s ease-in-out infinite;
+
+        left: 100%;
+        top: 100%;
+        transform: rotate(-90deg);
+    }
+
+    @keyframes flyClick {
+        0% {
+            opacity: 0;
+            transform: translate(40px, 40px) rotate(-90deg);
+        }
+
+        20% {
+            opacity: 1;
+            transform: translate(-300%, -100%) rotate(-90deg);
+        }
+
+        40% {
+            transform: translate(-300%, -100%) scale(0.9) rotate(-90deg);
+        }
+
+        45% {
+            transform: translate(-300%, -100%) scale(1) rotate(-90deg);
+        }
+
+        50% {
+            transform: translate(-300%, -100%) scale(0.9) rotate(-90deg);
+        }
+
+        55% {
+            transform: translate(-300%, -100%) scale(1) rotate(-90deg);
+        }
+
+        80% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            transform: translate(40px, 40px) rotate(-90deg);
+        }
+    }
+</style>
 
 <!-- page message -->
 @if($errors->any())
@@ -16,16 +100,34 @@
 <section class="w-screen h-screen">
     <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full pt-16">
         <div class="flex flex-1 justify-end items-center">
+            <img src="{{ url(asset('images/small/admission-open.png')) }}" alt="student" class="w-48 h-48 md:w-96 md:h-96">
+
+        </div>
+
+        <div class="flex flex-col flex-1 gap-y-2 justify-center">
+            <p>2025</p>
+            <h2 class="text-2xl md:text-4xl font-bold">Admission Open</h2>
+            <p class="text-slate-600 text-sm md:text-lg leading-relaxed mt-4">We are thrilled to welcome ambitious students to our dynamic academic journey, proudly offering FA, Pre-Engineering, and ICS programs.</p>
+            <a href="{{ url('admission-25')}}">
+                <div class="button-container">
+                    <button class="click-demo-button click-demo-button mt-5 rounded py-2 px-5">
+                        Join Us
+                    </button>
+                    <i class="bi bi-cursor-fill pointer-icon"></i>
+
+                </div>
+            </a>
+        </div>
+
+    </div>
+</section>
+<section class="w-screen h-screen">
+    <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full pt-16">
+        <div class="flex flex-1 justify-end items-center">
             <img src="{{ url(asset('images/small/world.png')) }}" alt="student" class="w-48 h-48 md:w-96 md:h-96">
 
         </div>
-        <!-- <div class="flex flex-col flex-1 gap-y-2 justify-center text-slate-100">
-            <div class="text-3xl md:text-5xl">Admission Open</div>
-            <p class="text-slate-300">Welcome to our online admission portal. Join us to get quality education in any of three disciplines: Pre Engineering, ICS & Humanities (Arts group). </p>
-            <a href="{{url('apply')}}">
-                <button class="btn-orange mt-5">Apply Now <i class="bi-arrow-right"></i></button>
-            </a>
-        </div> -->
+
         <div class="flex flex-col flex-1 gap-y-2 justify-center">
             <p>Explore</p>
             <h2 class="text-2xl md:text-4xl font-bold">OUR LIBRARY</h2>

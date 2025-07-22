@@ -1,24 +1,4 @@
 <div class="w-screen mt-12">
-    <div class="flex flex-wrap justify-center gap-6">
-        <a href="{{url('https://punjab.gov.pk/')}}">
-            <img src="{{url('images/logo/govt.png')}}" alt="logo" target="_blank" class="w-12 h-12">
-        </a>
-        <a href="{{url('https://bisesahiwal.edu.pk/')}}">
-            <img src="{{url('images/logo/swl.png')}}" alt="logo" target="_blank" class="w-12 h-12">
-        </a>
-        <a href="{{url('https://www.uo.edu.pk/')}}">
-            <img src="{{url('images/logo/uo.png')}}" alt="logo" target="_blank" class="w-12 h-12">
-        </a>
-        <a href="{{url('http://www.pu.edu.pk/')}}">
-            <img src="{{url('images/logo/pu.png')}}" alt="logo" target="_blank" class="w-12 h-12">
-        </a>
-        <a href="{{url('https://www.hec.gov.pk/english/pages/home.aspx')}}">
-            <img src="{{url('images/logo/hec.png')}}" alt="logo" target="_blank" class="w-12 h-12">
-        </a>
-        <a href="{{url('https://www.nts.org.pk/')}}">
-            <img src="{{url('images/logo/nts.png')}}" alt="logo" target="_blank" class="w-12 h-12">
-        </a>
-    </div>
     <div class="grid grid-cols-1 md:grid-cols-3 bg-slate-800 gap-6 md:gap-x-20 p-4 md:px-24 mt-12">
         <div>
             <h3 class="text-base text-orange-300">GHSSCB</h3>

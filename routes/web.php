@@ -96,6 +96,7 @@ Route::post('forgot', [AuthController::class, 'forgot']);
 
 Route::post('login', [AuthController::class, 'login']);
 
+Route::view('admission-25', 'admission.online-applications.instructions');
 Route::get('apply', [OnlineApplicationController::class, 'create']);
 Route::post('apply', [OnlineApplicationController::class, 'store']);
 // Route::resource('online-applications', OnlineApplicationController::class);
