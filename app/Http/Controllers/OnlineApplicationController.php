@@ -38,6 +38,7 @@ class OnlineApplicationController extends Controller
     {
         //
         $request->validate([
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'required',
             'father' => 'required',
             'bform' => 'required',
@@ -51,19 +52,28 @@ class OnlineApplicationController extends Controller
             'group_id' => 'required',
         ]);
 
+
         $request->merge([
             'grade_id' => 11,
             'concession' => 0,
         ]);
         try {
+            // Application::create($data);
             $duplicate = Application::where('rollno', $request->rollno)->where('pass_year', $request->pass_year)->first();
             if ($duplicate) {
                 // duplicate record;
                 return redirect()->back()->with('warning', 'Application alrady exists');
             } else {
                 // not duplicating
-                $application = Application::create($request->all());
-                return redirect()->route('applied', $application);
+                $data = $request->all();
+                if ($request->hasFile('img')) {
+                    $filename = time() . '_' . $request->img->getClientOriginalName();
+                    $path = $request->img->storeAs('students', $filename, 'public');
+                    $data['img'] = $path;
+                }
+                $application = Application::create($data);
+                // return redirect()->route('applied', $application);
+                return back()->with('success', 'Image uploaded');
             }
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());

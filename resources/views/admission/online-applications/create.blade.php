@@ -35,6 +35,47 @@
         animation: waveGlow 1s ease-in-out infinite;
         outline: none;
     }
+
+    .photo-box {
+        width: 150px;
+        height: 150px;
+        border: 2px dashed #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #aaa;
+        font-size: 18px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .photo-upload-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .custom-file-upload {
+        background-color: #007bff;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
+        transition: background-color 0.3s;
+    }
+
+    .custom-file-upload:hover {
+        background-color: #0056b3;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
 </style>
 
 <section>
@@ -48,9 +89,22 @@
             <x-message></x-message>
             @endif
 
-            <form action="{{url('apply')}}" method="post" class="mt-8 w-full" onsubmit="return validate(event)">
+            <form action="{{url('apply')}}" method="post" class="mt-8 w-full" enctype="multipart/form-data">
                 @csrf
-                <h2>Choose your desired group</h2>
+
+                <div class="photo-upload-wrapper">
+                    <!-- Placeholder Photo Box -->
+                    <div class="photo-box" id="photoPreview">
+                        Photo
+                    </div>
+
+                    <!-- Custom Upload Button -->
+                    <label for="img" class="custom-file-upload">Upload Your Photo</label>
+                    <input type="file" id="img" name="img" accept="image/*" onchange="previewSelectedPhoto(event)">
+                </div>
+
+
+                <h2 class="mt-8">Choose your desired group</h2>
                 <div class="grid gap-y-2 mt-3">
                     @foreach($groups as $group)
                     <div>
@@ -109,7 +163,7 @@
                     </div>
 
                 </div>
-                <div class="text-center mt-8">
+                <div class="flex  space-x-3 text-center mt-8">
                     <button class="btn-gray rounded py-3">Cancel</button>
                     <button class="btn-blue rounded py-3">Submit Application</button>
 
@@ -128,11 +182,8 @@
 
 <script type="module">
     $(document).ready(function() {
-        $('.chk-group').click(function() {
-            // Uncheck all checkboxes
-            $('.chk-group').prop('checked', false);
-            // Check the clicked checkbox
-            $(this).prop('checked', true);
+        $('.chk-group').on('change', function() {
+            $('.chk-group').not(this).prop('checked', false); // Uncheck all except clicked one
         });
 
         $('#bform').on('input', function() {
@@ -150,57 +201,33 @@
             if (value.length > 4) formatted = value.substring(0, 4) + '-' + value.substring(4);
             $(this).val(formatted);
         });
+
+        $('form').on('submit', function(e) {
+            if (!$('.chk-group:checked').length) {
+                Swal.fire({
+                    title: "Warning",
+                    text: "Please, select a group",
+                    icon: "warning",
+                    showConfirmButton: false,
+                    timer: 1500
+
+                });
+                e.preventDefault();
+            }
+        });
     });
 </script>
 <script>
-    function validate(event) {
-        var validated = true;
-        var group_checked = false;
-        $('.chk-group').each(function() {
-            if ($(this).is(':checked'))
-                group_checked = true;
-        });
-
-        if (!group_checked) {
-            event.preventDefault();
-            Swal.fire({
-                title: "Warning",
-                text: "Please, select a group",
-                icon: "warning",
-                showConfirmButton: false,
-                timer: 1500
-
-            });
+    function previewSelectedPhoto(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const photoBox = document.getElementById('photoPreview');
+            photoBox.style.backgroundImage = `url('${reader.result}')`;
+            photoBox.style.backgroundSize = 'cover';
+            photoBox.style.backgroundPosition = 'center';
+            photoBox.textContent = ''; // Remove "Photo" placeholder
         }
-        if (group_checked) {
-            // then compare obtained and total marks
-            var obtainded = $('#obtained').val()
-            var total = $('#total').val()
-            if (obtainded > total) {
-                validated = false
-                Swal.fire({
-                    title: "Warning",
-                    text: "Obtained marks wrong",
-                    icon: "warning",
-                    showConfirmButton: false,
-                    timer: 1500
-
-                });
-            } else {
-                validated = false
-                Swal.fire({
-                    title: "Warning",
-                    text: "Please check a group",
-                    icon: "warning",
-                    showConfirmButton: false,
-                    timer: 1500
-
-                });
-            }
-        }
-        return validated;
-        // return false;
-
+        reader.readAsDataURL(event.target.files[0]);
     }
 </script>
 @endsection

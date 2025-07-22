@@ -10,6 +10,7 @@ class Application extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'img',
         'name',
         'father',
         'bform',
