@@ -63,6 +63,13 @@
                         <td>{{ $application->obtained }}</td>
                         <td>{{ $application->obtainedPercentage() }}</td>
                         <td>{{ $application->fee_paid }}</td>
+                        <td>@if ($application->img)
+                            <img src="{{ asset('storage/' . $application->img) }}" alt="Photo"
+                                style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
+                            @else
+                            <span style="color: #999;">No Photo</span>
+                            @endif
+                        </td>
                         <td>
                             <div class="flex items-center justify-center">
                                 <input type="checkbox" class="w-4 h-4 rounded" name="application_ids_array[]" value="{{ $application->id }}">

@@ -15,6 +15,11 @@
 
     <div class="container grid gap-4 px-5 md:px-60 relative mt-3">
         <a href="{{ route('admission.applications.index') }}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
+
+        <div>
+            <img src="{{ asset('storage/' . $application->img) }}" alt="Student Photo" width="200">
+        </div>
+
         <div>
             <label for="">Application #</label>
             <div class="flex flex-wrap items-center gap-x-4">

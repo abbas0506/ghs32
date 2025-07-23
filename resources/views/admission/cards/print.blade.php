@@ -88,16 +88,41 @@ $roman = config('global.romans');
                     @if($i%$numOfCardsPerRow==0)<tr class="text-sm">@endif
                         <td class="p-6">
                             <div class="border p-2">
-                                <div class="font-bold mt-1">{{ $application->name }}</div>
-                                <div class="border w-24 h-24 m-auto mt-3"></div>
-                                <div class="text-xs mt-2">Session 2024-26</div>
-                                <div class="font-bold text-lg mt-1">{{ $application->group->name }}</div>
-                                <div class="flex flex-col m-auto mt-2">
-                                    <div id='qr' style="margin-left:76px">{!! DNS2D::getBarcodeHTML($application->bform,'QRCODE',2,2) !!}</div>
-                                    <p class="text-xs mt-2">Valid up to: August 2026</p>
-                                    <p class="text-xs mt-2">Govt. Higher Secondary School Chak Bedi, Pakpattan</p>
+                                <div><img src="{{public_path('images/logo/school_logo.png')}}" alt="" width="32px" height="32px"></div>
+                                <p class="text-xs mt-2">Govt. Higher Secondary School Chak Bedi, Pakpattan</p>
 
+                                <div class="w-24 h-24 m-auto mt-3">
+                                    @if ($application->img)
+                                    <img src="{{ public_path('storage/' . $application->img) }}"
+                                        style="width:80px; height:80px; border-radius:50%; border:1px solid #333; object-fit:cover;">
+                                    @else
+                                    <span style="color: #999;">No Photo</span>
+                                    @endif
                                 </div>
+                                <div class="font-bold" style="color:blue">{{ $application->name }}</div>
+                                <div class="text-md mt-2">Grade 11, {{ $application->group->name }}</div>
+                                <div class="text-xs mt-1">Session 2024-26</div>
+                                <table width="100%" style="margin-top: 24px;">
+                                    <tr>
+                                        <!-- QR Code on Left -->
+                                        <td style="text-align: left;">
+                                            {!! DNS2D::getBarcodeHTML($application->bform, 'QRCODE', 2, 2) !!}
+                                        </td>
+
+                                        <!-- Signature on Right -->
+                                        <td style="text-align: right; padding-right:8px">
+                                            <div style="text-align: center; display: inline-block;">
+                                                <img src="{{public_path('images/principal/sign.png')}}" alt="" width="32px" height="32px">
+                                                <span style="display: block; border-top: 1px solid #000; width: 80px; margin-top: 5px;"></span>
+                                                <span>Principal</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- <div class="flex flex-col m-auto mt-2">
+                                    <div id='qr' style="margin-left:76px">{!! DNS2D::getBarcodeHTML($application->bform,'QRCODE',2,2) !!}</div>
+                                </div> -->
                             </div>
                         </td>
 
