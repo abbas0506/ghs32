@@ -69,7 +69,7 @@ class OnlineApplicationController extends Controller
                 if ($request->hasFile('img')) {
                     $image = $request->file('img');
                     $extension = $image->getClientOriginalExtension();
-                    $filename = $request->year . '_' . $request->rollno . '.' . $extension;
+                    $filename = $request->pass_year . '_' . $request->rollno . '.' . $extension;
                     $path = $image->storeAs('students', $filename, 'public');
 
                     $data['img'] = $path;
