@@ -67,8 +67,11 @@ class OnlineApplicationController extends Controller
                 // not duplicating
                 $data = $request->all();
                 if ($request->hasFile('img')) {
-                    $filename = time() . '_' . $request->img->getClientOriginalName();
-                    $path = $request->img->storeAs('students', $filename, 'public');
+                    $image = $request->file('img');
+                    $extension = $image->getClientOriginalExtension();
+                    $filename = $request->year . '_' . $request->rollno . '.' . $extension;
+                    $path = $image->storeAs('students', $filename, 'public');
+
                     $data['img'] = $path;
                 }
                 $application = Application::create($data);
