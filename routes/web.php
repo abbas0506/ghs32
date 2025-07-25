@@ -27,6 +27,7 @@ use App\Http\Controllers\Admission\FeeController as AdmissionFeeController;
 use App\Http\Controllers\Admission\GroupController as AdmissionGroupController;
 use App\Http\Controllers\Admission\HighAchieverController;
 use App\Http\Controllers\Admission\ObjectionController as AdmissionObjectionController;
+use App\Http\Controllers\Admission\RejectionController;
 use App\Http\Controllers\Admission\SectionController;
 use App\Http\Controllers\Admission\SectionStudentsController;
 use App\Http\Controllers\Library\BookController;
@@ -147,10 +148,6 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/applications/{application}/accept', [AdmissionApplicationController::class, 'accept'])->name('applications.accept');
         Route::patch('/applications/{application}/reject', [AdmissionApplicationController::class, 'reject'])->name('applications.reject');
         Route::patch('/applications/{application}/admit', [AdmissionApplicationController::class, 'admit'])->name('applications.admit');
-
-
-
-        Route::resource('groups', AdmissionGroupController::class);
         Route::resource('fee', AdmissionFeeController::class);
         Route::resource('objections', AdmissionObjectionController::class);
 
