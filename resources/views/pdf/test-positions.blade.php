@@ -72,7 +72,7 @@ $roman = config('global.romans');
                         <th class="">Student Name</th>
                         <th class="w-12">Roll No</th>
                         <th class="w-16">Total</th>
-                        <th class="w-16">Obtained</th>
+                        <th class="w-16">obtained_marks</th>
                         <th class="w-16">Percentage</th>
                     </tr>
                 </thead>
@@ -83,8 +83,8 @@ $roman = config('global.romans');
                         <td>{{ $sortedPercentage['position'] }}</td>
                         <td class="text-left">{{ ucwords(strtolower($sortedPercentage['name'])) }}</td>
                         <td>{{ $sortedPercentage['rollno'] }}</td>
-                        <td>{{ $sortedPercentage['total'] }}</td>
-                        <td>{{ $sortedPercentage['obtained'] }}</td>
+                        <td>{{ $sortedPercentage['total_marks'] }}</td>
+                        <td>{{ $sortedPercentage['obtained_marks'] }}</td>
                         <td>{{ $sortedPercentage['percentage'] }} %</td>
 
 

@@ -21,7 +21,7 @@ class TestAllocationController extends Controller
         $testAllocations = TestAllocation::with(['allocation.section'])
             ->join('allocations', 'allocations.id', '=', 'test_allocations.allocation_id')
             ->join('sections', 'sections.id', '=', 'allocations.section_id')
-            ->join('grades', 'grades.id', '=', 'sections.grade_id')
+            ->join('grades', 'grades.id', '=', 'sections.grade')
             ->orderBy('grades.grade_no', 'asc')  // Sorting by `grade_no` of the related `section`
             ->where('test_id', $id)
             ->get('test_allocations.*');

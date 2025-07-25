@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admission;
 
 use App\Http\Controllers\Controller;
-use App\Models\Group;
+use App\Models\Application;
 use Illuminate\Http\Request;
 
-class GroupController extends Controller
+class RejectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +14,8 @@ class GroupController extends Controller
     public function index()
     {
         //
+        $applications = Application::where('status', 'rejected')->get();
+        return view('admission.rejections.index', compact('applications'));
     }
 
     /**
@@ -38,8 +40,6 @@ class GroupController extends Controller
     public function show(string $id)
     {
         //
-        $group = Group::findOrFail($id);
-        return view('admission.groups.show', compact('group'));
     }
 
     /**

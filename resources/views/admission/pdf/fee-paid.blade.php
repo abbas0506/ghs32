@@ -78,7 +78,7 @@ $roman = config('global.romans');
                         <th class="w-8">Sr</th>
                         <th class="w-8">Form#</th>
                         <th>Name</th>
-                        <th>Father</th>
+                        <th>father_name</th>
                         <th>Group</th>
                         <th>Marks</th>
                         <th>Fee</th>
@@ -86,15 +86,15 @@ $roman = config('global.romans');
                 </thead>
                 <tbody>
 
-                    @foreach($applications->sortByDesc('obtained')->sortBy('group_id') as $application)
+                    @foreach($applications->sortByDesc('obtained_marks')->sortBy('group_id') as $application)
                     <tr class="text-base">
                         <td>{{$sr++}}</td>
                         <td>{{$application->rollno}}</td>
                         <td style="text-align: left !important; padding:2px 6px;">{{$application->name}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$application->father}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;">{{$application->father_name}}</td>
                         <td>{{$application->group->name}}</td>
-                        <td>{{$application->obtained}}</td>
-                        <td>{{$application->fee_paid}}</td>
+                        <td>{{$application->obtained_marks}}</td>
+                        <td>{{$application->amount_paid}}</td>
                     </tr>
                     @endforeach
 
@@ -106,7 +106,7 @@ $roman = config('global.romans');
                     <tbody>
                         <tr class="text-xs">
                             <td class="text-left">Students: {{ $applications->count()}}</td>
-                            <td class="text-right">Total Fee: {{ $applications->sum('fee_paid')}}</td>
+                            <td class="text-right">Total Fee: {{ $applications->sum('amount_paid')}}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -61,9 +61,9 @@
                         </td>
                         <td class="text-left">{{ $application->name }}</td>
                         <td>{{ $application->group->name }}</td>
-                        <td>{{ $application->obtained }}</td>
-                        <td>{{ $application->obtainedPercentage() }}</td>
-                        <td>{{ $application->fee_paid }}</td>
+                        <td>{{ $application->obtained_marks }}</td>
+                        <td>{{ $application->obtained_percentage() }}</td>
+                        <td>{{ $application->amount_paid }}</td>
                         <td>
                             <input type="checkbox" class="rounded" name="application_ids_array[]" value="{{ $application->id }}" onclick="updateChkCount()">
                         </td>

@@ -13,7 +13,7 @@
             </div>
         </div>
         <div>
-            {{ $applications->whereNotNull('fee_paid')->count()}} / {{ $applications->count()}}
+            {{ $applications->whereNotNull('amount_paid')->count()}} / {{ $applications->count()}}
         </div>
     </div>
 
@@ -44,31 +44,23 @@
         <table class="table-fixed borderless w-full">
             <thead>
                 <tr class="border-b">
-                    <th class="w-8">Sr</th>
                     <th class="w-16">App #</th>
                     <th class="w-40 text-left">Student Name</th>
                     <th class="w-24">Group</th>
                     <th class="w-16">Marks</th>
-                    <th class="w-16">%</th>
                     <th class="w-16">Fee</th>
-                    <th class="w-16">Action</th>
+                    <th class="w-20">Time</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($applications->sortByDesc('updated_at') as $application)
+                @foreach($applications->sortByDesc('payment_date') as $application)
                 <tr class="tr text-sm border-b">
-                    <td>{{$sr++}}</td>
-                    <td>{{ $application->rollno }}</td>
+                    <td> <a href="{{ route('admission.applications.show', $application) }}" class="link">{{ $application->rollno }}</a></td>
                     <td class="text-left">{{ $application->name }}</td>
                     <td>{{ $application->group->name }}</td>
-                    <td>{{ $application->obtained }}</td>
-                    <td>{{ $application->obtainedPercentage() }}</td>
-                    <td>{{ $application->fee_paid }}</td>
-                    <td>
-                        <div class="flex items-center justify-center">
-                            <a href="{{route('admission.fee.edit',$application)}}" class="btn-teal rounded">Pay</a>
-                        </div>
-                    </td>
+                    <td>{{ $application->obtained_marks }}</td>
+                    <td>{{ $application->amount_paid }}</td>
+                    <td>{{ $application->payment_date?->diffForHumans()??''}}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -85,7 +77,7 @@
         var str = 0;
         $('.tr').each(function() {
             if (!(
-                    $(this).children().eq(1).prop('outerText').toLowerCase().includes(searchtext)
+                    $(this).children().eq(0).prop('outerText').toLowerCase().includes(searchtext)
                 )) {
                 $(this).addClass('hidden');
             } else {

@@ -11,7 +11,7 @@ class Section extends Model
 
     protected $fillable = [
         'name',    //section label A, B, C
-        'grade_id',
+        'grade',
         'incharge_id',
         'starts_at',
         'ends_at',

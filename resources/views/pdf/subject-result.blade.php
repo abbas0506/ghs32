@@ -71,7 +71,7 @@ $roman = config('global.romans');
                         <th class="w-12">Position</th>
                         <th class="">Student Name</th>
                         <th class="w-12">Roll No</th>
-                        <th class="w-16">Obtained</th>
+                        <th class="w-16">obtained_marks</th>
                         <th class="w-16">Percentage</th>
                         <th class="w-16">Status</th>
                     </tr>

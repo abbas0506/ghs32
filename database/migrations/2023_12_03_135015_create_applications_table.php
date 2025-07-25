@@ -13,28 +13,35 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
+            $table->string('photo', 50)->nullable();
             $table->string('name', 50);
-            $table->string('father', 50);
+            $table->string('father_name', 50);
             $table->string('bform', 15);
+            $table->string('gender', 1)->default('m');
             $table->string('phone', 16);
             $table->string('address', 100)->nullable();
-            $table->string('bise_name', 20);
+            $table->date('dob');
+            $table->string('identification_mark', 100);
+            $table->string('caste', 50);
+            $table->string('father_profession', 50);
+            $table->unsignedInteger('father_income');
+
+            $table->unsignedSmallInteger('admission_grade');
+            $table->foreignId('group_id')->constrained()->onDelete('cascade');
             $table->year('pass_year');
+            $table->enum('medium', ['en', 'ur'])->default('ur'); //english:0, urdu:1
+            $table->string('previous_school')->nullable();
+            $table->string('bise', 20);
             $table->string('rollno', 8);
-            $table->unsignedSmallInteger('obtained');
-            $table->unsignedSmallInteger('total');
-            $table->enum('medium', ['English', 'Urdu'])->default('Urdu'); //english:0, urdu:1
-            $table->string('objection', 200)->nullable();
-            $table->unsignedSmallInteger('fee_paid')->nullable();
-            $table->date('paid_at')->nullable();
-            $table->unsignedSmallInteger('concession')->nullable();
+            $table->unsignedSmallInteger('obtained_marks');
+            $table->unsignedSmallInteger('total_marks');
+            $table->string('status')->default('pending'); // 'pending', 'approved', 'rejected', 'admitted'
+            $table->unsignedInteger('amount_paid')->nullable();
+            $table->date('payment_date')->nullable();
+            $table->string('payment_method')->default('cash'); // 'cash', 'bank', 'online'
+            $table->unsignedSmallInteger('fee_concession')->nullable();
+            $table->string('rejection_note')->nullable();
             $table->timestamps();
-
-            $table->unsignedBigInteger('grade_id');
-            $table->unsignedBigInteger('group_id');
-
-            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
         });
     }
 

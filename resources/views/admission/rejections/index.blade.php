@@ -7,7 +7,9 @@
     <div class="bread-crumb">
         <a href="{{ url('/') }}">Dashboard</a>
         <div>/</div>
-        <div>Objections ( {{ $applications->count() }} )</div>
+        <a href="{{ route('admission.applications.index') }}">Applications</a>
+        <div>/</div>
+        <div>Rejected ( {{ $applications->count() }} )</div>
     </div>
 
 
@@ -37,31 +39,21 @@
         <table class="table-fixed borderless w-full">
             <thead>
                 <tr class="border-b">
-                    <th class="w-8">Sr</th>
                     <th class="w-12">App #</th>
                     <th class="w-40 text-left">Student Name</th>
                     <th class="w-24">Group</th>
                     <th class="w-12">Marks</th>
-                    <th class="w-12">Fee</th>
-                    <th class="w-24">Objection</th>
-                    <th class="w-12">Action</th>
+                    <th class="w-24">Rejection Note</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($applications->sortByDesc('updated_at') as $application)
                 <tr class="tr text-sm border-b">
-                    <td>{{$sr++}}</td>
-                    <td>{{ $application->rollno }}</td>
+                    <td><a href="{{ route('admission.applications.show', $application) }}" class="link"></a>{{ $application->rollno }}</td>
                     <td class="text-left">{{ $application->name }}</td>
                     <td>{{ $application->group->name }}</td>
-                    <td>{{ $application->obtained }}</td>
-                    <td>{{ $application->fee_paid }}</td>
-                    <td>{{ $application->objection }}</td>
-                    <td>
-                        <div class="flex items-center justify-center btn-orange rounded">
-                            <a href="{{route('admission.objections.edit',$application)}}">Edit</a>
-                        </div>
-                    </td>
+                    <td>{{ $application->obtained_marks }}</td>
+                    <td>{{ $application->rejection_note }}</td>
                 </tr>
                 @endforeach
             </tbody>

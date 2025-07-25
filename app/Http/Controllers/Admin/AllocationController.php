@@ -16,7 +16,7 @@ class AllocationController extends Controller
     //
     public function index()
     {
-        $sections = Section::where('grade_id', '>', 8)->get()->sortBy('grade.grade_no'); //get active sections
+        $sections = Section::where('grade', '>', 8)->get()->sortBy('grade.grade_no'); //get active sections
         return view('admin.allocations.index', compact('sections'));
     }
 

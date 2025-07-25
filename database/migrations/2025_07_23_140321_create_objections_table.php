@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('grades', function (Blueprint $table) {
+        Schema::create('objections', function (Blueprint $table) {
             $table->id();
-            $table->unsignedSmallInteger('grade_no');
-            $table->string('english_name', 20);
-            $table->string('roman_name', 20);
+            $table->foreignId('application_id')->constrained()->onDelete('cascade');
+            $table->string('objection_detail'); // 'cash', 'bank', 'online'
+            $table->boolean('resolved'); // 'cash', 'bank', 'online'
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('grades');
+        Schema::dropIfExists('objections');
     }
 };

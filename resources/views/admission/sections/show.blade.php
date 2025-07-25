@@ -50,7 +50,7 @@
                 <tr>
                     <th class="w-16">Roll No</th>
                     <th class="w-40 text-left">Name</th>
-                    <th class="w-40 text-left">Father</th>
+                    <th class="w-40 text-left">father_name</th>
                     <th class="w-24">BForm</th>
                     <th class="w-20">Marks</th>
                     <th class="w-20">Serial #</th>
@@ -62,10 +62,10 @@
                 <tr class="tr">
                     <td>{{$student->rollno}}</td>
                     <td class="text-left"><a href="{{route('admin.section.students.show', [$section, $student])}}" class="link">{{$student->name}}</a></td>
-                    <td class="text-left">{{ $student->father }}</td>
+                    <td class="text-left">{{ $student->father_name }}</td>
                     <td>{{$student->bform}}</td>
                     <td>{{$student->marks}}</td>
-                    <td>{{$student->serial_no}}</td>
+                    <td>{{$student->admission_no}}</td>
                     <td>
                         <form action="{{route('admission.section.students.destroy',[$student, $section])}}" method="post" onsubmit="return confirmDel(event)">
                             @csrf

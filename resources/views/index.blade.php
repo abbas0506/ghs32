@@ -100,7 +100,7 @@
 <section class="w-screen h-screen">
     <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full py-16">
         <div class="flex flex-1 justify-end items-center">
-            <img src="{{ url(asset('images/small/admission-1.png')) }}" alt="student" class="w-36 h-36 md:w-96 md:h-96">
+            <img src="{{ url(asset('images/small/admission-2.png')) }}" alt="student" class="w-40 h-40 md:w-96 md:h-96">
 
         </div>
 
@@ -110,7 +110,7 @@
             <p class="text-slate-600 text-sm md:text-lg leading-relaxed mt-4">We are thrilled to welcome ambitious students to our dynamic academic journey, proudly offering FA, Pre-Engineering, and ICS programs.</p>
             <a href="{{ url('admission-25')}}">
                 <div class="button-container">
-                    <button class="click-demo-button click-demo-button mt-5 rounded py-2 px-5">
+                    <button class="click-demo-button click-demo-button mt-5 rounded py-0 px-5">
                         Join Us
                     </button>
                     <i class="bi bi-cursor-fill pointer-icon"></i>

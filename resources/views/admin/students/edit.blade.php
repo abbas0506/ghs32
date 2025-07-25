@@ -33,8 +33,8 @@
                         <input type="text" name='name' class="custom-input" placeholder="Type here" value="{{ $student->name }}">
                     </div>
                     <div>
-                        <label>Father</label>
-                        <input type="text" name='father' class="custom-input" placeholder="Type here" value="{{ $student->father }}">
+                        <label>father_name</label>
+                        <input type="text" name='father_name' class="custom-input" placeholder="Type here" value="{{ $student->father_name }}">
                     </div>
                     <div class="">
                         <label>Bform *</label>

@@ -29,33 +29,8 @@ class UserSeeder extends Seeder
             'phone' => "03000373004",
             'cnic' => "3530119663433",
             'qualification' => 'MS in CS',
-            'designation' => 'SS(CS)',
-            'bps' => 17,
-        ]);
-
-        $user = User::create([
-            'email' => 'admission@ghsscb.edu.pk',
-            'password' => Hash::make('password'),
-        ]);
-
-        $user->assignRole('admission');
-
-        //sir atif
-        $user = User::create([
-            'email' => "atifzohaibkhan@gmail.com",
-            'password' => Hash::make('password'),
-        ]);
-
-        $user->assignRole('teacher');
-
-        Profile::create([
-            'user_id' => $user->id,
-            'name' => "Atif Zohaib",
-            'phone' => "03045562621",
-            'cnic' => "3610457786765",
-            'qualification' => 'MS in CS',
-            'designation' => 'SSE(CS)',
-            'bps' => 16,
+            'designation' => 'SSS(CS)',
+            'bps' => 18,
         ]);
 
         // lab incharge
@@ -72,7 +47,7 @@ class UserSeeder extends Seeder
             'cnic' => "3640291865395",
             'qualification' => 'MA Urdu',
             'designation' => 'EST',
-            'bps' => 17,
+            'bps' => 14,
         ]);
     }
 }

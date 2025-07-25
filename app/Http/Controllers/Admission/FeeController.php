@@ -15,7 +15,7 @@ class FeeController extends Controller
     public function index()
     {
         //
-        $applications = Application::all();
+        $applications = Application::where('status', 'admitted')->get();
         return view('admission.fee.index', compact('applications'));
     }
 
@@ -49,8 +49,6 @@ class FeeController extends Controller
     public function edit(string $id)
     {
         //
-        $application = Application::findOrFail($id);
-        return view('admission.fee.edit', compact('application'));
     }
 
     /**
@@ -59,20 +57,7 @@ class FeeController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $request->validate([
-            'fee_paid' => 'required|numeric|min:0',
-        ]);
-        $request->merge([
-            'paid_at' => now(),
-        ]);
 
-        $application = Application::findOrFail($id);
-        try {
-            $application->update($request->all());
-            return redirect()->route('admission.fee.index')->with('success', 'Fee for ' . $application->rollno . ' Successfully updated ');
-        } catch (Exception $ex) {
-            return redirect()->back()->withErrors($ex->getMessage());
-        }
     }
 
     /**

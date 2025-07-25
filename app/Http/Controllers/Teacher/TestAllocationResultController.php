@@ -82,8 +82,8 @@ class TestAllocationResultController extends Controller
 
         $resultIdsArray = array();
         $resultIdsArray = $request->result_ids_array;
-        $obtainedMarksArray = array();
-        $obtainedMarksArray = $request->obtained_marks_array;
+        $obtained_marksMarksArray = array();
+        $obtained_marksMarksArray = $request->obtained_marks_array;
 
         DB::beginTransaction();
         try {
@@ -93,7 +93,7 @@ class TestAllocationResultController extends Controller
             foreach ($resultIdsArray as $key => $id) {
                 $result = Result::findOrFail($id);
                 $result->update([
-                    'obtained_marks' => $obtainedMarksArray[$key],
+                    'obtained_marks' => $obtained_marksMarksArray[$key],
                 ]);
             }
             DB::commit();

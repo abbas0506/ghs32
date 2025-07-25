@@ -40,11 +40,11 @@ class CollectiveTestController extends Controller
         //
         $request->validate([
             'title' => 'required',
-            'grade_ids_array' => 'required',
+            'grades_array' => 'required',
         ]);
 
         $gradeIdsArray = array();
-        $gradeIdsArray = $request->grade_ids_array;
+        $gradeIdsArray = $request->grades_array;
 
         $grades = Grade::whereIn('id', $gradeIdsArray)->get();
 

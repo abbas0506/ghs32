@@ -31,7 +31,7 @@ class PdfController extends Controller
     }
     public function printFee()
     {
-        $applications = Application::whereNotNull('fee_paid')->get();
+        $applications = Application::whereNotNull('amount_paid')->get();
         $pdf = PDF::loadview('admission.pdf.fee-paid', compact('applications'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = "phone-list.pdf";

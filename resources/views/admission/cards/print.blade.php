@@ -92,8 +92,8 @@ $roman = config('global.romans');
                                 <p class="text-xs mt-2">Govt. Higher Secondary School Chak Bedi, Pakpattan</p>
 
                                 <div class="w-24 h-24 m-auto mt-3">
-                                    @if ($application->img)
-                                    <img src="{{ public_path('storage/' . $application->img) }}"
+                                    @if ($application->photo)
+                                    <img src="{{ public_path('storage/' . $application->photo) }}"
                                         style="width:80px; height:80px; border-radius:50%; border:1px solid #333; object-fit:cover;">
                                     @else
                                     <span style="color: #999;">No Photo</span>

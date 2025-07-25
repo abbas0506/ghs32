@@ -18,7 +18,7 @@ class SectionController extends Controller
     public function index()
     {
         //
-        $sections = Section::where('grade_id', 11)->get();
+        $sections = Section::where('grade', 11)->get();
         return view('admission.sections.index', compact('sections'));
     }
 
@@ -100,7 +100,7 @@ class SectionController extends Controller
             $students = $section->students->sortByDesc('marks');
 
             foreach ($students as $student) {
-                $student->serial_no = $srNo;
+                $student->admission_no = $srNo;
                 $student->save();
                 $srNo++;
             }

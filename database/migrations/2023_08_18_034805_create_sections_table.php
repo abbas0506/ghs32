@@ -14,16 +14,12 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->string('name', 20);
-            $table->unsignedBigInteger('grade_id');  //
-            $table->unsignedBigInteger('incharge_id')->nullable();
+            $table->unsignedInteger('grade');  //
+            $table->foreignId('incharge_id')->nullable()->constrained('users')->onDelete('set null');
             $table->date('starts_at');
             $table->date('ends_at'); //will pass out
 
             $table->timestamps();
-
-            // $table->unique(['name', 'grade_id', 'starts_at']); //disallow same section name within a class
-            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
-            $table->foreign('incharge_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

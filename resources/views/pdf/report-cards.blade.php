@@ -84,9 +84,9 @@ $roman = config('global.romans');
                         <td class="text-left">{{ ucwords(strtolower($student->name)) }}</td>
                     </tr>
                     <tr>
-                        <td class="text-left">Father</td>
+                        <td class="text-left">father_name</td>
                         <td>:</td>
-                        <td class="text-left">{{ ucwords(strtolower($student->father)) }}</td>
+                        <td class="text-left">{{ ucwords(strtolower($student->father_name)) }}</td>
                     </tr>
                     <tr>
                         <td class="text-left">Class</td>
@@ -114,7 +114,7 @@ $roman = config('global.romans');
                 <tbody class="data">
 
                     @php
-                    $obtained=$student->results()->test($test->id)->get()->sum('obtained_marks');
+                    $obtained_marks=$student->results()->test($test->id)->get()->sum('obtained_marks');
                     $total=0;
                     @endphp
                     @foreach($student->results()->test($test->id)->get() as $result)
@@ -136,7 +136,7 @@ $roman = config('global.romans');
                     <tr>
                         <td colspan="6" style="padding-top:16px">
                             @if($total!=0)
-                            <span class="font-bold">Overall Marks:</span> {{ $obtained }} / {{ $total }} = {{ round($obtained/$total*100,2) }} % <span class="text-white">-------</span> <span class="font-bold"> Class Position:</span> {{ $student->testRank($sortedResult) }}
+                            <span class="font-bold">Overall Marks:</span> {{ $obtained_marks }} / {{ $total }} = {{ round($obtained_marks/$total*100,2) }} % <span class="text-white">-------</span> <span class="font-bold"> Class Position:</span> {{ $student->testRank($sortedResult) }}
                             @endif
                         </td>
                     </tr>

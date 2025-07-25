@@ -7,12 +7,12 @@
 @section('body')
 <style>
     body {
-        background-color: #f1f5f9;
+        background-color: #6d6d6d;
     }
 
-    .sticky-header {
+    /* .sticky-header {
         background-color: #0d9488;
-    }
+    } */
 
     @keyframes waveGlow {
         0% {
@@ -89,7 +89,7 @@
             <x-message></x-message>
             @endif
 
-            <form action="{{url('apply')}}" method="post" class="mt-8 w-full" enctype="multipart/form-data">
+            <form action="{{url('apply')}}" method="post" id='applicationForm' class="mt-8 w-full" enctype="multipart/form-data">
                 @csrf
 
                 <div class="photo-upload-wrapper">
@@ -99,17 +99,17 @@
                     </div>
 
                     <!-- Custom Upload Button -->
-                    <label for="img" class="custom-file-upload">Upload Your Photo</label>
-                    <input type="file" id="img" name="img" accept="image/*" onchange="previewSelectedPhoto(event)">
+                    <label for="photo" class="custom-file-upload">Upload Your Photo</label>
+                    <input type="file" id="photo" name="photo" accept="image/*" onchange="previewSelectedPhoto(event)">
+                    <label id="photo-error" class="text-red-500 mt-1 hidden">File size exceeds 1MB.</label>
                 </div>
-
 
                 <h2 class="mt-8">Choose your desired group</h2>
                 <div class="grid gap-y-2 mt-3">
                     @foreach($groups as $group)
                     <div>
                         <input type="checkbox" id='group_id_{{$group->id}}' name="group_id" value="{{ $group->id }}" class="chk-group rounded mr-2">
-                        <label for="group_id_{{$group->id}}">{{ $group->name }} ({{ $group->subjects_list }})</label>
+                        <label for="group_id_{{$group->id}}"><strong>{{ $group->name }} </strong>({{ $group->subjects_list }})</label>
                     </div>
                     @endforeach
                 </div>
@@ -121,15 +121,19 @@
                         <option value="2025" selected>2025</option>
                     </select>
                 </div>
+                <!-- hidden fields -->
+                <input type="number" name="admission_grade" class="custom-input fancy-focus" value="11" hidden>
+                <input type="text" name="gender" class="custom-input fancy-focus" value="m" hidden>
+
                 <!-- student info -->
                 <div class="grid md:grid-cols-2 gap-4 mt-8">
                     <div class="md:col-span-2">
-                        <label for="">Student Name (میٹرک کے رزلٹ کارڈ کے مطابق)</label>
+                        <label for="">Student Name ( رزلٹ کارڈ کے مطابق)</label>
                         <input type="text" name="name" class="custom-input fancy-focus" placeholder="Student name" required>
                     </div>
                     <div class="md:col-span-2">
-                        <label for="">Father name</label>
-                        <input type="text" name="father" class="custom-input fancy-focus" placeholder="Father name" required>
+                        <label for="">father_name name</label>
+                        <input type="text" name="father_name" class="custom-input fancy-focus" placeholder="Father name" required>
                     </div>
                     <div>
                         <label for="">BForm (ب فارم)</label>
@@ -139,33 +143,116 @@
                         <label for="">Phone No</label>
                         <input type="text" name="phone" id='phone' class="custom-input fancy-focus" placeholder="x x x x - x x x x x x x" required>
                     </div>
-                    <div>
-                        <label for="">Board Name</label>
-                        <select name="bise_name" id="" class="custom-input fancy-focus">
-                            <option value="sahiwal">Sahiwal Board</option>
-                            <option value="other">Other Board</option>
-                        </select>
+                    <div class="md:col-span-2">
+                        <label for="">Address (گاوؑں کانام) </label>
+                        <input type="text" name="address" id='address' class="custom-input fancy-focus" placeholder="Address" required>
                     </div>
                     <div>
-                        <label for="">Matric Roll No.</label>
-                        <input type="number" name="rollno" class="custom-input fancy-focus" placeholder="Roll number" min=0 required>
+                        <label for="dob">Date of Birth (mm/dd/yyyy)</label>
+                        <input type="date" name="dob" class="custom-input fancy-focus" required>
                     </div>
+
                     <div>
-                        <label for="">Obtanied Marks</label>
-                        <input type="number" name="obtained" id='obtained' class="custom-input fancy-focus" placeholder="Obtained marks" min='0' max='1200' required>
+                        <label for="identification_mark">Identification Mark (شناختی علامت)</label>
+                        <input type="text" name="identification_mark" class="custom-input fancy-focus" placeholder="Identification mark" required>
                     </div>
+
                     <div>
-                        <label for="">Total Marks</label>
-                        <select name="total" id="total" class="custom-input fancy-focus">
-                            <option value="1100">1100</option>
-                            <option value="1200" selected>1200</option>
+                        <label for="caste">Caste (ذات)</label>
+                        <select name="caste" class="custom-input fancy-focus" placeholder="Caste" required>
+                            <option value="Rajput">Rajput</option>
+                            <option value="Bhatti">Bhatti</option>
+                            <option value="Arains">Arains (آرائیں)</option>
+                            <option value="Wattoo">Wattoo</option>
+                            <option value="Gujjars">Gujjars</option>
+                            <option value="Khokhar">Khokhar</option>
+                            <option value="Kharal">Kharal</option>
+                            <option value="Syeds">Syeds</option>
+                            <option value="Qureshi">Qureshi</option>
+                            <option value="Mughal">Mughal</option>
+                            <option value="Others">Others</option>
                         </select>
                     </div>
 
+                    <div>
+                        <label for="father_profession">Father Profession (باپ یا سرپرست کا پیشہ)</label>
+                        <select name="father_profession" class="custom-input fancy-focus" placeholder="Father's Profession" required>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Farmer">Farmer</option>
+                            <option value="Businessman">Businessman</option>
+                            <option value="Doctor">Doctor</option>
+                            <option value="Engineer">Engineer</option>
+                            <option value="Labourer">Labourer (مزدور)</option>
+                            <option value="Civil Servant">Civil Servant (سرکاری ملازم)</option>
+                            <option value="Civil Servant">Private Sector (پرائیویٹ ملازم)</option>
+                            <option value="Civil Servant">Others (کوئی اور)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="father_income">Father Income </label>
+                        <select name="father_income" class="custom-input fancy-focus" required>
+                            <option value="20000">Rs. 20,000</option>
+                            <option value="40000" selected>Rs. 40,000</option>
+                            <option value="60000">Rs. 60,000</option>
+                            <option value="80000">Rs. 80,000</option>
+                            <option value="100000">Rs. 100,000</option>
+                            <option value="150000">More than Rs. 100,000</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="previous_school">Previous School (سابقہ سکول)</label>
+                        <input type="text" name="previous_school" class="custom-input fancy-focus" placeholder="Previous school" required>
+                    </div>
+                    <div>
+                        <label for="medium">Medium (میٹرک میں زریعہ تعلیم)</label>
+                        <select name="medium" class="custom-input fancy-focus" required>
+                            <option value="ur">Urdu</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="bise">Board</label>
+                        <select name="bise" class="custom-input fancy-focus" placeholder="Board" required>
+                            <option value="Sahiwal">Sahiwal</option>
+                            <option value="Multan">Multan</option>
+                            <option value="Lahore">Lahore</option>
+                            <option value="Gujranwala">Gujranwala</option>
+                            <option value="Faisalabad">Faisalabad</option>
+                            <option value="Rawalpindi">Rawalpindi</option>
+                            <option value="DG Khan">DG Khan</option>
+                            <option value="Bahawalpur">Bahawalpur</option>
+                            <option value="Federal">Federal</option>
+                            <option value="Karachi">Karachi</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="rollno">Matric Roll No</label>
+                        <input type="text" name="rollno" class="custom-input fancy-focus" placeholder="Roll no." required>
+                    </div>
+                    <div>
+                        <label for="total_marks">Total Marks</label>
+                        <select name="total_marks" id="total_marks" class="custom-input fancy-focus">
+                            <option value="1000">1050</option>
+                            <option value="1050">1050</option>
+                            <option value="1100">1100</option>
+                            <option value="1150">1150</option>
+                            <option value="1200" selected>1200</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="obtained_marks">Obtained Marks (میٹرک میں حاصل کردہ نمبر) </label>
+                        <input type="number" name="obtained_marks" class="custom-input fancy-focus" placeholder="Obtained marks" min='0' max='1200' required>
+                    </div>
+
                 </div>
-                <div class="flex  space-x-3 text-center mt-8">
-                    <button class="btn-gray rounded py-3">Cancel</button>
-                    <button class="btn-blue rounded py-3">Submit Application</button>
+                <div class="flex justify-center space-x-3 text-center mt-8">
+                    <a href="{{ url('/')}}" class="btn-gray rounded py-3 px-5">Cancel</a>
+                    <button class="btn-blue rounded py-3 px-5">Submit</button>
 
                 </div>
             </form>
@@ -229,5 +316,37 @@
         }
         reader.readAsDataURL(event.target.files[0]);
     }
+    // show error if file size exceeds 1MB
+    const form = document.getElementById('applicationForm');
+    const photoInput = document.getElementById('photo');
+    const errorText = document.getElementById('photo-error');
+
+    photoInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file && file.size > 1024 * 1024) {
+            errorText.classList.remove('hidden');
+        } else {
+            errorText.classList.add('hidden');
+        }
+    });
+
+    form.addEventListener('submit', function(e) {
+        const file = photoInput.files[0];
+
+        if (file && file.size > 1024 * 1024) { // 1MB = 1024 * 1024 bytes
+            e.preventDefault(); // stop form submission
+            errorText.classList.remove('hidden'); // show error
+            Swal.fire({
+                title: "Warning",
+                text: "Photo size exceeds 1MB",
+                icon: "warning",
+                showConfirmButton: false,
+                timer: 1500
+
+            });
+        } else {
+            errorText.classList.add('hidden'); // hide error if valid
+        }
+    });
 </script>
 @endsection

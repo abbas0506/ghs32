@@ -5,6 +5,11 @@
 @endsection
 
 @section('body')
+<style>
+    body {
+        background-color: #6d6d6d;
+    }
+</style>
 <section>
 
     <head>
@@ -27,31 +32,31 @@
 
     <div class="bg-cover bg-center min-h-screen flex flex-col nastaliq">
         <!-- Instructions Box -->
-        <div dir="rtl" class="pt-24 w-full lg:w-2/3  mx-auto bg-white bg-opacity-90 rounded-xl shadow-xl p-6 mt-10">
-            <!-- Heading -->
+        <div dir="rtl" class="pt-8 w-full lg:w-2/3  mx-auto bg-white bg-opacity-90 rounded-xl shadow-xl p-6 mt-10">
             <div class="text-right">
-                <h1 class="text-xl font-bold text-teal-700 drop-shadow-lg">داخلہ فارم پُر کرنے سے متعلقہ ہدایات</h1>
+                <h1 class="text-xl font-bold text-teal-700 drop-shadow-lg">ضروری ہدایات</h1>
             </div>
             <ul class="space-y-4 text-sm justify-end text-gray-800 leading-relaxed mt-8">
-                <li class="flex items-end">
+                <li class="flex items-start">
                     <span class="text-blue-600 text-xl ml-2">👈</span>
-                    براہ کرم تمام خانوں کو مکمل اور درست طریقے سے پُر کریں۔
-
+                    فارم پُر کرنے سے پہلے آپکے پاس سکین شدہ یا کیمرہ سے لی گئی اپنی ایک تصویر ہونی چاہیے جس کا سائز ایک میگا بائٹ سے زیادہ نہ ہو، سائز زیادہ ہونیکی صورت میں اُسے کمپریس کریں۔ اس کیلیے آپ گوگل سے مدد لے سکتے ہیں
+                <li class="flex items-start">
+                    <span class="text-blue-600 text-xl ml-2">👈</span>
+                    فارم سبمِٹ کرنے سے پہلے تسلی کرلیں کہ تمام معلومات درست ہیں کیونکہ فارم جمع کروانے کے بعد تبدیلی ممکن نہیں ہوگی
                 </li>
-                <li class="flex items-center">
+                <li class="flex items-start">
                     <span class="text-blue-600 text-xl ml-2">👈</span>
-                    غلط معلومات فراہم کرنے پر درخواست مسترد کی جا سکتی ہے۔
+                    فارم سبمِٹ کرنے بعد اگلا مرحلہ فیس جمع کراناہے۔ نیچے دیے گئے داخلہ شیڈول کے مطابق اوریجنل رزلٹ کاڈ کے ساتھ تشریف لائیں اوراپنی فیس جمع کروائیں۔
                 </li>
-                <li class="flex items-center">
+                <li class="flex items-start">
                     <span class="text-blue-600 text-xl ml-2">👈</span>
-                    تمام ضروری دستاویزات کو اسکین کرکے اپ لوڈ کریں۔
+                    ساہیوال بورڈ کی بجائے اگر کسی اور بورڈ سے میٹرک پاس کیا ہے تو اُس بورڈ سے این او سی فوری حاصل کریں (رجسٹریشن سے پہلے جمع کروانا لازمی ہے)
                 </li>
-                <li class="flex items-center">
+                <li class="flex items-start">
                     <span class="text-blue-600 text-xl ml-2">👈</span>
-                    فارم جمع کروانے کے بعد تبدیلی ممکن نہیں ہوگی۔
+                    سب سے اہم بات یہ کہ اپنا گروپ سوچ سمجھ کر منتخب کریں، آنیوالی زندگی میں آپکا یہ فیصلہ انتہائی اہمیت رکھتا ہے۔۔۔ آئی سی ایس یا پری انجینیرنگ کا انتخاب تبھی کریں جب آپ ریاضی میں بہت اچھے ہوں
                 </li>
             </ul>
-
 
             <div class="text-right mt-12">
                 <h1 class="text-xl font-bold text-teal-700 drop-shadow-lg">داخلہ شیڈول</h1>
@@ -64,12 +69,8 @@
                             <td class="px-4 py-2 border font-semibold text-red-600">Aug 20, 2025</td>
                         </tr>
                         <tr class="border-t">
-                            <td class="px-4 py-2 border">کاغذات کی جانچ پڑتال، داخلہ لسٹیں </td>
-                            <td class="px-4 py-2 border">Aug 22, 2025</td>
-                        </tr>
-                        <tr class="border-t">
-                            <td class="px-4 py-2 border">فیس جمع کروانے کی آخری تاریخ</td>
-                            <td class="px-4 py-2 border">Aug 23, 2025</td>
+                            <td class="px-4 py-2 border"> ڈیٹا ویری فکیشن اور فیس </td>
+                            <td class="px-4 py-2 border">Aug 21, 2025</td>
                         </tr>
                         <tr class="border-t">
                             <td class="px-4 py-2 border">استقبالیہ تقریب ، کلاسز کا آغاز</td>
@@ -96,26 +97,24 @@
 <div id="popupModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
     <div class="bg-white rounded-lg shadow-xl w-96 relative p-6 mx-4">
         <!-- Close Button -->
-        <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-lg">
+        <button onclick="closeModal()" class="absolute top-0 right-2 text-gray-500 hover:text-red-500 text-lg">
             &times;
         </button>
 
         <!-- Modal Content -->
         <div class="text-center mt-4 mb-6">
             <h2 class="text-2xl font-bold text-green-800">Welcome!</h2>
-            <p class="text-sm text-gray-600 mt-2">Join Us — Admissions 2025 Are Open</p>
+            <p class="text-sm text-gray-600 mt-2">We are excited to have you here</p>
         </div>
 
 
         <!-- Last date -->
         <div class="flex justify-center">
-            <h2 class="text-red-600 font-bold text-md">Last Date to Apply: Aug 20, 2025</h2>
+            <h2 class="text-red-600 font-bold text-md">Last Date : Aug 20, 2025</h2>
         </div>
     </div>
 </div>
 
-<!-- footer -->
-<x-footer></x-footer>
 @endsection
 
 @section('script')

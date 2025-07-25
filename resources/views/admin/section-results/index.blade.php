@@ -43,7 +43,7 @@
                     <tr class="border-b">
                         <th class="w-8">Roll #</th>
                         <th class="w-40 text-left">Student</th>
-                        <th class="w-40 text-left">Father</th>
+                        <th class="w-40 text-left">father_name</th>
                         <th class="w-16">B Form</th>
                         <th class="w-16"><input type="checkbox" id='chkAll' class="rounded" onclick="checkAll()"><br><label for="">Check all</label></th>
                     </tr>
@@ -52,7 +52,7 @@
                     @foreach($section->students as $student)
                     <td>{{ $student->rollno }}</td>
                     <td class="text-left"><a href="" class="link">{{ $student->name }}</a></td>
-                    <td class="text-left">{{ $student->father}}</td>
+                    <td class="text-left">{{ $student->father_name}}</td>
                     <td>{{ $student->bform }}</td>
                     <td>
                         <div class="flex items-center justify-center">

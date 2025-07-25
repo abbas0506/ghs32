@@ -6,49 +6,157 @@
     <h1>Applications</h1>
 
     <div class="bread-crumb">
-        <a href="{{ url('/') }}">Dashboard</a>
+        <a href="{{ url('/') }}">Home</a>
         <div>/</div>
-        <div>Application # {{ $application->rollno }}</div>
+        <a href="{{ route('admission.applications.index') }}">Applications</a>
+        <div>/</div>
+        <div>{{ $application->rollno }}</div>
         <div>/</div>
         <div>View</div>
     </div>
 
-    <div class="container grid gap-4 px-5 md:px-60 relative mt-3">
-        <a href="{{ route('admission.applications.index') }}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
-
+    <div class="container grid gap-4 px-5 relative mt-3 shadow-lg md:w-2/3 mx-auto  p-8 rounded-lg">
         <div>
-            <img src="{{ asset('storage/' . $application->img) }}" alt="Student Photo" width="200">
+            @if($errors->any())
+            <x-message :errors='$errors'></x-message>
+            @else
+            <x-message></x-message>
+            @endif
         </div>
-
-        <div>
-            <label for="">Application #</label>
-            <div class="flex flex-wrap items-center gap-x-4">
-                <h2>{{ $application->rollno }}</h2>
-                <p>dated {{ $application->created_at->addHours(5)}}</p>
+        <div class="absolute top-2 right-2">
+            <div class="flex items-center justify-center space-x-2">
+                @if($application->status == 'pending')
+                <div class="flex w-8 h-8 rounded-full border justify-center items-center">
+                    <form action="{{route('admission.applications.destroy',$application)}}" method="post" onsubmit="return confirmDel(event)">
+                        @csrf
+                        @method('DELETE')
+                        <button><i class="bx bx-trash text-red-600"></i></button>
+                    </form>
+                </div>
+                @endif
+                <div class="flex w-8 h-8 rounded-full border justify-center items-center">
+                    <a href="{{route('admission.applications.edit',$application)}}"><i class="bx bx-pencil text-green-600"></i></a>
+                </div>
+                <div class="flex w-8 h-8 rounded-full border justify-center items-center">
+                    <a href="{{ route('admission.applications.index')}}"><i class="bi-x-lg"></i></a>
+                </div>
             </div>
         </div>
-        <div>
-            <label for="">Name</label>
-            <h2>{{ $application->name }} s/o {{ $application->father }}</h2>
-            <p class="text-slate-600 text-sm">{{ $application->bform }}, {{ $application->phone }}</p>
-        </div>
-        <div>
-            <label for="">Group</label>
-            <p>{{ $application->group->name }}</p>
-        </div>
-        <div>
-            <label for="">Marks</label>
-            <p>{{ $application->obtained }} ( {{ $application->obtainedPercentage() }} % ) {{ ucfirst($application->bise_name)}} board, {{ $application->pass_year }}</p>
-        </div>
-        <div>
-            <label for="">Fee Paid</label>
-            <p>{{ $application->fee_paid }} @if($application->concession>0) <span class="text-sm">( Concession: {{ $application->concession }} )</span> @endif </p>
-        </div>
-        <div>
-            <label for="">Objection</label>
-            <p>{{ $application->objection }} </p>
-        </div>
 
+        <!-- display info -->
+        <div class="grid md:grid-cols-3 mt-8">
+            <div class="grid md:col-span-2 gap-3">
+                <div>
+                    <label for="">Application # <span class="text-red-600 font-bold"> ( {{ $application->status }} )</span></label>
+                    <div class="flex flex-wrap items-center gap-x-4">
+                        <h2>{{ $application->rollno }}</h2>
+                        <label>submitted on {{ $application->created_at->addHours(5)}}</label>
+                    </div>
+                </div>
+                <div>
+                    <label for="">Personal Info</label>
+                    <p>{{ $application->name }} s/o {{ $application->father_name }}</p>
+                    <p class="text-slate-600 text-sm"><i class="bi-balloon"></i>{{ $application->dob->format('d-m-Y') }} <i class="bi-card-heading ml-2"></i> {{ $application->bform }} <i class="bi-telephone ml-2"></i> {{ $application->phone }}</p>
+                    <p class="text-slate-600 text-sm">{{ $application->address }} </p>
+                </div>
+                <div>
+                    <label for="">Group</label>
+                    <p>{{ $application->group->name }}</p>
+                </div>
+                <div>
+                    <label for="">Academic Info</label>
+                    <p>BISE {{ $application->bise }}, #{{ $application->rollno }} ({{ $application->pass_year }}), &nbsp &nbsp {{ $application->obtained_marks }}/{{ $application->total_marks}} ( {{ $application->obtained_percentage() }} % )</p>
+                    <p class="text-slate-600 text-sm">{{ $application->previous_school }}</p>
+                </div>
+                @if($application->status == 'admitted')
+                <div>
+                    <label for="">Fee</label>
+                    <p>{{ $application->amount_paid }} @if($application->fee_concession>0) <span class="text-sm">( fee_concession: {{ $application->fee_concession }} )</span> @endif <label> <i class="bi-clock ml-2"></i> {{ $application->payment_date?->diffForHumans()??'' }} </label></p>
+                </div>
+                @endif
+                @if($application->status == 'rejected')
+                <div>
+                    <label for="">Rejection Note</label>
+                    <p>{{ $application->rejection_note }} </p>
+                </div>
+                @endif
+
+                <div class="flex items-center mt-4 space-x-4">
+                    @if($application->status == 'pending')
+                    <form action="{{ route('admission.applications.accept', $application->id)}}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="btn-green px-5 rounded-full">Accept</button>
+                    </form>
+                    <button type="button" id="openRejectModal" class="btn btn-red px-5 rounded-full" data-bs-toggle="modal" data-bs-target="#rejectModal">
+                        Reject
+                    </button>
+                    @elseif($application->status == 'accepted')
+                    <form action="{{ route('admission.applications.admit', $application) }}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <input type="text" name='amount_paid' class="custom-input fancy-input" placeholder="Amount">
+                        <button type="submit" class="btn-green px-5 rounded-full mt-2">Admit</button>
+                        <button type="button" id="openRejectModal" class="btn btn-red px-5 rounded-full" data-bs-toggle="modal" data-bs-target="#rejectModal">
+                            Reject
+                        </button>
+                    </form>
+                    @elseif($application->status == 'rejected')
+                    <form action="{{ route('admission.applications.accept', $application->id)}}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="btn-green px-5 rounded-full">Accept</button>
+                    </form>
+                    @endif
+                </div>
+            </div>
+            <div>
+                <div>
+                    <img src="{{ asset('storage/' . $application->photo) }}" alt="Student Photo" width="100" height="100">
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    @endsection
+<!-- Modal -->
+<div id="rejectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md md:w-3/4 mx-auto p-5 relative">
+        <h2 class="text-lg font-semibold mb-4">Rejection Note</h2>
+        <form id='rejectApplicationForm' action="{{ route('admission.applications.reject', $application->id)}}" method="post">
+            @csrf
+            @method('PATCH')
+            <textarea id="rejection_note" name='rejection_note' rows="3" class="w-full p-2 border border-gray-300 rounded" placeholder="Enter reason..."></textarea>
+            <div class="flex justify-end mt-5">
+                <button type="submit" class="btn-red px-5 rounded-full">Reject</button>
+            </div>
+        </form>
+        <!-- Optional: Close Icon -->
+        <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl">&times;</button>
+    </div>
+</div>
+@endsection
+
+@section('script')
+<script type="module">
+    $(document).ready(function() {
+        $('#openRejectModal').on('click', function() {
+            $('#rejectModal').removeClass('hidden').addClass('flex');
+        });
+
+        $('#cancelModal, #closeModal').on('click', function() {
+            $('#rejectModal').removeClass('flex').addClass('hidden');
+        });
+
+        $('#rejectApplicationForm').on('submit', function(e) {
+            const note = $('#rejection_note').val();
+            if (!note.trim()) {
+                e.preventDefault()
+                alert('Please enter a rejection note.');
+            }
+
+            $('#rejectModal').removeClass('flex').addClass('hidden');
+        });
+    });
+</script>
+@endsection

@@ -10,45 +10,58 @@ class Application extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'img',
+        'photo',
         'name',
-        'father',
+        'father_name',
         'bform',
+        'gender',
         'phone',
-        'adddress',
-        'bise_name',
-        'rollno',
-        'obtained',
-        'total',
+        'address',
+        'dob',
+        'identification_mark',
+        'caste',
+        'father_profession',
+        'father_income',
+        'admission_grade',
+        'group_id',
         'pass_year',
-        'medium',       //english / urdu
-        'group_id',     //applied for
-        'objection',
-        'fee_paid',
-        'paid_at',
-        'concession',
-
-        'grade_id',
-
+        'medium',
+        'previous_school',
+        'bise',
+        'rollno',
+        'obtained_marks',
+        'total_marks',
+        'status',
+        'amount_paid',
+        'payment_date',
+        'payment_mehtod',
+        'fee_concession',
+        'rejection_note',
     ];
 
-    // protected $dateFormat = 'Y-m-d';
-    protected $dates = ['paid_at'];
+    protected $casts = [
+        'dob' => 'date',
+        'pass_year' => 'integer',
+        'father_income' => 'integer',
+        'admission_grade' => 'integer',
+        'obtained_marks' => 'integer',
+        'total_marks' => 'integer',
+        'amount_paid' => 'integer',
+        'payment_date' => 'date',
+        'fee_concession' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 
-    public function section()
-    {
-        return $this->belongsTo(Section::class);
-    }
+    // Optional: relationship to Group
     public function group()
     {
         return $this->belongsTo(Group::class);
     }
-    public function status()
+
+    public function  objections()
     {
-        $status = '';    //under process
-        if ($this->objection != null) $status = $this->objection; //objection over
-        elseif ($this->fee_paid != null && $this->fee_paid > 0) $status = 'finalized';   //fee paid
-        return $status;
+        return $this->hasMany(Objection::class);
     }
 
     public function scopeToday($query)
@@ -58,7 +71,7 @@ class Application extends Model
 
     public function scopeUnderprocess($query)
     {
-        return $query->whereNull('objection')->whereNull('fee_paid');
+        return $query->whereNull('objection')->whereNull('amount_paid');
     }
     public function scopeObjectioned($query)
     {
@@ -66,15 +79,15 @@ class Application extends Model
     }
     public function scopeFeepaid($query)
     {
-        return $query->whereNotNull('fee_paid');
+        return $query->whereNotNull('amount_paid');
     }
     public function scopeRecentlyPaid($query)
     {
-        return $query->whereDate('paid_at', today());
+        return $query->whereDate('payment_date', today());
     }
 
-    public function obtainedPercentage()
+    public function obtained_percentage()
     {
-        return round($this->obtained / $this->total * 100, 2);
+        return round($this->obtained_marks / $this->total_marks * 100, 2);
     }
 }

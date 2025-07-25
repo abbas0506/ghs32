@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($sections->sortBy('grade_id') as $section)
+                @foreach($sections->sortBy('grade') as $section)
                 <tr class="border-b">
                     <td>{{ $loop->index+1 }}</td>
                     <td>{{ $section->roman() }}</td>

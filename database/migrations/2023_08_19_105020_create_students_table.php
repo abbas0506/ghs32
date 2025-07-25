@@ -13,18 +13,24 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->string('img', 50)->nullable();
             $table->string('name', 50);
-            $table->string('father', 50)->nullable();
+            $table->string('father_name', 50)->nullable();
+            $table->date('birth_date')->nullable();
+            $table->date('admission_date')->nullable();
             $table->string('bform', 15)->unique();
             $table->string('phone', 15)->nullable();
-            $table->unsignedInteger('marks')->nullable();
+            $table->string('father_name_profession')->default('farmer');
+            $table->unsignedInteger('father_name_income')->nullable();
+            // $table->unsignedInteger('marks')->nullable();
 
             $table->foreignId('section_id')->constrained()->cascadeOnDelete();
             $table->foreignId('group_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('rollno');
-            $table->string('serial_no')->nullable()->unique();
+            $table->string('admission_no')->nullable()->unique();
 
-            $table->boolean('can_borrow_books')->default(1);
+            $table->boolean('library_banned')->default(1);
+            $table->boolean('card_printed')->default(0);
 
             $table->timestamps();
         });

@@ -16,12 +16,57 @@
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-3">
         <a href="{{ route('admission.applications.index') }}" class="pallet-box">
             <div class="flex-1 ">
-                <div class="title">Applications</div>
+                <div class="title">Pending Applications</div>
                 <div class="flex items-center">
-                    <div class="h2 mr-8">{{ $applications->count() }}</div>
-                    @if($numOfApplicationsToday)
+                    <div class="h2 mr-8">{{ $stats['pending_total'] }}</div>
+                    @if($stats['pending_today']>0)
+                    <i class="bi-arrow-up text-yellow-700 text-sm"></i>
+                    <p class="text-yellow-700 text-sm">{{ $stats['pending_today'] }}</p>
+                    @endif
+                </div>
+            </div>
+            <div class="ico bg-yellow-100">
+                <i class="bi bi-file-earmark-text text-yellow-600"></i>
+            </div>
+        </a>
+        <a href="{{ route('admission.applications.index') }}" class="pallet-box">
+            <div class="flex-1 ">
+                <div class="title">Accepted Applications</div>
+                <div class="flex items-center">
+                    <div class="h2 mr-8">{{ $stats['accepted_total'] }}</div>
+                    @if($stats['accepted_today']>0)
                     <i class="bi-arrow-up text-green-700 text-sm"></i>
-                    <p class="text-green-700 text-sm">{{ $numOfApplicationsToday }}</p>
+                    <p class="text-green-700 text-sm">{{ $stats['accepted_today'] }}</p>
+                    @endif
+                </div>
+            </div>
+            <div class="ico bg-green-100">
+                <i class="bi bi-file-earmark-text text-green-600"></i>
+            </div>
+        </a>
+        <a href="{{ route('admission.applications.index') }}" class="pallet-box">
+            <div class="flex-1 ">
+                <div class="title">Rejected Applications</div>
+                <div class="flex items-center">
+                    <div class="h2 mr-8">{{ $stats['rejected_total'] }}</div>
+                    @if($stats['rejected_today']>0)
+                    <i class="bi-arrow-up text-red-700 text-sm"></i>
+                    <p class="text-red-700 text-sm">{{ $stats['rejected_today'] }}</p>
+                    @endif
+                </div>
+            </div>
+            <div class="ico bg-red-100">
+                <i class="bi bi-file-earmark-text text-red-600"></i>
+            </div>
+        </a>
+        <a href="{{ route('admission.applications.index') }}" class="pallet-box">
+            <div class="flex-1 ">
+                <div class="title">Admitted Students</div>
+                <div class="flex items-center">
+                    <div class="h2 mr-8">{{ $stats['admitted_total'] }}</div>
+                    @if($stats['admitted_today']>0)
+                    <i class="bi-arrow-up text-teal-700 text-sm"></i>
+                    <p class="text-teal-700 text-sm">{{ $stats['admitted_today'] }}({{ $stats['amount_paid_today'] }})</p>
                     @endif
                 </div>
             </div>
@@ -29,82 +74,110 @@
                 <i class="bi bi-person text-teal-600"></i>
             </div>
         </a>
-        <a href="{{ route('admission.fee.index') }}" class="pallet-box">
+
+        <!-- <a href="{{ route('admission.fee.index') }}" class="pallet-box">
             <div class="flex-1">
                 <div class="title">Fee</div>
                 <div class="flex items-center">
-                    <div class="h2 mr-8"> {{ $applications->sum('fee_paid') }}</div>
-                    @if($sumOfFeeToday>0)
+                    <div class="h2 mr-8"> {{ $applications->sum('amount_paid') }}</div>
+                    @if($stats['amount_paid_today']>0)
                     <i class="bi-arrow-up text-green-700 text-sm"></i>
-                    <p class="text-green-700 text-sm">{{ $sumOfFeeToday }}</p>
+                    <p class="text-green-700 text-sm">{{ $stats['amount_paid_today'] }}</p>
                     @endif
                 </div>
             </div>
             <div class="ico bg-sky-100">
                 <i class="bi bi-currency-rupee text-sky-600"></i>
             </div>
-        </a>
-        <a href="{{ route('admission.objections.index') }}" class="pallet-box">
-            <div class="flex-1">
-                <div class="title">Objections</div>
-                <div class="flex items-center">
-                    <div class="h2 mr-8"> {{ $applications->whereNotNull('objection')->count() }}</div>
-                    @if($numOfObjectionsToday>0)
-                    <i class="bi-arrow-up text-red-600 text-sm"></i>
-                    <p class="text-red-600 text-sm">{{ $numOfObjectionsToday }}</p>
-                    @endif
-                </div>
-            </div>
-            <div class="ico bg-red-100">
-                <i class="bi bi-question text-red-600"></i>
-            </div>
-        </a>
-        <a href="{{ route('admission.high-achievers.index') }}" class="pallet-box">
-            <div class="flex-1">
-                <div class="title">High Achievers</div>
-                <div class="flex items-center">
-                    <div class="h2 mr-8"> {{ $applications->where('obtained','>=',1000)->count() }}</div>
-                    @if($numOfHighAchieversToday)
-                    <i class="bi-arrow-up text-green-700 text-sm"></i>
-                    <p class="text-green-700 text-sm">{{ $numOfHighAchieversToday }}</p>
-                    @endif
-                </div>
-            </div>
-            <div class="ico bg-green-100">
-                <i class="bi bi-hand-thumbs-up text-green-600"></i>
-            </div>
-        </a>
-
+        </a> -->
 
     </div>
+    <div class="grid grid-cols-4 gap-5">
+        <div class="col-span-3 bg-white">
+            <h2 class="mt-8">Recent Applications ({{ $applications->count() }})</h2>
+            <div class="overflow-x-auto w-full mt-2">
+                <table class="table-fixed w-full">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="w-16">App #</th>
+                            <th class="w-40 text-left">Student Name</th>
+                            <th class="w-24">Group</th>
+                            <th class="w-16">Marks</th>
+                            <th class="w-16">Status</th>
+                            <th class="w-20">Submitted</th>
+                        </tr>
+                    </thead>
+                    <tbody id='application-table'>
+                        @foreach($applications->sortByDesc('updated_at') as $application)
+                        <tr class="tr" data-status="{{ $application->status }}">
+                            <td>
+                                <a href="{{ route('admission.applications.show', $application) }}" class="link">{{ $application->rollno }}</a>
+                            </td>
+                            <td class="text-left">{{ $application->name }}</td>
+                            <td>{{ $application->group->name }}</td>
+                            <td>{{ $application->obtained_marks }}</td>
+                            <td>@if($application->status == 'pending')
+                                <i class="bi-circle-fill text-blue-600 text-xxs mr-1"> </i> {{ $application->status }}
+                                @elseif($application->status == 'accepted')
+                                <i class="bi-circle-fill text-green-600 text-xxs mr-1"> </i> {{ $application->status }}
+                                @elseif($application->status == 'rejected')
+                                <i class="bi-circle-fill text-red-600 text-xxs mr-1"> </i> {{ $application->status }}
+                                @elseif($application->status == 'admitted')
+                                <i class="bi-check font-bold text-green-600"> </i>
+                                @endif
 
-    @php $sr=1; @endphp
-    <div class="overflow-x-auto w-full mt-8">
+                            </td>
+                            <td>{{$application->created_at->diffForHumans()}}</td>
 
-        <table class="table-fixed borderless w-full">
-            <thead>
-                <tr class="border-b">
-                    <th class="w-8">Sr</th>
-                    <th class="w-64 text-left">Group</th>
-                    <th class="w-20">Finalized</th>
-                    <th class="w-12"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($groups as $group)
-                <tr class="tr text-sm border-b">
-                    <td>{{$sr++}}</td>
-                    <td class="text-left">
-                        <a href="{{ route('admission.groups.show',$group) }}" class="link">{{ $group->name }}</a>
-                        @if($group->applications()->today()->count()) <span class="text-green-600 text-xs pl-2">{{ $group->applications()->today()->count() }} <i class="bi-arrow-up"></i></span>@endif
-                    </td>
-                    <td>{{ $group->applications()->feepaid()->count() }} / {{ $group->applications()->count() }}</td>
-                    <td>@if($group->applications()->recentlyPaid()->count())<span class="text-green-600 text-xs pl-2">{{ $group->applications()->recentlyPaid()->count() }} <i class="bi-arrow-up"></i></span>@endif</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <h2 class="mt-8">General Stat</h2>
+            <div class="grid mt-2 gap-2 text-xs border rounded-lg p-3 bg-blue-100">
+                <div class="grid grid-cols-4">
+                    <div class="col-span-2">Applications</div>
+                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['applications_today']}}</div>
+                    <div class="">{{$stats['applications_admitted']}}/{{ $applications->count() }}</div>
+                </div>
+                <div class="grid grid-cols-4">
+                    <div class="col-span-2">Pre Engg.</div>
+                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['pre_engg_today']}}</div>
+                    <div class="">{{$stats['pre_engg_admitted']}}/{{$stats['pre_engg_total']}}</div>
+                </div>
+                <div class="grid grid-cols-4">
+                    <div class="col-span-2">ICS</div>
+                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['ics_today']}}</div>
+                    <div class="">{{$stats['ics_admitted']}}/{{$stats['ics_total']}}</div>
+                </div>
+                <div class="grid grid-cols-4">
+                    <div class="col-span-2">Arts</div>
+                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['arts_today']}}</div>
+                    <div class="">{{$stats['arts_admitted']}}/{{$stats['arts_total']}}</div>
+                </div>
+                <div class="grid grid-cols-4">
+                    <div class="col-span-2">1000+</div>
+                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['1000+_today']}}</div>
+                    <div class="">{{$stats['1000+_admitted']}}/{{$stats['1000+_total']}}</div>
+                </div>
+                <div class="grid grid-cols-4">
+                    <div class="col-span-2">Other Board</div>
+                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['other_board_today']}}</div>
+                    <div class="">{{$stats['other_board_admitted']}}/{{$stats['other_board_total']}}</div>
+                </div>
+                <div class="grid grid-cols-4">
+                    <div class="col-span-2">Fee</div>
+                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['amount_paid_today']}}</div>
+                    <div class="">{{ $stats['amount_paid_total'] }}</div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
 </div>
 
 @endsection
@@ -164,6 +237,18 @@
 
 
         });
+
+        function filterStatus(status) {
+            const rows = document.querySelectorAll('#application-table .tr');
+            rows.forEach(row => {
+                const rowStatus = row.getAttribute('data-status');
+                if (status === 'all' || rowStatus === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
     }
 </script>
 @endsection

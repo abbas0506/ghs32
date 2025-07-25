@@ -81,7 +81,7 @@ $roman = config('global.romans');
                         <th class="w-8">Roll#</th>
                         <th class="w-12">Serial</th>
                         <th>Name</th>
-                        <th>Father</th>
+                        <th>father_name</th>
                         <th>Group</th>
                         <th>Marks</th>
                         <th>Bform</th>
@@ -93,9 +93,9 @@ $roman = config('global.romans');
                     @foreach($section->students->sortBy('rollno') as $student)
                     <tr class="text-base">
                         <td>{{$student->rollno}}</td>
-                        <td>{{$student->serial_no}}</td>
+                        <td>{{$student->admission_no}}</td>
                         <td style="text-align: left !important; padding:2px 6px;">{{$student->name}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$student->father}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;">{{$student->father_name}}</td>
                         <td>{{$student->group->name}}</td>
                         <td>{{$student->marks}}</td>
                         <td>{{$student->bform}}</td>

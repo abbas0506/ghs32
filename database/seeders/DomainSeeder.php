@@ -6,7 +6,7 @@ use App\Models\Domain;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class domainSeeder extends Seeder
+class DomainSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -9,18 +9,29 @@ class Student extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'img',
         'name',
-        'father',
+        'father_name',
         'bform',
+        'birth_date',
+        'id_mark',
         'phone',
-        'group_id',
-        'marks',
-        'can_borrow_books',
-
+        'address',
         //school tag
+        'group_id',
         'section_id',
         'rollno',
-        'serial_no',
+        'admission_no',
+        'admission_date',
+
+        // 'marks',
+        'caste',
+        'father_name_profession',
+        'father_name_income',
+
+        'card_printed',
+        'library_banned',
+
     ];
 
     public function section()
@@ -82,7 +93,7 @@ class Student extends Model
         //!== will only be false if record could not be found
         if ($index !== false) {
             $ranking = $sortedPercentages->get($index);
-            return $ranking['total'];
+            return $ranking['total_marks'];
         } else {
             return '';
         }
@@ -97,7 +108,7 @@ class Student extends Model
         //!== will only be false if record could not be found
         if ($index !== false) {
             $ranking = $sortedPercentages->get($index);
-            return $ranking['obtained'];
+            return $ranking['obtained_marks'];
         } else {
             return '';
         }

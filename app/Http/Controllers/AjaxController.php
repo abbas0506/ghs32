@@ -12,15 +12,15 @@ class AjaxController extends Controller
     {
 
         $request->validate([
-            'grade_id' => 'required',
+            'grade' => 'required',
             'subject_id' => 'required',
         ]);
 
         session([
-            'grade_id' => $request->grade_id,
+            'grade' => $request->grade,
             'subject_id' => $request->subject_id,
         ]);
-        $chapters = Chapter::where('grade_id', $request->grade_id)
+        $chapters = Chapter::where('grade', $request->grade)
             ->where('subject_id', $request->subject_id)
             ->get();
 

@@ -30,7 +30,7 @@
                 <label for='grade{{$grade->id}}' class="flex-1 text-sm text-slate-800 hover:cursor-pointer py-2">{{ $grade->english_name }} </label>
                 <!-- </div> -->
                 <div class="text-base">
-                    <input type="checkbox" id='grade{{$grade->id}}' name='grade_ids_array[]' class="custom-input w-4 h-4 rounded hidden" value="{{ $grade->id }}">
+                    <input type="checkbox" id='grade{{$grade->id}}' name='grades_array[]' class="custom-input w-4 h-4 rounded hidden" value="{{ $grade->id }}">
                     <i class="bx bx-check"></i>
                 </div>
             </div>

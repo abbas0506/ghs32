@@ -80,7 +80,7 @@ $roman = config('global.romans');
                     <tr style="background-color: #bbb;">
                         <th class="w-8">Roll#</th>
                         <th>Name</th>
-                        <th>Father</th>
+                        <th>father_name</th>
                         <th>Group</th>
                         <th>Marks</th>
                         <th>Phone</th>
@@ -94,11 +94,11 @@ $roman = config('global.romans');
                     <tr class="text-base">
                         <td>{{$application->rollno}}</td>
                         <td style="text-align: left !important; padding:2px 6px;">{{$application->name}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$application->father}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;">{{$application->father_name}}</td>
                         <td>{{$application->group->name}}</td>
-                        <td>{{$application->obtained}}</td>
+                        <td>{{$application->obtained_marks}}</td>
                         <td>{{$application->phone}}</td>
-                        <td>{{$application->fee_paid}}</td>
+                        <td>{{$application->amount_paid}}</td>
                         <td>{{$application->objection}}</td>
                     </tr>
                     @php $i++; @endphp

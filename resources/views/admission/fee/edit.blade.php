@@ -31,7 +31,7 @@
             </div>
             <div>
                 <label for="">Name</label>
-                <h2>{{ $application->name }} s/o {{ $application->father }}</h2>
+                <h2>{{ $application->name }} s/o {{ $application->father_name }}</h2>
             </div>
             <div>
                 <label for="">Group</label>
@@ -39,17 +39,17 @@
             </div>
             <div>
                 <label for="">Marks</label>
-                <p>{{ $application->obtained }} ( {{ $application->obtainedPercentage() }} % ) {{ ucfirst($application->bise_name)}} board, {{ $application->pass_year }}</p>
+                <p>{{ $application->obtained_marks }} ( {{ $application->obtained_percentage() }} % ) {{ ucfirst($application->bise)}} board, {{ $application->pass_year }}</p>
             </div>
             <div class="grid md:grid-cols-2 gap-4">
                 <div>
                     <label for="">Fee</label>
-                    <input type="number" name="fee_paid" class="custom-input" placeholder="Fee" min='0' value="{{ $application->fee_paid }}">
+                    <input type="number" name="amount_paid" class="custom-input" placeholder="Fee" min='0' value="{{ $application->amount_paid }}">
                 </div>
-                @if($application->obtained>=1000)
+                @if($application->obtained_marks>=1000)
                 <div>
-                    <label for="">Concession</label>
-                    <input type="number" name="concession" class="custom-input" placeholder="Concession" min='0' value="{{ $application->concession}}">
+                    <label for="">fee_concession</label>
+                    <input type="number" name="fee_concession" class="custom-input" placeholder="fee_concession" min='0' value="{{ $application->fee_concession}}">
                 </div>
                 @endif
             </div>

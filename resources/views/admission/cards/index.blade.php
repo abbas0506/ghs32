@@ -60,11 +60,11 @@
                         </td>
                         <td class="text-left">{{ $application->name }}</td>
                         <td>{{ $application->group->name }}</td>
-                        <td>{{ $application->obtained }}</td>
-                        <td>{{ $application->obtainedPercentage() }}</td>
-                        <td>{{ $application->fee_paid }}</td>
-                        <td>@if ($application->img)
-                            <img src="{{ asset('storage/' . $application->img) }}" alt="Photo"
+                        <td>{{ $application->obtained_marks }}</td>
+                        <td>{{ $application->obtained_percentage() }}</td>
+                        <td>{{ $application->amount_paid }}</td>
+                        <td>@if ($application->photo)
+                            <img src="{{ asset('storage/' . $application->photo) }}" alt="Photo"
                                 style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
                             @else
                             <span style="color: #999;">No Photo</span>

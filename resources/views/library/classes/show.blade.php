@@ -37,7 +37,7 @@
                 <tr>
                     <th>Roll No</th>
                     <th>Name</th>
-                    <th>Father</th>
+                    <th>father_name</th>
                     <th>BForm</th>
                 </tr>
             </thead>
@@ -50,7 +50,7 @@
                         </a>
                     </td>
                     <td>{{$student->name}}</td>
-                    <td>{{$student->father}}</td>
+                    <td>{{$student->father_name}}</td>
                     <td>{{$student->bform}}</td>
                 </tr>
                 @endforeach

@@ -23,11 +23,23 @@
                     <span class="ml-3">Home</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admission.applications.index') }}" class="flex items-center p-2">
+                    <i class="bi-file-earmark-text"></i>
+                    <span class="ml-3">Applications</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admission.fee.index') }}" class="flex items-center p-2">
+                    <i class="bi-currency-rupee"></i>
+                    <span class="ml-3">Fee Log</span>
+                </a>
+            </li>
 
             <li>
-                <a href="" class="flex items-center p-2">
-                    <i class="bi bi-journal-check"></i>
-                    <span class="ml-3">Merit Lists</span>
+                <a href="{{ route('admission.rejections.index') }}" class="flex items-center p-2">
+                    <i class="bi-file-earmark-excel"></i>
+                    <span class="ml-3">Rejection List</span>
                 </a>
             </li>
             <li>

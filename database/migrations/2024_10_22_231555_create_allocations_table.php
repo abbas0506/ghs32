@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('allocations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('session_id')->constrained()->cascadeOnDelete();
+            $table->year('year');
             $table->foreignId('section_id')->constrained()->cascadeOnDelete();
             $table->unsignedTinyInteger('lecture_no');
             $table->foreignId('subject_id')->constrained()->cascadeOnDelete();
-            $table->unsignedBigInteger('teacher_id')->nullable(); //will be initialized at step 2 of subject allocation
-
-            $table->foreign('teacher_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('teacher_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

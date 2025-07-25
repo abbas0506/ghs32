@@ -41,6 +41,7 @@ use App\Http\Controllers\Library\PrintController;
 use App\Http\Controllers\Library\RackBooksController;
 use App\Http\Controllers\Library\TeacherController as LibraryTeacherController;
 use App\Http\Controllers\OnlineApplicationController;
+use App\Http\Controllers\RejectionController\Admission;
 use App\Http\Controllers\ReportCardController;
 use App\Http\Controllers\ResultDetailController;
 use App\Http\Controllers\SignupController;
@@ -143,10 +144,17 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {
         Route::get('/', [DashboardController::class, 'index']);
         Route::resource('applications', AdmissionApplicationController::class);
+        Route::patch('/applications/{application}/accept', [AdmissionApplicationController::class, 'accept'])->name('applications.accept');
+        Route::patch('/applications/{application}/reject', [AdmissionApplicationController::class, 'reject'])->name('applications.reject');
+        Route::patch('/applications/{application}/admit', [AdmissionApplicationController::class, 'admit'])->name('applications.admit');
+
+
+
         Route::resource('groups', AdmissionGroupController::class);
         Route::resource('fee', AdmissionFeeController::class);
         Route::resource('objections', AdmissionObjectionController::class);
-        Route::resource('high-achievers', HighAchieverController::class);
+
+        Route::resource('rejections', RejectionController::class);
         Route::resource('sections', SectionController::class);
         Route::resource('section.students', SectionStudentsController::class);
 

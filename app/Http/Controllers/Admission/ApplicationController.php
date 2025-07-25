@@ -7,9 +7,40 @@ use App\Models\Application;
 use App\Models\Group;
 use Exception;
 use Illuminate\Http\Request;
+use App\Services\ApplicationStatusService;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicationController extends Controller
 {
+
+    protected $statusService;
+
+    public function __construct(ApplicationStatusService $statusService)
+    {
+        $this->statusService = $statusService;
+    }
+
+    public function accept(Application $application)
+    {
+        $this->statusService->accept($application);
+        return back()->with('success', 'Application accepted.');
+    }
+
+    public function reject(Request $request, Application $application)
+    {
+        $request->validate(['rejection_note' => 'required|string']);
+        $this->statusService->reject($application, $request->rejection_note);
+        return back()->with('warning', 'Application rejected.');
+    }
+
+    public function admit(Request $request, Application $application)
+    {
+        $request->validate(['amount_paid' => 'required|numeric']);
+        $amount_paid = $request->amount_paid;
+        $this->statusService->admit($application, $amount_paid);
+        // return redirect()->route('students.index')->with('success', 'Application admitted.');
+        return back()->with('success', 'Application admitted.');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -17,7 +48,23 @@ class ApplicationController extends Controller
     {
         //
         $applications = Application::all();
-        return view('admission.applications.index', compact('applications'));
+        $today = \Carbon\Carbon::today();
+
+        $stats = [
+            'pending_total'   => Application::where('status', 'pending')->count(),
+            'pending_today'   => Application::where('status', 'pending')->whereDate('created_at', $today)->count(),
+
+            'accepted_total'  => Application::where('status', 'accepted')->count(),
+            'accepted_today'  => Application::where('status', 'accepted')->whereDate('created_at', $today)->count(),
+
+            'rejected_total'  => Application::where('status', 'rejected')->count(),
+            'rejected_today'  => Application::where('status', 'rejected')->whereDate('created_at', $today)->count(),
+
+            'admitted_total'  => Application::where('status', 'admitted')->count(),
+            'admitted_today'  => Application::where('status', 'admitted')->whereDate('created_at', $today)->count(),
+        ];
+
+        return view('admission.applications.index', compact('applications', 'stats'));
     }
 
     /**
@@ -38,21 +85,21 @@ class ApplicationController extends Controller
         //
         $request->validate([
             'name' => 'required',
-            'father' => 'required',
+            'father_name' => 'required',
             'bform' => 'required',
             'phone' => 'required',
-            'bise_name' => 'required',
+            'bise' => 'required',
             'rollno' => 'required',
-            'obtained' => 'required',
-            'total' => 'required',
+            'obtained_marks' => 'required',
+            'total_marks' => 'required',
             'pass_year' => 'required',
-            // 'concession' => 'required',
+            // 'fee_concession' => 'required',
             'group_id' => 'required',
         ]);
 
         $request->merge([
-            'grade_id' => 11,
-            'concession' => 0,
+            'grade' => 11,
+            'fee_concession' => 0,
         ]);
         try {
             $duplicate = Application::where('rollno', $request->rollno)->where('pass_year', $request->pass_year)->first();
@@ -97,25 +144,52 @@ class ApplicationController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $request->validate([
-            'name' => 'required',
-            'father' => 'required',
-            'bform' => 'required',
-            'phone' => 'required',
-            'bise_name' => 'required',
-            'rollno' => 'required',
-            'obtained' => 'required',
-            'total' => 'required',
-            'pass_year' => 'required',
-            'objection' => 'nullable',
-            // 'concession' => 'required',
-            'group_id' => 'required',
+        $application = Application::find($id);
+
+        $validated = $request->validate([
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
+            'name' => 'required|string|max:50',
+            'father_name' => 'required|string|max:50',
+            'bform' => 'required|string|max:15|unique:applications,bform,' . $application->id,
+            'phone' => 'required|string|max:16',
+            'address' => 'nullable|string|max:100',
+            'dob' => 'required|date',
+            // 'identification_mark' => 'required|string|max:100',
+            // 'caste' => 'required|string|max:50',
+            // // 'father_profession' => 'required|string|max:50',
+            // 'father_income' => 'required|integer|min:0',
+
+            // 'admission_grade' => 'required|integer|min:1|max:12',
+            'group_id' => 'required|exists:groups,id',
+            'pass_year' => 'required|digits:4|integer',
+            // 'medium' => 'required|in:en,ur',
+            // 'previous_school' => 'nullable|string|max:100',
+            // 'previous_school_type' => 'nullable|string|max:20',
+            'bise' => 'required|string|max:20',
+            'rollno' => 'required|string|max:8',
+            'obtained_marks' => 'required|integer|min:0',
+            'total_marks' => 'required|integer|min:1|gte:obtained_marks',
+            'status' => 'nullable|string|in:pending,approved,rejected,admitted',
+            'rejection_note' => 'nullable|string|max:200',
+            'amount_paid' => 'nullable|integer|min:0',
+
+            // 'fee_concession' => 'nullable|integer|min:0|max:100',
         ]);
 
         try {
-            $application = Application::findOrFail($id);
 
-            $application->update($request->all());
+            // ✅ If new photo uploaded
+            if ($request->hasFile('photo')) {
+                if ($application->photo && Storage::disk('public')->exists($application->photo)) {
+                    Storage::disk('public')->delete($application->photo);
+                }
+
+                $filename = uniqid() . '.' . $request->photo->extension();
+                $path = $request->photo->storeAs('uploads', $filename, 'public');
+
+                $validated['photo'] = $path; // ✅ full path like "uploads/abc.jpg"
+            }
+            $application->update($validated);
             return redirect()->route('admission.applications.index')->with('success', 'Application # ' . $application->rollno . ' successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());

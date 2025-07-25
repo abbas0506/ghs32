@@ -25,9 +25,9 @@
             <div class="grid grid-cols-2 gap-2">
                 <div>
                     <label>Class Grade</label>
-                    <select name="grade_id" id="" class="custom-input p-2">
+                    <select name="grade" id="" class="custom-input p-2">
                         @forelse($grades as $grade)
-                        <option value="{{$grade->id}}" @selected($section->grade_id==$grade->id)>{{ $grade->roman_name }}</option>
+                        <option value="{{$grade->id}}" @selected($section->grade==$grade->id)>{{ $grade->roman_name }}</option>
                         @empty
                         <option value="">No group available</option>
                         @endforelse

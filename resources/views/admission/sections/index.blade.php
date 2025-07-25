@@ -22,7 +22,7 @@
             @foreach($sections as $section)
             <div class="border p-8">
                 <div class="flex items-center bg-slate-100">
-                    <a href="{{route('admission.sections.show',$section)}}" class="link text-lg font-bold">{{$section->grade->grade_no}}-{{ $section->name}}</a>
+                    <a href="{{route('admission.sections.show',$section)}}" class="link text-lg font-bold">{{$section->grade}}-{{ $section->name}}</a>
                     <div class="ml-8"> <i class="bi-people"></i> {{$section->students->count()}}</div>
                 </div>
 

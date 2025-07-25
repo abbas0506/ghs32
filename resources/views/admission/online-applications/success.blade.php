@@ -4,35 +4,33 @@
 <x-header></x-header>
 @endsection
 
-@section('page-content')
+@section('body')
+<style>
+    body {
+        background-color: #6d6d6d;
+    }
+</style>
 <section>
 
-    <div class="bg-teal-800 text-teal-50 text-center mt-16 px-5 md:px-24 text-xl py-6">Congratulation</div>
-    <div class="container px-5 md:px-60">
-        <div class="text-center">
+    <div class="w-full md:w-2/3 mx-auto min-h-screen flex items-center justify-center p-6">
 
-            <i class="text-teal-800 bi-check-lg text-4xl"></i>
-            <h2>Successfully submitted!</h2>
-            <h2>Application No: {{ $application->rollno }}</h2>
-            <p></p>
-        </div>
-
-        <div class="mt-8 text-right">
-            <h2>غور سے پڑھیں</h2>
-            <p>
-                عزیز طالب علم ، آپکا داخلہ فارم موصول ہو چکا ہے، اب آپ سولہ اگست کو فیس کے ساتھ ایڈمشن آفس رابطہ کریں کسی قسم کے ڈاکیومنٹس ساتھ لانے کی ضرورت نہیں۔
-                ڈاکیومنٹس داخلہ ہو جانے کے بعد ہی آپ سے لیے جائیں گے
-
-            </p>
-            <p>بیس اگست سے کلاسز کا آغاز ہو گا (ان شا ٗ اللہ)</p>
-
-            <div class="text-center mt-8">
-                <a href="{{ url('/') }}" class="btn-teal">اوکے، میں نے غور سے پڑھ لیا ہے</a>
+        <div class="bg-white shadow-xl rounded-2xl max-w-lg w-full text-center p-8">
+            <div class="text-green-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-20 w-20 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4-4m5 2a9 9 0 11-18 0a9 9 0 0118 0z" />
+                </svg>
             </div>
+
+            <h1 class="text-2xl font-semibold text-gray-800 mb-3">Congratulations!</h1>
+            <p class="text-gray-600 text-lg mb-6">Your application has been submitted successfully.</p>
+
+            <div class="bg-gray-100 rounded-lg p-4 mb-6">
+                <p class="text-gray-500 text-sm">Your Application Number:</p>
+                <p class="text-xl font-bold text-gray-700">{{ $application->rollno }}</p>
+            </div>
+
+            <a href="{{ url('/') }}" class="btn-blue rounded-full py-2 px-5 mb-4">Ok</a>
         </div>
-
-
-
 
     </div>
 
