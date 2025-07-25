@@ -10,7 +10,6 @@
                 <div>Dashboard</div>
             </div>
         </div>
-        <div class="text-slate-500">{{ today()->format('d/m/Y') }}</div>
     </div>
     <!-- pallets -->
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-3">
@@ -74,25 +73,11 @@
                 <i class="bi bi-person text-teal-600"></i>
             </div>
         </a>
-
-        <!-- <a href="{{ route('admission.fee.index') }}" class="pallet-box">
-            <div class="flex-1">
-                <div class="title">Fee</div>
-                <div class="flex items-center">
-                    <div class="h2 mr-8"> {{ $applications->sum('amount_paid') }}</div>
-                    @if($stats['amount_paid_today']>0)
-                    <i class="bi-arrow-up text-green-700 text-sm"></i>
-                    <p class="text-green-700 text-sm">{{ $stats['amount_paid_today'] }}</p>
-                    @endif
-                </div>
-            </div>
-            <div class="ico bg-sky-100">
-                <i class="bi bi-currency-rupee text-sky-600"></i>
-            </div>
-        </a> -->
-
     </div>
+
+    <!-- Data  -->
     <div class="grid grid-cols-4 gap-5">
+        <!-- Recent Applications -->
         <div class="col-span-3 bg-white">
             <h2 class="mt-8">Recent Applications ({{ $applications->count() }})</h2>
             <div class="overflow-x-auto w-full mt-2">
@@ -135,6 +120,8 @@
                 </table>
             </div>
         </div>
+
+        <!-- generarl stat -->
         <div>
             <h2 class="mt-8">General Stat</h2>
             <div class="grid mt-2 gap-2 text-xs border rounded-lg p-3 bg-blue-100">
