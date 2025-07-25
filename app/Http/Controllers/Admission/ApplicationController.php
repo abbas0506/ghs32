@@ -169,7 +169,7 @@ class ApplicationController extends Controller
             'rollno' => 'required|string|max:8',
             'obtained_marks' => 'required|integer|min:0',
             'total_marks' => 'required|integer|min:1|gte:obtained_marks',
-            'status' => 'nullable|string|in:pending,approved,rejected,admitted',
+            'status' => 'nullable|string|in:pending,accepted,rejected,admitted',
             'rejection_note' => 'nullable|string|max:200',
             'amount_paid' => 'nullable|integer|min:0',
 

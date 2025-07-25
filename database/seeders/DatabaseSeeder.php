@@ -27,8 +27,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             LibraryRuleSeeder::class,
             DomainSeeder::class,
-
-
         ]);
     }
 }
