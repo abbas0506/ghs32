@@ -140,37 +140,65 @@
             <div class="grid mt-2 gap-2 text-xs border rounded-lg p-3 bg-blue-100">
                 <div class="grid grid-cols-4">
                     <div class="col-span-2">Applications</div>
-                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['applications_today']}}</div>
+                    <div>
+                        @if($stats['applications_today']>0)
+                        <i class="bi-arrow-up ml-3"></i>{{$stats['applications_today']}}
+                        @endif
+                    </div>
                     <div class="">{{$stats['applications_admitted']}}/{{ $applications->count() }}</div>
                 </div>
                 <div class="grid grid-cols-4">
                     <div class="col-span-2">Pre Engg.</div>
-                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['pre_engg_today']}}</div>
+                    <div>
+                        @if($stats['pre_engg_today']>0)
+                        <i class="bi-arrow-up ml-3"></i>{{$stats['pre_engg_today']}}
+                        @endif
+                    </div>
                     <div class="">{{$stats['pre_engg_admitted']}}/{{$stats['pre_engg_total']}}</div>
                 </div>
                 <div class="grid grid-cols-4">
                     <div class="col-span-2">ICS</div>
-                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['ics_today']}}</div>
+                    <div>
+                        @if($stats['ics_today']>0)
+                        <i class="bi-arrow-up ml-3"></i>{{$stats['ics_today']}}
+                        @endif
+                    </div>
                     <div class="">{{$stats['ics_admitted']}}/{{$stats['ics_total']}}</div>
                 </div>
                 <div class="grid grid-cols-4">
                     <div class="col-span-2">Arts</div>
-                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['arts_today']}}</div>
+                    <div>
+                        @if($stats['arts_today']>0)
+                        <i class="bi-arrow-up ml-3"></i>{{$stats['arts_today']}}
+                        @endif
+                    </div>
                     <div class="">{{$stats['arts_admitted']}}/{{$stats['arts_total']}}</div>
                 </div>
                 <div class="grid grid-cols-4">
                     <div class="col-span-2">1000+</div>
-                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['1000+_today']}}</div>
+                    <div>
+                        @if($stats['1000+_today']>0)
+                        <i class="bi-arrow-up ml-3"></i>{{$stats['1000+_today']}}
+                        @endif
+                    </div>
                     <div class="">{{$stats['1000+_admitted']}}/{{$stats['1000+_total']}}</div>
                 </div>
                 <div class="grid grid-cols-4">
                     <div class="col-span-2">Other Board</div>
-                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['other_board_today']}}</div>
+                    <div>
+                        @if($stats['other_board_today']>0)
+                        <i class="bi-arrow-up ml-3"></i>{{$stats['other_board_today']}}
+                        @endif
+                    </div>
                     <div class="">{{$stats['other_board_admitted']}}/{{$stats['other_board_total']}}</div>
                 </div>
                 <div class="grid grid-cols-4">
                     <div class="col-span-2">Fee</div>
-                    <div><i class="bi-arrow-up ml-3"></i>{{$stats['amount_paid_today']}}</div>
+                    <div>
+                        @if($stats['amount_paid_today']>0)
+                        <i class="bi-arrow-up ml-3"></i>{{$stats['amount_paid_today']}}
+                        @endif
+                    </div>
                     <div class="">{{ $stats['amount_paid_total'] }}</div>
                 </div>
             </div>
