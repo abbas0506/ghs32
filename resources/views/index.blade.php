@@ -20,7 +20,7 @@
 
     /* Button styling */
     .click-demo-button {
-        padding: 1rem 2.5rem;
+        padding: 0.25rem 1rem;
         font-size: 1.1rem;
         font-weight: 600;
         color: #0d9488;
@@ -100,7 +100,7 @@
 <section class="w-screen h-screen">
     <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full py-16">
         <div class="flex flex-1 justify-end items-center">
-            <img src="{{ url(asset('images/small/admission-2.png')) }}" alt="student" class="w-40 h-40 md:w-96 md:h-96">
+            <img src="{{ url(asset('images/small/admission-2.png')) }}" alt="student" class="w-64 h-64 md:w-96 md:h-96">
 
         </div>
 
