@@ -32,6 +32,18 @@
                 </a>
             </li>
             <li>
+                <a href="{{route('admin.events.index')}}" class="flex items-center p-2">
+                    <i class="bi bi-person-gear"></i>
+                    <span class="ml-3">Events</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('admin.alumni.index')}}" class="flex items-center p-2">
+                    <i class="bi bi-person-gear"></i>
+                    <span class="ml-3">Alumni</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{route('admin.subjects.index')}}" class="flex items-center p-2">
                     <i class="bi-book"></i>
                     <span class="ml-3">Subjects</span>

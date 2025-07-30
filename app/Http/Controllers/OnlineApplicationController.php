@@ -7,6 +7,7 @@ use App\Models\Application;
 use App\Models\Group;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class OnlineApplicationController extends Controller
 {
@@ -38,7 +39,7 @@ class OnlineApplicationController extends Controller
     {
         //
         $validated = $request->validate([
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:1024',
             'name' => 'required|string|max:50',
             'father_name' => 'required|string|max:50',
             'bform' => 'required|string|max:15|unique:applications,bform',
@@ -50,18 +51,15 @@ class OnlineApplicationController extends Controller
             'caste' => 'required|string|max:50',
             'father_profession' => 'required|string|max:50',
             'father_income' => 'required|integer|min:0',
-
             'admission_grade' => 'required|integer|min:1|max:12',
             'group_id' => 'required|exists:groups,id',
             'pass_year' => 'required|digits:4|integer',
             'medium' => 'required|in:en,ur',
             'previous_school' => 'nullable|string|max:100',
-            'previous_school_type' => 'nullable|string|max:20',
             'bise' => 'required|string|max:20',
             'rollno' => 'required|string|max:8',
             'obtained_marks' => 'required|integer|min:0',
             'total_marks' => 'required|integer|min:1|gte:obtained_marks',
-            'status' => 'nullable|string|in:pending,approved,rejected,admitted',
             'fee_concession' => 'nullable|integer|min:0|max:100',
         ]);
 
@@ -74,16 +72,13 @@ class OnlineApplicationController extends Controller
             } else {
                 // not duplicating
                 if ($request->hasFile('photo')) {
-                    $image = $request->file('photo');
-                    $extension = $image->getClientOriginalExtension();
-                    $filename = $request->pass_year . '_' . $request->rollno . '.' . $extension;
-                    $path = $image->storeAs('uploads', $filename, 'public');
+                    $filename = uniqid() . '.' . $request->photo->extension();
+                    $path = $request->photo->storeAs('uploads', $filename, 'public');
+                    $validated['photo'] = $path; // full path like "uploads/abc.jpg"
 
-                    $validated['photo'] = $path;
                 }
                 $application = Application::create($validated);
                 return redirect()->route('applied', $application);
-                // return back()->with('success', 'Image uploaded');
             }
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());

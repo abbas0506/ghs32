@@ -169,44 +169,27 @@
                     <div>
                         <label for="caste">Caste (ذات)</label>
                         <select name="caste" class="custom-input fancy-focus" placeholder="Caste" required>
-                            <option value="Rajput">Rajput</option>
-                            <option value="Bhatti">Bhatti</option>
-                            <option value="Arains">Arains (آرائیں)</option>
-                            <option value="Wattoo">Wattoo</option>
-                            <option value="Gujjars">Gujjars</option>
-                            <option value="Khokhar">Khokhar</option>
-                            <option value="Kharal">Kharal</option>
-                            <option value="Syeds">Syeds</option>
-                            <option value="Qureshi">Qureshi</option>
-                            <option value="Mughal">Mughal</option>
-                            <option value="Others">Others</option>
+                            @foreach (config('enums.cast') as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div>
                         <label for="father_profession">Father Profession (باپ یا سرپرست کا پیشہ)</label>
-                        <select name="father_profession" class="custom-input fancy-focus" placeholder="Father's Profession" required>
-                            <option value="Teacher">Teacher</option>
-                            <option value="Farmer">Farmer</option>
-                            <option value="Businessman">Businessman</option>
-                            <option value="Doctor">Doctor</option>
-                            <option value="Engineer">Engineer</option>
-                            <option value="Labourer">Labourer (مزدور)</option>
-                            <option value="Civil Servant">Civil Servant (سرکاری ملازم)</option>
-                            <option value="Civil Servant">Private Sector (پرائیویٹ ملازم)</option>
-                            <option value="Civil Servant">Others (کوئی اور)</option>
+                        <select name="father_profession" class="custom-input fancy-focus" required>
+                            @foreach (config('enums.professions') as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div>
                         <label for="father_income">Father Income (ماہانہ) </label>
                         <select name="father_income" class="custom-input fancy-focus" required>
-                            <option value="20000">Rs. 20,000</option>
-                            <option value="40000" selected>Rs. 40,000</option>
-                            <option value="60000">Rs. 60,000</option>
-                            <option value="80000">Rs. 80,000</option>
-                            <option value="100000">Rs. 100,000</option>
-                            <option value="150000">More than Rs. 100,000</option>
+                            @foreach (config('enums.father_income') as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                            @endforeach
                         </select>
                     </div>
 

@@ -130,6 +130,58 @@
                     <label for="">Address</label>
                     <input type="text" name="address" class="custom-input" placeholder="Address" value="{{ $application->address }}">
                 </div>
+
+                <div>
+                    <label for="identification_mark">Identification Mark (شناختی علامت)</label>
+                    <input type="text" name="identification_mark" class="custom-input fancy-focus" placeholder="Identification mark" value="{{ $application->identification_mark }}" required>
+                </div>
+
+                <div>
+                    <label for="caste">Caste (ذات)</label>
+                    <select name="caste" class="custom-input fancy-focus" required>
+                        @foreach (config('enums.castes') as $value => $label)
+                        <option value="{{ $value }}" @selected($application->caste == $value)>
+                            {{ $label }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <label for="father_profession">Father Profession (باپ یا سرپرست کا پیشہ)</label>
+                    <select name="father_profession" class="custom-input fancy-focus" required>
+                        @foreach (config('enums.professions') as $value => $label)
+                        <option value="{{ $value }}" @selected($application->father_profession == $value)>
+                            {{ $label }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <label for="father_income">Father Income (ماہانہ) </label>
+                    <select name="father_income" class="custom-input fancy-focus" required>
+                        @foreach (config('enums.father_incomes') as $value => $label)
+                        <option value="{{ $value }}" @selected($application->father_income == $value)>
+                            {{ $label }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <label for="previous_school">Previous School (سابقہ سکول)</label>
+                    <input type="text" name="previous_school" class="custom-input fancy-focus" placeholder="Previous school" value="{{ $application->previous_school }}" required>
+                </div>
+                <div>
+                    <label for="medium">Medium (میٹرک میں زریعہ تعلیم)</label>
+                    <select name="medium" class="custom-input fancy-focus" required>
+                        <option value="ur" @selected($application->medium=='ur')>Urdu</option>
+                        <option value="en" @selected($application->medium=='en')>English</option>
+                    </select>
+                </div>
+
+
                 <div>
                     <label for="">Board Name</label>
                     <select name="bise" id="" class="custom-input">
@@ -140,9 +192,9 @@
                 <div class="">
                     <label for="">Passing Year</label>
                     <select name="pass_year" id="" class="custom-input">
-                        <option value="2022" @selected($application->pass_year==2022)>2022</option>
                         <option value="2023" @selected($application->pass_year==2023)>2023</option>
                         <option value="2024" @selected($application->pass_year==2024)>2024</option>
+                        <option value="2025" @selected($application->pass_year==2025)>2025</option>
                     </select>
                 </div>
                 <div>

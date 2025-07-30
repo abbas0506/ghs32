@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AllocationController;
+use App\Http\Controllers\Admin\AlumniController;
 use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\Admin\CollectiveTestController;
@@ -30,6 +31,8 @@ use App\Http\Controllers\Admission\ObjectionController as AdmissionObjectionCont
 use App\Http\Controllers\Admission\RejectionController;
 use App\Http\Controllers\Admission\SectionController;
 use App\Http\Controllers\Admission\SectionStudentsController;
+use App\Http\Controllers\AlumniController as ControllersAlumniController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\Library\BookController;
 use App\Http\Controllers\Library\BookIssuanceController;
 use App\Http\Controllers\Library\RackController;
@@ -107,13 +110,17 @@ Route::get('applied/{application}', [OnlineApplicationController::class, 'applie
 Route::post('login/as', [AuthController::class, 'loginAs'])->name('login.as');
 Route::get('signout', [AuthController::class, 'signout'])->name('signout');
 
+Route::resource('alumni', ControllersAlumniController::class)->only('index', 'create', 'store');
+
 Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:admin']], function () {
         Route::get('/', [AdminDashboardController::class, 'index']);
         Route::resource('groups', GroupController::class);
         Route::resource('subjects', SubjectController::class);
+        Route::resource('alumni', AlumniController::class);
         Route::resource('sections', AdminSectionController::class);
+        Route::resource('events', EventController::class);
         Route::resource('grade.sections', GradeSectionController::class);
         Route::resource('section.lecture.allocations', AllocationController::class);
 

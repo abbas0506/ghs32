@@ -41,7 +41,6 @@
         <table class="table-fixed borderless w-full">
             <thead>
                 <tr class="border-b">
-                    <th class="w-8">Sr</th>
                     <th class="w-16">App #</th>
                     <th class="w-40 text-left">Student Name</th>
                     <th class="w-24">Group</th>
@@ -53,7 +52,6 @@
             <tbody id='application-table'>
                 @foreach($applications->sortByDesc('updated_at') as $application)
                 <tr class="tr" data-status="{{ $application->status }}">
-                    <td>{{$loop->index}}</td>
                     <td>
                         <a href="{{ route('admission.applications.show', $application) }}" class="link">{{ $application->rollno }}</a>
                     </td>
@@ -89,7 +87,7 @@
         var str = 0;
         $('.tr').each(function() {
             if (!(
-                    $(this).children().eq(1).prop('outerText').toLowerCase().includes(searchtext)
+                    $(this).children().eq(0).prop('outerText').toLowerCase().includes(searchtext)
                 )) {
                 $(this).addClass('hidden');
             } else {

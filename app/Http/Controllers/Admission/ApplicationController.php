@@ -154,17 +154,16 @@ class ApplicationController extends Controller
             'phone' => 'required|string|max:16',
             'address' => 'nullable|string|max:100',
             'dob' => 'required|date',
-            // 'identification_mark' => 'required|string|max:100',
-            // 'caste' => 'required|string|max:50',
-            // // 'father_profession' => 'required|string|max:50',
-            // 'father_income' => 'required|integer|min:0',
+            'identification_mark' => 'required|string|max:100',
+            'caste' => 'required|string|max:50',
+            'father_profession' => 'required|string|max:50',
+            'father_income' => 'required|integer|min:0',
 
             // 'admission_grade' => 'required|integer|min:1|max:12',
             'group_id' => 'required|exists:groups,id',
             'pass_year' => 'required|digits:4|integer',
-            // 'medium' => 'required|in:en,ur',
-            // 'previous_school' => 'nullable|string|max:100',
-            // 'previous_school_type' => 'nullable|string|max:20',
+            'medium' => 'required|in:en,ur',
+            'previous_school' => 'nullable|string|max:100',
             'bise' => 'required|string|max:20',
             'rollno' => 'required|string|max:8',
             'obtained_marks' => 'required|integer|min:0',
@@ -173,7 +172,7 @@ class ApplicationController extends Controller
             'rejection_note' => 'nullable|string|max:200',
             'amount_paid' => 'nullable|integer|min:0',
 
-            // 'fee_concession' => 'nullable|integer|min:0|max:100',
+            'fee_concession' => 'nullable|integer|min:0|max:100',
         ]);
 
         try {
@@ -187,7 +186,7 @@ class ApplicationController extends Controller
                 $filename = uniqid() . '.' . $request->photo->extension();
                 $path = $request->photo->storeAs('uploads', $filename, 'public');
 
-                $validated['photo'] = $path; // ✅ full path like "uploads/abc.jpg"
+                $validated['photo'] = $path; // full path like "uploads/abc.jpg"
             }
             $application->update($validated);
             return redirect()->route('admission.applications.index')->with('success', 'Application # ' . $application->rollno . ' successfully updated');
@@ -205,7 +204,14 @@ class ApplicationController extends Controller
         //
         try {
             $application = Application::findOrFail($id);
+            // Delete associated photo if exists
+            if ($application->photo && Storage::disk('public')->exists($application->photo)) {
+                Storage::disk('public')->delete($application->photo);
+            }
+
+            // Delete the record
             $application->delete();
+
             return redirect()->route('admission.applications.index')->with('success', 'Successfully deleted!');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
