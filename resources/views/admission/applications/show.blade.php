@@ -58,14 +58,13 @@
                     <p>{{ $application->name }}</p>
                     <p class="text-slate-600 text-sm"><i class="bi-balloon"></i>{{ $application->dob->format('d-m-Y') }} <i class="bi-card-heading ml-2"></i> {{ $application->bform }} <i class="bi-telephone ml-2"></i> {{ $application->phone }}</p>
                     <p class="text-slate-600 text-sm">{{ $application->identification_mark }} </p>
-                    <p class="text-slate-600 text-sm">{{ $application->previous_school }} </p>
+                    <p class="text-slate-600 text-sm">{{ $application->address }} </p>
                 </div>
                 <div>
                     <label for="">Father / Guardian Info</label>
                     <p>{{ $application->father_name }} </p>
                     <p class="text-slate-600 text-sm">{{ $application->caste }} / {{ $application->father_profession }} </p>
                     <p class="text-slate-600 text-sm"><i class="bi-currency"></i>{{ $application->father_income }} </p>
-                    <p class="text-slate-600 text-sm">{{ $application->address }} </p>
                 </div>
                 <div>
                     <label for="">Group</label>
