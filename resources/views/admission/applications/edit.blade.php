@@ -185,8 +185,11 @@
                 <div>
                     <label for="">Board Name</label>
                     <select name="bise" id="" class="custom-input">
-                        <option value="sahiwal" @selected($application->bise=='sahiwal')>Sahiwal Board</option>
-                        <option value="other" @selected($application->bise=='other')>Other Board</option>
+                        @foreach (config('enums.bises') as $value => $label)
+                        <option value="{{ $value }}" @selected($application->bise == $value)>
+                            {{ $label }}
+                        </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="">

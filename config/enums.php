@@ -37,4 +37,17 @@ return [
         'Others' => 'Others',
     ],
 
+    'bises' => [
+        'Sahiwal' => 'Sahiwal',
+        'Multan' => 'Multan',
+        'Lahore' => 'Lahore',
+        'Gujranwala' => 'Gujranwala',
+        'Faisalabad' => 'Faisalabad',
+        'Rawalpindi' => 'Rawalpindi',
+        'DG Khan' => 'DG Khan',
+        'Bahawalpur' => 'Bahawalpur',
+        'Federal' => 'Federal',
+        'Karachi' => 'Karachi',
+        'Other' => 'Other',
+    ],
 ];

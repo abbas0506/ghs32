@@ -91,12 +91,6 @@
         </div>
         <!-- <div class="text-teal-800 text-xl text-center font-bold bg-teal-100 p-4">Admission Form</div> -->
         <div class="px-5">
-            <!-- page message -->
-            @if($errors->any())
-            <x-message :errors='$errors'></x-message>
-            @else
-            <x-message></x-message>
-            @endif
 
             <form action="{{url('apply')}}" method="post" id='applicationForm' class="w-full py-5 md:px-16" enctype="multipart/form-data">
                 @csrf
@@ -112,6 +106,13 @@
                     <input type="file" id="photo" name="photo" accept="image/*" onchange="previewSelectedPhoto(event)">
                     <label id="photo-error" class="text-red-500 mt-1 hidden">File size exceeds 1MB.</label>
                 </div>
+
+                <!-- page error message -->
+                @if($errors->any())
+                <x-message :errors='$errors'></x-message>
+                @else
+                <x-message></x-message>
+                @endif
 
                 <h2 class="mt-8">Choose your desired group</h2>
                 <div class="grid gap-y-2 mt-3">
@@ -208,17 +209,11 @@
                     <div>
                         <label for="bise">Board</label>
                         <select name="bise" class="custom-input fancy-focus" placeholder="Board" required>
-                            <option value="Sahiwal">Sahiwal</option>
-                            <option value="Multan">Multan</option>
-                            <option value="Lahore">Lahore</option>
-                            <option value="Gujranwala">Gujranwala</option>
-                            <option value="Faisalabad">Faisalabad</option>
-                            <option value="Rawalpindi">Rawalpindi</option>
-                            <option value="DG Khan">DG Khan</option>
-                            <option value="Bahawalpur">Bahawalpur</option>
-                            <option value="Federal">Federal</option>
-                            <option value="Karachi">Karachi</option>
-                            <option value="Other">Other</option>
+                            @foreach (config('enums.bises') as $value => $label)
+                            <option value="{{ $value }}">
+                                {{ $label }}
+                            </option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -327,7 +322,18 @@
 
     form.addEventListener('submit', function(e) {
         const file = photoInput.files[0];
+        if (!photoInput.files.length) {
+            e.preventDefault(); // Stop form submission
+            Swal.fire({
+                title: "Warning",
+                text: "Please select a photo",
+                icon: "warning",
+                showConfirmButton: false,
+                timer: 1500
 
+            });
+            photoInput.focus();
+        }
         if (file && file.size > 1024 * 1024) { // 1MB = 1024 * 1024 bytes
             e.preventDefault(); // stop form submission
             errorText.classList.remove('hidden'); // show error
