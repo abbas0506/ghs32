@@ -97,7 +97,7 @@
 <x-message></x-message>
 @endif
 
-<section class="w-screen h-screen">
+<section class="w-screen h-screen bg-teal-50">
     <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full py-16">
         <div class="flex flex-1 justify-end items-center">
             <img src="{{ url(asset('images/small/admission-2.png')) }}" alt="student" class="w-64 h-64 md:w-96 md:h-96">
@@ -106,11 +106,11 @@
 
         <div class="flex flex-col flex-1 gap-y-2 justify-center">
             <p>2025</p>
-            <h2 class="text-2xl md:text-4xl font-bold">Admission Open</h2>
+            <h2 class="text-2xl md:text-4xl font-bold">Admission <span class="text-teal-700"> Open</span></h2>
             <p class="text-slate-600 text-sm md:text-lg leading-relaxed mt-4">We are thrilled to welcome ambitious students to our dynamic academic journey, proudly offering FA, Pre-Engineering, and ICS programs.</p>
             <a href="{{ url('admission-25')}}">
                 <div class="button-container">
-                    <button class="click-demo-button click-demo-button mt-5 rounded py-0 px-5">
+                    <button class="px-5 py-2 text-lg font-semibold border border-teal-600 mt-5 bg-teal-200 hover:bg-teal-300 rounded-full">
                         Join Us
                     </button>
                     <i class="bi bi-cursor-fill pointer-icon"></i>
@@ -140,10 +140,10 @@
     </div>
 </section>
 <section class="mt-5 md:mt-0">
-    <div class="flex justify-center w-full bg-teal-100">
-        <div class="flex flex-col md:flex-row items-center p-5 md:p-16">
-            <div class="w-1/3 grid place-items-center">
-                <img src="{{ url('images/small/paper-0.png') }}" alt="test" class="w-32">
+    <div class="justify-center w-full bg-teal-50">
+        <div class="grid grid-cols-1 md:grid-cols-2  items-center p-5 md:px-24 gap-5 md:gap-16">
+            <div class="place-items-center md:place-items-start">
+                <img src="{{ url('images/small/quiz.png') }}" alt="test" class="bg-cover">
             </div>
             <div class="">
                 <h3 class="text-xl md:text-2xl">Self Assessment</h3>
@@ -155,9 +155,6 @@
                 </div>
 
             </div>
-
-
-
         </div>
 
     </div>
@@ -220,12 +217,12 @@
 <!-- distinction -->
 <section>
     <div class="mt-24 bg-slate-100">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-4 md:p-8">
-            <div class="flex flex-1">
-                <img src="{{url('images/sports/trophy.png')}}" alt="sat" class="">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:px-24 p-4 md:p-8">
+            <div class="place-items-center md:place-items-start">
+                <img src="{{url('images/sports/trophy_3.png')}}" alt="sat" class="object-cover">
             </div>
-            <div class="flex flex-col flex-1 md:text-base text-sm">
-                <h2 class="text-xl">Our Achievements</h2>
+            <div class="md:text-base text-sm place-content-center">
+                <h2 class="text-2xl md:text-3xl">Extra-Curricular Achievements</h2>
                 <ul class="flex mt-3">
                     <li><i class="bi-check2-circle pr-3"></i></li>
                     <li> All Punjab Qirat Competition Winner</li>
@@ -256,9 +253,9 @@
     <div class="w-full md:w-3/4 mx-auto mt-12">
         <div class="flex justify-center items-center flex-col">
             <img src="{{asset('images/principal/muzammil.png')}}" class="w-64 rounded-full" alt="">
-            <h2 class="mt-3">Muzammil Hussain SS(Chemistry)</h2>
+            <h2 class="mt-3 font-bold text-lg">Muzammil Hussain SS(Chemistry)</h2>
             <h2>Principal</h2>
-            <p class="mt-3 text-sm md:text-lg text-center">
+            <p class="mt-3 text-sm md:text-lg text-center p-5">
                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                 "We are committed to achieve academic excellence, character education, and inclusive community engagement. we empower our students to become lifelong learners, compassionate leaders, and contributors to a globally connected society."
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
@@ -282,32 +279,38 @@
         <div class="h-1 w-24 bg-teal-800 mx-auto mt-6"></div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 place-items-center gap-y-6 mt-16 w-full justify-between">
-        <div class="bg-teal-100 p-5">
+    <div class="grid grid-cols-1 md:grid-cols-2 place-items-center mt-16">
+
+        <div class="md:p-8 py-5 order-2 md:order-none">
             <h2 class="text-2xl text-slate-800">Planned Testing</h2>
             <p class="mt-3 text-slate-600 leading-relaxed">We conduct well planned series of tests in order to get our students ready for their final exams. Our online assessment system also helps specially the brilliant students to perform their self assessment and identify their deficiencies properly.</p>
         </div>
-        <div class="">
-            <img src="{{asset('images/sports/shield.png')}}" alt="" class="md:w-3/4 md:float-right">
+
+        <div class="place-items-center md:place-items-end order-1 md:order-none">
+            <img src="{{asset('images/sports/shield_1.png')}}" alt="" class="bg-cover">
         </div>
-        <div class="">
-            <img src="{{asset('images/library/library-1.png')}}" alt="" class="md:w-3/4 md:float-left">
+
+        <div class="order-3 md:order-none">
+            <img src="{{asset('images/library/library_1.png')}}" alt="" class="bg-cover">
         </div>
-        <div class="bg-teal-100 p-5">
+
+        <div class="md:p-8 py-5 order-4 md:order-none">
             <h2 class="text-2xl text-slate-800">Books Library</h2>
             <p class="mt-3 text-slate-600 leading-relaxed">
                 We have established a state-of-the-art library, fully managed by a web-based application. It consists of 1000+ books from various domains like religion, science, history, literature, and more. Students can find their desired books using our web application.
             </p>
         </div>
-        <div class="bg-teal-100 p-5">
+
+        <div class="md:p-8 py-5 order-6 md:order-none">
             <h2 class="text-2xl text-slate-800">Character Building</h2>
             <p class="mt-3 text-slate-600 leading-relaxed">
                 We pay special focus on the social development of our students. We provide healthy environment where student grow to become morally good citizens.
                 We show them the right way that can lead to their destination.
             </p>
         </div>
-        <div class="">
-            <img src="{{asset('images/events/prayer.png')}}" alt="" class="md:w-3/4 md:float-right">
+
+        <div class="order-5 md:order-none">
+            <img src="{{asset('images/events/prayer_1.png')}}" alt="" class="bg-cover">
         </div>
 
     </div>
@@ -328,15 +331,15 @@
                 <div class="relative">
                     <div class="slider-container">
                         <div class="slides">
-                            <img src="{{asset('images/events/event-001.png')}}" alt="Image 1" class="w-96 h-64">
-                            <img src="{{asset('images/events/event-004.png')}}" alt="Image 2" class="w-96 h-64">
-                            <!-- <img src="{{asset('images/events/event-005.png')}}" alt="Image 3" class="w-96 h-64"> -->
-                            <!-- Add more images as needed -->
-                            <img src="{{asset('images/events/event-006.png')}}" alt="Image 1" class="w-96 h-64">
-                            <img src="{{asset('images/events/event-007.png')}}" alt="Image 2" class="w-96 h-64">
-                            <img src="{{asset('images/events/event-010.png')}}" alt="Image 3" class="w-96 h-64">
-                            <img src="{{asset('images/events/event-013.png')}}" alt="Image 3" class="w-96 h-64">
-                            <!-- Add more images as needed -->
+                            <img src="{{asset('images/events/event_1.png')}}" alt="Image 1" class="bg-cover">
+                            <img src="{{asset('images/events/event_2.png')}}" alt="Image 2" class="bg-cover">
+                            <img src="{{asset('images/events/event_3.png')}}" alt="Image 3" class="bg-cover">
+                            <img src="{{asset('images/events/event_4.png')}}" alt="Image 4" class="bg-cover">
+                            <img src="{{asset('images/events/event_5.png')}}" alt="Image 5" class="bg-cover">
+                            <img src="{{asset('images/events/event_6.png')}}" alt="Image 6" class="bg-cover">
+                            <img src="{{asset('images/events/event_7.png')}}" alt="Image 7" class="bg-cover">
+                            <img src="{{asset('images/events/event_8.png')}}" alt="Image 8" class="bg-cover">
+                            <img src="{{asset('images/events/event_9.png')}}" alt="Image 9" class="bg-cover">
                         </div>
                     </div>
                     <button class="prev absolute top-1/2 transform -translate-y-1/2 left-4 bg-white p-2 rounded-full shadow-md text-gray-600" onclick="changeSlide(-1)">❮</button>
@@ -344,10 +347,10 @@
                 </div>
             </div>
 
-            <div class="flex flex-col flex-1">
-                <h2>Days Celebrations</h2>
+            <div class="grid">
+                <h2 class="font-bold text-lg">Days Celebrations</h2>
                 <p>We are a team and every activity is performed in a team spirit. We celebrate welcomes, farewells and national days and provide our students an opertunity to showcase their abilities </p>
-                <h2 class="mt-4">Student Promotion</h2>
+                <h2 class="mt-4 font-bold text-lg">Student Promotion</h2>
                 <p>We promote our students' physical capacities in grounds. We arrange sports competitions to give them an oppertunity to be selected in national games ultimately. </p>
             </div>
         </div>
@@ -355,23 +358,27 @@
 
 </section>
 
-<section class="mt-24 md:px-24">
+<section class="mt-24 md:px-24 p-5">
     <div class="grid grid-cols-1 md:grid-cols-2 border">
         <div class="p-4 md:p-8 text-center">
             <img src="{{url(asset('images/donor.png'))}}" alt="" class="w-40 h-40 rounded-full mx-auto">
-            <h2 class="mt-3">Rao Zahoor Ahmad</h2>
-            <p class="text-slate-600 text-sm mt-2">A well known charity person of village Chak Bedi, who donated his 9 acres land for the establisment of school. May his soul rest in peace!</p>
+            <h2 class="mt-3 text-lg font-bold">Rao Zahoor Ahmad Kalanwari</h2>
+            <p class="text-slate-600 text-sm mt-2">We honor the profound generosity of Rao Zahoor Ahmad, a great philanthropist from village Chak Bedi, who selflessly donated 9 acres of land for the establishment of this school. May his soul rest in eternal peace.</p>
         </div>
 
         <div class="overflow-x-hidden">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d6044.265479385004!2d73.49551048367726!3d30.485434912974124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1shigher%20secondary%20school%20near%20Chak%20Bedi!5e0!3m2!1sen!2s!4v1701884753529!5m2!1sen!2s" width="540" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d6044.265479385004!2d73.49551048367726!3d30.485434912974124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1shigher%20secondary%20school%20near%20Chak%20Bedi!5e0!3m2!1sen!2s!4v1701884753529!5m2!1sen!2s" width="100%" height="324" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
     </div>
-    <div class="flex flex-col md:flex-row justify-center md:items-center w-full mt-12 space-y-3 md:space-x-4">
-        <img src="{{url('images/mini/email-5.png')}}" alt="" class="w-16 -rotate-6">
-        <input type="text" placeholder="Enter your mailing address" class="w-full md:w-3/4 custom-input pl-12">
-        <button class="btn-teal py-2 px-4">Submit</button>
+
+    <div class="flex items-center gap-5 mt-16">
+        <div class="relative flex-1">
+            <input type="text" placeholder="Enter your mailing address" class="custom-input pl-10">
+            <i class="bi-envelope absolute top-3 left-3"></i>
+        </div>
+        <!-- <img src="{{url('images/mini/email-5.png')}}" alt="" class="w-16 -rotate-6"> -->
+        <button class="btn-teal rounded-md py-2 px-4">Submit</button>
 
     </div>
 </section>
