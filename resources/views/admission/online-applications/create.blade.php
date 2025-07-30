@@ -141,7 +141,7 @@
                         <input type="text" name="name" class="custom-input fancy-focus" placeholder="Student name" required>
                     </div>
                     <div class="md:col-span-2">
-                        <label for="">father_name name</label>
+                        <label for="">Father Name</label>
                         <input type="text" name="father_name" class="custom-input fancy-focus" placeholder="Father name" required>
                     </div>
                     <div>
