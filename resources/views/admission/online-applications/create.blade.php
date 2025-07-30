@@ -199,7 +199,7 @@
                     </div>
 
                     <div>
-                        <label for="father_income">Father Income </label>
+                        <label for="father_income">Father Income (ماہانہ) </label>
                         <select name="father_income" class="custom-input fancy-focus" required>
                             <option value="20000">Rs. 20,000</option>
                             <option value="40000" selected>Rs. 40,000</option>
