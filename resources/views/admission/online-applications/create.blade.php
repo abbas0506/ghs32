@@ -79,8 +79,17 @@
 </style>
 
 <section>
-    <div class="max-w-full m-5 md:mx-auto lg:w-2/3 rounded border shadow-lg p-5 md:p-16 mt-24 bg-white">
-        <div class="text-teal-800  text-xl text-center font-bold text-decoration underline underline-offset-4">Admission Form</div>
+    <div class="max-w-full m-5 md:mx-auto lg:w-2/3  mt-24 bg-white">
+        <div class="bg-teal-600 p-5 relative">
+            <img src="{{ url(asset('images/logo/app_logo_transparent.png')) }}" alt="" class="absolute top-2 md:top-8 left-2 md:left-8 w-16">
+            <div class="flex flex-col flex-1 justify-center items-center text-center">
+                <h2 class="txt-lg font-bold tracking-wider"> ADMISSION FORM</h2>
+                <h2 class="text-sm font-semibold">Part I - Session 2025-27</h2>
+                <p class="text-sm"> Govt. Higher Seconary School Chakbedi Pakpattan</p>
+                <!-- <p>Part I Session 2025-27 </p> -->
+            </div>
+        </div>
+        <!-- <div class="text-teal-800 text-xl text-center font-bold bg-teal-100 p-4">Admission Form</div> -->
         <div class="px-5">
             <!-- page message -->
             @if($errors->any())
@@ -89,7 +98,7 @@
             <x-message></x-message>
             @endif
 
-            <form action="{{url('apply')}}" method="post" id='applicationForm' class="mt-8 w-full" enctype="multipart/form-data">
+            <form action="{{url('apply')}}" method="post" id='applicationForm' class="w-full py-5 md:px-16" enctype="multipart/form-data">
                 @csrf
 
                 <div class="photo-upload-wrapper">
@@ -249,6 +258,9 @@
                         <input type="number" name="obtained_marks" class="custom-input fancy-focus" placeholder="Obtained marks" min='0' max='1200' required>
                     </div>
 
+                </div>
+                <div dir="rtl" class="p-5 mt-5 bg-teal-100 text-sm">
+                    میں یہ حلفیہ اقرار کرتا ہوں کہ اس درخواست فارم میں فراہم کردہ تمام معلومات میرے بہترین علم کے مطابق درست ہیں۔ میں سمجھتا ہوں کہ کوئی بھی غلط یا گمراہ کن معلومات میری درخواست یا داخلے کی منسوخی کا سبب بن سکتی ہے۔"
                 </div>
                 <div class="flex justify-center space-x-3 text-center mt-8">
                     <a href="{{ url('/')}}" class="btn-gray rounded py-3 px-5">Cancel</a>

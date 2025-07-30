@@ -79,18 +79,20 @@
                     </tbody>
                 </table>
             </div>
+            <!-- Buttons -->
+            <div dir='ltr' class="font-sans flex justify-center space-x-4 my-10">
+                <a href="/" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded shadow">
+                    Cancel
+                </a>
+                <a href="{{url('apply')}}" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow">
+                    Start Applying
+                </a>
+            </div>
+
         </div>
 
     </div>
-    <!-- Buttons -->
-    <div class="flex justify-center space-x-4 my-10">
-        <a href="/" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded shadow">
-            Cancel
-        </a>
-        <a href="{{url('apply')}}" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded shadow">
-            Start Applying
-        </a>
-    </div>
+
 
 </section>
 <!-- Popup Modal -->

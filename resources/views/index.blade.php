@@ -111,7 +111,7 @@
             <a href="{{ url('admission-25')}}">
                 <div class="button-container">
                     <button class="px-5 py-2 text-lg font-semibold border border-teal-600 mt-5 bg-teal-200 hover:bg-teal-300 rounded-full">
-                        Join Us
+                        Apply Now
                     </button>
                     <i class="bi bi-cursor-fill pointer-icon"></i>
 
