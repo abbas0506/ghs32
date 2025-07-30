@@ -169,7 +169,7 @@
                     <div>
                         <label for="caste">Caste (ذات)</label>
                         <select name="caste" class="custom-input fancy-focus" placeholder="Caste" required>
-                            @foreach (config('enums.cast') as $value => $label)
+                            @foreach (config('enums.castes') as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                             @endforeach
                         </select>
@@ -187,7 +187,7 @@
                     <div>
                         <label for="father_income">Father Income (ماہانہ) </label>
                         <select name="father_income" class="custom-input fancy-focus" required>
-                            @foreach (config('enums.father_income') as $value => $label)
+                            @foreach (config('enums.father_incomes') as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                             @endforeach
                         </select>
