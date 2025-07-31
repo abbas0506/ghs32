@@ -33,6 +33,7 @@ use App\Http\Controllers\Admission\SectionController;
 use App\Http\Controllers\Admission\SectionStudentsController;
 use App\Http\Controllers\AlumniController as ControllersAlumniController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\GallaryController;
 use App\Http\Controllers\Library\BookController;
 use App\Http\Controllers\Library\BookIssuanceController;
 use App\Http\Controllers\Library\RackController;
@@ -86,7 +87,7 @@ Route::get('/', function () {
 
 Route::view('about', 'about');
 Route::view('contact', 'contact');
-Route::view('gallary', 'gallary');
+Route::get('gallary', [GallaryController::class, 'index']);
 
 Route::resource('applications', AdmissionApplicationController::class);
 
