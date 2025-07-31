@@ -4,48 +4,57 @@
 <x-header></x-header>
 @endsection
 @section('body')
-<!-- <div class="text-center bg-sky-100 text-sm py-1">(+92 42) 99233106-7</div> -->
-<section id='page_title' class="pt-32 pb-8 bg-app text-orange-200">
-    <div class="section-title text-center">
-        About Us
-    </div>
-</section>
-<section class="">
+<section class="text-gray-800 font-sans px-5 md:px-24 mt-16">
+    <!-- Hero Section -->
+    <section class="relative">
+        <div class="max-w-7xl mx-auto px-4 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-bold text-teal-700 mb-6">
+                    Welcome to <span class="text-slate-600">Our School</span>
+                </h1>
+                <p class="text-lg leading-relaxed text-gray-700">
+                    Our school fosters a learning environment where every student is inspired to achieve excellence. With passionate educators, modern labs, and a well-equipped library, we ensure holistic development for all.
+                </p>
+            </div>
+            <div class="relative">
+                <img src="{{url('images/events/event_1.png')}}" alt="School Image" class="rounded-xl shadow-2xl transform hover:scale-105 transition duration-500" />
+            </div>
+        </div>
+    </section>
 
-    <div class="grid md:grid-cols-2 mt-16">
-        <div class="flex justify-center items-center">
-            <img src="{{url('images/bg/office.png')}}" alt="sat" class="h-80" alt="">
+    <!-- Statistics Section -->
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-semibold text-teal-800 mb-12">At a Glance</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-10">
+                <div class="bg-blue-50 rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                    <h3 class="text-2xl md:text-4xl font-bold text-teal-600">1200+</h3>
+                    <p class="mt-2 text-gray-600">Students</p>
+                </div>
+                <div class="bg-blue-50 rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                    <h3 class="text-2xl md:text-4xl font-bold text-teal-600">40+</h3>
+                    <p class="mt-2 text-gray-600">Teachers</p>
+                </div>
+                <div class="bg-blue-50 rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                    <h3 class="text-2xl md:text-4xl font-bold text-teal-600">05</h3>
+                    <p class="mt-2 text-gray-600">Science Labs</p>
+                </div>
+                <div class="bg-blue-50 rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                    <h3 class="text-2xl md:text-4xl font-bold text-teal-600">1,000+</h3>
+                    <p class="mt-2 text-gray-600">Library Books</p>
+                </div>
+            </div>
         </div>
-        <div class="block w-full p-5 md:px-12 text-justify text-lg leading-relaxed">
-            Govt Higher Secondary School Chak Bedi is a public sector institute situated in Chak Bedi, near by Kasur Multan Road, 23 km away from Shehr-e-Fareed, Pakpattan.
-            People choose us because of our quality education from primary to higher secondary level, ease of access and so many other reasons.
-            We offer science and arts education from grades 9 to 12 and prepare our students for their future challanges.
-            We focus on their personal development and help them become a successful citizen of pakistan
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-teal-900 text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p>&copy; 2025 GHSS Chak Bedi, Pakpattan. All rights reserved.</p>
         </div>
-    </div>
+    </footer>
 </section>
-<section class="mt-16">
-    <div class="bg-slate-200 p-5 md:p-16 grid grid-cols-2 md:grid-cols-4 gap-5">
-        <div class="text-center">
-            <p class="text-2xl md:text-4xl">1500+</p>
-            <p>Students</p>
-        </div>
-        <div class="text-center">
-            <p class="text-2xl md:text-4xl">40+</p>
-            <p>Teachers</p>
-        </div>
-        <div class="text-center">
-            <p class="text-2xl md:text-4xl">5</p>
-            <p>Practical Labs</p>
-        </div>
-        <div class="text-center">
-            <p class="text-2xl md:text-4xl">1000+</p>
-            <p>Library Books</p>
-        </div>
-    </div>
-</section>
-<!-- footer -->
+@endsection
+@section('footer')
 <x-footer></x-footer>
 @endsection
-
-@section('script')

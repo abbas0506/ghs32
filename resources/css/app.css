@@ -6,7 +6,7 @@
 
 @layer base {
     body {
-        @apply w-screen lg:overflow-x-hidden bg-white;
+        @apply w-screen lg:overflow-x-hidden bg-gradient-to-b from-blue-50 via-white to-blue-100;
     }
     tr th {
         @apply px-2 text-sm text-gray-600 border bg-blue-50 text-center;

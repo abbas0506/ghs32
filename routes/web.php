@@ -62,6 +62,7 @@ use App\Http\Controllers\Teacher\TestController;
 use App\Http\Controllers\Teacher\TestSectionController;
 use App\Http\Controllers\Teacher\TestSectionStudentController;
 use App\Http\Controllers\TestPositionController;
+use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,7 +81,8 @@ Route::get('/', function () {
     if (Auth::check()) {
         return redirect(session('role'));
     } else {
-        return view('index');
+        $events = Event::latest()->take(3)->get();
+        return view('index', compact('events'));
     }
 });
 

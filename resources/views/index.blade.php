@@ -97,7 +97,7 @@
 <x-message></x-message>
 @endif
 
-<section class="w-screen h-screen bg-teal-50">
+<section class="w-screen h-screen">
     <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full py-16">
         <div class="flex flex-1 justify-end items-center">
             <img src="{{ url(asset('images/small/admission-2.png')) }}" alt="student" class="w-64 h-64 md:w-96 md:h-96">
@@ -331,15 +331,9 @@
                 <div class="relative">
                     <div class="slider-container">
                         <div class="slides">
-                            <img src="{{asset('images/events/event_1.png')}}" alt="Image 1" class="bg-cover">
-                            <img src="{{asset('images/events/event_2.png')}}" alt="Image 2" class="bg-cover">
-                            <img src="{{asset('images/events/event_3.png')}}" alt="Image 3" class="bg-cover">
-                            <img src="{{asset('images/events/event_4.png')}}" alt="Image 4" class="bg-cover">
-                            <img src="{{asset('images/events/event_5.png')}}" alt="Image 5" class="bg-cover">
-                            <img src="{{asset('images/events/event_6.png')}}" alt="Image 6" class="bg-cover">
-                            <img src="{{asset('images/events/event_7.png')}}" alt="Image 7" class="bg-cover">
-                            <img src="{{asset('images/events/event_8.png')}}" alt="Image 8" class="bg-cover">
-                            <img src="{{asset('images/events/event_9.png')}}" alt="Image 9" class="bg-cover">
+                            @foreach($events as $event)
+                            <img src="{{asset('storage/'. $event->photo)}}" alt="event" class="bg-cover">
+                            @endforeach
                         </div>
                     </div>
                     <button class="prev absolute top-1/2 transform -translate-y-1/2 left-4 bg-white p-2 rounded-full shadow-md text-gray-600" onclick="changeSlide(-1)">❮</button>

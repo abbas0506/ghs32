@@ -8,7 +8,7 @@
     <h2 class="text-3xl font-bold mb-4 text-center text-gray-800">Meet Our Alumni</h2>
 
     <div class="text-center mb-8">
-        <a href="{{ route('alumni.create') }}"
+        <a href="#"
             class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition duration-300 shadow-lg">
             🎓 Join as Alumni
         </a>
