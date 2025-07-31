@@ -101,7 +101,11 @@
 
 <div id="imageModal" class="modal">
     <span class="close-modal">&times;</span>
+    @if($events->count())
     <img class="modal-content" id="img01" src="{{ asset('storage/' . $events->first()->photo) }}">
+    @else
+    <img class="modal-content" id="img01" src="">
+    @endif
     <div id="caption" class="modal-caption"></div>
 </div>
 </section>
