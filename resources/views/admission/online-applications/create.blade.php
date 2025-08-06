@@ -184,7 +184,7 @@
                         <label for="is_orphan"> Are you orphan (یتیم)? </label>
                         <select name="is_orphan" class="custom-input fancy-focus" required>
                             <option value="0">No</option>
-                            <option value="0">Yes</option>
+                            <option value="1">Yes</option>
                         </select>
                     </div>
                     <div class="md:col-span-2 text-teal-600 text-right">گارڈین یا سرپرست سے مراد وہ شخص ہے جو آپکے تعلیمی اخراجات برداشت کرے گا </div>
