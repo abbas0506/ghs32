@@ -12,17 +12,17 @@
 </header>
 <section class="">
     <div class="grid md:grid-cols-2 mt-8 p-5 md:px-24 w-full md:w-2/3 mx-auto gap-8">
-        <div class="flex flex-col md:col-span-2 justify-center items-center text-center bg-teal-100 border p-8">
+        <div class="flex flex-col md:col-span-2 justify-center items-center text-center shadow-lg p-8 hover:shadow-2xl hover:bg-blue-200 transition-all delay-75 ease-in-out">
             <i class="bi-geo-alt-fill text-teal-700 text-2xl"></i>
             <h2 class="text-xl">Our Address</h2>
             <p class="">Govt Higher Secondary School Chak Bedi, Pakpattan</p>
         </div>
-        <div class="flex flex-col justify-center items-center bg-teal-50 border p-8">
+        <div class="flex flex-col justify-center items-center shadow-lg p-8 hover:shadow-2xl hover:bg-blue-200 transition-all delay-75 ease-in-out">
             <i class="bi-envelope-at-fill text-teal-700 text-2xl"></i>
             <h2 class="text-xl">Email Us</h2>
             <p class="">principal.ghsschakbedi@gmail.com</p>
         </div>
-        <div class="flex flex-col justify-center items-center bg-teal-50 border p-8">
+        <div class="flex flex-col justify-center items-center shadow-lg p-8 hover:shadow-2xl hover:bg-blue-200 transition-all delay-75 ease-in-out">
             <i class="bi-telephone-fill text-teal-700 text-2xl"></i>
             <h2 class="text-xl">Call Us</h2>
             <p class="">+92 316 7717963</p>

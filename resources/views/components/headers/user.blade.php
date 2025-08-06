@@ -1,8 +1,6 @@
-<header class="sticky-header" id='header'>
-    <div class="flex flex-wrap w-full h-16 items-center justify-between shadow-sm bg-white">
-
+<header class="sticky-header">
+    <div class="flex flex-wrap w-full h-16 items-center justify-between shadow-sm bg-white px-5">
         <div class="flex items-center space-x-2">
-
             <a href="{{url('/')}}" class="flex justify-center">
                 <img alt="logo" src="{{asset('images/logo/app_logo_transparent.png')}}" class="w-10 h-8">
             </a>

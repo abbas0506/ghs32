@@ -16,46 +16,46 @@
     @endif
 
     <div class="mt-12">
-        <ul class="space-y-2">
+        <ul class="grid gap-y-4 font-medium">
             <li>
-                <a href="{{ url('/') }}" class="flex items-center p-2">
+                <a href="{{ url('/') }}" class="flex items-center">
                     <i class="bi-house"></i>
                     <span class="ml-3">Home</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admission.applications.index') }}" class="flex items-center p-2">
+                <a href="{{ route('admission.applications.index') }}" class="flex items-center">
                     <i class="bi-file-earmark-text"></i>
                     <span class="ml-3">Applications</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admission.fee.index') }}" class="flex items-center p-2">
+                <a href="{{ route('admission.fee.index') }}" class="flex items-center">
                     <i class="bi-currency-rupee"></i>
                     <span class="ml-3">Fee Log</span>
                 </a>
             </li>
 
             <li>
-                <a href="{{ route('admission.rejections.index') }}" class="flex items-center p-2">
+                <a href="{{ route('admission.rejections.index') }}" class="flex items-center">
                     <i class="bi-file-earmark-excel"></i>
                     <span class="ml-3">Rejection List</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admission.sections.index') }}" class="flex items-center p-2">
+                <a href="{{ route('admission.sections.index') }}" class="flex items-center">
                     <i class="bi-diagram-3"></i>
                     <span class="ml-3">Sections</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('admission.cards.index') }}" class="flex items-center p-2">
+                <a href="{{ route('admission.cards.index') }}" class="flex items-center">
                     <i class="bi-person-badge"></i>
                     <span class="ml-3">Student Cards</span>
                 </a>
             </li>
             <li>
-                <a href="{{url('signout')}}" class="flex items-center p-2">
+                <a href="{{url('signout')}}" class="flex items-center">
                     <i class="bi bi-power"></i>
                     <span class="ml-3">Log Off</span>
                 </a>

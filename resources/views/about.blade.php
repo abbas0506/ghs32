@@ -23,23 +23,23 @@
     </section>
 
     <!-- Statistics Section -->
-    <section class="bg-white py-16">
+    <section class="py-16">
         <div class="max-w-6xl mx-auto px-6 text-center">
             <h2 class="text-3xl font-semibold text-teal-800 mb-12">At a Glance</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-10">
-                <div class="bg-blue-50 rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                <div class="bg-white rounded-lg p-6 shadow-[0_0_30px_rgba(0,0,0,0.2)]">
                     <h3 class="text-2xl md:text-4xl font-bold text-teal-600">1200+</h3>
                     <p class="mt-2 text-gray-600">Students</p>
                 </div>
-                <div class="bg-blue-50 rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                <div class="bg-white p-6 shadow-[0_0_30px_rgba(0,0,0,0.2)]">
                     <h3 class="text-2xl md:text-4xl font-bold text-teal-600">40+</h3>
                     <p class="mt-2 text-gray-600">Teachers</p>
                 </div>
-                <div class="bg-blue-50 rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                <div class="bg-white p-6 shadow-[0_0_30px_rgba(0,0,0,0.2)]">
                     <h3 class="text-2xl md:text-4xl font-bold text-teal-600">05</h3>
                     <p class="mt-2 text-gray-600">Science Labs</p>
                 </div>
-                <div class="bg-blue-50 rounded-lg shadow-lg p-6 hover:shadow-xl transition">
+                <div class="bg-white p-6 shadow-[0_0_30px_rgba(0,0,0,0.2)]">
                     <h3 class="text-2xl md:text-4xl font-bold text-teal-600">1,000+</h3>
                     <p class="mt-2 text-gray-600">Library Books</p>
                 </div>
@@ -47,12 +47,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-teal-900 text-white py-8 mt-12">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <p>&copy; 2025 GHSS Chak Bedi, Pakpattan. All rights reserved.</p>
-        </div>
-    </footer>
 </section>
 @endsection
 @section('footer')

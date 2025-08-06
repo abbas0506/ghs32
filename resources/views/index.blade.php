@@ -3,14 +3,7 @@
 @section('header')
 <x-header></x-header>
 @endsection
-
-@section('body')
-<!-- Bootstrap Icons CDN -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"> -->
-
-<!-- Bootstrap Icons CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
+@section('style')
 <style>
     /* Container holds both button and floating pointer */
     .button-container {
@@ -89,6 +82,15 @@
         }
     }
 </style>
+@endsection
+
+@section('body')
+<!-- Bootstrap Icons CDN -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"> -->
+
+<!-- Bootstrap Icons CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
 
 <!-- page message -->
 @if($errors->any())
@@ -96,7 +98,6 @@
 @else
 <x-message></x-message>
 @endif
-
 <section class="w-screen h-screen">
     <div class="flex flex-col md:flex-row-reverse justify-between items-center px-5 md:px-24 h-full py-16">
         <div class="flex flex-1 justify-end items-center">
@@ -110,7 +111,7 @@
             <p class="text-slate-600 text-sm md:text-lg leading-relaxed mt-4">We are thrilled to welcome ambitious students to our dynamic academic journey, proudly offering FA, Pre-Engineering, and ICS programs.</p>
             <a href="{{ url('admission-25')}}">
                 <div class="button-container">
-                    <button class="px-5 py-2 text-lg font-semibold mt-5 bg-teal-200 hover:bg-teal-300 rounded-full">
+                    <button class="px-5 py-2 text-lg font-semibold mt-5 bg-teal-400 hover:bg-teal-600 rounded-full">
                         Apply Now
                     </button>
                     <i class="bi bi-cursor-fill pointer-icon"></i>
@@ -149,11 +150,11 @@
                 <h3 class="text-xl md:text-2xl">Self Assessment</h3>
                 <p class="text-sm md:text-lg mt-1">Self assessment improves your underdtanding about the subject, helps you identify your deficiency areas and gauage your performance. We offer self assessment from grade 9 to 12 </p>
                 <div class="mt-6">
-                    <a href="{{ url('https://www.exampixel.com/') }}" target="_blank" class="bg-teal-600 hover:bg-teal-800 text-slate-100 rounded-sm duration-200 px-6 py-2">
-                        Start Self Testing
+                    <a href="{{ url('https://www.exampixel.com/') }}" target="_blank" class="bg-teal-600 hover:bg-teal-800 text-slate-100 rounded-md duration-200 px-6 py-2">
+                        Start Test
+                        <i class="bi-arrow-right"></i>
                     </a>
                 </div>
-
             </div>
         </div>
 
