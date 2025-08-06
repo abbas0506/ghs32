@@ -126,13 +126,13 @@
                 <div class="mt-8 md:w-1/2">
                     <label for="">Passing Year (میٹرک کب پاس کیا؟)</label>
                     <select name="pass_year" id="" class="custom-input fancy-focus">
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                        <option value="2025" selected>2025</option>
+                        <option value="{{ date('Y')-2}}">{{ date('Y')-2}}</option>
+                        <option value="{{ date('Y')-1}}">{{ date('Y')-1}}</option>
+                        <option value="{{ date('Y')}}" selected>{{ date('Y')}}</option>
                     </select>
                 </div>
                 <!-- hidden fields -->
-                <input type="number" name="admission_grade" class="custom-input fancy-focus" value="11" hidden>
+                <input type="number" name="grade" class="custom-input fancy-focus" value="11" hidden>
                 <input type="text" name="gender" class="custom-input fancy-focus" value="m" hidden>
 
                 <!-- student info -->
@@ -175,10 +175,40 @@
                             @endforeach
                         </select>
                     </div>
+                    <div>
+                        <label for="is_orphan"> Are you orphan (یتیم)? </label>
+                        <select name="is_orphan" class="custom-input fancy-focus" required>
+                            <option value="0">No</option>
+                            <option value="0">Yes</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2 text-teal-600 text-right">گارڈین یا سرپرست سے مراد وہ شخص ہے جو آپکے تعلیمی اخراجات برداشت کرے گا </div>
+                    <div>
+                        <label for="guardian_relation"> Who is Your Guardian (سرپرست)? </label>
+                        <select name="guardian_relation" class="custom-input fancy-focus" required>
+                            <option value="father">Father</option>
+                            <option value="mother">Mother</option>
+                            <option value="brother">Brother</option>
+                            <option value="uncle">Uncle</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="guardian_name">Guardian's Name</label>
+                        <input type="text" name="guardian_name" class="custom-input fancy-focus" placeholder="Guardian name" required>
+                    </div>
+                    <div>
+                        <label for="guardain_cnic">Guardian's CNIC</label>
+                        <input type="text" name="guardian_cnic" class="custom-input fancy-focus" placeholder="Guardian cnic" required>
+                    </div>
 
                     <div>
-                        <label for="father_profession">Father Profession (باپ یا سرپرست کا پیشہ)</label>
-                        <select name="father_profession" class="custom-input fancy-focus" required>
+                        <label for="mother_cnic">Mother's CNIC</label>
+                        <input type="text" name="identification_mark" class="custom-input fancy-focus" placeholder="Mother cnic" required>
+                    </div>
+                    <div>
+                        <label for="guardian_profession">Guardian's Profession (پیشہ)</label>
+                        <select name="guardian_profession" class="custom-input fancy-focus" required>
                             @foreach (config('enums.professions') as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                             @endforeach
@@ -186,9 +216,9 @@
                     </div>
 
                     <div>
-                        <label for="father_income">Father Income (ماہانہ) </label>
-                        <select name="father_income" class="custom-input fancy-focus" required>
-                            @foreach (config('enums.father_incomes') as $value => $label)
+                        <label for="guardian_income">Father Income (ماہانہ) </label>
+                        <select name="guardian_income" class="custom-input fancy-focus" required>
+                            @foreach (config('enums.guardian_incomes') as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                             @endforeach
                         </select>
@@ -232,7 +262,7 @@
                         </select>
                     </div>
                     <div>
-                        <label for="obtained_marks">Obtained Marks (میٹرک میں حاصل کردہ نمبر) </label>
+                        <label for="obtained_marks">Obtained Marks (حاصل کردہ نمبر) </label>
                         <input type="number" name="obtained_marks" class="custom-input fancy-focus" placeholder="Obtained marks" min='0' max='1200' required>
                     </div>
 

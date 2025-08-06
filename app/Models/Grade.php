@@ -9,7 +9,7 @@ class Grade extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'grade_no',
+        'grade',
         'english_name',          //Nine
         'roman_name',            //IX
     ];

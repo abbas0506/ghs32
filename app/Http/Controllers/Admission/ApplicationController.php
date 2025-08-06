@@ -156,10 +156,10 @@ class ApplicationController extends Controller
             'dob' => 'required|date',
             'identification_mark' => 'required|string|max:100',
             'caste' => 'required|string|max:50',
-            'father_profession' => 'required|string|max:50',
-            'father_income' => 'required|integer|min:0',
+            'guardian_profession' => 'required|string|max:50',
+            'guardian_income' => 'required|integer|min:0',
 
-            // 'admission_grade' => 'required|integer|min:1|max:12',
+            // 'grade' => 'required|integer|min:1|max:12',
             'group_id' => 'required|exists:groups,id',
             'pass_year' => 'required|digits:4|integer',
             'medium' => 'required|in:en,ur',

@@ -23,10 +23,15 @@ return new class extends Migration
             $table->date('dob');
             $table->string('identification_mark', 100);
             $table->string('caste', 50);
-            $table->string('father_profession', 50);
-            $table->unsignedInteger('father_income');
+            $table->boolean('is_orphan')->default(false);
+            $table->string('guardian_relation')->nullable();
+            $table->string('guardian_name')->nullable();
+            $table->string('guardian_cnic')->nullable();
+            $table->string('mother_cnic')->nullable();
+            $table->string('guardian_profession', 50)->nullable();
+            $table->unsignedInteger('guardian_income')->nullable();
 
-            $table->unsignedSmallInteger('admission_grade');
+            $table->unsignedSmallInteger('grade');
             $table->foreignId('group_id')->constrained()->onDelete('cascade');
             $table->year('pass_year');
             $table->enum('medium', ['en', 'ur'])->default('ur'); //english:0, urdu:1

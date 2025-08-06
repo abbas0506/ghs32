@@ -30,7 +30,7 @@
 <div class="flex flex-wrap justify-between gap-3 items-center mt-8">
     <div>
         <h2 class="text-teal-600">{{ $testAllocation->test->title }}</h2>
-        <p>{{ $testAllocation->allocation->subject->name }} - {{ $testAllocation->allocation->section->grade->grade_no }}</p>
+        <p>{{ $testAllocation->allocation->subject->name }} - {{ $testAllocation->allocation->section->grade->grade }}</p>
     </div>
 
     <a href="{{ route('teacher.test-allocation.result.print',$testAllocation) }}" target="_blank" class="flex justify-center items-center w-12 h-12 rounded-full bg-blue-100">

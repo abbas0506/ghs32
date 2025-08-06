@@ -43,7 +43,7 @@ class Section extends Model
     }
     public function scopeActive($query)
     {
-        $duration = ($this->grade_no < 9 ? 3 : 2);
+        $duration = ($this->grade < 9 ? 3 : 2);
 
         return $query->where('starts_at', '>=', date('y') - $duration);
     }

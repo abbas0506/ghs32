@@ -23,10 +23,10 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             GroupSeeder::class,
             SubjectSeeder::class,
-            SectionSeeder::class,
             UserSeeder::class,
             LibraryRuleSeeder::class,
-            DomainSeeder::class,
+            // SectionSeeder::class,
+            // DomainSeeder::class,
         ]);
     }
 }

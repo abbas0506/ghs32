@@ -28,7 +28,7 @@ class CollectiveTestController extends Controller
     public function create()
     {
         //
-        $grades = Grade::where('grade_no', '>', 5)->get();
+        $grades = Grade::where('grade', '>', 5)->get();
         return view('admin.tests.create', compact('grades'));
     }
 

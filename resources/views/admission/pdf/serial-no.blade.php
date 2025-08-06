@@ -52,7 +52,7 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-xl font-bold">List of Students with Sr No. {{ $section->grade->grade_no }}-{{ $section->name }}</td>
+                            <td class="text-center text-xl font-bold">List of Students with Sr No. {{ $section->grade->grade }}-{{ $section->name }}</td>
                         </tr>
                         <tr>
                             <td class="text-center text-sm">Govt. Higher Secondary School Chak Bedi, Pakpattan</td>

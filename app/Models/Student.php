@@ -14,7 +14,7 @@ class Student extends Model
         'father_name',
         'bform',
         'birth_date',
-        'id_mark',
+        'identification_mark',
         'phone',
         'address',
         //school tag
@@ -26,8 +26,8 @@ class Student extends Model
 
         // 'marks',
         'caste',
-        'father_name_profession',
-        'father_name_income',
+        'guardian_profession',
+        'guardian_income',
 
         'card_printed',
         'library_banned',

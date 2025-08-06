@@ -13,20 +13,29 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('img', 50)->nullable();
+            $table->string('photo', 50)->nullable();
             $table->string('name', 50);
-            $table->string('father_name', 50)->nullable();
-            $table->date('birth_date')->nullable();
-            $table->date('admission_date')->nullable();
-            $table->string('bform', 15)->unique();
-            $table->string('phone', 15)->nullable();
-            $table->string('father_name_profession')->default('farmer');
-            $table->unsignedInteger('father_name_income')->nullable();
-            // $table->unsignedInteger('marks')->nullable();
+            $table->string('father_name', 50);
+            $table->string('bform', 15);
+            $table->string('gender', 1)->default('m');
+            $table->string('phone', 16)->nullable();
+            $table->string('address', 100)->nullable();
+            $table->date('dob');
+            $table->string('identification_mark', 100)->nullable();
+            $table->string('caste', 50)->nullable();
+            $table->boolean('is_orphan')->default(false);
+            $table->string('guardian_relation')->nullable();
+            $table->string('guardian_name')->nullable();
+            $table->string('guardian_cnic')->nullable();
+            $table->string('mother_cnic')->nullable();
+            $table->string('guardian_profession', 50)->nullable();
+            $table->unsignedInteger('guardian_income')->nullable();
+
 
             $table->foreignId('section_id')->constrained()->cascadeOnDelete();
             $table->foreignId('group_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('rollno');
+            $table->date('admission_date')->nullable();
             $table->string('admission_no')->nullable()->unique();
 
             $table->boolean('library_banned')->default(1);

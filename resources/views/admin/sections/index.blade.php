@@ -22,7 +22,7 @@
             <tbody>
                 @foreach($grades as $grade)
                 <tr class="text-sm">
-                    <td>{{$grade->grade_no}}</td>
+                    <td>{{$grade->grade}}</td>
                     <td class="text-left">
                         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
                             @foreach($grade->sections as $section)

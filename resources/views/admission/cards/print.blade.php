@@ -100,8 +100,8 @@ $roman = config('global.romans');
                                     @endif
                                 </div>
                                 <div class="font-bold" style="color:blue">{{ $application->name }}</div>
-                                <div class="text-md mt-2">Grade 11, {{ $application->group->name }}</div>
-                                <div class="text-xs mt-1">Session 2024-26</div>
+                                <div class="text-md mt-2">Grade {{ $application->grade }}, {{ $application->group->name }}</div>
+                                <div class="text-xs mt-1">{{ date('Y') }}-{{date('y')+1}}</div>
                                 <table width="100%" style="margin-top: 24px;">
                                     <tr>
                                         <!-- QR Code on Left -->
@@ -119,10 +119,6 @@ $roman = config('global.romans');
                                         </td>
                                     </tr>
                                 </table>
-
-                                <!-- <div class="flex flex-col m-auto mt-2">
-                                    <div id='qr' style="margin-left:76px">{!! DNS2D::getBarcodeHTML($application->bform,'QRCODE',2,2) !!}</div>
-                                </div> -->
                             </div>
                         </td>
 

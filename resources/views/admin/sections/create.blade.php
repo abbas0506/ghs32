@@ -21,7 +21,7 @@
         <h1 class="text-teal-600 mt-8">New Clas</h1>
         <div>
             <label>Grade</label>
-            <h2>{{ $grade->grade_no }}</h2>
+            <h2>{{ $grade->grade }}</h2>
         </div>
         <form action="{{route('admin.grade.sections.store',$grade)}}" method='post' class="mt-4" onsubmit="return validate(event)">
             @csrf

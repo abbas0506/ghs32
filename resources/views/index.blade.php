@@ -147,9 +147,9 @@
             </div>
             <div class="">
                 <h3 class="text-xl md:text-2xl">Self Assessment</h3>
-                <p class="text-sm md:text-lg mt-1">Self assessment improves your underdtanding about the subject, helps you identify your deficiency areas and gauage your performance. We offer self assement from grade 9 to 12 </p>
+                <p class="text-sm md:text-lg mt-1">Self assessment improves your underdtanding about the subject, helps you identify your deficiency areas and gauage your performance. We offer self assessment from grade 9 to 12 </p>
                 <div class="mt-6">
-                    <a href="{{ url('https://www.exampixel.com/') }}" target="_blank" class="bg-teal-600 hover:bg-teal-800 text-slate-100 rounded-full duration-200 px-6 py-2">
+                    <a href="{{ url('https://www.exampixel.com/') }}" target="_blank" class="bg-teal-600 hover:bg-teal-800 text-slate-100 rounded-sm duration-200 px-6 py-2">
                         Start Self Testing
                     </a>
                 </div>

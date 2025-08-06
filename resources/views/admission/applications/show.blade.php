@@ -63,8 +63,8 @@
                 <div>
                     <label for="">Father / Guardian Info</label>
                     <p>{{ $application->father_name }} </p>
-                    <p class="text-slate-600 text-sm">{{ $application->caste }} / {{ $application->father_profession }} </p>
-                    <p class="text-slate-600 text-sm"><i class="bi-currency"></i>{{ $application->father_income }} </p>
+                    <p class="text-slate-600 text-sm">{{ $application->caste }} / {{ $application->guardian_profession }} </p>
+                    <p class="text-slate-600 text-sm"><i class="bi-currency"></i>{{ $application->guardian_income }} </p>
                 </div>
                 <div>
                     <label for="">Group</label>

@@ -148,10 +148,10 @@
                 </div>
 
                 <div>
-                    <label for="father_profession">Father Profession (باپ یا سرپرست کا پیشہ)</label>
-                    <select name="father_profession" class="custom-input fancy-focus" required>
+                    <label for="guardian_profession">Father Profession (باپ یا سرپرست کا پیشہ)</label>
+                    <select name="guardian_profession" class="custom-input fancy-focus" required>
                         @foreach (config('enums.professions') as $value => $label)
-                        <option value="{{ $value }}" @selected($application->father_profession == $value)>
+                        <option value="{{ $value }}" @selected($application->guardian_profession == $value)>
                             {{ $label }}
                         </option>
                         @endforeach
@@ -159,10 +159,10 @@
                 </div>
 
                 <div>
-                    <label for="father_income">Father Income (ماہانہ) </label>
-                    <select name="father_income" class="custom-input fancy-focus" required>
-                        @foreach (config('enums.father_incomes') as $value => $label)
-                        <option value="{{ $value }}" @selected($application->father_income == $value)>
+                    <label for="guardian_income">Father Income (ماہانہ) </label>
+                    <select name="guardian_income" class="custom-input fancy-focus" required>
+                        @foreach (config('enums.guardian_incomes') as $value => $label)
+                        <option value="{{ $value }}" @selected($application->guardian_income == $value)>
                             {{ $label }}
                         </option>
                         @endforeach
