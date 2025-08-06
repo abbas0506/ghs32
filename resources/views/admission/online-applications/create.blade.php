@@ -141,17 +141,14 @@
                         <label for="">Student Name ( رزلٹ کارڈ کے مطابق)</label>
                         <input type="text" name="name" class="custom-input fancy-focus" placeholder="Student name" required>
                     </div>
-                    <div class="md:col-span-2">
-                        <label for="">Father Name</label>
-                        <input type="text" name="father_name" class="custom-input fancy-focus" placeholder="Father name" required>
-                    </div>
+
                     <div>
                         <label for="">BForm (ب فارم)</label>
-                        <input type="text" name="bform" id='bform' class="custom-input fancy-focus" placeholder="x x x x x - x x x x x x x - x" required>
+                        <input type="text" name="bform" id='bform' class="custom-input fancy-focus cnic" placeholder="00000 - 0000000- 0" required>
                     </div>
                     <div>
                         <label for="">Phone No</label>
-                        <input type="text" name="phone" id='phone' class="custom-input fancy-focus" placeholder="x x x x - x x x x x x x" required>
+                        <input type="text" name="phone" id='phone' class="custom-input fancy-focus" placeholder="0000 - 0000000" required>
                     </div>
                     <div class="md:col-span-2">
                         <label for="">Address (گاوؑں کانام) </label>
@@ -174,6 +171,14 @@
                             <option value="{{ $value }}">{{ $label }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="">
+                        <label for="">Father Name</label>
+                        <input type="text" name="father_name" class="custom-input fancy-focus" placeholder="Father name" required>
+                    </div>
+                    <div class="">
+                        <label for="">Mother Name</label>
+                        <input type="text" name="mother_name" class="custom-input fancy-focus" placeholder="Father name" required>
                     </div>
                     <div>
                         <label for="is_orphan"> Are you orphan (یتیم)? </label>
@@ -199,12 +204,12 @@
                     </div>
                     <div>
                         <label for="guardain_cnic">Guardian's CNIC</label>
-                        <input type="text" name="guardian_cnic" class="custom-input fancy-focus" placeholder="Guardian cnic" required>
+                        <input type="text" name="guardian_cnic" class="custom-input fancy-focus cnic" placeholder="00000 - 0000000- 0" required>
                     </div>
 
                     <div>
                         <label for="mother_cnic">Mother's CNIC</label>
-                        <input type="text" name="mother_cnic" class="custom-input fancy-focus" placeholder="Mother cnic" required>
+                        <input type="text" name="mother_cnic" class="custom-input fancy-focus cnic" placeholder="00000 - 0000000- 0" required>
                     </div>
                     <div>
                         <label for="guardian_profession">Guardian's Profession (پیشہ)</label>
@@ -216,7 +221,7 @@
                     </div>
 
                     <div>
-                        <label for="guardian_income">Father Income (ماہانہ) </label>
+                        <label for="guardian_income">Guardian's Income (ماہانہ) </label>
                         <select name="guardian_income" class="custom-input fancy-focus" required>
                             @foreach (config('enums.guardian_incomes') as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
@@ -293,7 +298,7 @@
             $('.chk-group').not(this).prop('checked', false); // Uncheck all except clicked one
         });
 
-        $('#bform').on('input', function() {
+        $('.cnic').on('input', function() {
             let value = $(this).val().replace(/\D/g, '').substring(0, 13);
             let formatted = value;
             if (value.length > 5) formatted = value.substring(0, 5) + '-' + value.substring(5);
