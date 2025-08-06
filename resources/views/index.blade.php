@@ -110,7 +110,7 @@
             <p class="text-slate-600 text-sm md:text-lg leading-relaxed mt-4">We are thrilled to welcome ambitious students to our dynamic academic journey, proudly offering FA, Pre-Engineering, and ICS programs.</p>
             <a href="{{ url('admission-25')}}">
                 <div class="button-container">
-                    <button class="px-5 py-2 text-lg font-semibold border border-teal-600 mt-5 bg-teal-200 hover:bg-teal-300 rounded-full">
+                    <button class="px-5 py-2 text-lg font-semibold mt-5 bg-teal-200 hover:bg-teal-300 rounded-full">
                         Apply Now
                     </button>
                     <i class="bi bi-cursor-fill pointer-icon"></i>
