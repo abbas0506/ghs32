@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('photo', 50)->nullable();
             $table->string('name', 50);
-            $table->string('father_name', 50);
             $table->string('bform', 15);
             $table->string('gender', 1)->default('m');
             $table->string('phone', 16);
@@ -23,6 +22,9 @@ return new class extends Migration
             $table->date('dob');
             $table->string('identification_mark', 100);
             $table->string('caste', 50);
+            $table->string('father_name', 50)->nullable();
+            $table->string('mother_name', 50)->nullable();
+
             $table->boolean('is_orphan')->default(false);
             $table->string('guardian_relation')->nullable();
             $table->string('guardian_name')->nullable();

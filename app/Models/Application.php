@@ -13,6 +13,7 @@ class Application extends Model
         'photo',
         'name',
         'father_name',
+        'mother_name',
         'bform',
         'gender',
         'phone',

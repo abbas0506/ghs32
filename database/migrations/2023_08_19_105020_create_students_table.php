@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('photo', 50)->nullable();
             $table->string('name', 50);
-            $table->string('father_name', 50);
+            $table->string('father_name', 50)->nullable();
+            $table->string('mother_name', 50)->nullable();
             $table->string('bform', 15);
             $table->string('gender', 1)->default('m');
             $table->string('phone', 16)->nullable();

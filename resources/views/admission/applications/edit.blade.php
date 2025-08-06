@@ -146,9 +146,38 @@
                         @endforeach
                     </select>
                 </div>
+                <div>
+                    <label for="is_orphan"> Are you orphan (یتیم)? </label>
+                    <select name="is_orphan" class="custom-input fancy-focus" required>
+                        <option value="0" @selected($application->is_orphan == 0)>No</option>
+                        <option value="1" @selected($application->is_orphan == 1)>Yes</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="guardian_relation"> Who is Your Guardian (سرپرست)? </label>
+                    <select name="guardian_relation" class="custom-input fancy-focus" required>
+                        <option value="father" @selected($application->guardian_relation == 'father')>Father</option>
+                        <option value="mother" @selected($application->guardian_relation == 'mother')>Mother</option>
+                        <option value="brother" @selected($application->guardian_relation == 'brother')>Brother</option>
+                        <option value="uncle" @selected($application->guardian_relation == 'uncle')>Uncle</option>
+                        <option value="other" @selected($application->guardian_relation == 'other')>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="guardian_name">Guardian's Name</label>
+                    <input type="text" name="guardian_name" class="custom-input fancy-focus" placeholder="Guardian name" value="{{ $application->guardian_name }}" required>
+                </div>
+                <div>
+                    <label for="guardain_cnic">Guardian's CNIC</label>
+                    <input type="text" name="guardian_cnic" class="custom-input fancy-focus" placeholder="Guardian cnic" value="{{ $application->guardian_cnic }}" required>
+                </div>
 
                 <div>
-                    <label for="guardian_profession">Father Profession (باپ یا سرپرست کا پیشہ)</label>
+                    <label for="mother_cnic">Mother's CNIC</label>
+                    <input type="text" name="mother_cnic" class="custom-input fancy-focus" placeholder="Mother cnic" value="{{ $application->mother_cnic }}" required>
+                </div>
+                <div>
+                    <label for="guardian_profession">Guardian Profession</label>
                     <select name="guardian_profession" class="custom-input fancy-focus" required>
                         @foreach (config('enums.professions') as $value => $label)
                         <option value="{{ $value }}" @selected($application->guardian_profession == $value)>

@@ -12,6 +12,7 @@ class Student extends Model
         'img',
         'name',
         'father_name',
+        'mother_name',
         'bform',
         'birth_date',
         'identification_mark',

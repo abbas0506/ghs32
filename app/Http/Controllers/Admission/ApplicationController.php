@@ -156,6 +156,11 @@ class ApplicationController extends Controller
             'dob' => 'required|date',
             'identification_mark' => 'required|string|max:100',
             'caste' => 'required|string|max:50',
+            'is_orphan' => 'required|boolean',
+            'guardian_relation' => 'nullable|string|max:50',
+            'guardian_name' => 'nullable|string|max:50',
+            'guardian_cnic' => 'nullable|string|max:15',
+            'mother_cnic' => 'nullable|string|max:15',
             'guardian_profession' => 'required|string|max:50',
             'guardian_income' => 'required|integer|min:0',
 

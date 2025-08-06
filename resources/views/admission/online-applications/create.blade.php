@@ -204,7 +204,7 @@
 
                     <div>
                         <label for="mother_cnic">Mother's CNIC</label>
-                        <input type="text" name="identification_mark" class="custom-input fancy-focus" placeholder="Mother cnic" required>
+                        <input type="text" name="mother_cnic" class="custom-input fancy-focus" placeholder="Mother cnic" required>
                     </div>
                     <div>
                         <label for="guardian_profession">Guardian's Profession (پیشہ)</label>

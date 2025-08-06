@@ -42,6 +42,7 @@ class OnlineApplicationController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:1024',
             'name' => 'required|string|max:50',
             'father_name' => 'required|string|max:50',
+            'mother_name' => 'required|string|max:50',
             'bform' => 'required|string|max:15|unique:applications,bform',
             'gender' => 'required|in:m,f',
             'phone' => 'required|string|max:16',
@@ -49,6 +50,11 @@ class OnlineApplicationController extends Controller
             'dob' => 'required|date',
             'identification_mark' => 'required|string|max:100',
             'caste' => 'required|string|max:50',
+            'is_orphan' => 'required|boolean',
+            'guardian_relation' => 'nullable|string|max:50',
+            'guardian_name' => 'nullable|string|max:50',
+            'guardian_cnic' => 'nullable|string|max:15',
+            'mother_cnic' => 'nullable|string|max:15',
             'guardian_profession' => 'required|string|max:50',
             'guardian_income' => 'required|integer|min:0',
             'grade' => 'required|integer|min:1|max:12',
@@ -60,7 +66,6 @@ class OnlineApplicationController extends Controller
             'rollno' => 'required|string|max:8',
             'obtained_marks' => 'required|integer|min:0',
             'total_marks' => 'required|integer|min:1|gte:obtained_marks',
-            'fee_concession' => 'nullable|integer|min:0|max:100',
         ]);
 
         try {
