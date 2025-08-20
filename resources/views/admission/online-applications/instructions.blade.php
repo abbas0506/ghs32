@@ -66,15 +66,15 @@
                     <tbody class="text-gray-800">
                         <tr class="border-t">
                             <td class="px-4 py-2 border font-semibold text-red-600"> اپلائی کرنے کی آخری تاریخ </td>
-                            <td class="px-4 py-2 border font-semibold text-red-600">Aug 20, 2025</td>
+                            <td class="px-4 py-2 border font-semibold text-red-600">Aug 27, 2025</td>
                         </tr>
                         <tr class="border-t">
                             <td class="px-4 py-2 border"> ڈیٹا ویری فکیشن اور فیس </td>
-                            <td class="px-4 py-2 border">Aug 21, 2025</td>
+                            <td class="px-4 py-2 border">Aug 30, 2025</td>
                         </tr>
                         <tr class="border-t">
                             <td class="px-4 py-2 border">استقبالیہ تقریب ، کلاسز کا آغاز</td>
-                            <td class="px-4 py-2 border">Aug 25, 2025</td>
+                            <td class="px-4 py-2 border">Sep 01, 2025</td>
                         </tr>
                     </tbody>
                 </table>
@@ -112,7 +112,7 @@
 
         <!-- Last date -->
         <div class="flex justify-center">
-            <h2 class="text-red-600 font-bold text-md">Last Date : Aug 20, 2025</h2>
+            <h2 class="text-red-600 font-bold text-md">Last Date : Aug 27, 2025</h2>
         </div>
     </div>
 </div>
