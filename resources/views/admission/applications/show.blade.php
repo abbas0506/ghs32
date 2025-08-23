@@ -44,8 +44,8 @@
         </div>
 
         <!-- display info -->
-        <div class="grid md:grid-cols-3 mt-8">
-            <div class="grid md:col-span-2 gap-3">
+        <div class="grid md:grid-cols-3 mt-8 gap-4">
+            <div class="grid md:col-span-2 gap-3 order-2 md:order-1">
                 <div>
                     <label for="">Application # <span class="text-red-600 font-bold"> ( {{ $application->status }} )</span></label>
                     <div class="flex flex-wrap items-center gap-x-4">
@@ -98,12 +98,13 @@
                     <button type="button" id="openRejectModal" class="btn btn-red px-5 rounded-full" data-bs-toggle="modal" data-bs-target="#rejectModal">
                         Reject
                     </button>
+
                     @elseif($application->status == 'accepted')
-                    <form action="{{ route('admission.applications.admit', $application) }}" method="post">
+                    <form action="{{ route('admission.applications.admit', $application) }}" method="post" class="mt-5">
                         @csrf
                         @method('PATCH')
                         <input type="text" name='amount_paid' class="custom-input fancy-input" placeholder="Amount">
-                        <button type="submit" class="btn-green px-5 rounded-full mt-2">Admit</button>
+                        <button type="submit" class="btn-green px-5 rounded-full">Admit</button>
                         <button type="button" id="openRejectModal" class="btn btn-red px-5 rounded-full" data-bs-toggle="modal" data-bs-target="#rejectModal">
                             Reject
                         </button>
@@ -117,7 +118,7 @@
                     @endif
                 </div>
             </div>
-            <div>
+            <div class="order-1 md:order-2">
                 <div>
                     <img src="{{ asset('storage/' . $application->photo) }}" alt="Student Photo" width="100" height="100">
                 </div>
@@ -126,7 +127,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Rejection Modal -->
 <div id="rejectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
     <div class="bg-white rounded-lg shadow-lg w-full max-w-md md:w-3/4 mx-auto p-5 relative">
         <h2 class="text-lg font-semibold mb-4">Rejection Note</h2>
@@ -138,8 +139,23 @@
                 <button type="submit" class="btn-red px-5 rounded-full">Reject</button>
             </div>
         </form>
-        <!-- Optional: Close Icon -->
         <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl">&times;</button>
+    </div>
+
+    <!-- fee payment modeal -->
+    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md md:w-3/4 mx-auto p-5 relative">
+            <h2 class="text-lg font-semibold mb-4">Rejection Note</h2>
+            <form id='feePaymentForm' action="{{ route('admission.applications.reject', $application->id)}}" method="post">
+                @csrf
+                @method('PATCH')
+                <textarea id="rejection_note" name='rejection_note' rows="3" class="w-full p-2 border border-gray-300 rounded" placeholder="Enter reason..."></textarea>
+                <div class="flex justify-end mt-5">
+                    <button type="submit" class="btn-red px-5 rounded-full">Reject</button>
+                </div>
+            </form>
+            <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl">&times;</button>
+        </div>
     </div>
 </div>
 @endsection

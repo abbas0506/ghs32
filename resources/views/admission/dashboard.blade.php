@@ -76,9 +76,9 @@
     </div>
 
     <!-- Data  -->
-    <div class="grid grid-cols-4 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-5 ">
         <!-- Recent Applications -->
-        <div class="col-span-3 bg-white">
+        <div class="grid-cols-1 md:col-span-3 bg-white order-2 md:order-1">
             <h2 class="mt-8">Recent Applications ({{ $applications->count() }})</h2>
             <div class="overflow-x-auto w-full mt-2">
                 <table class="table-fixed w-full">
@@ -122,7 +122,7 @@
         </div>
 
         <!-- generarl stat -->
-        <div>
+        <div class="order-1 md:order-2">
             <h2 class="mt-8">General Stat</h2>
             <div class="grid mt-2 gap-2 text-xs border rounded-lg p-3 bg-blue-100">
                 <div class="grid grid-cols-4">
