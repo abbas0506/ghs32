@@ -34,7 +34,7 @@ class ApplicationController extends Controller
         try {
             $application->update([
                 'status' => 'rejected',
-                'rejection_note' => $$request->rejection_note,
+                'rejection_note' => $request->rejection_note,
             ]);
             return back()->with('success', 'Application rejected.');
         } catch (Exception $ex) {

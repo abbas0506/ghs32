@@ -124,7 +124,7 @@
 <div id="rejectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
     <div class="bg-white rounded-lg shadow-lg w-full max-w-md md:w-3/4 mx-auto p-4 relative">
         <h2 class="text-lg font-semibold mb-4">Reason</h2>
-        <form id='rejectApplicationForm' action="{{ route('admission.applications.reject', $application->id)}}" method="post">
+        <form id='rejectApplicationForm' action="{{ route('admission.applications.reject', $application->id)}}" method="POST">
             @csrf
             @method('PATCH')
             <textarea id="rejection_note" name='rejection_note' rows="2" class="w-full p-2 border border-gray-300 rounded" placeholder="Enter reason..."></textarea>
