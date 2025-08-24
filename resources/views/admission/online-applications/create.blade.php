@@ -111,18 +111,18 @@
                 @endif
 
                 <input name="grade" value="11" hidden>
-
-                <div class="grid md:grid-cols-2 gap-4 mt-8">
-                    <h2 class="mt-8">Choose your desired group</h2>
-                    <div class="grid gap-y-2 mt-3">
-                        @foreach($groups as $group)
-                        <div>
-                            <input type="checkbox" id='group_id_{{$group->id}}' name="group_id" value="{{ $group->id }}" class="chk-group rounded mr-2">
-                            <label for="group_id_{{$group->id}}"><strong>{{ $group->name }} </strong>({{ $group->subjects_list }})</label>
-                        </div>
-                        @endforeach
+                <h2 class="mt-8">Choose your desired group</h2>
+                <div class="grid gap-y-2 mt-3">
+                    @foreach($groups as $group)
+                    <div>
+                        <input type="checkbox" id='group_id_{{$group->id}}' name="group_id" value="{{ $group->id }}" class="chk-group rounded mr-2">
+                        <label for="group_id_{{$group->id}}"><strong>{{ $group->name }} </strong>({{ $group->subjects_list }})</label>
                     </div>
-                    <div class="mt-8 md:w-1/2">
+                    @endforeach
+                </div>
+                <hr class="mt-3">
+                <div class="grid md:grid-cols-2 gap-4 mt-4">
+                    <div class="">
                         <label for="">Passing Year (میٹرک کب پاس کیا؟)</label>
                         <select name="pass_year" id="" class="custom-input fancy-focus">
                             <option value="{{ date('Y')-2}}">{{ date('Y')-2}}</option>
@@ -166,14 +166,6 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="">
-                        <label for="">Father Name</label>
-                        <input type="text" name="father_name" class="custom-input fancy-focus" placeholder="Father name" required>
-                    </div>
-                    <div class="">
-                        <label for="">Mother Name</label>
-                        <input type="text" name="mother_name" class="custom-input fancy-focus" placeholder="Father name" required>
-                    </div>
                     <div>
                         <label for="is_orphan"> Are you orphan (یتیم)? </label>
                         <select name="is_orphan" class="custom-input fancy-focus" required>
@@ -181,23 +173,18 @@
                             <option value="1">Yes</option>
                         </select>
                     </div>
+                    <div class="">
+                        <label for="">Father Name</label>
+                        <input type="text" name="father_name" class="custom-input fancy-focus" placeholder="Father name" required>
+                    </div>
+                    <div class="">
+                        <label for="">Mother Name</label>
+                        <input type="text" name="mother_name" class="custom-input fancy-focus" placeholder="Mother name" required>
+                    </div>
+
                     <div class="md:col-span-2 text-teal-600 text-right">گارڈین یا سرپرست سے مراد وہ شخص ہے جو آپکے تعلیمی اخراجات برداشت کرے گا </div>
                     <div>
-                        <label for="guardian_relation"> Who is Your Guardian (سرپرست)? </label>
-                        <select name="guardian_relation" class="custom-input fancy-focus" required>
-                            <option value="father">Father</option>
-                            <option value="mother">Mother</option>
-                            <option value="brother">Brother</option>
-                            <option value="uncle">Uncle</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="guardian_name">Guardian's Name</label>
-                        <input type="text" name="guardian_name" class="custom-input fancy-focus" placeholder="Guardian name" required>
-                    </div>
-                    <div>
-                        <label for="guardain_cnic">Guardian's CNIC</label>
+                        <label for="guardain_cnic">Father/Guardian's CNIC</label>
                         <input type="text" name="father_cnic" class="custom-input fancy-focus cnic" placeholder="00000 - 0000000- 0" required>
                     </div>
 
@@ -206,7 +193,7 @@
                         <input type="text" name="mother_cnic" class="custom-input fancy-focus cnic" placeholder="00000 - 0000000- 0" required>
                     </div>
                     <div>
-                        <label for="profession">Guardian's Profession (پیشہ)</label>
+                        <label for="profession">Father/Guardian's Profession (پیشہ)</label>
                         <select name="profession" class="custom-input fancy-focus" required>
                             @foreach (config('enums.professions') as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
@@ -215,7 +202,7 @@
                     </div>
 
                     <div>
-                        <label for="income">Guardian's Income (ماہانہ) </label>
+                        <label for="income">Father/Guardian's Income (ماہانہ آمدنی) </label>
                         <select name="income" class="custom-input fancy-focus" required>
                             @foreach (config('enums.incomes') as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>

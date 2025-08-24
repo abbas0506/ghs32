@@ -138,13 +138,13 @@
 
 <!-- fee payment modeal -->
 <div id="feeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-lg w-full max-w-md md:w-3/4 mx-auto p-5 relative">
-        <h2 class="text-lg font-semibold mb-4">Fee (@if($application->group_id==3) 5000 @else 5200 @endif)</h2>
-        <form action="{{ route('admission.applications.admit', $application) }}" method="post" class="mt-5">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md md:w-1/3 mx-auto p-5 relative">
+        <h2 class="text-lg font-semibold">Fee Collection</h2>
+        <form action="{{ route('admission.applications.admit', $application) }}" method="post" class="mt-3">
             @csrf
             @method('PATCH')
-            <input type="number" name='amount_paid' class="custom-input fancy-input" placeholder="Amount" min="5000" max=5200>
-            <button type="submit" class="btn-green px-5 rounded-full mt-3 float-right">Get Fee</button>
+            <input type="number" name='amount_paid' class="custom-input fancy-input" placeholder="Amount" min="5000" max=5200 value="{{ $application->group->admission_fee }}">
+            <button type="submit" class="btn-green px-5 rounded-full mt-4 float-right">Collect</button>
         </form>
         <button id="closeFeeModal" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl">&times;</button>
     </div>
