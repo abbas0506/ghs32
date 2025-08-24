@@ -48,6 +48,22 @@ $roman = config('global.romans');
     <main>
         <div class="custom-container">
 
+            <!-- <div class="w-1/2 mx-auto">
+                <div class="relative">
+                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/school_logo.png')}}" class="w-16"></div>
+                </div>
+                <table class="w-full">
+                    <tbody>
+                        <tr>
+                            <td class="text-center text-xl font-bold">Student Cards </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center text-sm">Govt. Higher Secondary School Chak Bedi, Pakpattan</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> -->
+
             <!-- table header -->
             <div>
                 <table class="w-full">
@@ -70,31 +86,38 @@ $roman = config('global.romans');
                 <tbody class="data">
                     @foreach($students as $student)
                     @if($i%$numOfCardsPerRow==0)<tr class="text-sm">@endif
-                        <td class="p-4">
+                        <td class="p-6">
                             <div class="border p-2">
+                                <div><img src="{{public_path('images/logo/school_logo.png')}}" alt="" width="32px" height="32px"></div>
+                                <p class="text-xs mt-2">Govt. Higher Secondary School Chak Bedi, District Pakpattan</p>
 
-                                <div><img src="{{public_path('images/logo/app_logo_transparent.png')}}" alt="logo" class="w-16"></div>
+                                <div class="w-24 h-24 m-auto mt-3">
+                                    @if ($student->photo)
+                                    <img src="{{ public_path('storage/' . $student->photo) }}"
+                                        style="width:80px; height:80px; border-radius:50%; border:1px solid #333; object-fit:cover;">
+                                    @else
+                                    <span style="color: #999;">No Photo</span>
+                                    @endif
+                                </div>
+                                <div class="font-bold" style="color:blue">{{ $student->name }}</div>
+                                <div class="text-md mt-2">Class {{ $student->section->grade }}-{{$student->section->name}}, {{ $student->group->name }}</div>
+                                <div class="text-xs mt-1">{{ date('Y') }}-{{date('y')+1}}</div>
+                                <table width="100%" style="margin-top: 24px;">
+                                    <tr>
+                                        <!-- QR Code on Left -->
+                                        <td style="text-align: left;">
+                                            {!! DNS2D::getBarcodeHTML($student->bform, 'QRCODE', 2, 2) !!}
+                                        </td>
 
-                                <!-- image box -->
-                                <div class="border w-28 h-32 m-auto mt-2" style="color: #777"></div>
-
-                                <div class="font-bold mt-2 text-base">{{ $student->name }}</div>
-                                <div class="font-bold">{{ $student->section->roman() }} ({{ $student->rollno }})</div>
-
-                                <div class="mx-auto mt-1 mb-1 w-10" style="border:solid;border-width:1px;"></div>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div id='qr' class="" style="margin-left:6px">{!! DNS2D::getBarcodeHTML($student->bform,'QRCODE',2,2) !!}</div>
-                                            </td>
-                                            <td>
-                                                <!-- <div class="text-left ml-3 font-bold">{{ $student->section->roman() }} ({{ $student->rollno }})</div> -->
-                                                <div class="text-xs text-left ml-2">GHSS Chak Bedi, Pakpattan</div>
-                                                <div class="text-xs text-left ml-2">Valid up to: March 2026</div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                        <!-- Signature on Right -->
+                                        <td style="text-align: right; padding-right:8px">
+                                            <div style="text-align: center; display: inline-block;">
+                                                <img src="{{public_path('images/principal/sign.png')}}" alt="" width="32px" height="32px">
+                                                <span style="display: block; border-top: 1px solid #000; width: 80px; margin-top: 5px;"></span>
+                                                <span>Principal</span>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                         </td>

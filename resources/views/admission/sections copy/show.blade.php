@@ -1,37 +1,38 @@
-@extends('layouts.admin')
+@extends('layouts.admission')
 @section('page-content')
 
 <div class="custom-container">
-    <h1>{{ $section->grade }}-{{$section->name}}</h1>
+    <h1>{{$section->roman()}}</h1>
     <div class="bread-crumb">
-        <a href="{{url('admin')}}">Dashoboard</a>
+        <a href="{{url('/')}}">Dashoboard</a>
         <div>/</div>
-        <a href="{{route('admin.sections.index')}}">Sections</a>
+        <a href="{{route('admission.sections.index')}}">Sections</a>
         <div>/</div>
-        <div>{{$section->grade}}</div>
+        <div>{{$section->roman()}}</div>
     </div>
 
     <!-- search -->
-    <div class="flex justify-between items-center flex-wrap gap-6 mt-12">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mt-12">
         <div class="flex relative w-full md:w-1/3">
             <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
             <i class="bx bx-search absolute top-2 right-2"></i>
         </div>
-        <div class="flex gap-3 flex-wrap">
-            <a href="{{route('admin.section.students.create', $section)}}" class="text-sm p-2 border hover:bg-teal-400">New <i class="bi bi-person-add text-teal-600"></i></a>
-            <a href="{{url('admin/students/import',$section)}}" class="text-sm p-2 border hover:bg-teal-50">Import <i class="bi bi-file-earmark-excel text-teal-600"></i></a>
-            <a href="{{ route('admin.section.lecture.allocations.index',[$section,0]) }}" class="p-2 border rounded hover:bg-slate-200"><i class="bi-clock text-teal-600"></i></a>
-            <a href="{{ route('admin.section.cards.index',$section) }}" class="p-2 border rounded hover:bg-slate-200"><i class="bi-person-badge text-indigo-600"></i></a>
-            <form action="{{ route('admin.sections.clean', $section) }}" method="post" onsubmit="return confirmClean(event)">
+
+        <form action="{{ route('admission.sections.refresh.srno', $section) }}" method="post" onsubmit="return confirmRefreshAdmissionNo(event)" class="flex items-center gap-x-2">
+            @csrf
+            <input type="number" value="" class="custom-input w-32 py-0" name='startvalue' placeholder="Start value" required>
+            <button class="btn-red rounded">Sr No &nbsp <i class="bi-repeat"></i></button>
+        </form>
+
+        <a href="{{ route('admission.sections.refresh.rollno', $section) }}" class="btn-blue rounded">Roll No &nbsp <i class="bi bi-repeat"></i></a>
+        <div class="flex space-x-2 items-center">
+            <a href="{{route('admission.section.students.create',$section)}}" class="btn-teal rounded">Import &nbsp <i class="bi bi-upload"></i></a>
+            <form action="{{ route('admission.sections.clean', $section) }}" method="post" onsubmit="return confirmClean(event)">
                 @csrf
-                <button class="btn-red rounded p-2"><i class="bx bx-recycle text-base"></i></button>
-            </form>
-            <form action="{{ route('admin.sections.destroy', $section) }}" method="post" onsubmit="return confirmDel(event)">
-                @csrf
-                @method('delete')
-                <button class="btn-red rounded p-2"><i class="bx bx-trash text-base"></i></button>
+                <button class="btn-orange rounded"><i class="bx bx-recycle text-base"></i></button>
             </form>
         </div>
+
 
     </div>
 
@@ -47,10 +48,12 @@
         <table class="table-auto borderless w-full">
             <thead>
                 <tr>
-                    <th class="w-10">Roll No</th>
+                    <th class="w-16">Roll No</th>
                     <th class="w-40 text-left">Name</th>
-                    <th class="w-40 text-left">Father</th>
+                    <th class="w-40 text-left">father_name</th>
                     <th class="w-24">BForm</th>
+                    <th class="w-20">Marks</th>
+                    <th class="w-20">Serial #</th>
                     <th class="w-24">Actions</th>
                 </tr>
             </thead>
@@ -59,18 +62,16 @@
                 <tr class="tr">
                     <td>{{$student->rollno}}</td>
                     <td class="text-left"><a href="{{route('admin.section.students.show', [$section, $student])}}" class="link">{{$student->name}}</a></td>
-                    <td class="text-left">{{$student->father_name}}</td>
+                    <td class="text-left">{{ $student->father_name }}</td>
                     <td>{{$student->bform}}</td>
+                    <td>{{$student->marks}}</td>
+                    <td>{{$student->admission_no}}</td>
                     <td>
-                        <div class="flex items-center justify-center">
-                            <a href="{{route('admin.section.students.edit',[$section, $student])}}"><i class="bx bx-pencil text-green-600"></i></a>
-                            <span class="text-slate-300 px-2">|</span>
-                            <form action="{{route('admin.section.students.destroy',[$section, $student])}}" method="post" onsubmit="return confirmDel(event)">
-                                @csrf
-                                @method('DELETE')
-                                <button><i class="bx bx-trash text-red-600"></i></button>
-                            </form>
-                        </div>
+                        <form action="{{route('admission.section.students.destroy',[$student, $section])}}" method="post" onsubmit="return confirmDel(event)">
+                            @csrf
+                            @method('DELETE')
+                            <button><i class="bx bx-x text-red-600"></i></button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -81,6 +82,25 @@
 </div>
 
 <script type="text/javascript">
+    function confirmRefreshAdmissionNo(event) {
+        event.preventDefault(); // prevent form submit
+        var form = event.target; // storing the form
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Admission No will be refreshed!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, do it!'
+        }).then((result) => {
+            if (result.value) {
+                form.submit();
+            }
+        })
+    }
+
     function confirmDel(event) {
         event.preventDefault(); // prevent form submit
         var form = event.target; // storing the form

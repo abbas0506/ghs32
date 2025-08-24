@@ -14,7 +14,7 @@ return [
         'Others' => 'Others (کوئی اور)',
     ],
 
-    'guardian_incomes' => [
+    'incomes' => [
         '20000' => 'Rs. 20,000',
         '40000' => 'Rs. 40,000',
         '60000' => 'Rs. 60,000',

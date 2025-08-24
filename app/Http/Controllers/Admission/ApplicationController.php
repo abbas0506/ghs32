@@ -5,41 +5,93 @@ namespace App\Http\Controllers\Admission;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\Group;
+use App\Models\Section;
+use App\Models\Student;
 use Exception;
 use Illuminate\Http\Request;
-use App\Services\ApplicationStatusService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ApplicationController extends Controller
 {
 
-    protected $statusService;
-
-    public function __construct(ApplicationStatusService $statusService)
-    {
-        $this->statusService = $statusService;
-    }
-
     public function accept(Application $application)
     {
-        $this->statusService->accept($application);
-        return back()->with('success', 'Application accepted.');
+        try {
+            $application->update([
+                'status' => 'accepted',
+                'rejection_note' => null,
+            ]);
+            return back()->with('success', 'Application accepted!');
+        } catch (Exception $ex) {
+            return back()->with('warning', $ex->getMessage());
+        }
     }
 
     public function reject(Request $request, Application $application)
     {
         $request->validate(['rejection_note' => 'required|string']);
-        $this->statusService->reject($application, $request->rejection_note);
-        return back()->with('warning', 'Application rejected.');
+        try {
+            $application->update([
+                'status' => 'rejected',
+                'rejection_note' => $$request->rejection_note,
+            ]);
+            return back()->with('success', 'Application rejected.');
+        } catch (Exception $ex) {
+            return back()->with('warning', $ex->getMessage());
+        }
     }
 
     public function admit(Request $request, Application $application)
     {
-        $request->validate(['amount_paid' => 'required|numeric']);
-        $amount_paid = $request->amount_paid;
-        $this->statusService->admit($application, $amount_paid);
-        // return redirect()->route('students.index')->with('success', 'Application admitted.');
-        return back()->with('success', 'Application admitted.');
+        $request->validate([
+            'amount_paid' => 'required|numeric'
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $application->update([
+                'status' => 'admitted',
+                'amount_paid' => $request->amount_paid,
+                'payment_date' => now()->format('Y-m-d'),
+            ]);
+            // e.g., Move data to students table
+            $section = Section::where('grade', 11)->first();
+            if ($section) {
+                Student::create([
+                    'photo' => $application->photo,
+                    'name' => $application->name,
+                    'bform' => $application->bform,
+                    'gender' => $application->gender,
+                    'phone' => $application->phone,
+                    'address' => $application->address,
+                    'dob' => $application->dob,
+                    'id_mark' => $application->id_mark,
+                    'caste' => $application->caste,
+                    'is_orphan' => $application->is_orphan,
+                    'father_name' => $application->father_name,
+                    'mother_name' => $application->mother_name,
+                    'father_cnic' => $application->father_cnic,
+                    'mother_cnic' => $application->mother_cnic,
+                    'profession' => $application->profession,
+                    'income' => $application->income,
+
+                    'grade' => $section->grade,
+                    'section_id' => $section->id,
+                    'rollno' => $section->students->count() + 1,
+                    'group_id' => $application->group_id,
+                    'admission_date' => now(),
+                    'score' => $application->obtained_marks,
+                ]);
+                DB::commit();
+                return back()->with('success', 'Student successfully admitted');
+            } else {
+                DB::rollBack();
+                return back()->with('warning', 'Section required!');
+            }
+        } catch (Exception $ex) {
+            return back()->with('warning', $ex->getMessage());
+        }
     }
     /**
      * Display a listing of the resource.
@@ -93,14 +145,9 @@ class ApplicationController extends Controller
             'obtained_marks' => 'required',
             'total_marks' => 'required',
             'pass_year' => 'required',
-            // 'fee_concession' => 'required',
             'group_id' => 'required',
         ]);
 
-        $request->merge([
-            'grade' => 11,
-            'fee_concession' => 0,
-        ]);
         try {
             $duplicate = Application::where('rollno', $request->rollno)->where('pass_year', $request->pass_year)->first();
             if ($duplicate) {
@@ -154,15 +201,15 @@ class ApplicationController extends Controller
             'phone' => 'required|string|max:16',
             'address' => 'nullable|string|max:100',
             'dob' => 'required|date',
-            'identification_mark' => 'required|string|max:100',
+            'id_mark' => 'required|string|max:100',
             'caste' => 'required|string|max:50',
             'is_orphan' => 'required|boolean',
             'guardian_relation' => 'nullable|string|max:50',
             'guardian_name' => 'nullable|string|max:50',
-            'guardian_cnic' => 'nullable|string|max:15',
+            'father_cnic' => 'nullable|string|max:15',
             'mother_cnic' => 'nullable|string|max:15',
-            'guardian_profession' => 'required|string|max:50',
-            'guardian_income' => 'required|integer|min:0',
+            'profession' => 'required|string|max:50',
+            'income' => 'required|integer|min:0',
 
             // 'grade' => 'required|integer|min:1|max:12',
             'group_id' => 'required|exists:groups,id',

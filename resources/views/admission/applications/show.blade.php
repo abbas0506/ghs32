@@ -57,14 +57,14 @@
                     <label for="">Personal Info</label>
                     <p>{{ $application->name }}</p>
                     <p class="text-slate-600 text-sm"><i class="bi-balloon"></i>{{ $application->dob->format('d-m-Y') }} <i class="bi-card-heading ml-2"></i> {{ $application->bform }} <i class="bi-telephone ml-2"></i> {{ $application->phone }}</p>
-                    <p class="text-slate-600 text-sm">{{ $application->identification_mark }} </p>
+                    <p class="text-slate-600 text-sm">{{ $application->id_mark }} </p>
                     <p class="text-slate-600 text-sm">{{ $application->address }} </p>
                 </div>
                 <div>
                     <label for="">Father / Guardian Info</label>
                     <p>{{ $application->father_name }} </p>
-                    <p class="text-slate-600 text-sm">{{ $application->caste }} / {{ $application->guardian_profession }} </p>
-                    <p class="text-slate-600 text-sm"><i class="bi-currency"></i>{{ $application->guardian_income }} </p>
+                    <p class="text-slate-600 text-sm">{{ $application->caste }} / {{ $application->profession }} </p>
+                    <p class="text-slate-600 text-sm"><i class="bi-currency"></i>{{ $application->income }} </p>
                 </div>
                 <div>
                     <label for="">Group</label>
@@ -100,15 +100,8 @@
                     </button>
 
                     @elseif($application->status == 'accepted')
-                    <form action="{{ route('admission.applications.admit', $application) }}" method="post" class="mt-5">
-                        @csrf
-                        @method('PATCH')
-                        <input type="text" name='amount_paid' class="custom-input fancy-input" placeholder="Amount">
-                        <button type="submit" class="btn-green px-5 rounded-full">Admit</button>
-                        <button type="button" id="openRejectModal" class="btn btn-red px-5 rounded-full" data-bs-toggle="modal" data-bs-target="#rejectModal">
-                            Reject
-                        </button>
-                    </form>
+                    <button type="button" id='openFeeModal' class="btn-green px-5 rounded-full" data-bs-toggle="modal" data-bs-target="#feeModal">Get Fee</button>
+                    <button type="button" id="openRejectModal" class="btn btn-red px-5 rounded-full" data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
                     @elseif($application->status == 'rejected')
                     <form action="{{ route('admission.applications.accept', $application->id)}}" method="post">
                         @csrf
@@ -129,33 +122,31 @@
 
 <!-- Rejection Modal -->
 <div id="rejectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-lg w-full max-w-md md:w-3/4 mx-auto p-5 relative">
-        <h2 class="text-lg font-semibold mb-4">Rejection Note</h2>
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md md:w-3/4 mx-auto p-4 relative">
+        <h2 class="text-lg font-semibold mb-4">Reason</h2>
         <form id='rejectApplicationForm' action="{{ route('admission.applications.reject', $application->id)}}" method="post">
             @csrf
             @method('PATCH')
-            <textarea id="rejection_note" name='rejection_note' rows="3" class="w-full p-2 border border-gray-300 rounded" placeholder="Enter reason..."></textarea>
-            <div class="flex justify-end mt-5">
+            <textarea id="rejection_note" name='rejection_note' rows="2" class="w-full p-2 border border-gray-300 rounded" placeholder="Enter reason..."></textarea>
+            <div class="flex justify-end mt-3">
                 <button type="submit" class="btn-red px-5 rounded-full">Reject</button>
             </div>
         </form>
-        <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl">&times;</button>
+        <button id="closeRejectionModal" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl">&times;</button>
     </div>
+</div>
 
-    <!-- fee payment modeal -->
-    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-lg shadow-lg w-full max-w-md md:w-3/4 mx-auto p-5 relative">
-            <h2 class="text-lg font-semibold mb-4">Rejection Note</h2>
-            <form id='feePaymentForm' action="{{ route('admission.applications.reject', $application->id)}}" method="post">
-                @csrf
-                @method('PATCH')
-                <textarea id="rejection_note" name='rejection_note' rows="3" class="w-full p-2 border border-gray-300 rounded" placeholder="Enter reason..."></textarea>
-                <div class="flex justify-end mt-5">
-                    <button type="submit" class="btn-red px-5 rounded-full">Reject</button>
-                </div>
-            </form>
-            <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl">&times;</button>
-        </div>
+<!-- fee payment modeal -->
+<div id="feeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md md:w-3/4 mx-auto p-5 relative">
+        <h2 class="text-lg font-semibold mb-4">Fee (@if($application->group_id==3) 5000 @else 5200 @endif)</h2>
+        <form action="{{ route('admission.applications.admit', $application) }}" method="post" class="mt-5">
+            @csrf
+            @method('PATCH')
+            <input type="number" name='amount_paid' class="custom-input fancy-input" placeholder="Amount" min="5000" max=5200>
+            <button type="submit" class="btn-green px-5 rounded-full mt-3 float-right">Get Fee</button>
+        </form>
+        <button id="closeFeeModal" class="absolute top-2 right-2 text-gray-500 hover:text-black text-xl">&times;</button>
     </div>
 </div>
 @endsection
@@ -166,9 +157,16 @@
         $('#openRejectModal').on('click', function() {
             $('#rejectModal').removeClass('hidden').addClass('flex');
         });
+        $('#openFeeModal').on('click', function() {
+            $('#feeModal').removeClass('hidden').addClass('flex');
+        });
 
-        $('#cancelModal, #closeModal').on('click', function() {
+        $('#closeRejectionModal').on('click', function() {
             $('#rejectModal').removeClass('flex').addClass('hidden');
+        });
+
+        $('#closeFeeModal').on('click', function() {
+            $('#feeModal').removeClass('flex').addClass('hidden');
         });
 
         $('#rejectApplicationForm').on('submit', function(e) {

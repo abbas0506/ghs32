@@ -1,0 +1,138 @@
+@extends('layouts.admin')
+@section('page-content')
+
+<div class="custom-container">
+    <h1>{{ $section->grade }}-{{$section->name}}</h1>
+    <div class="bread-crumb">
+        <a href="{{url('admin')}}">Dashoboard</a>
+        <div>/</div>
+        <a href="{{route('admin.sections.index')}}">Sections</a>
+        <div>/</div>
+        <div>{{$section->grade}}</div>
+    </div>
+
+    <form action="{{ route('admin.sections.export.post') }}" method="post">
+        @csrf
+
+        <!-- search -->
+        <div class="flex relative w-full md:w-1/3 mt-5">
+            <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
+            <i class="bx bx-search absolute top-2 right-2"></i>
+        </div>
+
+        <!-- page message -->
+        @if($errors->any())
+        <x-message :errors='$errors'></x-message>
+        @else
+        <x-message></x-message>
+        @endif
+
+        <div class="mt-4 w-full md:w-1/3">
+            <label for="">Export To</label>
+            <select name="export_section_id" id="" class="custom-input-borderless py-1">
+                @foreach($exportSections as $exSec)
+                <option value="{{ $exSec->id }}">{{ $exSec->grade }}-{{ $exSec->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="overflow-x-auto bg-white w-full mt-8">
+
+            <table class="table-auto borderless w-full">
+                <thead>
+                    <tr>
+                        <th class="w-6"><input type="checkbox" id='chkAll' class="rounded" onclick="checkAll()"></th>
+                        <th class="w-8">#</th>
+                        <th class="w-40 text-left">Name</th>
+                        <th class="w-40 text-left">Father</th>
+                        <th class="w-24">BForm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($section->students->sortBy('rollno') as $student)
+                    <tr class="tr">
+                        <td>
+                            <div class="flex items-center justify-center">
+                                <input type="checkbox" class="w-4 h-4 rounded" name="student_ids_array[]" value="{{ $student->id }}">
+                            </div>
+                        </td>
+                        <td>{{$student->rollno}}</td>
+                        <td class="text-left"><a href="{{route('admin.section.students.show', [$section, $student])}}" class="link">{{$student->name}}</a></td>
+                        <td class="text-left">{{$student->father_name}}</td>
+                        <td>{{$student->bform}}</td>
+
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn-blue float-right mt-5 rounded py-2">Move / Export</button>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function confirmDel(event) {
+        event.preventDefault(); // prevent form submit
+        var form = event.target; // storing the form
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                form.submit();
+            }
+        })
+    }
+
+    function confirmClean(event) {
+        event.preventDefault(); // prevent form submit
+        var form = event.target; // storing the form
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You are going to clean this class!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                form.submit();
+            }
+        })
+    }
+
+
+    function search(event) {
+        var searchtext = event.target.value.toLowerCase();
+        var str = 0;
+        $('.tr').each(function() {
+            if (!(
+                    $(this).children().eq(0).prop('outerText').toLowerCase().includes(searchtext) ||
+                    $(this).children().eq(1).prop('outerText').toLowerCase().includes(searchtext)
+                )) {
+                $(this).addClass('hidden');
+            } else {
+                $(this).removeClass('hidden');
+            }
+        });
+    }
+
+    function checkAll() {
+
+        $('.tr').each(function() {
+            if (!$(this).hasClass('hidden'))
+                $(this).children().find('input[type=checkbox]').prop('checked', $('#chkAll').is(':checked'));
+            // updateChkCount()
+        });
+    }
+</script>
+
+@endsection

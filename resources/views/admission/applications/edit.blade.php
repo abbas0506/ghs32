@@ -132,8 +132,8 @@
                 </div>
 
                 <div>
-                    <label for="identification_mark">Identification Mark (شناختی علامت)</label>
-                    <input type="text" name="identification_mark" class="custom-input fancy-focus" placeholder="Identification mark" value="{{ $application->identification_mark }}" required>
+                    <label for="id_mark">Identification Mark (شناختی علامت)</label>
+                    <input type="text" name="id_mark" class="custom-input fancy-focus" placeholder="Identification mark" value="{{ $application->id_mark }}" required>
                 </div>
 
                 <div>
@@ -169,7 +169,7 @@
                 </div>
                 <div>
                     <label for="guardain_cnic">Guardian's CNIC</label>
-                    <input type="text" name="guardian_cnic" class="custom-input fancy-focus" placeholder="Guardian cnic" value="{{ $application->guardian_cnic }}" required>
+                    <input type="text" name="father_cnic" class="custom-input fancy-focus" placeholder="Guardian cnic" value="{{ $application->father_cnic }}" required>
                 </div>
 
                 <div>
@@ -177,10 +177,10 @@
                     <input type="text" name="mother_cnic" class="custom-input fancy-focus" placeholder="Mother cnic" value="{{ $application->mother_cnic }}" required>
                 </div>
                 <div>
-                    <label for="guardian_profession">Guardian Profession</label>
-                    <select name="guardian_profession" class="custom-input fancy-focus" required>
+                    <label for="profession">Guardian Profession</label>
+                    <select name="profession" class="custom-input fancy-focus" required>
                         @foreach (config('enums.professions') as $value => $label)
-                        <option value="{{ $value }}" @selected($application->guardian_profession == $value)>
+                        <option value="{{ $value }}" @selected($application->profession == $value)>
                             {{ $label }}
                         </option>
                         @endforeach
@@ -188,10 +188,10 @@
                 </div>
 
                 <div>
-                    <label for="guardian_income">Father Income (ماہانہ) </label>
-                    <select name="guardian_income" class="custom-input fancy-focus" required>
-                        @foreach (config('enums.guardian_incomes') as $value => $label)
-                        <option value="{{ $value }}" @selected($application->guardian_income == $value)>
+                    <label for="income">Father Income (ماہانہ) </label>
+                    <select name="income" class="custom-input fancy-focus" required>
+                        @foreach (config('enums.incomes') as $value => $label)
+                        <option value="{{ $value }}" @selected($application->income == $value)>
                             {{ $label }}
                         </option>
                         @endforeach

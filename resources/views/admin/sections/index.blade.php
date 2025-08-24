@@ -4,38 +4,20 @@
 <div class="custom-container">
     <h1>Classes</h1>
     <div class="bread-crumb">
-        <a href="{{url('admin')}}">Dashoboard</a>
+        <a href="{{url('/')}}">Dashoboard</a>
         <div>/</div>
         <div>Classes</div>
         <div>/</div>
         <div>All</div>
     </div>
-    <div class="overflow-x-auto">
-        <table class="table-fixed w-full mt-12 text-sm">
-            <thead>
-                <tr>
-                    <th class="w-12">Grade</th>
-                    <th class="w-36 text-left">Sections</th>
-                    <th class="w-12"><i class="bi-people-fill"></i></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($grades as $grade)
-                <tr class="text-sm">
-                    <td>{{$grade->grade}}</td>
-                    <td class="text-left">
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
-                            @foreach($grade->sections as $section)
-                            <a href="{{route('admin.section.students.index',$section)}}" class="w-16 rounded btn-teal">{{$section->name}} <span class="text-xs"> ({{ $section->students->count() }})</span></a>
-                            @endforeach
-                            <a href="{{route('admin.grade.sections.create',$grade)}}" class="w-16 rounded btn-teal text-center"><i class="bi-plus-lg"></i></a>
-                        </div>
-                    </td>
-                    <td>{{$grade->students->count()}}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="grid grid-cols-1 md:grid-cols-2 mt-12 w-full md:w-3/4 mx-auto gap-4">
+        @foreach($sections->sortBy('grade') as $section)
+        <a href="{{route('admin.sections.show',$section)}}" class="p-4 ring-1 shadow-[0_0_20px_rgba(0,100,0,0.2)] rounded-md ">
+            <h2>{{ $section->grade }}-{{ $section->name }}</h2>
+            <div>{{ $section->students->count() }}</div>
+        </a>
+        @endforeach
     </div>
 </div>
+<a href="{{ route('admin.sections.create') }}" class="fixed bottom-8 right-8 flex rounded-full w-12 h-12 btn-blue justify-center items-center text-2xl"><i class="bi bi-plus"></i></a>
 @endsection

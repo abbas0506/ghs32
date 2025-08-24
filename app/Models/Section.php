@@ -13,11 +13,8 @@ class Section extends Model
         'name',    //section label A, B, C
         'grade',
         'incharge_id',
-        'starts_at',
-        'ends_at',
     ];
 
-    protected $dates = ['starts_at', 'ends_at'];
     public function grade()
     {
         return $this->belongsTo(Grade::class);
@@ -37,15 +34,9 @@ class Section extends Model
         return $this->hasMany(Allocation::class);
     }
 
-    public function roman()
-    {
-        return $this->grade->roman_name . "-" . $this->name;
-    }
     public function scopeActive($query)
     {
-        $duration = ($this->grade < 9 ? 3 : 2);
-
-        return $query->where('starts_at', '>=', date('y') - $duration);
+        return true;
     }
     public function  studentRank($sortedPercentages, $specificId)
     {

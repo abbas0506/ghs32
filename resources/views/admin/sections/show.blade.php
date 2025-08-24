@@ -12,28 +12,29 @@
     </div>
 
     <!-- search -->
-    <div class="flex justify-between items-center flex-wrap gap-6 mt-12">
-        <div class="flex relative w-full md:w-1/3">
-            <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
-            <i class="bx bx-search absolute top-2 right-2"></i>
-        </div>
-        <div class="flex gap-3 flex-wrap">
-            <a href="{{route('admin.section.students.create', $section)}}" class="text-sm p-2 border hover:bg-teal-400">New <i class="bi bi-person-add text-teal-600"></i></a>
-            <a href="{{url('admin/students/import',$section)}}" class="text-sm p-2 border hover:bg-teal-50">Import <i class="bi bi-file-earmark-excel text-teal-600"></i></a>
-            <a href="{{ route('admin.section.lecture.allocations.index',[$section,0]) }}" class="p-2 border rounded hover:bg-slate-200"><i class="bi-clock text-teal-600"></i></a>
-            <a href="{{ route('admin.section.cards.index',$section) }}" class="p-2 border rounded hover:bg-slate-200"><i class="bi-person-badge text-indigo-600"></i></a>
-            <form action="{{ route('admin.sections.clean', $section) }}" method="post" onsubmit="return confirmClean(event)">
-                @csrf
-                <button class="btn-red rounded p-2"><i class="bx bx-recycle text-base"></i></button>
-            </form>
-            <form action="{{ route('admin.sections.destroy', $section) }}" method="post" onsubmit="return confirmDel(event)">
-                @csrf
-                @method('delete')
-                <button class="btn-red rounded p-2"><i class="bx bx-trash text-base"></i></button>
-            </form>
-        </div>
-
+    <!-- <div class="flex justify-between items-center flex-wrap gap-6 mt-12"> -->
+    <div class="flex relative w-full md:w-1/3">
+        <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
+        <i class="bx bx-search absolute top-2 right-2"></i>
     </div>
+    <div class="flex justify-center items-center gap-3 flex-wrap mt-5">
+        <a href="{{ route('admin.section.students.create', $section)}}"><i class="bi bi-person-add text-teal-600"></i></a>
+        <a href="{{ route('admin.sections.import',$section)}}" class=""><i class="bi bi-file-earmark-excel text-teal-600"></i></a>
+        <a href="{{ route('admin.sections.export',$section)}}" class=""><i class="bi bi-box-arrow-up-right text-teal-600"></i></a>
+        <a href="{{ route('admin.section.lecture.allocations.index',[$section,0]) }}" class=""><i class="bi-clock text-teal-600"></i></a>
+        <a href="{{ route('admin.section.cards.index',$section) }}" class=""><i class="bi-person-badge text-indigo-600"></i></a>
+        <form action="{{ route('admin.sections.clean', $section) }}" method="post" onsubmit="return confirmClean(event)">
+            @csrf
+            <button class=""><i class="bx bx-recycle text-base"></i></button>
+        </form>
+        <form action="{{ route('admin.sections.destroy', $section) }}" method="post" onsubmit="return confirmDel(event)">
+            @csrf
+            @method('delete')
+            <button class=""><i class="bx bx-trash text-base"></i></button>
+        </form>
+    </div>
+
+    <!-- </div> -->
 
     <!-- page message -->
     @if($errors->any())
@@ -47,10 +48,10 @@
         <table class="table-auto borderless w-full">
             <thead>
                 <tr>
-                    <th class="w-10">Roll No</th>
-                    <th class="w-40 text-left">Name</th>
-                    <th class="w-40 text-left">Father</th>
-                    <th class="w-24">BForm</th>
+                    <th class="w-10">#</th>
+                    <th class="w-48 text-left">Name</th>
+                    <th class="w-48 text-left">Father</th>
+                    <th class="w-36">BForm</th>
                     <th class="w-24">Actions</th>
                 </tr>
             </thead>

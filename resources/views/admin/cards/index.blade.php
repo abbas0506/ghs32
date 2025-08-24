@@ -2,13 +2,17 @@
 @section('page-content')
 <div class="custom-container">
     <!-- Title     -->
-    <h1>Section {{ $section->roman() }}</h1>
+    <h1>Student Cards</h1>
     <div class="flex flex-wrap items-center gap-2">
         <div class="flex-1">
             <div class="bread-crumb">
                 <a href="{{ url('/') }}">Dashboard</a>
                 <div>/</div>
-                <div>Students ( {{ $section->students->count() }} )</div>
+                <a href="{{ route('admin.sections.index') }}">Sections</a>
+                <div>/</div>
+                <a href="{{ route('admin.sections.show', $section) }}">{{ $section->grade }}-{{$section->name}}</a>
+                <div>/</div>
+                <div>Cards</div>
             </div>
         </div>
     </div>
@@ -40,26 +44,27 @@
 
             <table class="table-fixed borderless w-full">
                 <thead>
-                    <tr class="border-b">
-                        <th class="w-8">Roll #</th>
+                    <tr class="">
+                        <th class="w-8 py-2"><input type="checkbox" id='chkAll' class="rounded" onclick="checkAll()"></th>
+                        <th class="w-8">#</th>
                         <th class="w-40 text-left">Student</th>
-                        <th class="w-40 text-left">father_name</th>
-                        <th class="w-16">B Form</th>
-                        <th class="w-16"><input type="checkbox" id='chkAll' class="rounded" onclick="checkAll()"><br><label for="">Check all</label></th>
+                        <th class="w-40 text-left">Father</th>
+                        <th class="w-40">B Form</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($section->students as $student)
                     <tr class="tr text-sm border-b">
+                        <td>
+                            <!-- <div class="flex items-center justify-center"> -->
+                            <input type="checkbox" class="w-4 h-4 rounded" name="student_ids_array[]" value="{{ $student->id }}">
+                            <!-- </div> -->
+                        </td>
                         <td>{{ $student->rollno }}</td>
                         <td class="text-left"><a href="" class="link">{{ $student->name }}</a></td>
                         <td class="text-left">{{ $student->father_name}}</td>
                         <td>{{ $student->bform }}</td>
-                        <td>
-                            <div class="flex items-center justify-center">
-                                <input type="checkbox" class="w-4 h-4 rounded" name="student_ids_array[]" value="{{ $student->id }}">
-                            </div>
-                        </td>
+
                     </tr>
                     @endforeach
                 </tbody>
@@ -77,7 +82,7 @@
         var str = 0;
         $('.tr').each(function() {
             if (!(
-                    $(this).children().eq(1).prop('outerText').toLowerCase().includes(searchtext)
+                    $(this).children().eq(2).prop('outerText').toLowerCase().includes(searchtext)
                 )) {
                 $(this).addClass('hidden');
             } else {
@@ -93,25 +98,6 @@
                 $(this).children().find('input[type=checkbox]').prop('checked', $('#chkAll').is(':checked'));
             // updateChkCount()
         });
-    }
-
-    function confirmDel(event) {
-        event.preventDefault(); // prevent form submit
-        var form = event.target; // storing the form
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.value) {
-                form.submit();
-            }
-        })
     }
 </script>
 @endsection

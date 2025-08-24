@@ -31,6 +31,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{route('admin.sections.index')}}" class="flex items-center">
+                    <i class="bi bi-person-gear"></i>
+                    <span class="ml-3">Sections</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{route('admin.events.index')}}" class="flex items-center">
                     <i class="bi bi-person-gear"></i>
                     <span class="ml-3">Events</span>

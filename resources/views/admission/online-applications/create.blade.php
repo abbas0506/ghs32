@@ -89,17 +89,13 @@
                 <!-- <p>Part I Session 2025-27 </p> -->
             </div>
         </div>
-        <!-- <div class="text-teal-800 text-xl text-center font-bold bg-teal-100 p-4">Admission Form</div> -->
-        <div class="px-5">
 
+        <div class="px-5">
             <form action="{{url('apply')}}" method="post" id='applicationForm' class="w-full py-5 md:px-16" enctype="multipart/form-data">
                 @csrf
-
                 <div class="photo-upload-wrapper">
                     <!-- Placeholder Photo Box -->
-                    <div class="photo-box" id="photoPreview">
-                        Photo
-                    </div>
+                    <div class="photo-box" id="photoPreview">Photo</div>
 
                     <!-- Custom Upload Button -->
                     <label for="photo" class="custom-file-upload">Upload Your Photo</label>
@@ -114,29 +110,27 @@
                 <x-message></x-message>
                 @endif
 
-                <h2 class="mt-8">Choose your desired group</h2>
-                <div class="grid gap-y-2 mt-3">
-                    @foreach($groups as $group)
-                    <div>
-                        <input type="checkbox" id='group_id_{{$group->id}}' name="group_id" value="{{ $group->id }}" class="chk-group rounded mr-2">
-                        <label for="group_id_{{$group->id}}"><strong>{{ $group->name }} </strong>({{ $group->subjects_list }})</label>
-                    </div>
-                    @endforeach
-                </div>
-                <div class="mt-8 md:w-1/2">
-                    <label for="">Passing Year (میٹرک کب پاس کیا؟)</label>
-                    <select name="pass_year" id="" class="custom-input fancy-focus">
-                        <option value="{{ date('Y')-2}}">{{ date('Y')-2}}</option>
-                        <option value="{{ date('Y')-1}}">{{ date('Y')-1}}</option>
-                        <option value="{{ date('Y')}}" selected>{{ date('Y')}}</option>
-                    </select>
-                </div>
-                <!-- hidden fields -->
-                <input type="number" name="grade" class="custom-input fancy-focus" value="11" hidden>
-                <input type="text" name="gender" class="custom-input fancy-focus" value="m" hidden>
+                <input name="grade" value="11" hidden>
 
-                <!-- student info -->
                 <div class="grid md:grid-cols-2 gap-4 mt-8">
+                    <h2 class="mt-8">Choose your desired group</h2>
+                    <div class="grid gap-y-2 mt-3">
+                        @foreach($groups as $group)
+                        <div>
+                            <input type="checkbox" id='group_id_{{$group->id}}' name="group_id" value="{{ $group->id }}" class="chk-group rounded mr-2">
+                            <label for="group_id_{{$group->id}}"><strong>{{ $group->name }} </strong>({{ $group->subjects_list }})</label>
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="mt-8 md:w-1/2">
+                        <label for="">Passing Year (میٹرک کب پاس کیا؟)</label>
+                        <select name="pass_year" id="" class="custom-input fancy-focus">
+                            <option value="{{ date('Y')-2}}">{{ date('Y')-2}}</option>
+                            <option value="{{ date('Y')-1}}">{{ date('Y')-1}}</option>
+                            <option value="{{ date('Y')}}" selected>{{ date('Y')}}</option>
+                        </select>
+                    </div>
+
                     <div class="md:col-span-2">
                         <label for="">Student Name ( رزلٹ کارڈ کے مطابق)</label>
                         <input type="text" name="name" class="custom-input fancy-focus" placeholder="Student name" required>
@@ -160,8 +154,8 @@
                     </div>
 
                     <div>
-                        <label for="identification_mark">Identification Mark (شناختی علامت)</label>
-                        <input type="text" name="identification_mark" class="custom-input fancy-focus" placeholder="Identification mark" required>
+                        <label for="id_mark">Identification Mark (شناختی علامت)</label>
+                        <input type="text" name="id_mark" class="custom-input fancy-focus" placeholder="Identification mark" required>
                     </div>
 
                     <div>
@@ -204,7 +198,7 @@
                     </div>
                     <div>
                         <label for="guardain_cnic">Guardian's CNIC</label>
-                        <input type="text" name="guardian_cnic" class="custom-input fancy-focus cnic" placeholder="00000 - 0000000- 0" required>
+                        <input type="text" name="father_cnic" class="custom-input fancy-focus cnic" placeholder="00000 - 0000000- 0" required>
                     </div>
 
                     <div>
@@ -212,8 +206,8 @@
                         <input type="text" name="mother_cnic" class="custom-input fancy-focus cnic" placeholder="00000 - 0000000- 0" required>
                     </div>
                     <div>
-                        <label for="guardian_profession">Guardian's Profession (پیشہ)</label>
-                        <select name="guardian_profession" class="custom-input fancy-focus" required>
+                        <label for="profession">Guardian's Profession (پیشہ)</label>
+                        <select name="profession" class="custom-input fancy-focus" required>
                             @foreach (config('enums.professions') as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                             @endforeach
@@ -221,9 +215,9 @@
                     </div>
 
                     <div>
-                        <label for="guardian_income">Guardian's Income (ماہانہ) </label>
-                        <select name="guardian_income" class="custom-input fancy-focus" required>
-                            @foreach (config('enums.guardian_incomes') as $value => $label)
+                        <label for="income">Guardian's Income (ماہانہ) </label>
+                        <select name="income" class="custom-input fancy-focus" required>
+                            @foreach (config('enums.incomes') as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                             @endforeach
                         </select>
@@ -286,8 +280,6 @@
 
 </section>
 
-<!-- footer
-<x-footer></x-footer> -->
 @endsection
 
 @section('script')

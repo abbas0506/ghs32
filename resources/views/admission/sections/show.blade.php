@@ -2,13 +2,13 @@
 @section('page-content')
 
 <div class="custom-container">
-    <h1>{{$section->roman()}}</h1>
+    <h1>{{ $section->grade }}-{{$section->name}}</h1>
     <div class="bread-crumb">
         <a href="{{url('/')}}">Dashoboard</a>
         <div>/</div>
         <a href="{{route('admission.sections.index')}}">Sections</a>
         <div>/</div>
-        <div>{{$section->roman()}}</div>
+        <div>{{ $section->grade }}-{{$section->name}}</div>
     </div>
 
     <!-- search -->
@@ -26,7 +26,7 @@
 
         <a href="{{ route('admission.sections.refresh.rollno', $section) }}" class="btn-blue rounded">Roll No &nbsp <i class="bi bi-repeat"></i></a>
         <div class="flex space-x-2 items-center">
-            <a href="{{route('admission.section.students.create',$section)}}" class="btn-teal rounded">Import &nbsp <i class="bi bi-upload"></i></a>
+            <a href="{{route('admission.section.students.create',$section)}}" class="btn-teal rounded">Export &nbsp <i class="bi bi-upload"></i></a>
             <form action="{{ route('admission.sections.clean', $section) }}" method="post" onsubmit="return confirmClean(event)">
                 @csrf
                 <button class="btn-orange rounded"><i class="bx bx-recycle text-base"></i></button>
@@ -54,7 +54,6 @@
                     <th class="w-24">BForm</th>
                     <th class="w-20">Marks</th>
                     <th class="w-20">Serial #</th>
-                    <th class="w-24">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,15 +63,8 @@
                     <td class="text-left"><a href="{{route('admin.section.students.show', [$section, $student])}}" class="link">{{$student->name}}</a></td>
                     <td class="text-left">{{ $student->father_name }}</td>
                     <td>{{$student->bform}}</td>
-                    <td>{{$student->marks}}</td>
+                    <td>{{$student->score}}</td>
                     <td>{{$student->admission_no}}</td>
-                    <td>
-                        <form action="{{route('admission.section.students.destroy',[$student, $section])}}" method="post" onsubmit="return confirmDel(event)">
-                            @csrf
-                            @method('DELETE')
-                            <button><i class="bx bx-x text-red-600"></i></button>
-                        </form>
-                    </td>
                 </tr>
                 @endforeach
             </tbody>

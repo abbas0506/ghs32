@@ -16,9 +16,6 @@ return new class extends Migration
             $table->string('name', 20);
             $table->unsignedInteger('grade');  //
             $table->foreignId('incharge_id')->nullable()->constrained('users')->onDelete('set null');
-            $table->date('starts_at');
-            $table->date('ends_at'); //will pass out
-
             $table->timestamps();
         });
     }

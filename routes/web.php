@@ -132,8 +132,11 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('section.cards', SectionCardController::class);
         Route::get('section/student-cards/print', [SectionCardController::class, 'print'])->name('section.cards.print');
 
-        Route::get('students/import/{section}', [SectionStuedentsController::class, 'import']);
-        Route::post('students/import', [SectionStuedentsController::class, 'postImport']);
+        Route::get('sections/import/{section}', [AdminSectionController::class, 'import'])->name('sections.import');
+        Route::post('sections/import', [AdminSectionController::class, 'postImport'])->name('sections.import.post');
+
+        Route::get('sections/{section}/export', [AdminSectionController::class, 'export'])->name('sections.export');
+        Route::post('sections/export', [AdminSectionController::class, 'postExport'])->name('sections.export.post');
 
         Route::view('change/password', 'admin.change_password');
         Route::post('change/password', [AuthController::class, 'changePassword'])->name('change.password');

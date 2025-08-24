@@ -18,39 +18,24 @@
     @endif
 
     <div class="w-full md:w-3/4 mx-auto mt-8">
-        <h1 class="text-teal-600 mt-8">New Clas</h1>
-        <div>
-            <label>Grade</label>
-            <h2>{{ $grade->grade }}</h2>
-        </div>
-        <form action="{{route('admin.grade.sections.store',$grade)}}" method='post' class="mt-4" onsubmit="return validate(event)">
+        <h1 class="text-teal-600 mt-8">New Class / Section</h1>
+        <form action="{{route('admin.sections.store')}}" method='post' class="mt-4" onsubmit="return validate(event)">
             @csrf
-            <div class="grid grid-cols-2 gap-2">
-
+            <div class="grid gap-2">
                 <div>
-                    <label>Section Label </label>
-                    <input type="text" name='name' class="custom-input-borderless" placeholder="e.g A" value="">
-                </div>
-                <div>
-                    <label>Starts at : mm-dd-yyyy</label>
-                    <input type="date" name='starts_at' class="custom-input-borderless" value="{{ now()->format('Y-m-d') }}">
-                </div>
-                <div class="col-span-full">
-                    <label>Incharge</label>
-                    <select name="incharge_id" id="" class="custom-input-borderless">
-                        @forelse($users as $user)
-                        <option value="{{$user->id}}">{{ $user->profile->name }}</option>
-                        @empty
-                        <option value="">No teacher available</option>
-                        @endforelse
+                    <label for="">Grade</label>
+                    <select name="grade" id="" class="custom-input-borderless">
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
                     </select>
                 </div>
-
-
-                <!-- <div>
-                        <label>Ends at : mm-dd-yyyy </label>
-                        <input type="date" name='ends_at' class="custom-input-borderless" value="2024-03-31">
-                    </div> -->
+                <div>
+                    <label>Section Label </label>
+                    <input type="text" name='name' class="custom-input-borderless" placeholder="A, B, C, ..." value="">
+                </div>
             </div>
             <div class="flex justify-end mt-4">
                 <button type="submit" class="btn-teal rounded p-2">Create Now</button>

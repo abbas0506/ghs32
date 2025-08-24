@@ -9,32 +9,40 @@ class Student extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'img',
+        'photo',
         'name',
-        'father_name',
-        'mother_name',
         'bform',
-        'birth_date',
-        'identification_mark',
+        'dob',
+        'id_mark',
         'phone',
         'address',
+        'caste',
+        'is_orphan',
+        'father_name',
+        'mother_name',
+        'father_cnic',
+        'mother_cnic',
         //school tag
         'group_id',
         'section_id',
         'rollno',
         'admission_no',
         'admission_date',
+        'score',
 
         // 'marks',
         'caste',
-        'guardian_profession',
-        'guardian_income',
+        'profession',
+        'income',
 
         'card_printed',
         'library_banned',
 
     ];
 
+    protected $casts = [
+        'admission_date' => 'date',   // Cast as Carbon date
+    ];
     public function section()
     {
         return $this->belongsTo(Section::class);

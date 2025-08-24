@@ -114,25 +114,4 @@ class SectionStuedentsController extends Controller
             return redirect()->back()->withErrors($e->getMessage());
         }
     }
-
-    public function import($id)
-    {
-
-        // save selected class for later usage at students import actually
-        session(['section_id' => $id]);
-        $section = Section::findOrFail($id);
-        return view('admin.students.import', compact('section'));
-    }
-    /**
-     * import data from excel
-     */
-    public function postImport(Request $request)
-    {
-        try {
-            Excel::import(new StudentImport, $request->file('file'));
-            return redirect()->route('admin.sections.index')->with('success', 'Students imported successfully');
-        } catch (Exception $ex) {
-            return redirect()->back()->withErrors($ex->getMessage());
-        }
-    }
 }

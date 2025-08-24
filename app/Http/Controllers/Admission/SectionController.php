@@ -18,7 +18,7 @@ class SectionController extends Controller
     public function index()
     {
         //
-        $sections = Section::where('grade', 11)->get();
+        $sections = Section::all();
         return view('admission.sections.index', compact('sections'));
     }
 
