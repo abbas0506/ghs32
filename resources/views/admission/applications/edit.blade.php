@@ -110,10 +110,6 @@
                     <label for="">Student Name</label>
                     <input type="text" name="name" class="custom-input" placeholder="Student name" value="{{ $application->name }}">
                 </div>
-                <div class="">
-                    <label for="">Father Name</label>
-                    <input type="text" name="father_name" class="custom-input" placeholder="Father name" value="{{ $application->father_name }}">
-                </div>
                 <div>
                     <label for="">Date of Birth</label>
                     <input type="date" name="dob" class="custom-input" placeholder="Date of birth" value="{{ optional($application->dob)->format('Y-m-d') }}">
@@ -153,22 +149,16 @@
                         <option value="1" @selected($application->is_orphan == 1)>Yes</option>
                     </select>
                 </div>
-                <div>
-                    <label for="guardian_relation"> Who is Your Guardian (سرپرست)? </label>
-                    <select name="guardian_relation" class="custom-input fancy-focus" required>
-                        <option value="father" @selected($application->guardian_relation == 'father')>Father</option>
-                        <option value="mother" @selected($application->guardian_relation == 'mother')>Mother</option>
-                        <option value="brother" @selected($application->guardian_relation == 'brother')>Brother</option>
-                        <option value="uncle" @selected($application->guardian_relation == 'uncle')>Uncle</option>
-                        <option value="other" @selected($application->guardian_relation == 'other')>Other</option>
-                    </select>
+                <div class="">
+                    <label for="">Father Name</label>
+                    <input type="text" name="father_name" class="custom-input" placeholder="Father name" value="{{ $application->father_name }}">
+                </div>
+                <div class="">
+                    <label for="">Father Name</label>
+                    <input type="text" name="mother_name" class="custom-input" placeholder="Mother name" value="{{ $application->mother_name }}">
                 </div>
                 <div>
-                    <label for="guardian_name">Guardian's Name</label>
-                    <input type="text" name="guardian_name" class="custom-input fancy-focus" placeholder="Guardian name" value="{{ $application->guardian_name }}" required>
-                </div>
-                <div>
-                    <label for="guardain_cnic">Guardian's CNIC</label>
+                    <label for="father_cnic">Father/Guardian's CNIC</label>
                     <input type="text" name="father_cnic" class="custom-input fancy-focus" placeholder="Guardian cnic" value="{{ $application->father_cnic }}" required>
                 </div>
 
@@ -177,7 +167,7 @@
                     <input type="text" name="mother_cnic" class="custom-input fancy-focus" placeholder="Mother cnic" value="{{ $application->mother_cnic }}" required>
                 </div>
                 <div>
-                    <label for="profession">Guardian Profession</label>
+                    <label for="profession">Profession</label>
                     <select name="profession" class="custom-input fancy-focus" required>
                         @foreach (config('enums.professions') as $value => $label)
                         <option value="{{ $value }}" @selected($application->profession == $value)>
@@ -188,7 +178,7 @@
                 </div>
 
                 <div>
-                    <label for="income">Father Income (ماہانہ) </label>
+                    <label for="income">Income</label>
                     <select name="income" class="custom-input fancy-focus" required>
                         @foreach (config('enums.incomes') as $value => $label)
                         <option value="{{ $value }}" @selected($application->income == $value)>

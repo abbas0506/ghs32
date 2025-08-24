@@ -184,7 +184,7 @@
 
                     <div class="md:col-span-2 text-teal-600 text-right">گارڈین یا سرپرست سے مراد وہ شخص ہے جو آپکے تعلیمی اخراجات برداشت کرے گا </div>
                     <div>
-                        <label for="guardain_cnic">Father/Guardian's CNIC</label>
+                        <label for="father_cnic">Father/Guardian's CNIC</label>
                         <input type="text" name="father_cnic" class="custom-input fancy-focus cnic" placeholder="00000 - 0000000- 0" required>
                     </div>
 
