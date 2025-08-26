@@ -71,7 +71,41 @@ class Application extends Model
 
     public function scopeToday($query)
     {
-        return $query->whereDate('created_at', today());
+        return $query->whereDate('created_at', now()->toDateString());
+    }
+    public function scopePreEngg($query)
+    {
+        return $query->where('group_id', 1);
+    }
+
+    public function scopeIcs($query)
+    {
+        return $query->where('group_id', 2);
+    }
+
+    public function scopeArts($query)
+    {
+        return $query->where('group_id', 3);
+    }
+    public function scopeOtherBoard($query)
+    {
+        return $query->where('bise', '<>', 'sahiwal');
+    }
+    public function scopePending($query)
+    {
+        return $query->where('status', 'pending');
+    }
+    public function scopeAccepted($query)
+    {
+        return $query->where('status', 'accepted');
+    }
+    public function scopeAdmitted($query)
+    {
+        return $query->where('status', 'admitted');
+    }
+    public function scopeRejected($query)
+    {
+        return $query->where('status', 'rejected');
     }
 
     public function scopeUnderprocess($query)

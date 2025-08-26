@@ -32,7 +32,7 @@
 
     <div class="bg-cover bg-center min-h-screen flex flex-col nastaliq">
         <!-- Instructions Box -->
-        <div dir="rtl" class="pt-8 w-full lg:w-2/3  mx-auto bg-white bg-opacity-90 rounded-xl shadow-xl p-6 mt-10">
+        <div dir="rtl" class="pt-8 w-full lg:w-2/3  mx-auto bg-white bg-opacity-90 rounded-xl shadow-xl p-6 mt-24">
             <div class="text-right">
                 <h1 class="text-xl font-bold text-teal-700 drop-shadow-lg">ضروری ہدایات</h1>
             </div>
@@ -47,7 +47,7 @@
                 </li>
                 <li class="flex items-start">
                     <span class="bi-3-circle text-red-600 ml-2"></span>
-                    فارم سبمِٹ کرنے بعد فیس جمع کروانے کیلیے سکول تشریف لائیں۔
+                    فارم سبمِٹ ہونے کے بعد فیس جمع کروانے کیلیے سکول تشریف لائیں۔
                 </li>
             </ul>
 
@@ -58,11 +58,7 @@
                 <table class="table-auto w-full text-right border border-gray-300 rounded-lg overflow-hidden">
                     <tbody class="text-gray-800">
                         <tr class="border-t">
-                            <td class="px-4 py-2 border font-semibold text-red-600"> اپلائی کرنے کی آخری تاریخ </td>
-                            <td class="px-4 py-2 border font-semibold text-red-600">Aug 27, 2025</td>
-                        </tr>
-                        <tr class="border-t">
-                            <td class="px-4 py-2 border"> ڈیٹا ویری فکیشن اور فیس </td>
+                            <td class="px-4 py-2 border"> فیس جمع کروانے کی آخری تاریخ</td>
                             <td class="px-4 py-2 border">Aug 30, 2025</td>
                         </tr>
                         <tr class="border-t">

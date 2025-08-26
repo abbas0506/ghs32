@@ -79,7 +79,7 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-5 ">
         <!-- Recent Applications -->
         <div class="grid-cols-1 md:col-span-3 bg-white order-2 md:order-1">
-            <h2 class="mt-8">Recent Applications ({{ $recentApplications->count() }})</h2>
+            <h2 class="mt-8">Recent Applications ({{ $applications_today->count() }})</h2>
             <div class="overflow-x-auto w-full mt-2">
                 <table class="table-fixed w-full">
                     <thead>
@@ -93,7 +93,7 @@
                         </tr>
                     </thead>
                     <tbody id='application-table'>
-                        @foreach($recentApplications->sortByDesc('updated_at') as $application)
+                        @foreach($applications_today as $application)
                         <tr class="tr" data-status="{{ $application->status }}">
                             <td>
                                 <a href="{{ route('admission.applications.show', $application) }}" class="link">{{ $application->rollno }}</a>
@@ -128,11 +128,11 @@
                 <div class="grid grid-cols-4">
                     <div class="col-span-2">Applications</div>
                     <div>
-                        @if($stats['applications_today']>0)
-                        <i class="bi-arrow-up ml-3"></i>{{$stats['applications_today']}}
+                        @if($applications_today->count())
+                        <i class="bi-arrow-up ml-3"></i>{{ $applications_today->count() }}
                         @endif
                     </div>
-                    <div class="">{{$stats['applications_admitted']}}/{{ $recentApplications->count() }}</div>
+                    <div class="">{{$stats['applications_admitted']}}/{{ $applications_today->count() }}</div>
                 </div>
                 <div class="grid grid-cols-4">
                     <div class="col-span-2">Pre Engg.</div>
