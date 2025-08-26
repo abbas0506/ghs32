@@ -32,10 +32,10 @@ class DashboardController extends Controller
             'rejected_today'  => Application::rejected()->today()->count(),
 
             'admitted_total'  => Application::admitted()->count(),
-            'admitted_today'  => Application::admitted()->today()->count(),
+            'admitted_today'  => Application::admitted()->whereDate('payment_date', today())->count(),
 
             'amount_paid_total'  => Application::sum('amount_paid'),
-            'amount_paid_today'  => Application::where('payment_date', now()->toDateString())->sum('amount_paid'),
+            'amount_paid_today'  => Application::whereDate('payment_date', today())->sum('amount_paid'),
 
             'pre_engg_total'  => Application::preEngg()->count(),
             'pre_engg_today'  => Application::preEngg()->today()->count(),
