@@ -16,7 +16,7 @@ class DashboardController extends Controller
     {
         //
         $today = \Carbon\Carbon::today();
-        $applications = Application::orderBy('id', 'desc')->whereDate('created_at', $today)->get();
+        $applications = Application::orderBy('id', 'desc')->get();
 
         $stats = [
             'applications_today' => Application::where('created_at', $today)->count(),
@@ -35,7 +35,7 @@ class DashboardController extends Controller
             'admitted_today'  => Application::where('status', 'admitted')->whereDate('created_at', $today)->count(),
 
             'amount_paid_total'  => Application::sum('amount_paid'),
-            'amount_paid_today'  => Application::whereDate('created_at', $today)->sum('amount_paid'),
+            'amount_paid_today'  => Application::whereDate('payment_date', $today)->sum('amount_paid'),
 
             'pre_engg_total'  => Application::where('group_id', 1)->count(),
             'pre_engg_today'  => Application::where('group_id', 1)->whereDate('created_at', $today)->count(),
