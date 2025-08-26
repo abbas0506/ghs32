@@ -132,7 +132,7 @@
                         <i class="bi-arrow-up ml-3"></i>{{ $applications_today->count() }}
                         @endif
                     </div>
-                    <div class="">{{$stats['applications_admitted']}}/{{ $applications_today->count() }}</div>
+                    <div class="">{{$stats['applications_admitted']}}/{{ $stats['applications_total'] }}</div>
                 </div>
                 <div class="grid grid-cols-4">
                     <div class="col-span-2">Pre Engg.</div>
