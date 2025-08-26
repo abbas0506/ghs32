@@ -16,10 +16,10 @@ class DashboardController extends Controller
     {
         //
         $today = \Carbon\Carbon::today();
-        $applications = Application::all();
-        $recentApplications = $applications->where('created_at', $today);
+        $recentApplications = Application::where('created_at', $today)->get();
 
         $stats = [
+            'applications_total' => Application::count(),
             'applications_today' => Application::where('created_at', $today)->count(),
             'applications_admitted' => Application::where('status', 'admitted')->count(),
 
@@ -65,7 +65,7 @@ class DashboardController extends Controller
 
         $groups = Group::all();
 
-        return view('admission.dashboard', compact('applications', 'groups', 'stats', 'recentApplications'));
+        return view('admission.dashboard', compact('groups', 'stats', 'recentApplications'));
     }
 
     /**
