@@ -16,7 +16,7 @@ class DashboardController extends Controller
     {
         //
         $today = \Carbon\Carbon::today();
-        $applications = Application::orderBy('id', 'desc')->get();
+        $applications = Application::all();
         $recentApplications = $applications->where('created_at', $today);
 
         $stats = [

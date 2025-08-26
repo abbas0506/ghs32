@@ -79,7 +79,7 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-5 ">
         <!-- Recent Applications -->
         <div class="grid-cols-1 md:col-span-3 bg-white order-2 md:order-1">
-            <h2 class="mt-8">Recent Applications ({{ $applications->count() }})</h2>
+            <h2 class="mt-8">Recent Applications ({{ $recentApplications->count() }})</h2>
             <div class="overflow-x-auto w-full mt-2">
                 <table class="table-fixed w-full">
                     <thead>
