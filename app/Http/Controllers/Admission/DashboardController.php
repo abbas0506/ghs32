@@ -16,8 +16,6 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        $applications = Application::all();
-        $applications_today = Application::today()->get();
 
         $stats = [
             'applications_total' => Application::count(),
@@ -62,8 +60,8 @@ class DashboardController extends Controller
 
         ];
 
-        $groups = Group::all();
-        return view('admission.dashboard', compact('groups', 'stats', 'applications_today'));
+        $applications_today = Application::today()->get();
+        return view('admission.dashboard', compact('stats', 'applications_today'));
     }
 
     /**

@@ -49,7 +49,7 @@
                     <th class="w-24">Group</th>
                     <th class="w-16">Marks</th>
                     <th class="w-16">Fee</th>
-                    <th class="w-20">Time</th>
+                    <th class="w-20">Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,7 +60,7 @@
                     <td>{{ $application->group->name }}</td>
                     <td>{{ $application->obtained_marks }}</td>
                     <td>{{ $application->amount_paid }}</td>
-                    <td>{{ $application->payment_date?->diffForHumans()??''}}</td>
+                    <td>{{ $application->payment_date->format('d/m/y')}}</td>
                 </tr>
                 @endforeach
             </tbody>
