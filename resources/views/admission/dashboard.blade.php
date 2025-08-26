@@ -93,7 +93,7 @@
                         </tr>
                     </thead>
                     <tbody id='application-table'>
-                        @foreach($applications->sortByDesc('updated_at') as $application)
+                        @foreach($recentApplications->sortByDesc('updated_at') as $application)
                         <tr class="tr" data-status="{{ $application->status }}">
                             <td>
                                 <a href="{{ route('admission.applications.show', $application) }}" class="link">{{ $application->rollno }}</a>
