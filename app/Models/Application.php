@@ -71,7 +71,7 @@ class Application extends Model
 
     public function scopeToday($query)
     {
-        return $query->whereDate('created_at', now()->toDateString());
+        return $query->whereDate('created_at', today());
     }
     public function scopePreEngg($query)
     {
