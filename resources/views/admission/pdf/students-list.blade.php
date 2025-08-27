@@ -81,7 +81,7 @@ $roman = config('global.romans');
                         <th class="w-8">Roll#</th>
                         <th class="w-12">Serial</th>
                         <th>Name</th>
-                        <th>father_name</th>
+                        <th>Father</th>
                         <th>Group</th>
                         <th>Marks</th>
                         <th>Bform</th>

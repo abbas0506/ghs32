@@ -32,7 +32,7 @@
                         <input type="text" name='name' class="custom-input" placeholder="Type here">
                     </div>
                     <div>
-                        <label>father_name</label>
+                        <label>Father</label>
                         <input type="text" name='father_name' class="custom-input" placeholder="Type here">
                     </div>
                     <div class="">

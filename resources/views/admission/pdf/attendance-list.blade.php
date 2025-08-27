@@ -80,7 +80,7 @@ $roman = config('global.romans');
                     <tr style="background-color: #bbb;">
                         <th class="w-8">Roll#</th>
                         <th>Name</th>
-                        <th>father_name</th>
+                        <th>Father</th>
                         <th>Group</th>
                         <th class="border w-12"></th>
                         <th class="border w-12"></th>

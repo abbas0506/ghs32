@@ -37,7 +37,7 @@
                 <tr>
                     <th>Roll No</th>
                     <th>Name</th>
-                    <th>father_name</th>
+                    <th>Father</th>
                     <th>BForm</th>
                 </tr>
             </thead>

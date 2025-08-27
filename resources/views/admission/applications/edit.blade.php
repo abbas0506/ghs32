@@ -226,7 +226,7 @@
                 <div>
                     <label for="">Total Marks</label>
                     <select name="total_marks" id="" class="custom-input">
-                        <option value="1000" @selected($application->total==1000)>100</option>
+                        <option value="1000" @selected($application->total==1000)>1000</option>
                         <option value="1050" @selected($application->total==1050)>1050</option>
                         <option value="1100" @selected($application->total==1100)>1100</option>
                         <option value="1150" @selected($application->total==1150)>1150</option>
@@ -235,7 +235,7 @@
                 </div>
                 <div>
                     <label for="">Obtanied Marks</label>
-                    <input type="number" name="obtained_marks" class="custom-input" placeholder="obtained_marks marks" min='0' value="{{ $application->obtained_marks }}">
+                    <input type="number" name="obtained_marks" class="custom-input" placeholder="Obtained marks" min='0' value="{{ $application->obtained_marks }}">
                 </div>
                 <div>
                     <label for="">Fee</label>

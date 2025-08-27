@@ -33,7 +33,7 @@
                         <tr class="text-sm">
                             <th>rollno</th>
                             <th>name</th>
-                            <th>father_name</th>
+                            <th>Father</th>
                             <th>bform</th>
                         </tr>
                     </thead>

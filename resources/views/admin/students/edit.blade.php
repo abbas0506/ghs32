@@ -33,7 +33,7 @@
                         <input type="text" name='name' class="custom-input" placeholder="Type here" value="{{ $student->name }}">
                     </div>
                     <div>
-                        <label>father_name</label>
+                        <label>Father</label>
                         <input type="text" name='father_name' class="custom-input" placeholder="Type here" value="{{ $student->father_name }}">
                     </div>
                     <div class="">

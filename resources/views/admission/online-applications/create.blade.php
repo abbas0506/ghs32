@@ -240,7 +240,7 @@
                     <div>
                         <label for="total_marks">Total Marks</label>
                         <select name="total_marks" id="total_marks" class="custom-input fancy-focus">
-                            <option value="1000">1050</option>
+                            <option value="1000">1000</option>
                             <option value="1050">1050</option>
                             <option value="1100">1100</option>
                             <option value="1150">1150</option>
