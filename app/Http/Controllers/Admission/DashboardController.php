@@ -47,7 +47,7 @@ class DashboardController extends Controller
 
             'arts_total'  => Application::arts()->count(),
             'arts_today'  => Application::arts()->today()->count(),
-            'arts_admitted'  => Application::ics()->admitted()->count(),
+            'arts_admitted'  => Application::arts()->admitted()->count(),
 
 
             '1000+_total'  => Application::where('obtained_marks', '>=', 1000)->count(),
