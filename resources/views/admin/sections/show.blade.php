@@ -51,8 +51,8 @@
                     <th class="w-10">#</th>
                     <th class="w-48 text-left">Name</th>
                     <th class="w-48 text-left">Father</th>
-                    <th class="w-36">BForm</th>
                     <th class="w-24">Group</th>
+                    <th class="w-36">BForm</th>
                     <th class="w-24">Actions</th>
                 </tr>
             </thead>
