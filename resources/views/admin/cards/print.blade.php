@@ -6,146 +6,151 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Cards</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
+
     <style>
         @page {
             margin: 10px;
         }
 
-        .footer {
-            position: fixed;
-            bottom: 50px;
-            left: 0px;
-            right: 0px;
-            background-color: white;
-            height: 50px;
-        }
-
-        .page-break {
-            page-break-after: always;
+        body {
+            margin: 0;
+            padding: 0;
         }
 
         .data tr th,
         .data tr td {
             font-size: 12px;
             text-align: center;
-            /* border-spacing: 40px;
-            border: 0.5px solid; */
-            /* margin: 20px */
         }
 
         .border {
             border: solid 1px;
         }
+
+        .card-container {
+            position: relative;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .card-logo-bg {
+            position: absolute;
+            top: 160px;
+            /* Adjust based on where you want the image */
+            left: 27px;
+            width: 150px;
+            opacity: 0.25;
+        }
+
+        .wave-pattern {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 300px;
+            opacity: 0.75;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
     </style>
 </head>
+
 @php
 $roman = config('global.romans');
+$i = 0;
+$numOfCardsPerRow = 3;
 @endphp
 
 <body>
-
     <main>
         <div class="custom-container">
-
-            <!-- <div class="w-1/2 mx-auto">
-                <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/school_logo.png')}}" class="w-16"></div>
-                </div>
-                <table class="w-full">
-                    <tbody>
-                        <tr>
-                            <td class="text-center text-xl font-bold">Student Cards </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center text-sm">Govt. Higher Secondary School Chak Bedi, Pakpattan</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div> -->
-
-            <!-- table header -->
-            <div>
-                <table class="w-full">
-                    <tbody>
-                        <tr class="text-xs">
-                            <td class="text-left">Student Cards</td>
-                            <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            @php $i=1; @endphp
-
-            @php
-            $i=0;
-            $numOfCardsPerRow=3;
-            @endphp
+            <table class="w-full">
+                <tbody>
+                    <tr class="text-xs">
+                        <td class="text-left">Student Cards</td>
+                        <td class="text-right">Printed on {{ now()->format('d-M-Y') }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <table class="table-auto w-full mt-2" cellspacing="0">
                 <tbody class="data">
                     @foreach($students as $student)
-                    @if($i%$numOfCardsPerRow==0)<tr class="text-sm">@endif
+                    @if($i % $numOfCardsPerRow == 0)
+                    <tr class="text-sm">
+                        @endif
+
                         <td class="p-6">
-                            <div class="border p-2">
-                                <div><img src="{{public_path('images/logo/school_logo.png')}}" alt="" width="32px" height="32px"></div>
-                                <p class="text-xs mt-2">Govt. Higher Secondary School Chak Bedi, District Pakpattan</p>
+                            <div class="border p-2 card-container">
+                                <!-- Background Logo -->
+                                <img src="{{ public_path('images/logo/punjab.png') }}" class="card-logo-bg" alt="Background Logo">
+                                <!-- wave patten -->
+                                <img src="{{ public_path('images/bg/waves.png') }}" class="wave-pattern" alt="Wave pattern">
 
-                                <div class="w-24 h-24 m-auto mt-3">
-                                    @if ($student->photo)
-                                    <img src="{{ public_path('storage/' . $student->photo) }}"
-                                        style="width:80px; height:80px; border-radius:50%; border:1px solid #333; object-fit:cover;">
-                                    @else
-                                    <span style="color: #999;">No Photo</span>
-                                    @endif
+                                <!-- Foreground Content -->
+                                <div class="card-content">
+                                    <div><img src="{{ public_path('images/logo/school_logo.png') }}" alt="" width="36px" height="36px"></div>
+                                    <p class="text-xs mt-2">Govt. Higher Secondary School Chak Bedi, District Pakpattan</p>
+
+                                    <div class="w-24 h-24 m-auto mt-3">
+                                        @if ($student->photo)
+                                        <img src="{{ public_path('storage/' . $student->photo) }}"
+                                            style="width:75px; height:75px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
+                                        @else
+                                        <span style="color: #999;">No Photo</span>
+                                        @endif
+                                    </div>
+
+                                    <div class="font-bold" style="color:green">{{ Str::upper($student->name) }}</div>
+                                    <div class="text-md mt-2">Class {{ $student->section->grade }}-{{ $student->section->name }}, {{ $student->group->name }}</div>
+                                    <div class="text-xs mt-1">{{ date('Y') }}-{{ date('y') + 1 }}</div>
+
+                                    <table width="100%" style="margin-top: 24px;">
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                {!! DNS2D::getBarcodeHTML($student->bform, 'QRCODE', 2, 2) !!}
+                                            </td>
+                                            <td style="text-align: right; padding-right:8px">
+                                                <div style="text-align: center; display: inline-block;">
+                                                    <img src="{{ public_path('images/principal/sign1.png') }}" alt="" width="32px" height="32px">
+                                                    <span style="display: block; border-top: 1px solid #000; width: 80px; margin-top: 5px;"></span>
+                                                    <span>Principal</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
-                                <div class="font-bold" style="color:blue">{{ $student->name }}</div>
-                                <div class="text-md mt-2">Class {{ $student->section->grade }}-{{$student->section->name}}, {{ $student->group->name }}</div>
-                                <div class="text-xs mt-1">{{ date('Y') }}-{{date('y')+1}}</div>
-                                <table width="100%" style="margin-top: 24px;">
-                                    <tr>
-                                        <!-- QR Code on Left -->
-                                        <td style="text-align: left;">
-                                            {!! DNS2D::getBarcodeHTML($student->bform, 'QRCODE', 2, 2) !!}
-                                        </td>
-
-                                        <!-- Signature on Right -->
-                                        <td style="text-align: right; padding-right:8px">
-                                            <div style="text-align: center; display: inline-block;">
-                                                <img src="{{public_path('images/principal/sign.png')}}" alt="" width="32px" height="32px">
-                                                <span style="display: block; border-top: 1px solid #000; width: 80px; margin-top: 5px;"></span>
-                                                <span>Principal</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
                             </div>
                         </td>
 
-                        @if($i%$numOfCardsPerRow==$numOfCardsPerRow-1)
-                    </tr>@endif
+                        @if($i % $numOfCardsPerRow == $numOfCardsPerRow - 1)
+                    </tr>
+                    @endif
                     @php $i++; @endphp
                     @endforeach
                 </tbody>
             </table>
-
+        </div>
     </main>
 
     <script type="text/php">
-        if (isset($pdf) ) {
+        if (isset($pdf)) {
             $x = 285;
             $y = 20;
             $text = "{PAGE_NUM} of {PAGE_COUNT}";
             $font = $fontMetrics->get_font("helvetica", "bold");
             $size = 6;
-            $color = array(0,0,0);
-            $word_space = 0.0;  //  default
-            $char_space = 0.0;  //  default
-            $angle = 0.0;   //  default
-            $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
+            $color = [0, 0, 0];
+            $pdf->page_text($x, $y, $text, $font, $size, $color);
         }
     </script>
-
 </body>
 
 </html>

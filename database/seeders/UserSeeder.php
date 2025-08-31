@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        $user->assignRole(['teacher', 'librarian']);
+        $user->assignRole(['teacher', 'library']);
         Profile::create([
             'user_id' => $user->id,
             'name' => 'Muhammad Ittfaq',
