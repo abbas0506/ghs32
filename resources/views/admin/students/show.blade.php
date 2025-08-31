@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('page-content')
 <div class="responsive-container">
-    <h1>{{$section->roman()}} / Student </h1>
+    <h1>{{ $section->section->name }} / Student </h1>
     <div class="container md:w-2/3 mx-auto mt-12">
         <div class="content-section relative">
             <a href="{{route('admin.section.students.index',$section)}}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
@@ -13,7 +13,7 @@
                     <div class="grid grid-cols-2 gap-x-4 gap-y-1">
                         <!-- <div></div> -->
                         <label for="">Class</label>
-                        <div>{{$student->section?->roman()}}</div>
+                        <div>{{$student->section->name}}</div>
                         <label>Roll No</label>
                         <div>{{$student->rollno}}</div>
                         <label>B Form</label>
