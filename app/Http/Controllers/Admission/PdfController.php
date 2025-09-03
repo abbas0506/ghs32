@@ -48,7 +48,7 @@ class PdfController extends Controller
 
     public function printObjections()
     {
-        $applicationsHavingObjection = Application::whereNotNull('objection')->get();
+        $applicationsHavingObjection = Application::where('status', 'rejected')->get();
         $pdf = PDF::loadview('admission.pdf.objections', compact('applicationsHavingObjection'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = "objections.pdf";

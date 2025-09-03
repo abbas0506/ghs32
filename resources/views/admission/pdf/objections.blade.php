@@ -99,7 +99,7 @@ $roman = config('global.romans');
                         <td>{{$application->obtained_marks}}</td>
                         <td>{{$application->phone}}</td>
                         <td>{{$application->amount_paid}}</td>
-                        <td>{{$application->objection}}</td>
+                        <td>{{$application->rejection_note}}</td>
                     </tr>
                     @php $i++; @endphp
                     @endforeach

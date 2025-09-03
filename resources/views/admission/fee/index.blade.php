@@ -77,7 +77,8 @@
         var str = 0;
         $('.tr').each(function() {
             if (!(
-                    $(this).children().eq(0).prop('outerText').toLowerCase().includes(searchtext)
+                    $(this).children().eq(0).prop('outerText').toLowerCase().includes(searchtext) ||
+                    $(this).children().eq(2).prop('outerText').toLowerCase().includes(searchtext)
                 )) {
                 $(this).addClass('hidden');
             } else {

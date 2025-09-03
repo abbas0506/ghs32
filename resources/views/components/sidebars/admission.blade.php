@@ -2,18 +2,8 @@
     <div class="flex justify-center items-center h-24 mt-6">
         <img src="{{asset('images/logo/app_logo_transparent.png')}}" alt="logo" class="w-20">
     </div>
-    <div class="mt-8 font-bold text-center text-orange-300 uppercase tracking-wider">Teacher Panel</div>
-    <label class="text-xs text-center text-teal-600">GHSS Chak Bedi, Pakpattan</label>
-
-    @if(Auth::user()->roles->count()>1)
-    <div class="grid gap-2 mt-4 text">
-        @foreach(Auth::user()->roles as $role)
-        @if($role->name!='admission')
-        <a href="{{ url('switch/as',$role->name) }}" class="btn-teal text-xs font-normal text-center rounded">Switch to {{ $role->name }} </a>
-        @endif
-        @endforeach
-    </div>
-    @endif
+    <div class="mt-8 font-bold text-center text-orange-300 uppercase tracking-wider">Admission</div>
+    <hr class="border-teal-600 border-2 rounded-full mt-3 w-1/2 mx-auto">
 
     <div class="mt-12">
         <ul class="grid gap-y-4 font-medium">
@@ -40,18 +30,6 @@
                 <a href="{{ route('admission.rejections.index') }}" class="flex items-center">
                     <i class="bi-file-earmark-excel"></i>
                     <span class="ml-3">Rejection List</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admission.sections.index') }}" class="flex items-center">
-                    <i class="bi-diagram-3"></i>
-                    <span class="ml-3">Sections</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admission.cards.index') }}" class="flex items-center">
-                    <i class="bi-person-badge"></i>
-                    <span class="ml-3">Student Cards</span>
                 </a>
             </li>
             <li>

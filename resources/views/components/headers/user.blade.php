@@ -5,6 +5,13 @@
                 <img alt="logo" src="{{asset('images/logo/app_logo_transparent.png')}}" class="w-10 h-8">
             </a>
             <div class="text-base font-semibold">GHSS-CB</div>
+            <select id="roleSwitcher" class="ml-3 text-sm border-none focus:outline-none focus:ring-0 hover:cursor-pointer">
+                @if(Auth::user()->roles->count()>1)
+                @foreach(Auth::user()->roles as $role)
+                <option value="{{ url('switch/as',$role->name) }}" class="ml-3" @selected($role->name==session('role'))>{{ ucfirst($role->name) }} </option>
+                @endforeach
+                @endif
+            </select>
         </div>
         <div id=" current-user-area" class="flex space-x-3 items-center justify-center relative">
             <label for="toggle-current-user-dropdown" class="hidden md:flex items-center">
@@ -15,5 +22,12 @@
             </div>
         </div>
     </div>
-
 </header>
+<script>
+    document.getElementById("roleSwitcher").addEventListener("change", function() {
+        const url = this.value;
+        if (url) {
+            window.location.href = url; // Redirect to selected role’s page
+        }
+    });
+</script>
