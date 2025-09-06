@@ -60,7 +60,7 @@
                         <td class="text-left"><a href="" class="link">{{ $student->name }}</a></td>
                         <td class="text-left">{{ $student->father_name}}</td>
                         <td>{{ $student->group->name}}</td>
-                        <td><img src="{{ asset('storage/' . $student->photo) }}" alt="photo" width="32" height="32" class="rounded-lg mx-auto"></td>
+                        <td><img src="{{ asset('storage/' . $student->photo) }}" alt="photo" class="rounded mx-auto w-8 h-8"></td>
                         <td><input type="checkbox" class="w-4 h-4 rounded" name="student_ids_array[]" value="{{ $student->id }}"></td>
                     </tr>
                     @endforeach
