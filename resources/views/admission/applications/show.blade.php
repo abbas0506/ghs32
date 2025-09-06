@@ -25,7 +25,7 @@
         </div>
         <div class="absolute top-2 right-2">
             <div class="flex items-center justify-center space-x-2">
-                @if($application->status == 'pending')
+                @if($application->status != 'admitted')
                 <div class="flex w-8 h-8 rounded-full border justify-center items-center">
                     <form action="{{route('admission.applications.destroy',$application)}}" method="post" onsubmit="return confirmDel(event)">
                         @csrf
@@ -33,10 +33,11 @@
                         <button><i class="bx bx-trash text-red-600"></i></button>
                     </form>
                 </div>
-                @endif
+
                 <div class="flex w-8 h-8 rounded-full border justify-center items-center">
                     <a href="{{route('admission.applications.edit',$application)}}"><i class="bx bx-pencil text-green-600"></i></a>
                 </div>
+                @endif
                 <div class="flex w-8 h-8 rounded-full border justify-center items-center">
                     <a href="{{ route('admission.applications.index')}}"><i class="bi-x-lg"></i></a>
                 </div>

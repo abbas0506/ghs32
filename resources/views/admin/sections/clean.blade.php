@@ -2,7 +2,7 @@
 @section('page-content')
 
 <div class="custom-container">
-    <h1>Move/Export Students</h1>
+    <h1>Clean Section</h1>
     <div class="bread-crumb">
         <a href="{{url('admin')}}">Dashoboard</a>
         <div>/</div>
@@ -11,7 +11,7 @@
         <div>{{$section->fullName()}}</div>
     </div>
 
-    <form action="{{ route('admin.sections.export.post') }}" method="post">
+    <form action="{{ route('admin.sections.clean.post', $section) }}" method="post" onsubmit="return confirmDel(event)">
         @csrf
 
         <!-- search -->
@@ -26,15 +26,6 @@
         @else
         <x-message></x-message>
         @endif
-
-        <div class="mt-4 w-full md:w-1/3">
-            <label for="">Export To</label>
-            <select name="export_section_id" id="" class="custom-input-borderless py-1">
-                @foreach($exportSections as $exSec)
-                <option value="{{ $exSec->id }}">{{ $exSec->grade }}-{{ $exSec->name }}</option>
-                @endforeach
-            </select>
-        </div>
 
         <div class="overflow-x-auto bg-white w-full mt-8">
 
@@ -67,10 +58,50 @@
                 </tbody>
             </table>
         </div>
-        <button type="submit" class="btn-blue float-right mt-5 rounded py-2">Move / Export</button>
+        <button type="submit" class="btn-red float-right mt-5 rounded py-2">Remove/Clean</button>
     </form>
 </div>
-<script>
+
+<script type="text/javascript">
+    function confirmDel(event) {
+        event.preventDefault(); // prevent form submit
+        var form = event.target; // storing the form
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                form.submit();
+            }
+        })
+    }
+
+    function confirmClean(event) {
+        event.preventDefault(); // prevent form submit
+        var form = event.target; // storing the form
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You are going to clean this class!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                form.submit();
+            }
+        })
+    }
+
+
     function search(event) {
         var searchtext = event.target.value.toLowerCase();
         var str = 0;

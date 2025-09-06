@@ -84,7 +84,7 @@
             <img src="{{ url(asset('images/logo/app_logo_transparent.png')) }}" alt="" class="absolute top-2 md:top-8 left-2 md:left-8 w-16">
             <div class="flex flex-col flex-1 justify-center items-center text-center">
                 <h2 class="txt-lg font-bold tracking-wider"> ADMISSION FORM</h2>
-                <h2 class="text-sm font-semibold">Part I - Session 2025-27</h2>
+                <h2 class="text-sm font-semibold">Part I - Session {{ date('Y')}}</h2>
                 <p class="text-sm"> Govt. Higher Seconary School Chakbedi Pakpattan</p>
                 <!-- <p>Part I Session 2025-27 </p> -->
             </div>
@@ -137,7 +137,7 @@
                     </div>
 
                     <div>
-                        <label for="">BForm (ب فارم)</label>
+                        <label for="">Form-B (ب فارم)</label>
                         <input type="text" name="bform" id='bform' class="custom-input fancy-focus cnic" placeholder="00000 - 0000000- 0" required>
                     </div>
                     <div>

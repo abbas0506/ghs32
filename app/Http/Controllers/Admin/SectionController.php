@@ -87,19 +87,33 @@ class SectionController extends Controller
         }
     }
 
-    // remove all students
-    public function clean(Request $request, $sectionId)
+    public function clean($id)
     {
         //
-        $model = Section::findOrFail($sectionId);
+        $section = Section::findOrFail($id);
+        return view('admin.sections.clean', compact('section'));
+    }
+    // remove all students
+    public function postClean(Request $request, $sectionId)
+    {
+        //
+        $request->validate([
+            'student_ids_array' => 'required',
+        ]);
+
+
         try {
-            $model->students()->delete();
-            return redirect()->back()->with('success', 'Successfully deleted');
+            $studentIdsArray = array();
+            $studentIdsArray = $request->student_ids_array;
+            // Bulk removal
+            Student::whereIn('id', $studentIdsArray)->delete();
+            return redirect()->back()->with('success', 'Students removed successfully!');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
         }
     }
+
 
     public function export($id)
     {

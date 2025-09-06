@@ -5,7 +5,11 @@
 <div class="custom-container">
     <h2>Import Students</h2>
     <div class="bread-crumb">
-        <a href="{{url('admin')}}">Cancel & Go Back</a>
+        <a href="{{url('admin')}}">Dashoboard</a>
+        <div>/</div>
+        <a href="{{route('admin.sections.index')}}">Sections</a>
+        <div>/</div>
+        <div>{{$section->fullName()}}</div>
     </div>
 
     <div class="content-section relative  p-5 md:p-12">

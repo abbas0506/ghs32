@@ -127,7 +127,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('grade.sections', GradeSectionController::class);
         Route::resource('section.lecture.allocations', AllocationController::class);
 
-        Route::post('sections/{section}/clean', [AdminSectionController::class, 'clean'])->name('sections.clean');
+        Route::get('sections/{section}/clean', [AdminSectionController::class, 'clean'])->name('sections.clean');
+        Route::post('sections/{section}/clean', [AdminSectionController::class, 'postClean'])->name('sections.clean.post');
         Route::resource('section.students', SectionStuedentsController::class);
         Route::resource('section.cards', SectionCardController::class);
         Route::get('section/student-cards/print', [SectionCardController::class, 'print'])->name('section.cards.print');

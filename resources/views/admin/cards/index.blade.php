@@ -45,26 +45,23 @@
             <table class="table-fixed borderless w-full">
                 <thead>
                     <tr class="">
-                        <th class="w-8 py-2"><input type="checkbox" id='chkAll' class="rounded" onclick="checkAll()"></th>
                         <th class="w-8">#</th>
                         <th class="w-40 text-left">Student</th>
                         <th class="w-40 text-left">Father</th>
-                        <th class="w-40">B Form</th>
+                        <th class="w-16">Group</th>
+                        <th class="w-24">Photo</th>
+                        <th class="w-8 py-2"><input type="checkbox" id='chkAll' class="rounded" onclick="checkAll()"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($section->students as $student)
                     <tr class="tr text-sm border-b">
-                        <td>
-                            <!-- <div class="flex items-center justify-center"> -->
-                            <input type="checkbox" class="w-4 h-4 rounded" name="student_ids_array[]" value="{{ $student->id }}">
-                            <!-- </div> -->
-                        </td>
                         <td>{{ $student->rollno }}</td>
                         <td class="text-left"><a href="" class="link">{{ $student->name }}</a></td>
                         <td class="text-left">{{ $student->father_name}}</td>
-                        <td>{{ $student->bform }}</td>
-
+                        <td>{{ $student->group->name}}</td>
+                        <td><img src="{{ asset('storage/' . $student->photo) }}" alt="photo" width="32" height="32" class="rounded-lg mx-auto"></td>
+                        <td><input type="checkbox" class="w-4 h-4 rounded" name="student_ids_array[]" value="{{ $student->id }}"></td>
                     </tr>
                     @endforeach
                 </tbody>

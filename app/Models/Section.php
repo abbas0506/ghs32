@@ -15,6 +15,10 @@ class Section extends Model
         'incharge_id',
     ];
 
+    public function fullName()
+    {
+        return $this->grade . "-" . $this->name;
+    }
     public function grade()
     {
         return $this->belongsTo(Grade::class);

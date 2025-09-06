@@ -41,6 +41,7 @@ class Student extends Model
     ];
 
     protected $casts = [
+        'dob' => 'date',   // Cast as Carbon date
         'admission_date' => 'date',   // Cast as Carbon date
     ];
     public function section()

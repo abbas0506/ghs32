@@ -51,7 +51,7 @@
                 </li>
             </ul>
 
-            <div class="text-right mt-12">
+            <!-- <div class="text-right mt-12">
                 <h1 class="text-xl font-bold text-teal-700 drop-shadow-lg">داخلہ شیڈول</h1>
             </div>
             <div class="overflow-x-auto mt-6">
@@ -67,7 +67,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div> -->
             <!-- Buttons -->
             <div dir='ltr' class="font-sans flex justify-center space-x-4 my-10">
                 <a href="/" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded shadow">
@@ -101,7 +101,7 @@
 
         <!-- Last date -->
         <div class="flex justify-center">
-            <h2 class="text-red-600 font-bold text-md">Last Date : Aug 27, 2025</h2>
+            <h2 class="text-red-600 font-bold text-md">Last Date : Sep 10, 2025</h2>
         </div>
     </div>
 </div>

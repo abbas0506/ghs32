@@ -1,56 +1,239 @@
 @extends('layouts.admin')
+
 @section('page-content')
+<style>
+    .photo-box {
+        width: 150px;
+        height: 150px;
+        border: 2px dashed #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #aaa;
+        font-size: 18px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .photo-upload-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .custom-file-upload {
+        background-color: #007bff;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
+        transition: background-color 0.3s;
+    }
+
+    .custom-file-upload:hover {
+        background-color: #0056b3;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+</style>
 <div class="custom-container">
-    <h1>{{$section->roman()}} / Edit Student </h1>
-    <div class="bread-crumb">
-        <a href="{{url('admin')}}">Dashoboard</a>
-        <div>/</div>
-        <a href="{{route('admin.sections.index')}}">Sections</a>
-        <div>/</div>
-        <a href="{{route('admin.section.students.index', $section)}}">{{$section->roman()}}</a>
-        <div>/</div>
-        <div>Students / Edit</div>
-    </div>
-
-    <div class="content-section relative">
-        <!-- close button -->
-        <a href="{{ route('admin.section.students.index', $section) }}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>
-
-        <div class="w-full md:w-3/4 mx-auto mt-8">
-            <!-- page message -->
-            @if($errors->any())
-            <x-message :errors='$errors'></x-message>
-            @else
-            <x-message></x-message>
-            @endif
-
-            <form action="{{route('admin.section.students.update', [$section, $student])}}" method='post' class="mt-4" onsubmit="return validate(event)">
-                @csrf
-                @method('PATCH')
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label>Name *</label>
-                        <input type="text" name='name' class="custom-input" placeholder="Type here" value="{{ $student->name }}">
-                    </div>
-                    <div>
-                        <label>Father</label>
-                        <input type="text" name='father_name' class="custom-input" placeholder="Type here" value="{{ $student->father_name }}">
-                    </div>
-                    <div class="">
-                        <label>Bform *</label>
-                        <input type="text" name='bform' class="custom-input" placeholder="Type here" value="{{ $student->bform }}">
-                    </div>
-                    <div class="">
-                        <label>Roll No *</label>
-                        <input type="text" name='rollno' class="custom-input" placeholder="Type here" value="{{ $student->rollno }}">
-                    </div>
-                </div>
-                <div class="text-right mt-8">
-                    <button type="submit" class="btn-teal rounded p-2">Update Now</button>
-                </div>
-            </form>
-
+    <!-- Title     -->
+    <h1>Edit Student</h1>
+    <div class="flex items-center">
+        <div class="flex-1">
+            <div class="bread-crumb">
+                <a href="{{ url('/') }}">Dashboard</a>
+                <div>/</div>
+                <a href="{{ route('admission.sections.index') }}">Sections</a>
+                <div>/</div>
+                <a href="{{ route('admission.sections.show', $section) }}">{{ $section->fullName() }}</a>
+                <div>/</div>
+                <div>{{ $student->rollno }}</div>
+                <div>/</div>
+                <div>Edit</div>
+            </div>
         </div>
     </div>
+    <!-- page message -->
+    @if($errors->any())
+    <x-message :errors='$errors'></x-message>
+    @else
+    <x-message></x-message>
+    @endif
+
+    <div class="w-full md:w-4/5 bg-slate-100 mx-auto p-8 mt-8 shadow-lg">
+        <form action="{{route('admin.section.students.update', [$section, $student])}}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+            <!-- student info -->
+            <div class="grid md:grid-cols-3 gap-4">
+                <h1 class="md:col-span-2">{{ $student->section->fullName() }} ({{ $student->rollno }}) <label for=""><i class="bi-clock ml-2"></i> {{ $student->created_at }}</label></h1>
+                <div class="photo-upload-wrapper">
+                    <div class="photo-box" id="photoPreview">
+                        @if($student->photo) <!-- adjust $user or $student as needed -->
+                        <img src="{{ asset('storage/' . $student->photo) }}"
+                            alt="Current Photo"
+                            id="photoImage"
+                            class="rounded" width="100" height="100">
+                        @else
+                        Photo
+                        @endif
+                    </div>
+                    <!-- Custom Upload Button -->
+                    <label for="photo" class="custom-file-upload">Upload Your Photo</label>
+                    <input type="file" id="photo" name="photo" accept="image/*" onchange="previewSelectedPhoto(event)">
+                    <label id="photo-error" class="text-red-500 mt-1 hidden">File size exceeds 1MB.</label>
+                </div>
+                <div>
+                    <label for="">Group</label>
+                    <select name="group_id" class="custom-input">
+                        @foreach($groups as $group)
+                        <option value="{{ $group->id }}" @selected($group->id == $student->group_id)>{{ $group->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="md:col-span-3">
+                    <label for="">Student Name</label>
+                    <input type="text" name="name" class="custom-input" placeholder="Student name" value="{{ $student->name }}">
+                </div>
+                <div>
+                    <label for="">Date of Birth</label>
+                    <input type="date" name="dob" class="custom-input" placeholder="Date of birth" value="{{ optional($student->dob)->format('Y-m-d') }}">
+                </div>
+                <div>
+                    <label for="">Form-B</label>
+                    <input type="text" name="bform" class="custom-input" placeholder="B Form" value="{{ $student->bform }}">
+                </div>
+                <div>
+                    <label for="">Phone No</label>
+                    <input type="text" name="phone" class="custom-input" placeholder="Phone No." value="{{ $student->phone }}">
+                </div>
+                <div class="md:col-span-2">
+                    <label for="">Address</label>
+                    <input type="text" name="address" class="custom-input" placeholder="Address" value="{{ $student->address }}">
+                </div>
+
+                <div>
+                    <label for="id_mark">Identification Mark (شناختی علامت)</label>
+                    <input type="text" name="id_mark" class="custom-input fancy-focus" placeholder="Identification mark" value="{{ $student->id_mark }}" required>
+                </div>
+
+                <div>
+                    <label for="caste">Caste (ذات)</label>
+                    <select name="caste" class="custom-input fancy-focus" required>
+                        @foreach (config('enums.castes') as $value => $label)
+                        <option value="{{ $value }}" @selected($student->caste == $value)>
+                            {{ $label }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <label for="is_orphan"> Are you orphan (یتیم)? </label>
+                    <select name="is_orphan" class="custom-input fancy-focus" required>
+                        <option value="0" @selected($student->is_orphan == 0)>No</option>
+                        <option value="1" @selected($student->is_orphan == 1)>Yes</option>
+                    </select>
+                </div>
+                <div class="">
+                    <label for="">Father Name</label>
+                    <input type="text" name="father_name" class="custom-input" placeholder="Father name" value="{{ $student->father_name }}">
+                </div>
+                <div class="">
+                    <label for="">Mother Name</label>
+                    <input type="text" name="mother_name" class="custom-input" placeholder="Mother name" value="{{ $student->mother_name }}">
+                </div>
+                <div>
+                    <label for="father_cnic">Father/Guardian's CNIC</label>
+                    <input type="text" name="father_cnic" class="custom-input fancy-focus" placeholder="Guardian cnic" value="{{ $student->father_cnic }}" required>
+                </div>
+
+                <div>
+                    <label for="mother_cnic">Mother's CNIC</label>
+                    <input type="text" name="mother_cnic" class="custom-input fancy-focus" placeholder="Mother cnic" value="{{ $student->mother_cnic }}" required>
+                </div>
+                <div>
+                    <label for="profession">Profession</label>
+                    <select name="profession" class="custom-input fancy-focus" required>
+                        @foreach (config('enums.professions') as $value => $label)
+                        <option value="{{ $value }}" @selected($student->profession == $value)>
+                            {{ $label }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <label for="income">Income</label>
+                    <select name="income" class="custom-input fancy-focus" required>
+                        @foreach (config('enums.incomes') as $value => $label)
+                        <option value="{{ $value }}" @selected($student->income == $value)>
+                            {{ $label }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+
+            </div>
+            <div class="text-center mt-8">
+                <button class="btn-teal rounded py-3">Update student</button>
+            </div>
+        </form>
+    </div>
+
 </div>
+@endsection
+@section('script')
+<script>
+    function previewSelectedPhoto(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const photoBox = document.getElementById('photoPreview');
+            photoBox.style.backgroundImage = `url('${reader.result}')`;
+            photoBox.style.backgroundSize = 'cover';
+            photoBox.style.backgroundPosition = 'center';
+            photoBox.textContent = ''; // Remove "Photo" placeholder
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+    // show error if file size exceeds 1MB
+    const form = document.getElementById('studentForm');
+    const photoInput = document.getElementById('photo');
+    const errorText = document.getElementById('photo-error');
+
+    photoInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file && file.size > 1024 * 1024) {
+            errorText.classList.remove('hidden');
+        } else {
+            errorText.classList.add('hidden');
+        }
+    });
+
+    form.addEventListener('submit', function(e) {
+        const file = photoInput.files[0];
+
+        if (file && file.size > 1024 * 1024) { // 1MB = 1024 * 1024 bytes
+            e.preventDefault(); // stop form submission
+            errorText.classList.remove('hidden'); // show error
+            Swal.fire({
+                title: "Warning",
+                text: "Photo size exceeds 1MB",
+                icon: "warning",
+                showConfirmButton: false,
+                timer: 1500
+
+            });
+        } else {
+            errorText.classList.add('hidden'); // hide error if valid
+        }
+    });
+</script>
 @endsection
