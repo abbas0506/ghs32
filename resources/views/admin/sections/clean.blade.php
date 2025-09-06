@@ -8,7 +8,9 @@
         <div>/</div>
         <a href="{{route('admin.sections.index')}}">Sections</a>
         <div>/</div>
-        <div>{{$section->fullName()}}</div>
+        <a href="{{route('admin.sections.show', $section)}}">{{$section->fullName()}}</a>
+        <div>/</div>
+        <div>Clean</div>
     </div>
 
     <form action="{{ route('admin.sections.clean.post', $section) }}" method="post" onsubmit="return confirmDel(event)">
@@ -47,7 +49,7 @@
                         <td class="text-left"><a href="{{route('admin.section.students.show', [$section, $student])}}" class="link">{{$student->name}}</a></td>
                         <td class="text-left">{{$student->father_name}}</td>
                         <td>{{ $student->group->name }}</td>
-                        <td><img src="{{ asset('storage/' . $student->photo) }}" alt="photo" class="rounded-lg mx-auto w-8 h-8"></td>
+                        <td><img src="{{ asset('storage/' . $student->photo) }}" alt="photo" class="rounded mx-auto w-8 h-8"></td>
                         <td>
                             <div class="flex items-center justify-center">
                                 <input type="checkbox" class="w-4 h-4 rounded" name="student_ids_array[]" value="{{ $student->id }}">

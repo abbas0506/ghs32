@@ -9,7 +9,9 @@
         <div>/</div>
         <a href="{{route('admin.sections.index')}}">Sections</a>
         <div>/</div>
-        <div>{{$section->fullName()}}</div>
+        <a href="{{route('admin.sections.show', $section)}}">{{$section->fullName()}}</a>
+        <div>/</div>
+        <div>Import</div>
     </div>
 
     <div class="content-section relative  p-5 md:p-12">
