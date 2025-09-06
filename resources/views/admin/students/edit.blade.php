@@ -51,9 +51,9 @@
             <div class="bread-crumb">
                 <a href="{{ url('/') }}">Dashboard</a>
                 <div>/</div>
-                <a href="{{ route('admission.sections.index') }}">Sections</a>
+                <a href="{{ route('admin.sections.index') }}">Sections</a>
                 <div>/</div>
-                <a href="{{ route('admission.sections.show', $section) }}">{{ $section->fullName() }}</a>
+                <a href="{{ route('admin.sections.show', $section) }}">{{ $section->fullName() }}</a>
                 <div>/</div>
                 <div>{{ $student->rollno }}</div>
                 <div>/</div>
