@@ -55,7 +55,7 @@
                     <td class="text-left"><a href="{{route('admin.section.students.show', [$section, $student])}}" class="link">{{$student->name}}</a></td>
                     <td class="text-left">{{$student->father_name}}</td>
                     <td>{{$student->group->name}}</td>
-                    <td><img src="{{ asset('storage/' . $student->photo) }}" alt="photo" width="32" height="32" class="rounded-lg mx-auto"></td>
+                    <td><img src="{{ asset('storage/' . $student->photo) }}" alt="photo" class="rounded-lg mx-auto w-8"></td>
                 </tr>
                 @endforeach
             </tbody>
