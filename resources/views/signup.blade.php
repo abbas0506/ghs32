@@ -2,9 +2,9 @@
 @section('title', 'Signup')
 @section('body')
 
-<div class="grid grid-cols-1 md:h-screen place-items-center bg-white p-5">
+<div class="grid min-h-screen place-items-center p-5 bg-gradient-to-b from-blue-50 via-white to-blue-100">
 
-    <div><img src="{{ url('images/small/key.png') }}" alt="key" class="w-32"></div>
+    <!-- <div><img src="{{ url('images/small/key.png') }}" alt="key" class="w-32"></div> -->
     <div class="grid place-items-center w-full md:w-1/2 mx-auto">
 
         <h2 class="text-4xl font-bold">SIGN UP</h2>

@@ -8,6 +8,7 @@ use App\Models\Student;
 use Exception;
 use Illuminate\Http\Request;
 use App\Imports\StudentImport;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SectionController extends Controller
@@ -173,5 +174,66 @@ class SectionController extends Controller
         } catch (Exception $ex) {
             return redirect()->back()->withErrors($ex->getMessage());
         }
+    }
+    public function resetIndex(Section $section)
+    {
+        return view('admin.sections.reset', compact('section'));
+    }
+
+    public function resetAdmNo(Request $request, $id)
+    {
+
+        // refresh serial no starting from the start value
+        $request->validate([
+            'startvalue' => 'required',
+        ]);
+
+        $srNo = $request->startvalue;
+
+        DB::beginTransaction();
+        try {
+            $section = Section::findOrFail($id);
+            $students = $section->students->sortByDesc('score');
+
+            foreach ($students as $student) {
+                $student->admission_no = $srNo;
+                $student->save();
+                $srNo++;
+            }
+            DB::commit();
+            return redirect()->route('admin.sections.show', $section)->with('success', 'Successfully cleaned');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors($e->getMessage());
+            // something went wrong
+        }
+    }
+
+    public function resetRollNo($id)
+    {
+        //refresh section rollno
+
+        $srNo = 1;
+        DB::beginTransaction();
+        try {
+            $section = Section::findOrFail($id);
+            $students = $section->students->sortByDesc('score')->sortBy('group_id');
+
+            foreach ($students as $student) {
+                $student->rollno = $srNo;
+                $student->save();
+                $srNo++;
+            }
+            DB::commit();
+            return redirect()->route('admin.sections.show', $section)->with('success', 'Successfully re-ordered');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors($e->getMessage());
+            // something went wrong
+        }
+    }
+    public function print(Section $section)
+    {
+        return view('admin.sections.print', compact('section'));
     }
 }

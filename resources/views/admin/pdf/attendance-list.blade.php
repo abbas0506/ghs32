@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of Students with Sr No.</title>
+    <title>Attendance List</title>
     <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
     <style>
         @page {
@@ -32,7 +32,7 @@
             /* padding-bottom: 0px;
             padding-top: 0px; */
             border: 0.5px solid;
-            line-height: 30px;
+            line-height: 14px;
         }
     </style>
 </head>
@@ -52,7 +52,7 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-xl font-bold">List of Students with Sr No. {{ $section->grade->grade }}-{{ $section->name }}</td>
+                            <td class="text-center text-xl font-bold">Attendance List {{ $section->fullName() }}</td>
                         </tr>
                         <tr>
                             <td class="text-center text-sm">Govt. Higher Secondary School Chak Bedi, Pakpattan</td>
@@ -79,15 +79,20 @@ $roman = config('global.romans');
                 <thead>
                     <tr style="background-color: #bbb;">
                         <th class="w-8">Roll#</th>
-                        <th class="w-12">Serial</th>
                         <th>Name</th>
                         <th>Father</th>
                         <th>Group</th>
-                        <th>Bform</th>
-                        <th>Phone</th>
-                        <th class="w-16">Caste</th>
-                        <th class="w-16">Birth Date</th>
-                        <th class="w-32">Address</th>
+                        <th>Photo</th>
+                        <th class="border w-12"></th>
+                        <th class="border w-12"></th>
+                        <th class="border w-12"></th>
+                        <th class="border w-12"></th>
+                        <th class="border w-12"></th>
+                        <th class="border w-12"></th>
+                        <th class="border w-12"></th>
+                        <th class="border w-12"></th>
+                        <th class="border w-12"></th>
+                        <th class="border w-12"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,18 +100,32 @@ $roman = config('global.romans');
                     @foreach($section->students->sortBy('rollno') as $student)
                     <tr class="text-base">
                         <td>{{$student->rollno}}</td>
-                        <td>{{$student->admission_no}}</td>
                         <td style="text-align: left !important; padding:2px 6px;">{{$student->name}}</td>
                         <td style="text-align: left !important; padding:2px 6px;">{{$student->father_name}}</td>
                         <td>{{$student->group->name}}</td>
-                        <td>{{$student->bform}}</td>
-                        <td>{{$student->phone}}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            @if ($student->photo)
+                            <img src="{{ public_path('storage/' . $student->photo) }}"
+                                style="width:32px; height:32px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
+                            @else
+                            <span style="color: #999;">No Photo</span>
+                            @endif
+                        </td>
+                        <td class="border"></td>
+                        <td class="border"></td>
+                        <td class="border"></td>
+                        <td class="border"></td>
+                        <td class="border"></td>
+                        <td class="border"></td>
+                        <td class="border"></td>
+                        <td class="border"></td>
+                        <td class="border"></td>
+                        <td class="border"></td>
+
                     </tr>
                     @php $i++; @endphp
                     @endforeach
+
                 </tbody>
             </table>
 
@@ -114,7 +133,7 @@ $roman = config('global.romans');
 
     <script type="text/php">
         if (isset($pdf) ) {
-            $x = 420;
+            $x = 300;
             $y = 20;
             $text = "{PAGE_NUM} of {PAGE_COUNT}";
             $font = $fontMetrics->get_font("helvetica", "bold");

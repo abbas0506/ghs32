@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Cards</title>
+    <title>Phone List</title>
     <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
     <style>
         @page {
-            margin: 50px 80px 50px 50px;
+            margin: 50px 50px 50px 80px;
         }
 
         .footer {
             position: fixed;
-            bottom: 50px;
+            bottom: 0px;
             left: 30px;
             right: 50px;
             background-color: white;
@@ -27,15 +27,12 @@
 
         .data tr th,
         .data tr td {
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
-            /* border-spacing: 40px;
-            border: 0.5px solid; */
-            /* margin: 20px */
-        }
-
-        .border {
-            border: solid 1px;
+            /* padding-bottom: 0px;
+            padding-top: 0px; */
+            border: 0.5px solid;
+            line-height: 14px;
         }
     </style>
 </head>
@@ -48,28 +45,29 @@ $roman = config('global.romans');
     <main>
         <div class="custom-container">
 
-            <!-- <div class="w-1/2 mx-auto">
+            <div class="w-1/2 mx-auto">
                 <div class="relative">
                     <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/school_logo.png')}}" class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-xl font-bold">Student Cards </td>
+                            <td class="text-center text-xl font-bold">Phone List {{ $section->fullName() }}</td>
                         </tr>
                         <tr>
                             <td class="text-center text-sm">Govt. Higher Secondary School Chak Bedi, Pakpattan</td>
                         </tr>
                     </tbody>
                 </table>
-            </div> -->
+            </div>
+
 
             <!-- table header -->
-            <div>
+            <div class="mt-8">
                 <table class="w-full">
                     <tbody>
                         <tr class="text-xs">
-                            <td class="text-left">Student Cards</td>
+                            <td class="text-left">Total Students: {{ $section->students->count() }}</td>
                             <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
                         </tr>
                     </tbody>
@@ -77,32 +75,35 @@ $roman = config('global.romans');
             </div>
             @php $i=1; @endphp
 
-            @php
-            $i=0;
-            $numOfCardsPerRow=3;
-            @endphp
+            <table class="w-full mt-2 data">
+                <thead>
+                    <tr style="background-color: #bbb;">
+                        <th class="w-8">Roll#</th>
+                        <th>Name</th>
+                        <th>Father</th>
+                        <th>Group</th>
+                        <th>Phone</th>
+                        <th>Photo</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            <table class="table-auto w-full mt-2" cellspacing="20">
-                <tbody class="data">
-                    @foreach($applications as $application)
-                    @if($i%$numOfCardsPerRow==0)<tr class="text-sm">@endif
-                        <td class="p-5">
-                            <div class="border p-3">
-                                <div class="text-base">{{ $application->name }}</div>
-                                <div class="border w-24 h-24 m-auto mt-3"></div>
-                                <div class="mt-3">Session 2024-26</div>
-                                <div class="font-bold text-xl mt-2">{{ $application->group->name }}</div>
-                                <div class="flex flex-col m-auto mt-2">
-                                    <div id='qr' style="margin-left:100px">{!! DNS2D::getBarcodeHTML($application->bform,'QRCODE',3,3) !!}</div>
-                                    <p class="text-xs mt-2">Valid up to: August 2026</p>
-                                    <p class="text-xs mt-2">Govt Higher Secondary School Chak Bedi, Pakpattan</p>
-
-                                </div>
-                            </div>
+                    @foreach($section->students->where('is_orphan',1)->sortBy('rollno') as $student)
+                    <tr class="text-base">
+                        <td>{{$student->rollno}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;">{{$student->name}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;">{{$student->father_name}}</td>
+                        <td>{{$student->group->name}}</td>
+                        <td>{{$student->phone}}</td>
+                        <td>
+                            @if ($student->photo)
+                            <img src="{{ public_path('storage/' . $student->photo) }}"
+                                style="width:32px; height:32px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
+                            @else
+                            <span style="color: #999;">No Photo</span>
+                            @endif
                         </td>
-
-                        @if($i%$numOfCardsPerRow==$numOfCardsPerRow-1)
-                    </tr>@endif
+                    </tr>
                     @php $i++; @endphp
                     @endforeach
                 </tbody>
@@ -112,7 +113,7 @@ $roman = config('global.romans');
 
     <script type="text/php">
         if (isset($pdf) ) {
-            $x = 285;
+            $x = 300;
             $y = 20;
             $text = "{PAGE_NUM} of {PAGE_COUNT}";
             $font = $fontMetrics->get_font("helvetica", "bold");
@@ -124,7 +125,6 @@ $roman = config('global.romans');
             $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
         }
     </script>
-
 </body>
 
 </html>

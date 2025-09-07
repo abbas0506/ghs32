@@ -126,7 +126,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('events', EventController::class);
         Route::resource('grade.sections', GradeSectionController::class);
         Route::resource('section.lecture.allocations', AllocationController::class);
-
+        Route::get('section/{section}/reset-index', [AdminSectionController::class, 'resetIndex'])->name('sections.reset');
+        Route::post('section/{section}/reset-rollno', [AdminSectionController::class, 'resetRollNo'])->name('sections.reset.rollno');
+        Route::post('section/{section}/reset-admission-no', [AdminSectionController::class, 'resetAdmNo'])->name('sections.reset.admno');
         Route::get('sections/{section}/clean', [AdminSectionController::class, 'clean'])->name('sections.clean');
         Route::post('sections/{section}/clean', [AdminSectionController::class, 'postClean'])->name('sections.clean.post');
         Route::resource('section.students', SectionStuedentsController::class);
@@ -156,9 +158,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('test/{t}/section/{s}/report-cards/print', [ReportCardController::class, 'print'])->name('test.section.report-cards.print');
 
 
-        // Route::get('sections/{section}/print/students-list', [PdfController::class, 'printListOfStudents'])->name('sections.print.listOfStudents');
-        // Route::get('sections/{section}/print/attendance-list', [PdfController::class, 'printAttendanceList'])->name('sections.print.attendanceList');
-        // Route::get('sections/{section}/print/serial-list', [PdfController::class, 'printListOfSrNo'])->name('sections.print.listOfSrNo');
+        Route::get('sections/{section}/print', [AdminSectionController::class, 'print'])->name('sections.print');
+        Route::get('sections/{section}/print/phone-list', [PdfController::class, 'printPhoneList'])->name('sections.print.phoneList');
+        Route::get('sections/{section}/print/attendance-list', [PdfController::class, 'printAttendanceList'])->name('sections.print.attendanceList');
+        Route::get('sections/{section}/print/student-detail', [PdfController::class, 'printStudentDetail'])->name('sections.print.studentDetail');
+        Route::get('sections/{section}/print/orphan-list', [PdfController::class, 'printOrphanList'])->name('sections.print.orphanList');
     });
 
     Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {
@@ -173,14 +177,6 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('rejections', RejectionController::class);
         Route::resource('sections', SectionController::class);
         Route::resource('section.students', SectionStudentsController::class);
-
-        // Route::post('sections/{section}/clean', [SectionController::class, 'clean'])->name('sections.clean');
-        // Route::post('sections/{section}/refresh-srno', [SectionController::class, 'refreshSrNo'])->name('sections.refresh.srno');
-        // Route::get('sections/{section}/refresh-rollno', [SectionController::class, 'refreshRollNo'])->name('sections.refresh.rollno');
-
-        // Route::resource('cards', CardController::class);
-        // Route::get('print/cards', [CardController::class, 'print'])->name('cards.print');
-
 
         Route::get('print/fee', [PdfController::class, 'printFee'])->name('print.fee');
         Route::get('print/objections', [PdfController::class, 'printObjections'])->name('print.objections');

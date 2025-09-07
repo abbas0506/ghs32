@@ -27,7 +27,7 @@
 
         .data tr th,
         .data tr td {
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
             border: 0.5px solid;
             line-height: 14px;
@@ -50,7 +50,7 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-xl font-bold">Fee Record XI Session 2024-26</td>
+                            <td class="text-center text-lg font-bold">Fee Record XI ({{ date('Y') }})</td>
                         </tr>
                         <tr>
                             <td class="text-center text-sm">Govt. Higher Secondary School Chak Bedi, Pakpattan</td>
@@ -76,12 +76,12 @@ $roman = config('global.romans');
                 <thead>
                     <tr style="background-color: #bbb;">
                         <th class="w-8">Sr</th>
-                        <th class="w-8">Form#</th>
+                        <th class="w-12">Form#</th>
                         <th>Name</th>
-                        <th>Father</th>
                         <th>Group</th>
                         <th>Marks</th>
                         <th>Fee</th>
+                        <th>Photo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,10 +91,17 @@ $roman = config('global.romans');
                         <td>{{$sr++}}</td>
                         <td>{{$application->rollno}}</td>
                         <td style="text-align: left !important; padding:2px 6px;">{{$application->name}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$application->father_name}}</td>
                         <td>{{$application->group->name}}</td>
                         <td>{{$application->obtained_marks}}</td>
                         <td>{{$application->amount_paid}}</td>
+                        <td>
+                            @if ($application->photo)
+                            <img src="{{ public_path('storage/' . $application->photo) }}"
+                                style="width:32px; height:32px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
+                            @else
+                            <span style="color: #999;">No Photo</span>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
 

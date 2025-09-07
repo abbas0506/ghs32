@@ -1,10 +1,7 @@
 @extends('layouts.basic')
 @section('body')
-<div class="grid grid-cols-1 md:grid-cols-2 md:h-screen place-items-center bg-white p-5">
-    <div>
-        <img src="{{ url('images/small/key.png') }}" alt="lock" class="md:w-full">
-    </div>
-    <div class="text-center w-full md:w-1/2 mx-auto">
+<div class="grid h-screen place-items-center bg-gradient-to-b from-blue-50 via-white to-blue-100 p-5">
+    <div class="text-center w-full md:w-1/3 mx-auto">
         <!-- page message -->
 
         <form action="{{url('login')}}" method="post" class="grid gap-4">
@@ -12,7 +9,7 @@
 
 
             <div>
-                <h2 class="text-4xl font-bold">WELCOME</h2>
+                <h2 class="text-4xl font-bold">LOGIN</h2>
                 <label for="">https://wwww.ghsscb.edu.pk</label>
             </div>
 

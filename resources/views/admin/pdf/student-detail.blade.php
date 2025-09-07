@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fee Paid</title>
+    <title>List of Students with Sr No.</title>
     <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
     <style>
         @page {
-            margin: 50px 80px 50px 50px;
+            margin: 50px 50px 50px 80px;
         }
 
         .footer {
             position: fixed;
-            bottom: 50px;
+            bottom: 0px;
             left: 30px;
             right: 50px;
             background-color: white;
@@ -27,10 +27,12 @@
 
         .data tr th,
         .data tr td {
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
-            /* padding-bottom: 2px; */
+            /* padding-bottom: 0px;
+            padding-top: 0px; */
             border: 0.5px solid;
+            line-height: 16px;
         }
     </style>
 </head>
@@ -50,7 +52,7 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-xl font-bold">Fee Payment</td>
+                            <td class="text-center text-xl font-bold">List of Students {{ $section->fullName() }}</td>
                         </tr>
                         <tr>
                             <td class="text-center text-sm">Govt. Higher Secondary School Chak Bedi, Pakpattan</td>
@@ -65,68 +67,65 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr class="text-xs">
-                            <td class="text-left">Part I, Session {{$session->title()}}</td>
+                            <td class="text-left">Total Students: {{ $section->students->count() }}</td>
                             <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             @php $i=1; @endphp
-            @foreach($session->applications()->feepaid()->get()->sortBy('matric_rollno')->chunk(40) as $chunk)
+
             <table class="w-full mt-2 data">
                 <thead>
                     <tr style="background-color: #bbb;">
-                        <th class="w-8">#</th>
-                        <th>Form #</th>
-                        <th>Name</th>
-                        <th>%</th>
-                        <th>Group</th>
-                        <th>Fee</th>
-                        <th>Fee Date</th>
+                        <th class="w-8">Roll#</th>
+                        <th class="w-12">Adm #</th>
+                        <th>Student Info</th>
+                        <th>Family Info</th>
+                        <th class="w-16">Group</th>
+                        <th class="w-16">Photo</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($chunk as $application)
+                    @foreach($section->students->sortBy('rollno') as $student)
                     <tr class="text-base">
-                        <td>{{$i}}</td>
-                        <td>{{$application->matric_rollno}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$application->name}}</td>
-                        <td>{{round($application->matric_marks/11,0)}} %</td>
-                        <td>{{$application->group->short}}</td>
-                        <td>{{$application->fee}}</td>
-                        <td>{{$application->updated_at->format('d-M-y')}}</td>
+                        <td>{{$student->rollno}}</td>
+                        <td>{{$student->admission_no}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;">
+                            <b>{{ ucwords(strtolower($student->name))}}</b> <br>
+                            {{ $student->dob->format('d-m-Y') }}, {{ $student->bform }}<br>
+                            {{ $student->phone }}<br>
+                            {{ $student->id_mark }}<br>
+                            {{ $student->address }} <br>
+                        </td>
+                        <td style="text-align: left !important; padding:2px 6px;">
+                            <b>{{ ucwords(strtolower($student->father_name))}} </b>(@if($student->is_orphan) G @else F @endif)<br>
+                            {{ $student->father_cnic }} <br>
+                            {{ $student->caste }}, {{ $student->profession }}, {{ $student->income }}<br>
+                            <b>{{ ucwords(strtolower($student->mother_name))}} </b><br>
+                            {{ $student->mother_cnic }} <br>
+                        </td>
+                        <td>{{$student->group->name}}</td>
+                        <td>
+                            @if ($student->photo)
+                            <img src="{{ public_path('storage/' . $student->photo) }}"
+                                style="width:32px; height:32px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
+                            @else
+                            <span style="color: #999;">No Photo</span>
+                            @endif
+                        </td>
                     </tr>
                     @php $i++; @endphp
                     @endforeach
                 </tbody>
             </table>
-            @if($i%40!=1)
-            @break
-            @endif
-            <div class="page-break"></div>
 
-            @endforeach
-            <div class="text-xs mt-1">*The form # is same as matric roll number</div>
     </main>
-
-    <footer class="footer">
-        <div class="mt-8">
-            <table class="w-full">
-                <tbody>
-                    <tr class="text-xs">
-                        <td class="text-left">Total Applications: {{ $session->applications()->feepaid()->count()}}</td>
-                        <td class="text-center">Total Fee: Rs. {{ $session->applications->sum('fee')}} /-</td>
-                        <td class="text-right">Verified by: ______________</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </footer>
 
     <script type="text/php">
         if (isset($pdf) ) {
-            $x = 285;
+            $x = 300;
             $y = 20;
             $text = "{PAGE_NUM} of {PAGE_COUNT}";
             $font = $fontMetrics->get_font("helvetica", "bold");

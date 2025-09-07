@@ -21,12 +21,12 @@
         <a href="{{ route('admin.section.students.create', $section)}}"><i class="bi bi-person-add text-teal-600"></i></a>
         <a href="{{ route('admin.sections.import',$section)}}" class=""><i class="bi bi-file-earmark-plus text-teal-600"></i></a>
         <a href="{{ route('admin.sections.export',$section)}}" class=""><i class="bi bi-arrow-right-square text-teal-600"></i></a>
-        <a href="{{ route('admin.section.lecture.allocations.index',[$section,0]) }}" class=""><i class="bi-clock text-teal-600"></i></a>
+        <a href="{{ route('admin.sections.reset', $section) }}" class=""><i class="bi-repeat-1 text-orange-600"></i></a>
         <a href="{{ route('admin.section.cards.index',$section) }}" class=""><i class="bi-person-badge text-indigo-600"></i></a>
         <a href="{{ route('admin.sections.clean',$section) }}" class=""><i class="bx bx-recycle text-orange-600"></i></a>
+        <a href="{{ route('admin.sections.print',$section) }}" class=""><i class="bi-printer text-teal-600"></i></a>
+        <a href="{{ route('admin.section.lecture.allocations.index',[$section,0]) }}" class=""><i class="bi-clock text-teal-600"></i></a>
     </div>
-
-    <!-- </div> -->
 
     <!-- page message -->
     @if($errors->any())
