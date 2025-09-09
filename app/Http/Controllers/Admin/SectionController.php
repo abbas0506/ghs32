@@ -188,13 +188,18 @@ class SectionController extends Controller
             'startvalue' => 'required',
         ]);
 
+        // reset all existing admission nos.
+        $section = Section::findOrFail($id);
+        Student::whereHas('section', function ($q) use ($section) {
+            $q->where('grade', $section->grade);
+        })->update(['admission_no' => null]);
+
         $srNo = $request->startvalue;
 
         DB::beginTransaction();
         try {
-            $section = Section::findOrFail($id);
-            $students = $section->students->sortByDesc('score');
 
+            $students = $section->students->sortByDesc('score');
             foreach ($students as $student) {
                 $student->admission_no = $srNo;
                 $student->save();
