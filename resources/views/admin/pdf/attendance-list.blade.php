@@ -83,16 +83,16 @@ $roman = config('global.romans');
                         <th>Father</th>
                         <th>Group</th>
                         <th>Photo</th>
-                        <th class="border w-12"></th>
-                        <th class="border w-12"></th>
-                        <th class="border w-12"></th>
-                        <th class="border w-12"></th>
-                        <th class="border w-12"></th>
-                        <th class="border w-12"></th>
-                        <th class="border w-12"></th>
-                        <th class="border w-12"></th>
-                        <th class="border w-12"></th>
-                        <th class="border w-12"></th>
+                        <th class="border w-8"></th>
+                        <th class="border w-8"></th>
+                        <th class="border w-8"></th>
+                        <th class="border w-8"></th>
+                        <th class="border w-8"></th>
+                        <th class="border w-8"></th>
+                        <th class="border w-8"></th>
+                        <th class="border w-8"></th>
+                        <th class="border w-8"></th>
+                        <th class="border w-8"></th>
                     </tr>
                 </thead>
                 <tbody>
