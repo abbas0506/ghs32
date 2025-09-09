@@ -24,7 +24,7 @@ class PdfController extends Controller
     public function printAttendanceList($id)
     {
         $section = Section::findOrFail($id);
-        $pdf = PDF::loadview('admin.pdf.attendance-list', compact('section'))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadview('admin.pdf.attendance-list', compact('section'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = "attendance-list.pdf";
         return $pdf->stream($file);

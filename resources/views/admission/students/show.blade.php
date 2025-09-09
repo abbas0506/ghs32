@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('page-content')
 <div class="responsive-container">
-    <h1>{{$section->roman()}} / Student </h1>
+    <h1>{{$section->fullName()}} / Student </h1>
     <div class="container md:w-2/3 mx-auto mt-12">
         <div class="content-section relative">
             <a href="{{route('admin.section.students.index',$section)}}" class="absolute top-2 right-2 p-2 hover:bg-slate-200 rounded"><i class="bi-x-lg"></i></a>

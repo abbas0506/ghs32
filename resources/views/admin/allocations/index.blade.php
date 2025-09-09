@@ -56,7 +56,7 @@
 
             @foreach($sections as $section)
             <tr>
-                <td class="font-semibold">{{ $section->roman()}}</td>
+                <td class="font-semibold">{{ $section->fullName()}}</td>
                 <td class="">
 
                     <a href="{{route('admin.incharges.edit', $section) }}" class="link">

@@ -3,7 +3,7 @@
 
 
 <div class="custom-container">
-    <h2>Import Students to {{ $section->roman() }}</h2>
+    <h2>Import Students to {{ $section->fullName() }}</h2>
     <div class="bread-crumb">
         <a href="{{url('admin')}}">Cancel & Go Back</a>
     </div>

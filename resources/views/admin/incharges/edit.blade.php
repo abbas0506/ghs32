@@ -24,7 +24,7 @@
     <x-message></x-message>
     @endif
 
-    <h2>Section: {{ $section->roman() }}</h2>
+    <h2>Section: {{ $section->fullName() }}</h2>
     <h2>Current Incharge: {{ $section->incharge?->profile?->name }}</h2>
 
     <div class="divider my-2"></div>

@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 @section('page-content')
 <div class="custom-container">
-    <h1>{{$section->roman()}} / Edit Student </h1>
+    <h1>{{$section->fullName()}} / Edit Student </h1>
     <div class="bread-crumb">
         <a href="{{url('admin')}}">Dashoboard</a>
         <div>/</div>
         <a href="{{route('admin.sections.index')}}">Sections</a>
         <div>/</div>
-        <a href="{{route('admin.section.students.index', $section)}}">{{$section->roman()}}</a>
+        <a href="{{route('admin.section.students.index', $section)}}">{{$section->fullName()}}</a>
         <div>/</div>
         <div>Students / Edit</div>
     </div>

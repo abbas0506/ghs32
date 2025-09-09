@@ -2,7 +2,7 @@
 @section('page-content')
 <div class="custom-container">
     <!-- Title     -->
-    <h1>Section {{ $section->roman() }}</h1>
+    <h1>Section {{ $section->fullName() }}</h1>
     <div class="flex flex-wrap items-center gap-2">
         <div class="flex-1">
             <div class="bread-crumb">

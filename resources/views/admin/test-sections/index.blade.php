@@ -28,7 +28,7 @@
                 @foreach($sections->sortBy('grade') as $section)
                 <tr class="border-b">
                     <td>{{ $loop->index+1 }}</td>
-                    <td>{{ $section->roman() }}</td>
+                    <td>{{ $section->fullName() }}</td>
                     <td>{{$section->students->count()}}</td>
                     <td>
                         <a href="{{route('admin.test.section.result.print',[$test, $section])}}" target="_blank" class="w-16"><i class="bi-printer"></i></a>

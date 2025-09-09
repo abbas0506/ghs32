@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 20);
             $table->unsignedInteger('grade');  //
-            $table->foreignId('incharge_id')->nullable()->constrained('users')->onDelete('set null');
+            // $table->foreignId('incharge_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

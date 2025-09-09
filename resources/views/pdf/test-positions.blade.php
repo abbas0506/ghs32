@@ -62,7 +62,7 @@ $roman = config('global.romans');
                     </tbody>
                 </table>
             </div>
-            <h4 class="mt-8 underline text-center">Class: {{ $section->roman() }}</h4>
+            <h4 class="mt-8 underline text-center">Class: {{ $section->fullName() }}</h4>
 
 
             <table class="table-auto w-full mt-4" cellspacing="0">

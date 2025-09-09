@@ -14,6 +14,12 @@ class Allocation extends Model
         'lecture_no',
         'subject_id',
         'teacher_id',
+        'day1',
+        'day2',
+        'day3',
+        'day4',
+        'day5',
+        'day6',
     ];
 
     public function section()

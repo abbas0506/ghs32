@@ -12,21 +12,17 @@ class Section extends Model
     protected $fillable = [
         'name',    //section label A, B, C
         'grade',
-        'incharge_id',
+        // 'incharge_id',
     ];
 
     public function fullName()
     {
         return $this->grade . "-" . $this->name;
     }
-    public function grade()
-    {
-        return $this->belongsTo(Grade::class);
-    }
 
     public function incharge()
     {
-        return $this->belongsTo(User::class, 'incharge_id');
+        //
     }
 
     public function students()

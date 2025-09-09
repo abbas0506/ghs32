@@ -67,7 +67,7 @@ class TestPositionController extends Controller
 
         $pdf = PDF::loadview('pdf.test-positions', compact('test', 'section', 'sortedResult'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
-        $file = "positions - " . $section->roman() . ".pdf";
+        $file = "positions - " . $section->fullName() . ".pdf";
         return $pdf->stream($file);
     }
 }

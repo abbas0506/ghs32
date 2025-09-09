@@ -91,7 +91,7 @@ $roman = config('global.romans');
                     <tr>
                         <td class="text-left">Class</td>
                         <td>:</td>
-                        <td class="text-left">{{ $section->roman() }}</td>
+                        <td class="text-left">{{ $section->fullName() }}</td>
                     </tr>
                     <tr>
                         <td class="text-left">Roll No.</td>

@@ -2,13 +2,13 @@
 @section('page-content')
 
 <div class="custom-container">
-    <h1>{{$section->roman()}}</h1>
+    <h1>{{$section->fullName()}}</h1>
     <div class="bread-crumb">
         <a href="{{url('admin')}}">Dashoboard</a>
         <div>/</div>
         <a href="{{route('admin.sections.index')}}">Sections</a>
         <div>/</div>
-        <div>{{$section->roman()}}</div>
+        <div>{{$section->fullName()}}</div>
     </div>
 
     <!-- search -->

@@ -46,7 +46,7 @@
             <li>
                 <a href="{{route('admin.section.lecture.allocations.index',[0,0])}}" class="flex items-center">
                     <i class="bi-clock"></i>
-                    <span class="ml-3">Time Table</span>
+                    <span class="ml-3">Schedule</span>
                 </a>
             </li>
             <li>
