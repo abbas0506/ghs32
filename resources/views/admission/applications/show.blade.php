@@ -25,7 +25,7 @@
         </div>
         <div class="absolute top-2 right-2">
             <div class="flex items-center justify-center space-x-2">
-                @if($application->status != 'admitted')
+                @if($application->status != 'pending')
                 <div class="flex w-8 h-8 rounded-full border justify-center items-center">
                     <form action="{{route('admission.applications.destroy',$application)}}" method="post" onsubmit="return confirmDel(event)">
                         @csrf
