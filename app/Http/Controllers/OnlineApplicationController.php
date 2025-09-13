@@ -27,8 +27,7 @@ class OnlineApplicationController extends Controller
     {
         //
         $groups = Group::all();
-        // echo "Sorry, you are late. Contact admission office";
-        // echo $groups;
+        // echo "Requested resource is not available ...";
         return view('admission.online-applications.create', compact('groups'));
     }
 

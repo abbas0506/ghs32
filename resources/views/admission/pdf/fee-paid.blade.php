@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phone List</title>
+    <title>Fee Payments</title>
     <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
     <style>
         @page {
@@ -90,7 +90,7 @@ $roman = config('global.romans');
                     <tr class="text-base">
                         <td>{{$sr++}}</td>
                         <td>{{$application->rollno}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$application->name}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;">{{ucwords(strtolower($application->name))}}</td>
                         <td>{{$application->group->name}}</td>
                         <td>{{$application->obtained_marks}}</td>
                         <td>{{$application->amount_paid}}</td>
