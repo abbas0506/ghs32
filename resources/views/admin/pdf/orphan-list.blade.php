@@ -91,8 +91,8 @@ $roman = config('global.romans');
                     @foreach($section->students->where('is_orphan',1)->sortBy('rollno') as $student)
                     <tr class="text-base">
                         <td>{{$student->rollno}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$student->name}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$student->father_name}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;">{{ ucwords(strtolower($student->name))}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;">{{ ucwords(strtolower($student->father_name))}}</td>
                         <td>{{$student->group->name}}</td>
                         <td>{{$student->phone}}</td>
                         <td>

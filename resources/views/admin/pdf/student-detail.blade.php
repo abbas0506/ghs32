@@ -89,7 +89,7 @@ $roman = config('global.romans');
                 <tbody>
 
                     @foreach($section->students->sortBy('rollno') as $student)
-                    <tr class="text-base">
+                    <tr class="text-sm">
                         <td>{{$student->rollno}}</td>
                         <td>{{$student->admission_no}}</td>
                         <td style="text-align: left !important; padding:2px 6px;">
