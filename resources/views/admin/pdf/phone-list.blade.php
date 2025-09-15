@@ -89,16 +89,16 @@ $roman = config('global.romans');
                 <tbody>
 
                     @foreach($section->students->sortBy('rollno') as $student)
-                    <tr class="text-base">
+                    <tr class="text-sm">
                         <td>{{$student->rollno}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$student->name}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$student->father_name}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;">{{ ucwords(strtolower($student->name))}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;">{{ ucwords(strtolower($student->father_name))}}</td>
                         <td>{{$student->group->name}}</td>
                         <td>{{$student->phone}}</td>
                         <td>
                             @if ($student->photo)
                             <img src="{{ public_path('storage/' . $student->photo) }}"
-                                style="width:32px; height:32px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
+                                style="width:24px; height:24px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
                             @else
                             <span style="color: #999;">No Photo</span>
                             @endif
