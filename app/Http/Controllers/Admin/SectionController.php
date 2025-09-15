@@ -199,7 +199,7 @@ class SectionController extends Controller
         DB::beginTransaction();
         try {
 
-            $students = $section->students->sortByDesc('score');
+            $students = $section->students->sortByDesc('rollno');
             foreach ($students as $student) {
                 $student->admission_no = $srNo;
                 $student->save();
