@@ -91,8 +91,8 @@ $roman = config('global.romans');
                     @foreach($section->students->sortBy('rollno') as $student)
                     <tr class="text-sm">
                         <td>{{$student->rollno}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{ ucwords(strtolower($student->name))}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{ ucwords(strtolower($student->father_name))}}</td>
+                        <td style="text-align: left !important; padding:2px 6px;"><b>{{ ucwords(strtolower($student->name))}}</b><br>{{ $student->admission_no }},{{$student->dob->format('d/m/Y')}} ({{ $student->score }})</td>
+                        <td style="text-align: left !important; padding:2px 6px;">{{ ucwords(strtolower($student->father_name))}}, {{ $student->caste }}<br>{{ $student->address }}</td>
                         <td>{{$student->group->name}}</td>
                         <td>{{$student->phone}}</td>
                         <td>
