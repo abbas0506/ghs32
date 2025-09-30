@@ -104,11 +104,11 @@ Route::post('forgot', [AuthController::class, 'forgot']);
 
 Route::post('login', [AuthController::class, 'login']);
 
-//Route::view('admission-25', 'admission.online-applications.instructions');
-// Route::get('apply', [OnlineApplicationController::class, 'create']);
-// Route::post('apply', [OnlineApplicationController::class, 'store']);
-// Route::resource('online-applications', OnlineApplicationController::class);
-// Route::get('applied/{application}', [OnlineApplicationController::class, 'applied'])->name('applied');
+Route::view('admission-25', 'admission.online-applications.instructions');
+Route::get('apply', [OnlineApplicationController::class, 'create']);
+Route::post('apply', [OnlineApplicationController::class, 'store']);
+Route::resource('online-applications', OnlineApplicationController::class);
+Route::get('applied/{application}', [OnlineApplicationController::class, 'applied'])->name('applied');
 
 Route::post('login/as', [AuthController::class, 'loginAs'])->name('login.as');
 Route::get('signout', [AuthController::class, 'signout'])->name('signout');

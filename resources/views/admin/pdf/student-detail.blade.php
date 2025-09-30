@@ -68,7 +68,7 @@ $roman = config('global.romans');
                     <tbody>
                         <tr class="text-xs">
                             <td class="text-left">Total Students: {{ $section->students->count() }}</td>
-                            <td class="text-right">Printed on {{ now()->format('d-M-Y')}} it has been changed</td>
+                            <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
                         </tr>
                     </tbody>
                 </table>
