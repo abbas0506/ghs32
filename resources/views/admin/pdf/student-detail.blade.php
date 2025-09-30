@@ -110,7 +110,7 @@ $roman = config('global.romans');
                         <td>
                             @if ($student->photo)
                             <img src="{{ public_path('storage/' . $student->photo) }}"
-                                style="width:32px; height:32px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
+                                style="width:60px; height:60px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
                             @else
                             <span style="color: #999;">No Photo</span>
                             @endif
