@@ -6,8 +6,6 @@ use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\Admin\CollectiveTestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\GradeController;
-use App\Http\Controllers\Admin\GradeSectionController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\InchargeController;
 use App\Http\Controllers\Admin\SectionCardController;
@@ -16,7 +14,6 @@ use App\Http\Controllers\Admin\SectionResultCardController;
 use App\Http\Controllers\Admin\SectionResultController;
 use App\Http\Controllers\Admin\SectionStuedentsController;
 use App\Http\Controllers\Admin\SubjectController;
-use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\TestAllocationController as AdminTestAllocationController;
 use App\Http\Controllers\Admin\TestSectionController as AdminTestSectionController;
 use App\Http\Controllers\Admin\UserController;
@@ -44,7 +41,6 @@ use App\Http\Controllers\Library\DomainController;
 use App\Http\Controllers\Library\LibraryRuleController;
 use App\Http\Controllers\Library\PrintController;
 use App\Http\Controllers\Library\RackBooksController;
-use App\Http\Controllers\Library\TeacherController as LibraryTeacherController;
 use App\Http\Controllers\OnlineApplicationController;
 use App\Http\Controllers\RejectionController\Admission;
 use App\Http\Controllers\ReportCardController;
@@ -61,6 +57,7 @@ use App\Http\Controllers\Teacher\TestAllocationResultController;
 use App\Http\Controllers\Teacher\TestController;
 use App\Http\Controllers\Teacher\TestSectionController;
 use App\Http\Controllers\Teacher\TestSectionStudentController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TestPositionController;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
@@ -112,6 +109,8 @@ Route::get('applied/{application}', [OnlineApplicationController::class, 'applie
 
 Route::post('login/as', [AuthController::class, 'loginAs'])->name('login.as');
 Route::get('signout', [AuthController::class, 'signout'])->name('signout');
+Route::resource('teachers', TeacherController::class);
+Route::get('faculty', [TeacherController::class, 'faculty']);
 
 Route::resource('alumni', ControllersAlumniController::class)->only('index', 'create', 'store');
 
