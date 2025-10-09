@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\SectionResultCardController;
 use App\Http\Controllers\Admin\SectionResultController;
 use App\Http\Controllers\Admin\SectionStuedentsController;
 use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\TestAllocationController as AdminTestAllocationController;
 use App\Http\Controllers\Admin\TestSectionController as AdminTestSectionController;
 use App\Http\Controllers\Admin\UserController;
@@ -123,7 +124,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('alumni', AlumniController::class);
         Route::resource('sections', AdminSectionController::class);
         Route::resource('events', EventController::class);
-        Route::resource('grade.sections', GradeSectionController::class);
+        Route::resource('teachers', AdminTeacherController::class);
         Route::resource('section.lecture.allocations', AllocationController::class);
         Route::get('section/{section}/reset-index', [AdminSectionController::class, 'resetIndex'])->name('sections.reset');
         Route::post('section/{section}/reset-rollno', [AdminSectionController::class, 'resetRollNo'])->name('sections.reset.rollno');

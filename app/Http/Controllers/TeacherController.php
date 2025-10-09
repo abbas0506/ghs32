@@ -39,6 +39,7 @@ class TeacherController extends Controller
             'qualification' => 'nullable|string|max:100',
             'bps' => 'nullable|string|max:10',
             'posting' => 'nullable|string|max:100',
+            'personal_number' => 'string|max:10',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:1024', // 1MB limit
         ]);
 
@@ -65,58 +66,8 @@ class TeacherController extends Controller
         }
     }
 
-    public function show(Teacher $teacher)
-    {
-        return view('teachers.show', compact('teacher'));
-    }
+    public function show(Teacher $teacher) {}
 
-    public function edit(Teacher $teacher)
-    {
-        return view('teachers.edit', compact('teacher'));
-    }
-
-    public function update(Request $request, Teacher $teacher)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'father_name' => 'nullable|string|max:255',
-            'cnic' => 'required|string|max:20|unique:teachers,cnic,' . $teacher->id,
-            'dob' => 'nullable|date',
-            'blood_group' => 'nullable|string|max:10',
-            'address' => 'nullable|string',
-            'personal_phone' => 'nullable|string|max:15',
-            'official_phone' => 'nullable|string|max:15',
-            'joined_at' => 'nullable|date',
-            'designation' => 'nullable|string|max:100',
-            'qualification' => 'nullable|string|max:100',
-            'bps' => 'nullable|string|max:10',
-            'posting' => 'nullable|string|max:100',
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
-        ]);
-
-        if ($request->hasFile('photo')) {
-            // delete old photo if exists
-            if ($teacher->photo && Storage::disk('public')->exists($teacher->photo)) {
-                Storage::disk('public')->delete($teacher->photo);
-            }
-            $validated['photo'] = $request->file('photo')->store('teachers', 'public');
-        }
-
-        $teacher->update($validated);
-
-        return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully.');
-    }
-
-    public function destroy(Teacher $teacher)
-    {
-        if ($teacher->photo && Storage::disk('public')->exists($teacher->photo)) {
-            Storage::disk('public')->delete($teacher->photo);
-        }
-
-        $teacher->delete();
-
-        return redirect()->route('teachers.index')->with('success', 'Teacher deleted successfully.');
-    }
     public function faculty()
     {
         $teachers = Teacher::where('is_active', true)->orderBy('bps', 'desc')->get();

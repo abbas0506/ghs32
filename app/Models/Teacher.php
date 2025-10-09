@@ -24,8 +24,14 @@ class Teacher extends Model
         'qualification',
         'bps',
         'posting',
+        'personal_number',
         'photo',
         'is_active',
+    ];
+
+    protected $casts = [
+        'dob' => 'date',   // Cast as Carbon date
+        'joined_at' => 'date',   // Cast as Carbon date
     ];
 
     public function user()

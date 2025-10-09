@@ -175,6 +175,10 @@
                         <label for="dob">Working Since (mm/dd/yyyy) <i class="bi-clock"></i></label>
                         <input type="date" name="joined_at" class="custom-input fancy-focus" required>
                     </div>
+                    <div>
+                        <label for="personal_number">Personal # <i class="bi-numeric"></i></label>
+                        <input type="text" name="personal_number" class="custom-input fancy-focus" placeholder="Personal No." required>
+                    </div>
                     <div class="flex justify-center space-x-3 text-center mt-8 md:col-span-2">
                         <a href="{{ url('/')}}" class="btn-gray rounded py-3 px-5">Cancel <i class="bi-x text-white"></i></a>
                         <button class="btn-blue rounded py-3 px-5">Submit <i class="bi-check"></i></button>

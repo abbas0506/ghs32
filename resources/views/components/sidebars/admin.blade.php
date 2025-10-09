@@ -20,6 +20,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{route('admin.teachers.index')}}" class="flex items-center">
+                    <i class="bi bi-person-gear"></i>
+                    <span class="ml-3">Teachers</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{route('admin.sections.index')}}" class="flex items-center">
                     <i class="bi bi-person-gear"></i>
                     <span class="ml-3">Sections</span>
