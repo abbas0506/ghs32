@@ -25,7 +25,7 @@
         <div class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-shadow duration-300 hover:scale-105 transform p-4 group">
             @if($teacher->photo)
             <img src="{{ asset('storage/' . $teacher->photo) }}" alt="{{ $teacher->name }}"
-                class="w-24 h-24 mx-auto rounded-full mb-4 shadow-sm">
+                class="w-24 h-24 mx-auto rounded-full border-[1px] border-green-600 mb-4 shadow-sm">
             @else
             <div class="w-full h-36 bg-gray-200 flex items-center justify-center rounded-xl mb-4 text-gray-500">
                 No Image
