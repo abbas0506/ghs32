@@ -151,7 +151,7 @@
                     <label for="bps">BPS</label>
                     <select name="bps" class="custom-input fancy-focus" required>
                         <option value="">Select ...</option>
-                        <option value="4" @selected($teacher->bps==4)>4</option>
+                        <option value="04" @selected($teacher->bps==04)>04</option>
                         <option value="14" @selected($teacher->bps==14)>14</option>
                         <option value="15" @selected($teacher->bps==15)>15</option>
                         <option value="16" @selected($teacher->bps==16)>16</option>
