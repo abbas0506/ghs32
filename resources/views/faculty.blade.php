@@ -34,11 +34,11 @@
 
             <h3 class="text-lg font-semibold text-gray-800">{{ $teacher->prefix }} {{ $teacher->name }}</h3>
             <div class="text-xs text-gray-500 mt-3">
-                <p><strong>Designation:</strong> {{ $teacher->designation }} {{ $teacher->bps }}</p>
+                <p><strong>Designation:</strong> {{ $teacher->designation }} (BPS {{ $teacher->bps }})</p>
                 <p><strong>Email:</strong> {{ $teacher->user?->email }}</p>
                 <p><strong>Phone:</strong> {{ $teacher->personal_phone }}</p>
                 <!-- <p class="mt-3"><strong>Home:</strong> {{ $teacher->address }}</p> -->
-                <p><strong>Working Since:</strong> {{ $teacher->joined_at }}</p>
+                <p><strong>Working Since:</strong> {{ $teacher->joined_at->format('d-m-Y') }}</p>
             </div>
         </div>
         @empty
