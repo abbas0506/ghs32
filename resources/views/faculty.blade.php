@@ -33,12 +33,11 @@
             @endif
 
             <h3 class="text-lg font-semibold text-gray-800">{{ $teacher->prefix }} {{ $teacher->name }}</h3>
+            <p class="text-gray-500 text-sm">{{ $teacher->designation }}, BPS {{ $teacher->bps }}</p>
             <div class="text-xs text-gray-500 mt-3">
-                <p><strong>Designation:</strong> {{ $teacher->designation }} (BPS {{ $teacher->bps }})</p>
-                <p><strong>Email:</strong> {{ $teacher->user?->email }}</p>
-                <p><strong>Phone:</strong> {{ $teacher->personal_phone }}</p>
-                <!-- <p class="mt-3"><strong>Home:</strong> {{ $teacher->address }}</p> -->
-                <p><strong>Working Since:</strong> {{ $teacher->joined_at->format('d-m-Y') }}</p>
+                <p><i class="bi-at"></i> {{ $teacher->user?->email }}</p>
+                <p><i class="bi-telephone"></i> {{ $teacher->personal_phone }}</p>
+                <p><i class="bi-clock"></i> {{ $teacher->joined_at->diffInYears(Carbon\Carbon::now()) }} years experience</p>
             </div>
         </div>
         @empty
