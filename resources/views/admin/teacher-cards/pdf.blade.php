@@ -25,7 +25,7 @@
         }
 
         .border {
-            border: solid 1px;
+            border: 0.5px solid #999;
         }
 
         .card-container {

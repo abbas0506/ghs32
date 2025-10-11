@@ -24,14 +24,11 @@
             text-align: center;
         }
 
-        .border {
-            border: solid 1px;
-        }
-
         .card-container {
             position: relative;
             overflow: hidden;
             background-color: white;
+            border: 1px solid;
         }
 
         .card-logo-bg {
@@ -88,7 +85,7 @@ $numOfCardsPerRow = 3;
                         @endif
 
                         <td class="p-6">
-                            <div class="border p-2 card-container">
+                            <div class="p-2 card-container">
                                 <!-- Background Logo -->
                                 <img src="{{ public_path('images/logo/punjab.png') }}" class="card-logo-bg" alt="Background Logo">
                                 <!-- wave patten -->
