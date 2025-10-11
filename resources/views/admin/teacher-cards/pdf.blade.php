@@ -82,7 +82,7 @@ $numOfCardsPerRow = 3;
 
             <table class="table-auto w-full mt-2" cellspacing="0">
                 <tbody class="data">
-                    @foreach($teachers as $teacher)
+                    @foreach($teachers->sortByDesc('bps') as $teacher)
                     @if($i % $numOfCardsPerRow == 0)
                     <tr class="text-sm">
                         @endif
