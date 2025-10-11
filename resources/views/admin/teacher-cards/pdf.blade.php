@@ -108,7 +108,7 @@ $numOfCardsPerRow = 3;
                                         @endif
                                     </div>
 
-                                    <div class="font-bold" style="color:green">{{ Str::upper($teacher->name) }}</div>
+                                    <div class="font-bold" style="color:#2B5E39">{{ Str::upper($teacher->name) }}</div>
                                     <div class="text-md mt-2"> {{ $teacher->designation }} BPS {{ $teacher->bps }}</div>
                                     <h3>TEACHER</h3>
                                     <table width="100%" style="margin-top: 24px;">
