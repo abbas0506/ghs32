@@ -140,6 +140,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('teacher-cards', TeacherCardController::class);
         Route::get('teachers-cards/print', [AdminPdfController::class, 'printTeacherCards'])->name('teacher-cards.print');
+
         Route::get('sections/import/{section}', [AdminSectionController::class, 'import'])->name('sections.import');
         Route::post('sections/import', [AdminSectionController::class, 'postImport'])->name('sections.import.post');
 

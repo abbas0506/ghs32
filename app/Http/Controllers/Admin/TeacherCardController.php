@@ -42,7 +42,7 @@ class TeacherCardController extends Controller
         try {
             $idsArray = array();
             $idsArray = $request->ids_array;
-            $teachers = Student::whereIn('id', $idsArray)->get();
+            $teachers = Teacher::whereIn('id', $idsArray)->get();
             session([
                 'teachers' => $teachers,
             ]);

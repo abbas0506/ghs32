@@ -97,12 +97,12 @@ $numOfCardsPerRow = 3;
                                 <!-- Foreground Content -->
                                 <div class="card-content">
                                     <div><img src="{{ public_path('images/logo/school_logo.png') }}" alt="" width="36px" height="36px"></div>
-                                    <p class="text-xs mt-2">Govt. Higher Secondary School Chak Bedi, District Pakpattan</p>
+                                    <p class="text-xs mt-2">GHSS Chak Bedi, Pakpattan</p>
 
                                     <div class="w-24 h-24 m-auto mt-3">
                                         @if ($teacher->photo)
                                         <img src="{{ public_path('storage/' . $teacher->photo) }}"
-                                            style="width:75px; height:75px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
+                                            style="width:75px; height:75px; border-radius:50%; border:0.5px solid #fff; object-fit:cover;">
                                         @else
                                         <span style="color: #999;">No Photo</span>
                                         @endif
@@ -110,8 +110,7 @@ $numOfCardsPerRow = 3;
 
                                     <div class="font-bold" style="color:green">{{ Str::upper($teacher->name) }}</div>
                                     <div class="text-md mt-2"> {{ $teacher->designation }} BPS {{ $teacher->bps }}</div>
-                                    <!-- <div class="text-xs mt-1">{{ date('Y') }}-{{ date('y') + 2 }}</div> -->
-
+                                    <h3>TEACHER</h3>
                                     <table width="100%" style="margin-top: 24px;">
                                         <tr>
                                             <td style="text-align: left;">
