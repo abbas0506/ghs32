@@ -18,10 +18,8 @@
     <div class="flex justify-center items-center gap-3 flex-wrap mt-5">
         <a href=""><i class="bi bi-person-add text-teal-600"></i></a>
         <a href="" class=""><i class="bi bi-file-earmark-plus text-teal-600"></i></a>
-        <a href="" class=""><i class="bi bi-arrow-right-square text-teal-600"></i></a>
-        <a href="" class=""><i class="bi-repeat-1 text-orange-600"></i></a>
-        <a href="" class=""><i class="bi-person-badge text-indigo-600"></i></a>
-        <a href="" class=""><i class="bx bx-recycle text-orange-600"></i></a>
+        <a href="{{ route('admin.teacher-cards.index') }}" class=""><i class="bi-person-badge text-indigo-600"></i></a>
+        <a href="" class=""><i class="bi-recycle text-orange-600"></i></a>
         <a href="" class=""><i class="bi-printer text-teal-600"></i></a>
         <a href="" class=""><i class="bi-clock text-teal-600"></i></a>
     </div>

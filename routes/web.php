@@ -6,14 +6,17 @@ use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\Admin\CollectiveTestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\EmployeeCardController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\InchargeController;
+use App\Http\Controllers\Admin\PdfController as AdminPdfController;
 use App\Http\Controllers\Admin\SectionCardController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
 use App\Http\Controllers\Admin\SectionResultCardController;
 use App\Http\Controllers\Admin\SectionResultController;
 use App\Http\Controllers\Admin\SectionStuedentsController;
 use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\TeacherCardController;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Admin\TestAllocationController as AdminTestAllocationController;
 use App\Http\Controllers\Admin\TestSectionController as AdminTestSectionController;
@@ -135,6 +138,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('section.cards', SectionCardController::class);
         Route::get('section/student-cards/print', [SectionCardController::class, 'print'])->name('section.cards.print');
 
+        Route::resource('teacher-cards', TeacherCardController::class);
+        Route::get('teachers-cards/print', [::class, 'printTeacherCards'])->name('teacher-cards.print');
         Route::get('sections/import/{section}', [AdminSectionController::class, 'import'])->name('sections.import');
         Route::post('sections/import', [AdminSectionController::class, 'postImport'])->name('sections.import.post');
 
