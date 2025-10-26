@@ -83,7 +83,7 @@ class UserController extends Controller
                 'email' => $request->email,
             ]);
 
-            $user->profile->update([
+            $user->teacher->update([
                 'name' => $request->name,
             ]);
 

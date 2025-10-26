@@ -17,12 +17,17 @@
 </div>
 
 <!-- search -->
-<!-- <div class="flex items-center justify-between mt-12">
+<div class="flex items-center justify-between mt-12">
     <div class="flex relative w-full md:w-1/3">
         <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
         <i class="bx bx-search absolute top-2 right-2"></i>
     </div>
-</div> -->
+    <div class="flex gap-3">
+        <a href="{{ url('admin/teacher-wise-schedule') }}"><i class="bi-repeat text-green-700"></i></a>
+        <a href="{{ url('admin/section-wise-schedule/print') }}" target="_blank"><i class="bi-printer text-cyan-700"></i></a>
+        <a href="{{ url('admin/section-wise-schedule/clear') }}"><i class="bi-recycle text-orange-600"></i></a>
+    </div>
+</div>
 
 <!-- page message -->
 @if($errors->any())
@@ -36,47 +41,26 @@
     <table class="table-auto sm w-full">
         <thead>
             <tr>
-                <th class="w-11">Section</th>
-                <th>Incharge</th>
-                <th>0</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
+                <th class="w-24">Class</th>
+                @foreach(range(1,8) as $lecture_no)
+                <th>{{ $lecture_no }}</th>
+                @endforeach
             </tr>
         </thead>
         <tbody>
-            @php
-            $i=0;
-            @endphp
-
             @foreach($sections as $section)
             <tr>
-                <td class="font-semibold">{{ $section->fullName()}}</td>
-                <td class="">
-
-                    <a href="{{route('admin.incharges.edit', $section) }}" class="link">
-                        @if($section->incharge_id)
-                        {{ $section->incharge->profile->name }}
-                        @else
-                        <i class="bx bx-pencil"></i>
-                        @endif
-                    </a>
-                </td>
-                @foreach(range(0,8) as $lecture_no)
+                <td class="font-bold"> {{ $section->fullName()}}</td>
+                @foreach(range(1,8) as $lecture_no)
                 <td class="p-1">
                     @foreach($section->allocations()->havingLectureNo($lecture_no)->get() as $allocation)
                     <div class="text-sm bg-teal-50">
-                        <a href="{{ route('admin.section.lecture.allocations.edit', [$section, $lecture_no, $allocation]) }}" class="link">{{ $allocation->subject->short_name }}</a>
-                        <p>{{ $allocation->teacher->profile->name }}</p>
+                        <a href="{{ route('admin.section.lecture.schedule.edit', [$section, $lecture_no, $allocation]) }}" class="link">{{ $allocation->subject->short_name }}</a>
+                        <p>{{ $allocation->teacher->name }}</p>
                     </div>
                     <div class="divider"></div>
                     @endforeach
-                    <a href="{{ route('admin.section.lecture.allocations.create',[$section, $lecture_no]) }}" class="text-sm link"><i class="bi-clock"></i></a>
+                    <a href="{{ route('admin.section.lecture.schedule.create',[$section, $lecture_no]) }}" class="text-sm link"><i class="bi-plus"></i></a>
                 </td>
                 @endforeach
             </tr>

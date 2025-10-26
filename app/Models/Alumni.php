@@ -12,10 +12,9 @@ class Alumni extends Model
         'prefix',
         'name',
         'phone',
-        'email',
-        'home_address',
-        'office_address',
-        'job_desc',
+        'address',
+        'session',
+        'introduction',
         'photo'
     ];
 }

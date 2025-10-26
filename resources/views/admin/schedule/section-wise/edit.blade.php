@@ -5,7 +5,7 @@
 <div class="bread-crumb">
     <a href="/">Home</a>
     <div>/</div>
-    <a href="{{route('admin.section.lecture.allocations.index',[0,0])}}">Allocations</a>
+    <a href="{{route('admin.section.lecture.schedule.index',[0,0])}}">Allocations</a>
     <div>/</div>
     <div>Edit</div>
 </div>
@@ -19,11 +19,8 @@
     @endif
 
     <div class="flex justify-between">
-        <div>
-            <h2>Section: {{ $allocation->section->roman() }}</h2>
-            <h2>Lecture: {{ $allocation->lecture_no }}</h2>
-        </div>
-        <form action="{{ route('admin.section.lecture.allocations.destroy',[$allocation->section, $allocation->lecture_no, $allocation]) }}" method="POST" onsubmit="return confirmDel(event)">
+        <h2>Class {{ $allocation->section->fullName() }} / Lecture # {{ $allocation->lecture_no }}</h2>
+        <form action="{{ route('admin.section.lecture.schedule.destroy',[$allocation->section, $allocation->lecture_no, $allocation]) }}" method="POST" onsubmit="return confirmDel(event)">
             @csrf
             @method('DELETE')
             <button type="submit" class="flex justify-center items-center w-12 h-12 rounded-full border hover:bg-slate-100">
@@ -32,7 +29,7 @@
         </form>
     </div>
     <div class="divider my-2"></div>
-    <form action="{{ route('admin.section.lecture.allocations.update',[$allocation->section, $allocation->lecture_no, $allocation]) }}" method='post' class="w-full grid gap-6" onsubmit="return validate(event)">
+    <form action="{{ route('admin.section.lecture.schedule.update',[$allocation->section, $allocation->lecture_no, $allocation]) }}" method='post' class="w-full grid gap-6" onsubmit="return validate(event)">
         @csrf
         @method('PATCH')
         <div>
@@ -46,8 +43,8 @@
         <div>
             <label>Teacher</label>
             <select name="teacher_id" id="" class="custom-input-borderless">
-                @foreach($users as $user)
-                <option value="{{ $user->id }}" @selected($allocation->teacher_id==$user->id)>{{ $user->profile->name }}</option>
+                @foreach($teachers as $teacher)
+                <option value="{{ $teacher->id }}" @selected($allocation->teacher_id==$teacher->id)>{{ $teacher->name }}</option>
                 @endforeach
             </select>
         </div>

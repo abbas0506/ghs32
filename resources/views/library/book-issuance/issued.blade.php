@@ -50,7 +50,7 @@
                         <br>
                         <label for="">
                             @if($bookIssuance->user_type=='App\Models\Student')
-                            {{$bookIssuance->reader->section->roman()}} ({{$bookIssuance->reader->rollno}})
+                            {{$bookIssuance->reader->section->fullName()}} ({{$bookIssuance->reader->rollno}})
                             @else
                             {{$bookIssuance->reader->designation}}
                             @endif

@@ -19,8 +19,8 @@
 
     <label for="">{{ $test->title }}</label>
     <div class="border rounded-md mt-3 p-3 text-sm bg-gradient-to-r from-blue-100 to-blue-50 border-blue-200">
-        <h3 class="font-bold">{{ $testAllocation->allocation->section->roman()}} Lecture # {{ $testAllocation->allocation->lecture_no }}</h3>
-        <p>{{ $testAllocation->allocation->subject->name}} <span class="text-slate-400">by {{ $testAllocation->allocation->teacher->profile->name }}</span></p>
+        <h3 class="font-bold">Class {{ $testAllocation->section->fullName()}} / Lecture # {{ $testAllocation->lecture_no }}</h3>
+        <p>{{ $testAllocation->subject->name}} <span class="text-slate-400">by {{ $testAllocation->teacher->name }}</span></p>
     </div>
 
     <form action="{{route('admin.test.allocations.update',[$test, $testAllocation])}}" method='post' class="w-full grid gap-6 mt-6">
@@ -28,8 +28,16 @@
         @method('patch')
 
         <div>
-            <label>Total Marks</label>
-            <input type="number" name='total_marks' class="custom-input" placeholder="Total marks" value="{{ $testAllocation->total_marks }}" required>
+            <select name="teacher_id" id="" class="custom-input-borderless">
+                @foreach($teachers->sortByDesc('bps') as $teacher)
+                <option value="{{ $teacher->id }}" @selected($teacher->id==$testAllocation->teacher_id)>{{ $teacher->name }}</option>
+                @endforeach
+            </select>
+
+        </div>
+        <div>
+            <label>Max Marks</label>
+            <input type="number" name='max_marks' class="custom-input" placeholder="Total marks" value="{{ $testAllocation->max_marks }}" required>
         </div>
         @if($testAllocation->result_date)
         <div>

@@ -35,7 +35,7 @@ class Application extends Model
         'bise',
         'rollno',
         'obtained_marks',
-        'total_marks',
+        'max_marks',
         'status',
         'amount_paid',
         'payment_date',
@@ -50,7 +50,7 @@ class Application extends Model
         'income' => 'integer',
         'grade' => 'integer',
         'obtained_marks' => 'integer',
-        'total_marks' => 'integer',
+        'max_marks' => 'integer',
         'amount_paid' => 'integer',
         'payment_date' => 'date',
         'fee_concession' => 'integer',
@@ -127,6 +127,6 @@ class Application extends Model
 
     public function obtained_percentage()
     {
-        return round($this->obtained_marks / $this->total_marks * 100, 2);
+        return round($this->obtained_marks / $this->max_marks * 100, 2);
     }
 }

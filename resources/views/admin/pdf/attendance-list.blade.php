@@ -47,7 +47,7 @@ $roman = config('global.romans');
 
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/school_logo.png')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo_32.png')}}" class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
@@ -55,7 +55,7 @@ $roman = config('global.romans');
                             <td class="text-center text-xl font-bold">Attendance List {{ $section->fullName() }}</td>
                         </tr>
                         <tr>
-                            <td class="text-center text-sm">Govt. Higher Secondary School Chak Bedi, Pakpattan</td>
+                            <td class="text-center text-sm">Govt. High School 32/2L, Okara</td>
                         </tr>
                     </tbody>
                 </table>

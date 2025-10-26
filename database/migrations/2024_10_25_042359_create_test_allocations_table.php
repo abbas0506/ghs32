@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('test_allocations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('test_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('allocation_id')->constrained()->cascadeOnDelete();
-            $table->unsignedTinyInteger('total_marks');
-            $table->date('test_date');
+            $table->foreignId('section_id')->constrained()->cascadeOnDelete();
+            $table->unsignedTinyInteger('lecture_no');
+            $table->foreignId('subject_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
+
+            $table->unsignedTinyInteger('max_marks');
+            $table->date('test_date')->nullable();
             $table->date('result_date')->nullable();
 
             $table->timestamps();

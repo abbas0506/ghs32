@@ -225,7 +225,7 @@
                 </div>
                 <div>
                     <label for="">Total Marks</label>
-                    <select name="total_marks" id="" class="custom-input">
+                    <select name="max_marks" id="" class="custom-input">
                         <option value="1000" @selected($application->total==1000)>1000</option>
                         <option value="1050" @selected($application->total==1050)>1050</option>
                         <option value="1100" @selected($application->total==1100)>1100</option>

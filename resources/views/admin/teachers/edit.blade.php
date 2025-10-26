@@ -104,10 +104,13 @@
                     <input type="text" name="name" class="custom-input fancy-focus" placeholder="Your good name" value="{{ $teacher->name }}" required>
                 </div>
                 <div class="">
+                    <label for="">Short Name</label>
+                    <input type="text" name="short_name" class="custom-input fancy-focus" placeholder="Short name" value="{{ $teacher->short_name }}" required>
+                </div>
+                <div class="">
                     <label for="">Father Name</label>
                     <input type="text" name="father_name" class="custom-input fancy-focus" placeholder="Father name" value="{{ $teacher->father_name }}" required>
                 </div>
-
                 <div>
                     <label for="">CNIC <i class="bi-person-vcard"></i></label>
                     <input type="text" name="cnic" id='cnic' class="custom-input fancy-focus cnic" placeholder="Type your CNIC" value="{{ $teacher->cnic }}" required>
@@ -122,11 +125,11 @@
                 </div>
                 <div>
                     <label for="">Personal Phone No <i class="bi-whatsapp"></i></label>
-                    <input type="text" name="personal_phone" id='personal_phone' class="custom-input fancy-focus phone" placeholder="Personal Phone" value="{{ $teacher->personal_phone }}" required>
+                    <input type="text" name="phone" id='phone' class="custom-input fancy-focus phone" placeholder="Personal Phone" value="{{ $teacher->phone }}" required>
                 </div>
                 <div>
                     <label for="">Official Phone No <i class="bi-telephone"></i></label>
-                    <input type="text" name="official_phone" id='personal_phone' class="custom-input fancy-focus phone" placeholder="Official Phone" value="{{ $teacher->official_phone }}">
+                    <input type="text" name="official_phone" id='phone' class="custom-input fancy-focus phone" placeholder="Official Phone" value="{{ $teacher->official_phone }}">
                 </div>
                 <div class="md:col-span-2">
                     <label for="">Home Address <i class="bi-house"></i></label>
@@ -167,8 +170,8 @@
                     <input type="date" name="joined_at" class="custom-input fancy-focus" value="{{ optional($teacher->joined_at)->format('Y-m-d') }}" required>
                 </div>
                 <div>
-                    <label for="personal_number">Personal # <i class="bi-numeric"></i></label>
-                    <input type="text" name="personal_number" class="custom-input fancy-focus" placeholder="Personal No." value="{{ $teacher->personal_number }}" required>
+                    <label for="personal_no">Personal # <i class="bi-numeric"></i></label>
+                    <input type="text" name="personal_no" class="custom-input fancy-focus" placeholder="Personal No." value="{{ $teacher->personal_no }}" required>
                 </div>
                 <div class="flex justify-center space-x-3 text-center mt-8 md:col-span-2">
                     <a href="{{ url('/')}}" class="btn-gray rounded py-3 px-5">Cancel <i class="bi-x text-white"></i></a>

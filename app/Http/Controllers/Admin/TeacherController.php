@@ -60,20 +60,19 @@ class TeacherController extends Controller
     public function update(Request $request, Teacher $teacher)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'father_name' => 'nullable|string|max:255',
+            'name' => 'required|string|max:100',
+            'short_name' => 'required|string|max:50',
+            'father_name' => 'nullable|string|max:100',
             'cnic' => 'required|string|max:20|unique:teachers,cnic,' . $teacher->id,
             'dob' => 'nullable|date',
             'blood_group' => 'nullable|string|max:10',
             'address' => 'nullable|string',
-            'personal_phone' => 'nullable|string|max:15',
-            'official_phone' => 'nullable|string|max:15',
+            'phone' => 'nullable|string|max:15',
             'joined_at' => 'nullable|date',
             'designation' => 'nullable|string|max:100',
             'qualification' => 'nullable|string|max:100',
             'bps' => 'nullable|string|max:10',
-            'posting' => 'nullable|string|max:100',
-            'personal_number' => 'string|max:10',
+            'personal_no' => 'string|max:10',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
         ]);
 
@@ -93,8 +92,8 @@ class TeacherController extends Controller
                 'email' => $request->email
             ]);
 
-            return redirect()->route('admin.teachers.index')->with('success', 'Teacher updated successfully.');
             DB::commit();
+            return redirect()->route('admin.teachers.index')->with('success', 'Teacher updated successfully.');
         } catch (Exception $ex) {
             DB::rollBack();
             return back()->with('error', $ex->getMessage());

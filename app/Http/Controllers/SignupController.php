@@ -74,7 +74,7 @@ class SignupController extends Controller
 
                 $user->assignRole('teacher');
 
-                $user->profile()->create([
+                $user->teacher()->create([
                     'name' => $request->name,
                     'cnic' => $request->cnic,
                     'designation' => $request->designation,

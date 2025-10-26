@@ -2,9 +2,9 @@
     <div class="flex flex-wrap w-full h-16 items-center justify-between shadow-sm bg-white px-5">
         <div class="flex items-center space-x-2">
             <a href="{{url('/')}}" class="flex justify-center">
-                <img alt="logo" src="{{asset('images/logo/app_logo_transparent.png')}}" class="w-10 h-8">
+                <img alt="logo" src="{{asset('images/logo/logo_32.png')}}" class="w-10 h-10 md:hidden">
             </a>
-            <div class="text-base font-semibold">GHSS-CB</div>
+            <div class="text-base font-semibold">GHS 32/2L</div>
             <select id="roleSwitcher" class="ml-3 text-sm border-none focus:outline-none focus:ring-0 hover:cursor-pointer">
                 @if(Auth::user()->roles->count()>1)
                 @foreach(Auth::user()->roles as $role)
@@ -15,7 +15,7 @@
         </div>
         <div id=" current-user-area" class="flex space-x-3 items-center justify-center relative">
             <label for="toggle-current-user-dropdown" class="hidden md:flex items-center">
-                <div class="">{{ Auth::user()->profile->name }}</div>
+                <div class="">{{ Auth::user()->teacher->name }}</div>
             </label>
             <div id='menu' class="flex md:hidden">
                 <i class="bi bi-list"></i>

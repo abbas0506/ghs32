@@ -16,10 +16,9 @@ return new class extends Migration
             $table->string('prefix')->nullable();
             $table->string('name');
             $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->text('home_address')->nullable();
-            $table->text('office_address')->nullable();
-            $table->text('job_desc')->nullable();
+            $table->text('address')->nullable();
+            $table->unsignedSmallInteger('session')->nullable();
+            $table->text('introduction')->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();
         });

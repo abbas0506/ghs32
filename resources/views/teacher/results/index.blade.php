@@ -1,7 +1,7 @@
 @extends('layouts.teacher')
 @section('page-content')
 
-<h2>{{ $testAllocation->allocation->subject->name }} , {{ $testAllocation->allocation->section->roman() }}</h2>
+<h2>{{ $testAllocation->subject->name }} , {{ $testAllocation->section->fullName() }}</h2>
 <div class="bread-crumb">
     <a href="{{url('/')}}">Home</a>
     <div>/</div>
@@ -28,7 +28,7 @@
 <x-message></x-message>
 @endif
 <div class="flex flex-wrap justify-between gap-3 items-center mt-8">
-    <h2 class="text-center">Appearing Students: <i class="bx bx-group mr-2"></i>{{ $testAllocation->appearingStudents->count() }}/{{ $testAllocation->allocation->section->students->count() }}</h2>
+    <h2 class="text-center">Appearing Students: <i class="bx bx-group mr-2"></i>{{ $testAllocation->appearingStudents->count() }}/{{ $testAllocation->section->students->count() }}</h2>
 
     <div class="flex items-center gap-3">
 

@@ -46,6 +46,7 @@
                     <th class="w-16">Class</th>
                     <th class="text-left w-48">Subject</th>
                     <th class="text-left w-48">Teacher</th>
+                    <th class="text-left w-16">Lecture #</th>
                     <th class="w-16">Studens</th>
                     <th class="w-16">Marks</th>
                     <th class="w-16">Result</th>
@@ -54,14 +55,15 @@
             </thead>
             <tbody>
 
-                @foreach($testAllocations as $testAllocation)
+                @foreach($testAllocations->sortBy(['section_id','lecture_no']) as $testAllocation)
                 <tr class="tr">
                     <td>{{ $loop->index+1 }}</td>
-                    <td>{{ $testAllocation->allocation->section->roman() }}</td>
-                    <td class="text-left">{{ $testAllocation->allocation->subject->name }}</td>
-                    <td class="text-left">{{ $testAllocation->allocation->teacher?->profile?->name }}</td>
+                    <td>{{ $testAllocation->section->fullName() }}</td>
+                    <td class="text-left">{{ $testAllocation->subject->name }}</td>
+                    <td class="text-left">{{ $testAllocation->teacher?->name }}</td>
+                    <td class="">{{ $testAllocation->lecture_no }}</td>
                     <td>{{ $testAllocation->appearingStudents->count() }}</td>
-                    <td>{{ $testAllocation->total_marks }}</td>
+                    <td>{{ $testAllocation->max_marks }}</td>
                     <td class="@if($testAllocation->result_date) submitted @else pending @endif">
                         @if($testAllocation->result_date)
                         <i class="bi-check-lg text-green-500 font-bold"></i>

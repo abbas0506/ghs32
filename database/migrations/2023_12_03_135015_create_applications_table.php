@@ -39,7 +39,7 @@ return new class extends Migration
             $table->string('bise', 20);
             $table->string('rollno', 8);
             $table->unsignedSmallInteger('obtained_marks');
-            $table->unsignedSmallInteger('total_marks');
+            $table->unsignedSmallInteger('max_marks');
             $table->string('status')->default('pending'); // 'pending', 'approved', 'rejected', 'admitted'
             $table->unsignedInteger('amount_paid')->nullable();
             $table->date('payment_date')->nullable();

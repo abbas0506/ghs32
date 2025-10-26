@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Allocation;
 use App\Models\Grade;
+use App\Models\Section;
 use App\Models\Test;
 use App\Models\TestAllocation;
 use Exception;
@@ -18,7 +20,7 @@ class CollectiveTestController extends Controller
     public function index()
     {
         //
-        $tests = Test::whereNull('user_id')->get();
+        $tests = Test::whereNull('teacher_id')->get();
         return view('admin.tests.index', compact('tests'));
     }
 
@@ -28,8 +30,8 @@ class CollectiveTestController extends Controller
     public function create()
     {
         //
-        $grades = Grade::where('grade', '>', 5)->get();
-        return view('admin.tests.create', compact('grades'));
+        $sections = Section::all();
+        return view('admin.tests.create', compact('sections'));
     }
 
     /**
@@ -40,25 +42,30 @@ class CollectiveTestController extends Controller
         //
         $request->validate([
             'title' => 'required',
-            'grades_array' => 'required',
+            'max_marks' => 'required|numeric',
+            'sections_array' => 'required',
         ]);
 
-        $gradeIdsArray = array();
-        $gradeIdsArray = $request->grades_array;
+        $sectionIdsArray = array();
+        $sectionIdsArray = $request->sections_array;
 
-        $grades = Grade::whereIn('id', $gradeIdsArray)->get();
+        // $grades = Grade::whereIn('id', $gradeIdsArray)->get();
 
         DB::beginTransaction();
         try {
             $test = Test::create([
                 'title' => $request->title,
+                'max_marks' => $request->max_marks,
             ]);
-
-            foreach ($grades as $grade) {
-                foreach ($grade->allocations as $allocation) {
+            $sections = Section::whereIn('id', $sectionIdsArray)->get();
+            foreach ($sections as $section) {
+                foreach ($section->allocations as $allocation) {
                     $test->testAllocations()->create([
-                        'allocation_id' => $allocation->id,
-                        'total_marks' => 50,
+                        'section_id' => $allocation->section_id,
+                        'lecture_no' => $allocation->lecture_no,
+                        'subject_id' => $allocation->subject_id,
+                        'teacher_id' => $allocation->teacher_id,
+                        'max_marks' => $request->max_marks,
                         'test_date' => now(),
                     ]);
                 }

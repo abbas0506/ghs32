@@ -44,25 +44,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function profile()
+    public function teacher()
     {
-        return $this->hasOne(Profile::class, 'user_id');
-    }
-
-    public function allocations()
-    {
-        return $this->hasMany(Allocation::class, 'teacher_id', 'id');
-    }
-    public function testAllocations()
-    {
-        return $this->hasManyThrough(TestAllocation::class, Allocation::class, 'teacher_id');
-    }
-    public function tests()
-    {
-        return $this->hasMany(Test::class);
-    }
-    public function section()
-    {
-        return $this->hasOne(Section::class, 'incharge_id');
+        return $this->hasOne(Teacher::class, 'user_id');
     }
 }

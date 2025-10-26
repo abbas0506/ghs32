@@ -62,7 +62,7 @@ class OnlineApplicationController extends Controller
             'bise' => 'required|string|max:20',
             'rollno' => 'required|string|max:8',
             'obtained_marks' => 'required|integer|min:0',
-            'total_marks' => 'required|integer|min:1|gte:obtained_marks',
+            'max_marks' => 'required|integer|min:1|gte:obtained_marks',
         ]);
 
         try {

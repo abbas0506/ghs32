@@ -6,7 +6,8 @@
 
 @layer base {
     body {
-        @apply w-screen lg:overflow-x-hidden bg-gradient-to-b from-blue-50 via-white to-blue-100;
+        /* @apply w-screen lg:overflow-x-hidden bg-gradient-to-b from-blue-50 via-white to-blue-100; */
+        @apply w-screen lg:overflow-x-hidden bg-white;
     }
     tr th {
         @apply px-2 text-sm text-gray-600 border bg-blue-50 text-center;
@@ -59,7 +60,7 @@
     }
 
     .sticky-header.scrolled-down {
-        @apply bg-white shadow-sm;
+        @apply bg-slate-300 shadow-sm;
     }
 
     .sticky-header .nav-item {

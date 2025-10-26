@@ -20,7 +20,7 @@ class ImportStudentController extends Controller
         //find all those students who have already been included in allocation result
         $testAllocation = TestAllocation::findOrFail($id);
         $appearingStudentIds = $testAllocation->appearingStudents->pluck('id')->unique()->toArray();
-        $missingStudents = Student::where('section_id', $testAllocation->allocation->section_id)
+        $missingStudents = Student::where('section_id', $testAllocation->section_id)
             ->whereNotIn('id', $appearingStudentIds)
             ->get();
 

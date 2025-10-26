@@ -54,7 +54,7 @@ $roman = config('global.romans');
             @endif
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/school_logo.png')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo.jpg')}}" class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
@@ -62,7 +62,7 @@ $roman = config('global.romans');
                             <td class="text-center text-lg font-bold">Report Card - {{ $test->title }}</td>
                         </tr>
                         <tr>
-                            <td class="text-center text-sm font-bold">Govt Higher Secondary School Chak Bedi, Pakpattan</td>
+                            <td class="text-center text-sm font-bold">Govt High School 32/2L, Okara</td>
                         </tr>
                     </tbody>
                 </table>
@@ -119,18 +119,18 @@ $roman = config('global.romans');
                     @endphp
                     @foreach($student->results()->test($test->id)->get() as $result)
                     @php
-                    $percentage=round( $result->obtained_marks/$result->testAllocation->total_marks*100,0);
+                    $percentage=round( $result->obtained_marks/$result->testAllocation->max_marks*100,0);
                     @endphp
                     <tr class="border">
                         <td>{{ $loop->index+1 }}</td>
                         <td class="text-left">{{ $result->testAllocation->allocation->subject->name }}</td>
-                        <td>{{ $result->testAllocation->total_marks }}</td>
+                        <td>{{ $result->testAllocation->max_marks }}</td>
                         <td>{{ $result->obtained_marks }}</td>
                         <td>{{ $percentage }} %</td>
                         <td>@if($percentage>=33) Pass @else Fail @endif</td>
                     </tr>
                     @php
-                    $total+=$result->testAllocation->total_marks;
+                    $total+=$result->testAllocation->max_marks;
                     @endphp
                     @endforeach
                     <tr>

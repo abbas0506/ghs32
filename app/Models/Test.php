@@ -10,8 +10,10 @@ class Test extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',    //section label A, B, C
-        'user_id',
+        'title',
+        'max_marks',
+        'teacher_id',   //test owner id , blank if combined test
+
         'is_open',
     ];
 
@@ -37,10 +39,10 @@ class Test extends Model
 
     public function scopeCombined($query)
     {
-        return $query->whereNull('user_id');
+        return $query->whereNull('teacher_id');
     }
     public function scopeIndividual($query)
     {
-        return $query->whereNotNull('user_id');
+        return $query->whereNotNull('teacher_id');
     }
 }

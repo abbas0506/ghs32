@@ -73,7 +73,7 @@ class TestAllocationResultController extends Controller
         //
 
         $request->validate([
-            'total_marks' => 'required|numeric|min:1|max:100',
+            'max_marks' => 'required|numeric|min:1|max:100',
             'result_ids_array' => 'required',
             'obtained_marks_array' => 'required',
         ]);
@@ -88,7 +88,7 @@ class TestAllocationResultController extends Controller
         DB::beginTransaction();
         try {
             $testAllocation->update([
-                'total_marks' => $request->total_marks,
+                'max_marks' => $request->max_marks,
             ]);
             foreach ($resultIdsArray as $key => $id) {
                 $result = Result::findOrFail($id);

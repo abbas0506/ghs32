@@ -42,7 +42,7 @@
             <tr class="text-sm tr">
                 <td>{{ $loop->index+1 }}</td>
                 <td class="text-left px-3">
-                    {{ $user->profile?->name }}
+                    {{ $user->teacher?->name }}
                     <br>
                     {{ $user->email }}
                 </td>

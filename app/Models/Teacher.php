@@ -12,19 +12,18 @@ class Teacher extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'short_name',
         'father_name',
         'cnic',
         'dob',
         'blood_group',
         'address',
-        'personal_phone',
-        'official_phone',
+        'phone',
         'joined_at',
         'designation',
         'qualification',
         'bps',
-        'posting',
-        'personal_number',
+        'personal_no',
         'photo',
         'is_active',
     ];
@@ -37,5 +36,17 @@ class Teacher extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function allocations()
+    {
+        return $this->hasMany(Allocation::class);
+    }
+    public function tests()
+    {
+        return $this->hasMany(Test::class);
+    }
+    public function testAllocations()
+    {
+        return $this->hasMany(TestAllocation::class);
     }
 }

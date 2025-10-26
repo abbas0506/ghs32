@@ -9,8 +9,9 @@
 
 
             <div>
-                <h2 class="text-4xl font-bold">LOGIN</h2>
-                <label for="">https://wwww.ghsscb.edu.pk</label>
+                <img src="{{asset('images/logo/logo_32.png')}}" alt="" class="w-24 md:w-36 mx-auto">
+                <!-- <h2 class="text-4xl font-bold">LOGIN</h2> -->
+                <label for="">Registered users only</label>
             </div>
 
             <div class="text-left">

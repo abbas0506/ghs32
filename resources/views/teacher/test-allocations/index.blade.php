@@ -33,7 +33,7 @@ $colors=config('globals.colors');
     @endif
 
     @if(Auth::user()->section)
-    <h2 class="mt-8">My Section: ({{ Auth::user()->section->roman() }})</h2>
+    <h2 class="mt-8">My Section: ({{ Auth::user()->section->fullName() }})</h2>
     <div class="flex flex-wrap items-center gap-4 mt-4">
         <div class="rounded-full border flex justify-center items-center w-10 h-10 p-3">
             <i class="bi-printer text-xl"></i>
@@ -63,10 +63,10 @@ $colors=config('globals.colors');
                 @foreach($testAllocations as $testAllocation)
                 <tr class="tr @if($testAllocation->hasBeenSubmitted()) submitted @endif">
                     <td>{{ $loop->index+1 }}</td>
-                    <td>{{ $testAllocation->allocation->section->roman() }}</td>
+                    <td>{{ $testAllocation->section->fullName() }}</td>
                     <td class="text-left">
                         <a href="{{ route('teacher.test-allocation.results.index',$testAllocation) }}" class="link">
-                            {{ $testAllocation->allocation->subject->name }}
+                            {{ $testAllocation->subject->name }}
                         </a>
                     </td>
                     <td>{{ $testAllocation->appearingStudents->count() }}</td>
@@ -87,16 +87,5 @@ $colors=config('globals.colors');
             </tbody>
         </table>
     </div>
-
-
-    <!-- <p class="p-3 bg-slate-100">Please click on any of the following subjects to view / feed the result</p>
-    <div class="grid md:grid-cols-2 gap-6 ">
-        @foreach($testAllocations as $testAllocation)
-        <a href="{{ route('teacher.test-allocation.results.index',$testAllocation) }}" class="text-center p-4 rounded-lg bg-{{ $colors[$loop->index%4] }}-100 text-{{ $colors[$loop->index%4] }}-600">
-            {{ $testAllocation->allocation->subject->name }} , {{ $testAllocation->allocation->section->roman() }}
-        </a>
-        @endforeach
-
-    </div> -->
 </div>
 @endsection

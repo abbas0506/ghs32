@@ -50,7 +50,7 @@ $roman = config('global.romans');
             <!-- front page ... section gazzet -->
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/school_logo.png')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo.jpg')}}" class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
@@ -63,8 +63,8 @@ $roman = config('global.romans');
                     </tbody>
                 </table>
             </div>
-            <h4 class="mt-8 underline text-center">Subject: {{ $testAllocation->allocation->subject->name }}, {{ $testAllocation->allocation->section->roman() }} </h4>
-            <h6 class="my-0 text-right">Total Marks: {{ $testAllocation->total_marks }}</h6>
+            <h4 class="mt-8 underline text-center">Subject: {{ $testAllocation->subject->name }}, {{ $testAllocation->section->fullName() }} </h4>
+            <h6 class="my-0 text-right">Total Marks: {{ $testAllocation->max_marks }}</h6>
             <table class="table-auto w-full mt-1" cellspacing="0">
                 <thead class="data">
                     <tr class="border">
@@ -80,7 +80,7 @@ $roman = config('global.romans');
 
                     @foreach($testAllocation->results->sortByDesc('obtained_marks') as $result)
                     <!-- calculate percentage -->
-                    @php $percentage=round($result->obtained_marks/$testAllocation->total_marks*100,1); @endphp
+                    @php $percentage=round($result->obtained_marks/$testAllocation->max_marks*100,1); @endphp
                     <tr class="border">
                         <td>{{ $loop->index+1 }}</td>
                         <td class="text-left">{{ ucwords(strtolower($result->student->name)) }}</td>

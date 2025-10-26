@@ -25,15 +25,13 @@
                 <div>
                     <label for="">Grade</label>
                     <select name="grade" id="" class="custom-input-borderless">
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
+                        @foreach(range(1,10) as $grade)
+                        <option value="{{ $grade }}">{{ $grade }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div>
-                    <label>Section Label </label>
+                    <label>Section Label <span class="text-red-600"> (Leave blank if single section) </span></label>
                     <input type="text" name='name' class="custom-input-borderless" placeholder="A, B, C, ..." value="">
                 </div>
             </div>

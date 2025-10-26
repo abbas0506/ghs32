@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 20);
+            $table->string('name', 20)->nullable();
             $table->unsignedInteger('grade');  //
-            // $table->foreignId('incharge_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

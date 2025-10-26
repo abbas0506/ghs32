@@ -21,33 +21,24 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        $user->assignRole(['admin', 'teacher']);
+        $user->assignRole(['admin', 'teacher', 'library']);
 
-        Profile::create([
+        Teacher::create([
+
             'user_id' => $user->id,
-            'name' => "Muhammad Abbas",
-            'phone' => "03000373004",
-            'cnic' => "3530119663433",
-            'qualification' => 'MS in CS',
-            'designation' => 'SSS(CS)',
+            'name' => 'Muhammad Abbas',
+            'short_name' => 'Abbas',
+            'father_name' => 'Muhammad Yousaf',
+            'cnic' => '3530119663433',
+            'dob' => '06/05/1978',
+            'blood_group' => 'B+',
+            'address' => 'PTCL Exchange Road, Depalpur',
+            'phone' => '03000373004',
+            'joined_at' => '10/16/2025',
+            'designation' => 'Sr. Headmaster',
+            'qualification' => 'MS in Computer Sc.',
             'bps' => 18,
-        ]);
-
-        // lab incharge
-        $user = User::create([
-            'email' => "muhammadittfaq007@gmail.com",
-            'password' => Hash::make('password'),
-        ]);
-
-        $user->assignRole(['teacher', 'library']);
-        Profile::create([
-            'user_id' => $user->id,
-            'name' => 'Muhammad Ittfaq',
-            'phone' => "03143661308",
-            'cnic' => "3640291865395",
-            'qualification' => 'MA Urdu',
-            'designation' => 'EST',
-            'bps' => 14,
+            'personal_no' => '31282674',
         ]);
     }
 }

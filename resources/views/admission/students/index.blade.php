@@ -20,7 +20,7 @@
         <div class="flex gap-3 flex-wrap">
             <a href="{{route('admin.section.students.create', $section)}}" class="text-sm p-2 border hover:bg-teal-400">New <i class="bi bi-person-add text-teal-600"></i></a>
             <a href="{{url('admin/students/import',$section)}}" class="text-sm p-2 border hover:bg-teal-50">Import <i class="bi bi-file-earmark-excel text-teal-600"></i></a>
-            <a href="{{ route('admin.section.lecture.allocations.index',[$section,0]) }}" class="p-2 border rounded hover:bg-slate-200"><i class="bi-clock text-teal-600"></i></a>
+            <a href="{{ route('admin.section.lecture.schedule.index',[$section,0]) }}" class="p-2 border rounded hover:bg-slate-200"><i class="bi-clock text-teal-600"></i></a>
             <a href="{{ route('admin.section.cards.index',$section) }}" class="p-2 border rounded hover:bg-slate-200"><i class="bi-person-badge text-indigo-600"></i></a>
             <form action="{{ route('admin.sections.clean', $section) }}" method="post" onsubmit="return confirmClean(event)">
                 @csrf

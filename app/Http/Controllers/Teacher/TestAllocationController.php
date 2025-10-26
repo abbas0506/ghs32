@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Models\Teacher;
 use App\Models\Test;
 use App\Models\TestAllocation;
 use Exception;
@@ -18,13 +19,12 @@ class TestAllocationController extends Controller
     {
         //
 
-
+        $teacher = Teacher::where('user_id', Auth::user()->id)->first();
 
         $test = Test::with('testAllocations')->findOrFail($id);
         $testAllocations = TestAllocation::where('test_id', $test->id)
-            ->whereHas('allocation', function ($query) {
-                $query->where('teacher_id', Auth::user()->id);
-            })->get();
+            ->where('teacher_id', $teacher->id)
+            ->get();
 
         return view('teacher.test-allocations.index', compact('test', 'testAllocations'));
     }

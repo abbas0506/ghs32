@@ -1,11 +1,11 @@
-<header class="sticky-header no-auth">
+<header class="sticky-header no-auth" id='header'>
     <div class="flex flex-wrap w-full h-16 items-center justify-between px-5">
 
         <a href="{{url('/')}}" class="flex text-xl font-bold items-center">
-            <img src="{{asset('images/logo/app_logo_transparent.png')}}" alt="" class="w-8 md:w-12">
+            <img src="{{asset('images/logo/logo_32.png')}}" alt="" class="w-8 md:w-12">
             <div class="px-2">
-                <div class="app-title text-lg font-medium">GHSSCB</div>
-                <div class="app-subtitle text-xs font-thin hidden md:block">Govt Higher Secondary School Chak Bedi</div>
+                <div class="app-title text-lg font-medium">GHS 32/2L</div>
+                <div class="app-subtitle text-xs font-thin hidden md:block">Believe in Excellence</div>
             </div>
         </a>
 
@@ -16,7 +16,7 @@
                 </li>
                 <li><a href="{{ url('/') }}" class="nav-item">Home</a></li>
                 <li><a href="{{ url('about') }}" class="nav-item">About</a></li>
-                <li><a href="{{ url('faculty') }}" class="nav-item">Faculty</a></li>
+                <li><a href="{{ route('faculty.index') }}" class="nav-item">Faculty</a></li>
                 <li><a href="{{ url('gallary') }}" class="nav-item">Gallary</a></li>
                 <li><a href="{{ route('alumni.index') }}" class="nav-item">Alumni</a></li>
                 <li><a href="{{ url('contact') }}" class="nav-item">Contact Us</a></li>

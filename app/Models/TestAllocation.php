@@ -10,8 +10,11 @@ class TestAllocation extends Model
     use HasFactory;
     protected $fillable = [
         'test_id',    //section label A, B, C
-        'allocation_id',
-        'total_marks',
+        'section_id',
+        'lecture_no',
+        'subject_id',
+        'teacher_id',
+        'max_marks',
         'test_date',
         'result_date',
     ];
@@ -22,14 +25,18 @@ class TestAllocation extends Model
     {
         return $this->belongsTo(Test::class);
     }
-    // public function section()
-    // {
-    //     return $this->hasOneThrough(Allocation::class, Section::class);
-    // }
-
-    public function allocation()
+    public function section()
     {
-        return $this->belongsTo(Allocation::class);
+        return $this->belongsTo(Section::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
     }
 
     public function results()
@@ -44,7 +51,7 @@ class TestAllocation extends Model
     public function scopeCombined($query)
     {
         return $query->whereHas('test', function ($query) {
-            $query->whereNull('user_id');
+            $query->whereNull('teacher_id');
         });
     }
     public function scopeResultSubmitted($query)

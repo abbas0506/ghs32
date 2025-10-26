@@ -140,7 +140,7 @@
 
     </div>
 </section>
-<section class="mt-5 md:mt-0">
+<!-- <section class="mt-5 md:mt-0">
     <div class="justify-center w-full bg-teal-50">
         <div class="grid grid-cols-1 md:grid-cols-2  items-center p-5 md:px-24 gap-5 md:gap-16">
             <div class="place-items-center md:place-items-start">
@@ -148,7 +148,7 @@
             </div>
             <div class="">
                 <h3 class="text-xl md:text-2xl">Self Assessment</h3>
-                <p class="text-sm md:text-lg mt-1">Self assessment improves your underdtanding about the subject, helps you identify your deficiency areas and gauage your performance. We offer self assessment from grade 9 to 12 </p>
+                <p class="text-sm md:text-lg mt-1">Self assessment improves your underdtanding about the subject, helps you identify your deficiency areas and gauage your performance. We offer self assessment from grade 9 to 10 </p>
                 <div class="mt-6">
                     <a href="{{ url('https://www.exampixel.com/') }}" target="_blank" class="bg-teal-600 hover:bg-teal-800 text-slate-100 rounded-md duration-200 px-6 py-2">
                         Start Test
@@ -159,11 +159,11 @@
         </div>
 
     </div>
-</section>
+</section> -->
 <!-- features section -->
 <section id='features' class="md:mt-24 px-4 md:px-24 mt-12">
     <h2 class="text-2xl md:text-4xl text-center">WELCOME TO</h2>
-    <p class="text-center text-sm md:text-lg mt-3">Govt Higher Secondary School Chak Bedi, Pakpattan</p>
+    <p class="text-center text-sm md:text-lg mt-3">Government High School 32/2L, Okara, Pakistan</p>
     <div class="h-1 w-24 bg-teal-800 mx-auto mt-6"></div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
         <div class="feature-box hover:border-pink-300 hover:bg-pink-50">
@@ -171,7 +171,7 @@
                 <i class="bi-book text-2xl text-pink-400"></i>
             </div>
             <h3 class="mt-3 text-lg">Free Education</h3>
-            <p class="text-sm text-center">We provide free education as per govt policy from nursery to 12<sup>th</sup> class.</p>
+            <p class="text-sm text-center">We provide free education as per govt policy from nursery to 10<sup>th</sup> class.</p>
         </div>
 
         <div class="feature-box hover:border-orange-300 hover:bg-orange-50">
@@ -194,8 +194,8 @@
             <div class="flex items-center justify-center bg-green-100 rounded-full w-16 h-16">
                 <i class="bx bx-run text-2xl text-green-400"></i>
             </div>
-            <h3 class="mt-3 text-lg">Vast Playgrounds</h3>
-            <p class="text-sm text-center">Vast playgrounds of hockey, footbal, cricket are always open to students.</p>
+            <h3 class="mt-3 text-lg">Vast Playground</h3>
+            <p class="text-sm text-center">Vast playground for cricket, football and hockey is always open to students.</p>
         </div>
 
         <div class="feature-box hover:border-indigo-200 hover:bg-indigo-50">
@@ -253,9 +253,9 @@
     </div>
     <div class="w-full md:w-3/4 mx-auto mt-12">
         <div class="flex justify-center items-center flex-col">
-            <img src="{{asset('images/principal/muzammil.png')}}" class="w-64 rounded-full" alt="">
-            <h2 class="mt-3 font-bold text-lg">Muzammil Hussain SS(Chemistry)</h2>
-            <h2>Principal</h2>
+            <img src="{{asset('images/principal/abbas.png')}}" class="w-48 h-48 rounded-full" alt="">
+            <h2 class="mt-3 font-bold text-lg">Muhammad Abbas SSS(CS)</h2>
+            <h2>Sr. Headmaster</h2>
             <p class="mt-3 text-sm md:text-lg text-center p-5">
                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                 "We are committed to achieve academic excellence, character education, and inclusive community engagement. we empower our students to become lifelong learners, compassionate leaders, and contributors to a globally connected society."
@@ -354,25 +354,18 @@
 </section>
 
 <section class="mt-24 md:px-24 p-5">
-    <div class="grid grid-cols-1 md:grid-cols-2 border">
-        <div class="p-4 md:p-8 text-center">
-            <img src="{{url(asset('images/donor.png'))}}" alt="" class="w-40 h-40 rounded-full mx-auto">
-            <h2 class="mt-3 text-lg font-bold">Rao Zahoor Ahmad Kalanwari</h2>
-            <p class="text-slate-600 text-sm mt-2">We honor the profound generosity of Rao Zahoor Ahmad, a great philanthropist from village Chak Bedi, who selflessly donated 9 acres of land for the establishment of this school. May his soul rest in eternal peace.</p>
-        </div>
 
-        <div class="overflow-x-hidden">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d6044.265479385004!2d73.49551048367726!3d30.485434912974124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1shigher%20secondary%20school%20near%20Chak%20Bedi!5e0!3m2!1sen!2s!4v1701884753529!5m2!1sen!2s" width="100%" height="324" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-
+    <div class="overflow-x-hidden">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6858.6632086990285!2d73.52574868837141!3d30.73718562002131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39180624c19cb001%3A0x4eb6e3a38a104dbe!2sGovt%20Boys%20High%20School!5e0!3m2!1sen!2s!4v1761409543502!5m2!1sen!2s" width="100%" height="324" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full" height="320" style="border:0;"></iframe>
     </div>
+
 
     <div class="flex items-center gap-5 mt-16">
         <div class="relative flex-1">
             <input type="text" placeholder="Enter your mailing address" class="custom-input pl-10">
             <i class="bi-envelope absolute top-3 left-3"></i>
         </div>
-        <!-- <img src="{{url('images/mini/email-5.png')}}" alt="" class="w-16 -rotate-6"> -->
+
         <button class="btn-teal rounded-md py-2 px-4">Submit</button>
 
     </div>

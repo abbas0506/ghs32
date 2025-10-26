@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ghss-cb</title>
-    <link rel="icon" href="{{ asset('/images/logo/logo-light.png') }}">
+    <title>GHS32/2L</title>
+    <link rel="icon" href="{{ asset('/images/logo/logo_32.png') }}">
     <!-- Fonts -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Styles -->

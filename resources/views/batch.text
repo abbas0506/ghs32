@@ -35,7 +35,7 @@ INSERT INTO ghsscb.applications (
     bise,
     rollno,
     obtained_marks,
-    total_marks,
+    max_marks,
     status,
     created_at
 )
@@ -60,7 +60,7 @@ SELECT
     bise,
     rollno,
     obtained_marks,
-    total_marks,
+    max_marks,
     status,
     created_at
 FROM

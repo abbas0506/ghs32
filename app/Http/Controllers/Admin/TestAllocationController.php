@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Allocation;
+use App\Models\Teacher;
 use App\Models\Test;
 use App\Models\TestAllocation;
 use Exception;
@@ -18,14 +19,7 @@ class TestAllocationController extends Controller
     {
         //
         $test = Test::findOrFail($id);
-        $testAllocations = TestAllocation::with(['allocation.section'])
-            ->join('allocations', 'allocations.id', '=', 'test_allocations.allocation_id')
-            ->join('sections', 'sections.id', '=', 'allocations.section_id')
-            ->join('grades', 'grades.id', '=', 'sections.grade')
-            ->orderBy('grades.grade', 'asc')  // Sorting by `grade` of the related `section`
-            ->where('test_id', $id)
-            ->get('test_allocations.*');
-        // $testAllocations = $test->testAllocations;
+        $testAllocations = $test->testAllocations;
         return view('admin.tests.allocations.index', compact('test', 'testAllocations'));
     }
 
@@ -55,7 +49,7 @@ class TestAllocationController extends Controller
         try {
             $test->testAllocations()->create([
                 'allocation_id' => $request->allocation_id,
-                'total_marks' => 50,
+                'max_marks' => 50,
                 'test_date' => now(),
             ]);
             return redirect()->route('admin.test.allocations.index', $test)->with('success', 'Successfully created');
@@ -81,7 +75,8 @@ class TestAllocationController extends Controller
         //
         $test = Test::findOrFail($testId);
         $testAllocation = TestAllocation::findOrFail($id);
-        return view('admin.tests.allocations.edit', compact('test', 'testAllocation'));
+        $teachers = Teacher::where('is_active', true)->get();
+        return view('admin.tests.allocations.edit', compact('test', 'testAllocation', 'teachers'));
     }
 
     /**
@@ -91,7 +86,8 @@ class TestAllocationController extends Controller
     {
         //
         $request->validate([
-            'total_marks' => 'required|numeric|min:1',
+            'max_marks' => 'required|numeric|min:1',
+            'teacher_id' => 'required',
         ]);
 
         $test = Test::findOrFail($testId);
@@ -100,12 +96,13 @@ class TestAllocationController extends Controller
 
             if ($request->unlock) {
                 $test->testAllocations()->findOrFail($id)->update([
-                    'total_marks' => $request->total_marks,
+                    // 'max_marks' => $request->max_marks,
                     'result_date' => null,
                 ]);
             } else {
                 $test->testAllocations()->findOrFail($id)->update([
-                    'total_marks' => $request->total_marks,
+                    'teacher_id' => $request->teacher_id,
+                    'max_marks' => $request->max_marks,
                 ]);
             }
             return redirect()->route('admin.test.allocations.index', $test)->with('success', 'Successfully created');

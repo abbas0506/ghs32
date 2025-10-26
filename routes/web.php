@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AllocationController;
 use App\Http\Controllers\Admin\AlumniController;
+use App\Http\Controllers\Admin\ClassWiseScheduleController;
 use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\Admin\CollectiveTestController;
@@ -10,14 +11,17 @@ use App\Http\Controllers\Admin\EmployeeCardController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\InchargeController;
 use App\Http\Controllers\Admin\PdfController as AdminPdfController;
+use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\SectionCardController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
 use App\Http\Controllers\Admin\SectionResultCardController;
 use App\Http\Controllers\Admin\SectionResultController;
 use App\Http\Controllers\Admin\SectionStuedentsController;
+use App\Http\Controllers\Admin\SectionWiseScheduleController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherCardController;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
+use App\Http\Controllers\Admin\TeacherWiseScheduleController;
 use App\Http\Controllers\Admin\TestAllocationController as AdminTestAllocationController;
 use App\Http\Controllers\Admin\TestSectionController as AdminTestSectionController;
 use App\Http\Controllers\Admin\UserController;
@@ -34,6 +38,7 @@ use App\Http\Controllers\Admission\SectionController;
 use App\Http\Controllers\Admission\SectionStudentsController;
 use App\Http\Controllers\AlumniController as ControllersAlumniController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\GallaryController;
 use App\Http\Controllers\Library\BookController;
 use App\Http\Controllers\Library\BookIssuanceController;
@@ -113,9 +118,7 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::post('login/as', [AuthController::class, 'loginAs'])->name('login.as');
 Route::get('signout', [AuthController::class, 'signout'])->name('signout');
-Route::resource('teachers', TeacherController::class);
-Route::get('faculty', [TeacherController::class, 'faculty']);
-
+Route::resource('faculty', FacultyController::class)->only('index', 'create', 'store');
 Route::resource('alumni', ControllersAlumniController::class)->only('index', 'create', 'store');
 
 Route::middleware(['auth'])->group(function () {
@@ -128,7 +131,16 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('sections', AdminSectionController::class);
         Route::resource('events', EventController::class);
         Route::resource('teachers', AdminTeacherController::class);
-        Route::resource('section.lecture.allocations', AllocationController::class);
+
+        Route::resource('section.lecture.schedule', ScheduleController::class);
+
+        Route::get('section-wise-schedule', [SectionWiseScheduleController::class, 'index']);
+        Route::get('section-wise-schedule/print', [SectionWiseScheduleController::class, 'print']);
+        Route::get('section-wise-schedule/clear', [SectionWiseScheduleController::class, 'clear']);
+
+        Route::get('teacher-wise-schedule', [TeacherWiseScheduleController::class, 'index']);
+        Route::get('teacher-wise-schedule/print', [TeacherWiseScheduleController::class, 'print']);
+
         Route::get('section/{section}/reset-index', [AdminSectionController::class, 'resetIndex'])->name('sections.reset');
         Route::post('section/{section}/reset-rollno', [AdminSectionController::class, 'resetRollNo'])->name('sections.reset.rollno');
         Route::post('section/{section}/reset-admission-no', [AdminSectionController::class, 'resetAdmNo'])->name('sections.reset.admno');

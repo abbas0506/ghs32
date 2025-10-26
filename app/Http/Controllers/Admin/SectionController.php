@@ -36,7 +36,7 @@ class SectionController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required',
+            'name' => 'nullable|max:50',
             'grade' => 'required',
         ]);
 

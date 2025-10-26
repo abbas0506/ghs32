@@ -33,7 +33,7 @@ class TestPositionController extends Controller
         $studentPercentages = $students->map(function ($student) use ($test) {
             // obtained_marks marks, total marks
             $obtained_marks = $student->results->where('testAllocation.test_id', $test->id)->sum('obtained_marks');
-            $total = $student->results->where('testAllocation.test_id', $test->id)->sum('testAllocation.total_marks');
+            $total = $student->results->where('testAllocation.test_id', $test->id)->sum('testAllocation.max_marks');
 
             // Avoid division by zero
             $percentage = $total > 0 ? ($obtained_marks / $total) * 100 : 0;
@@ -42,7 +42,7 @@ class TestPositionController extends Controller
                 'id' => $student->id,
                 'rollno' => $student->rollno,
                 'name' => $student->name,
-                'total_marks' => $total,
+                'max_marks' => $total,
                 'obtained_marks' => $obtained_marks,
                 'percentage' => round($percentage, 0),
             ];
@@ -58,7 +58,7 @@ class TestPositionController extends Controller
                 'id' => $sortedPercentage['id'],
                 'rollno' => $sortedPercentage['rollno'],
                 'name' => $sortedPercentage['name'],
-                'total_marks' => $sortedPercentage['total_marks'],
+                'max_marks' => $sortedPercentage['max_marks'],
                 'obtained_marks' => $sortedPercentage['obtained_marks'],
                 'percentage' => $sortedPercentage['percentage'],
                 'position' => ++$i,

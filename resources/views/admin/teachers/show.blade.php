@@ -40,7 +40,7 @@
             <div>
                 <label for="">Personal # </label>
                 <div class="flex flex-wrap items-center gap-x-4">
-                    <h2>{{ $teacher->personal_number }}</h2>
+                    <h2>{{ $teacher->personal_no }}</h2>
 
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 <label for="">Personal Info</label>
                 <p>{{ $teacher->name }} s/o {{ $teacher->father_name }}</p>
                 <p class="text-slate-600 text-sm"><i class="bi-balloon"></i>{{ $teacher->dob }} <i class="bi-card-heading ml-2"></i> {{ $teacher->cnic }} </p>
-                <p><i class="bi-telephone ml-2"></i> {{ $teacher->personal_phone }} <i class="bi-at"></i>{{ $teacher->user?->email }}</p>
+                <p><i class="bi-telephone ml-2"></i> {{ $teacher->phone }} <i class="bi-at"></i>{{ $teacher->user?->email }}</p>
                 <p class="text-slate-600 text-sm">{{ $teacher->address }} </p>
             </div>
 

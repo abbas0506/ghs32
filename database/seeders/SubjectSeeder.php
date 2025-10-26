@@ -24,9 +24,6 @@ class SubjectSeeder extends Seeder
         Subject::create(['name' => 'Biology', 'short_name' => 'BIO']);
         Subject::create(['name' => 'Chemistry', 'short_name' => 'CHM']);
         Subject::create(['name' => 'Computer Sc.', 'short_name' => 'CSC']);
-        Subject::create(['name' => 'Civics', 'short_name' => 'CIV']);
-        Subject::create(['name' => 'Health and Physical', 'short_name' => 'H&P']);
-        Subject::create(['name' => 'Education', 'short_name' => 'EDU']);
         Subject::create(['name' => 'Islamic Studies (Elective)', 'short_name' => 'IST']);
         Subject::create(['name' => 'Arabic', 'short_name' => 'ARB']);
         Subject::create(['name' => 'Agricutlure', 'short_name' => 'AGR']);

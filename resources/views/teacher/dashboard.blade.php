@@ -18,8 +18,8 @@
         <div class="flex-1">
             <h3>Collective Tests</h3>
             <p class="text-sm text-slate-600 font-thin">Pendency:
-                @if (Auth::user()->testAllocations()->active()->count())
-                {{100-round(Auth::user()->testAllocations()->combined()->active()->resultSubmitted()->count()/Auth::user()->testAllocations()->combined()->active()->count()*100,0)}} %
+                @if ($teacher->testAllocations()->active()->count())
+                {{100-round($teacher->testAllocations()->combined()->active()->resultSubmitted()->count()/$teacher->testAllocations()->combined()->active()->count()*100,0)}} %
                 @else
                 -
                 @endif
@@ -27,7 +27,7 @@
             </p>
         </div>
         <div class="ico bg-teal-100 text-teal-600">
-            {{ $tests->whereNull('user_id')->where('is_open', true)->count() }}
+            {{ $tests->whereNull('teacher_id')->where('is_open', true)->count() }}
         </div>
     </a>
     <a href="#" class="pallet-box bg-gradient-to-r from-indigo-100 to-white">
@@ -36,7 +36,7 @@
             <p class="text-sm text-slate-600 font-thin">Pendency: -</p>
         </div>
         <div class="ico bg-indigo-100 text-indigo-400">
-            {{ Auth::user()->tests()->individual()->count() }}
+            {{$teacher->tests()->individual()->count() }}
         </div>
     </a>
 

@@ -9,7 +9,6 @@ class Allocation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'session_id',
         'section_id',
         'lecture_no',
         'subject_id',
@@ -20,6 +19,7 @@ class Allocation extends Model
         'day4',
         'day5',
         'day6',
+        'room_no'
     ];
 
     public function section()
@@ -38,7 +38,7 @@ class Allocation extends Model
     }
     public function teacher()
     {
-        return $this->belongsTo(User::class, 'teacher_id', 'id');
+        return $this->belongsTo(Teacher::class);
     }
     public function scopeHavingLectureNo($query, $lecture_no)
     {

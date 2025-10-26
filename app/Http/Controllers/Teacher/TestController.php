@@ -14,7 +14,7 @@ class TestController extends Controller
     public function index()
     {
         //
-        $tests = Test::whereNull('user_id')->get();
+        $tests = Test::whereNull('teacher_id')->get();
         return view('teacher.tests.index', compact('tests'));
     }
 

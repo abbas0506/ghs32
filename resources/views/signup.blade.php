@@ -6,11 +6,11 @@
 
     <!-- <div><img src="{{ url('images/small/key.png') }}" alt="key" class="w-32"></div> -->
     <div class="grid place-items-center w-full md:w-1/2 mx-auto">
+        <img src="{{asset('images/logo/logo_32.png')}}" alt="" class="w-24 md:w-36 mx-auto">
+        <!-- <h2 class="text-xl font-bold mt-6">SIGN UP</h2> -->
+        <!-- <label for="">https://www.ghsscb.edu.pk</label> -->
 
-        <h2 class="text-4xl font-bold">SIGN UP</h2>
-        <label for="">https://www.ghsscb.edu.pk</label>
-
-        <form action="{{route('signup.store') }}" method="post" class="w-full mt-6">
+        <form action="{{route('signup.store') }}" method="post" class="w-full mt-3">
             @csrf
 
             <!-- page message -->

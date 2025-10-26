@@ -17,7 +17,10 @@ class Section extends Model
 
     public function fullName()
     {
-        return $this->grade . "-" . $this->name;
+        if ($this->name)
+            return $this->grade . "(" . $this->name . ")";
+        else
+            return $this->grade;
     }
 
     public function incharge()

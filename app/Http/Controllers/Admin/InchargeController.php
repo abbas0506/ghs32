@@ -72,7 +72,7 @@ class InchargeController extends Controller
                 'incharge_id' => $request->incharge_id,
             ]);
 
-            return redirect()->route('admin.section.lecture.allocations.index', [0, 0])->with('success', 'Successfully updated');;
+            return redirect()->route('admin.section.lecture.schedule.index', [0, 0])->with('success', 'Successfully updated');;
         } catch (Exception $ex) {
             return redirect()->back()->withErrors($ex->getMessage());
         }

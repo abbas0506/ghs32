@@ -103,7 +103,7 @@ class Student extends Model
         //!== will only be false if record could not be found
         if ($index !== false) {
             $ranking = $sortedPercentages->get($index);
-            return $ranking['total_marks'];
+            return $ranking['max_marks'];
         } else {
             return '';
         }
@@ -148,7 +148,7 @@ class Student extends Model
                 $query->where('test_id', $testId);  // Filter by test_id in the test_allocations
             })
             ->join('test_allocations', 'results.test_allocation_id', '=', 'test_allocations.id')  // Join test_allocations to results
-            ->sum('test_allocations.total_marks');  // Sum the total_marks from the test_allocations
+            ->sum('test_allocations.max_marks');  // Sum the max_marks from the test_allocations
 
 
         return $sumMarks;

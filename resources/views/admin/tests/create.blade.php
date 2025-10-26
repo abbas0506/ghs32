@@ -18,19 +18,27 @@
     @endif
     <form action="{{route('admin.tests.store')}}" method='post' class="w-full grid gap-6" onsubmit="return validate(event)">
         @csrf
-        <div>
-            <label>Test Title</label>
-            <input type="text" name='title' class="custom-input" placeholder="test title" value="" required>
+        <div class="grid md:grid-cols-4 gap-3">
+            <div class="md:col-span-3">
+                <label>Test Title</label>
+                <input type="text" name='title' class="custom-input" placeholder="For example: December Test" value="" required>
+            </div>
+            <div>
+                <label>Marks</label>
+                <input type="number" name='max_marks' class="custom-input text-center" placeholder="Max marks" value="20" required>
+
+            </div>
         </div>
+
         <div class="md:p-8 border rounded-lg">
-            <h3 class="mb-4">Select grades for this test</h3>
-            @foreach($grades as $grade)
+            <h3 class="mb-4">Select classes for this test</h3>
+            @foreach($sections as $section)
             <div class="flex items-center odd:bg-slate-100 checkable-row px-4">
                 <!-- <div class="flex flex-1 items-center justify-between space-x-2 pr-3"> -->
-                <label for='grade{{$grade->id}}' class="flex-1 text-sm text-slate-800 hover:cursor-pointer py-2">{{ $grade->english_name }} </label>
+                <label for='section{{$section->id}}' class="flex-1 text-sm text-slate-800 hover:cursor-pointer py-2">{{ $section->fullName()}} </label>
                 <!-- </div> -->
                 <div class="text-base">
-                    <input type="checkbox" id='grade{{$grade->id}}' name='grades_array[]' class="custom-input w-4 h-4 rounded hidden" value="{{ $grade->id }}">
+                    <input type="checkbox" id='section{{$section->id}}' name='sections_array[]' class="custom-input w-4 h-4 rounded hidden" value="{{ $section->id }}">
                     <i class="bx bx-check"></i>
                 </div>
             </div>

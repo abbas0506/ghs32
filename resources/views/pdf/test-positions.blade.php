@@ -49,7 +49,7 @@ $roman = config('global.romans');
             <!-- front page ... section gazzet -->
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/school_logo.png')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo.jpg')}}" class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
@@ -83,7 +83,7 @@ $roman = config('global.romans');
                         <td>{{ $sortedPercentage['position'] }}</td>
                         <td class="text-left">{{ ucwords(strtolower($sortedPercentage['name'])) }}</td>
                         <td>{{ $sortedPercentage['rollno'] }}</td>
-                        <td>{{ $sortedPercentage['total_marks'] }}</td>
+                        <td>{{ $sortedPercentage['max_marks'] }}</td>
                         <td>{{ $sortedPercentage['obtained_marks'] }}</td>
                         <td>{{ $sortedPercentage['percentage'] }} %</td>
 

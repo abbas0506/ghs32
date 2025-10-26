@@ -24,7 +24,7 @@
                 <h2 class="md:col-span-2 text-green-600">Edit User <i class="bi-person-check"></i></h2>
                 <div class="md:col-span-2">
                     <label for="">User Name</label>
-                    <input type="text" id='' name='name' class="custom-input-borderless" placeholder="User name" value="{{$user->profile?->name}}">
+                    <input type="text" id='' name='name' class="custom-input-borderless" placeholder="User name" value="{{$user->teacher?->name}}">
                 </div>
 
                 <div>

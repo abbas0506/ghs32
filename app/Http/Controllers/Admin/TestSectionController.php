@@ -17,7 +17,7 @@ class TestSectionController extends Controller
         //
         $test = Test::findOrFail($id);
 
-        $sectionIds = $test->allocations->pluck('section_id')->unique()->toArray();
+        $sectionIds = $test->testAllocations->pluck('section_id')->unique()->toArray();
         $sections = Section::whereIn('id', $sectionIds)->get();
 
         return view('admin.test-sections.index', compact('test', 'sections'));

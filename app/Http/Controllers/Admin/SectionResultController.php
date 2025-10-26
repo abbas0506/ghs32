@@ -34,7 +34,7 @@ class SectionResultController extends Controller
         $studentPercentages = $students->map(function ($student) {
             $obtained_marks = $student->results->sum('obtained_marks');
             $total = $student->results->sum(function ($result) {
-                return $result->testAllocation->total_marks;
+                return $result->testAllocation->max_marks;
             });
 
             // Avoid division by zero
@@ -44,7 +44,7 @@ class SectionResultController extends Controller
                 'id' => $student->id,
                 'rollno' => $student->rollno,
                 'name' => $student->name,
-                'total_marks' => $total,
+                'max_marks' => $total,
                 'obtained_marks' => $obtained_marks,
                 'percentage' => round($percentage, 0),
             ];
@@ -60,7 +60,7 @@ class SectionResultController extends Controller
                 'id' => $sortedPercentage['id'],
                 'rollno' => $sortedPercentage['rollno'],
                 'name' => $sortedPercentage['name'],
-                'total_marks' => $sortedPercentage['total_marks'],
+                'max_marks' => $sortedPercentage['max_marks'],
                 'obtained_marks' => $sortedPercentage['obtained_marks'],
                 'percentage' => $sortedPercentage['percentage'],
                 'position' => ++$i,

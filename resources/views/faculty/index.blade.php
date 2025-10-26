@@ -8,7 +8,7 @@
     <h2 class="text-3xl font-bold mb-4 mt-32 text-center text-gray-800">Meet Our Faculty</h2>
 
     <div class="text-center mb-8">
-        <a href="{{ route('teachers.create') }}"
+        <a href="{{ route('faculty.create') }}"
             class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition duration-300 shadow-lg">
             Join as Faculty Member
         </a>
@@ -36,7 +36,7 @@
             <p class="text-gray-500 text-sm">{{ $teacher->designation }}, BPS {{ $teacher->bps }}</p>
             <div class="text-xs text-gray-500 mt-3">
                 <p><i class="bi-at"></i> {{ $teacher->user?->email }}</p>
-                <p><i class="bi-telephone"></i> {{ $teacher->personal_phone }}</p>
+                <p><i class="bi-telephone"></i> {{ $teacher->phone }}</p>
                 <p><i class="bi-clock"></i> {{ $teacher->joined_at->diffInYears(Carbon\Carbon::now()) }} years experience</p>
             </div>
         </div>

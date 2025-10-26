@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->string('title', 60);
-            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->unsignedTinyInteger('max_marks')->default(20);
+            $table->foreignId('teacher_id')->nullable()->constrained('teachers')->onDelete('set null');
+
             $table->boolean('is_open')->default(true);
             $table->timestamps();
         });

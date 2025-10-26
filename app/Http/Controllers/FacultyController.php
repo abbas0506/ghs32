@@ -10,36 +10,36 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-class TeacherController extends Controller
+class FacultyController extends Controller
 {
     public function index()
     {
         $teachers = Teacher::all();
-        return view('teachers.index', compact('teachers'));
+        return view('faculty.index', compact('teachers'));
     }
 
     public function create()
     {
-        return view('teachers.create');
+        return view('faculty.create');
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'short_name' => 'required|string|max:50',
             'father_name' => 'nullable|string|max:255',
             'cnic' => 'required|string|max:20|unique:teachers',
             'dob' => 'nullable|date',
             'blood_group' => 'nullable|string|max:10',
             'address' => 'nullable|string',
-            'personal_phone' => 'nullable|string|max:15',
+            'phone' => 'nullable|string|max:15',
             'official_phone' => 'nullable|string|max:15',
             'joined_at' => 'nullable|date',
             'designation' => 'nullable|string|max:100',
             'qualification' => 'nullable|string|max:100',
             'bps' => 'nullable|string|max:10',
-            'posting' => 'nullable|string|max:100',
-            'personal_number' => 'string|max:10',
+            'personal_no' => 'string|max:10',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:1024', // 1MB limit
         ]);
 
@@ -59,7 +59,7 @@ class TeacherController extends Controller
                 'user_id' => $user->id,
             ]));
             DB::commit();
-            return redirect('faculty')->with('success', 'Teacher added successfully.');
+            return redirect()->route('faculty.index')->with('success', 'Teacher added successfully.');
         } catch (Exception $ex) {
             Db::rollBack();
             return back()->with('warning', $ex->getMessage());

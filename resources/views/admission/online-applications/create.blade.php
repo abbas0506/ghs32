@@ -81,7 +81,7 @@
 <section>
     <div class="max-w-full m-5 md:mx-auto lg:w-2/3  mt-24 bg-white">
         <div class="bg-teal-600 p-5 relative">
-            <img src="{{ url(asset('images/logo/app_logo_transparent.png')) }}" alt="" class="absolute top-2 md:top-8 left-2 md:left-8 w-16">
+            <img src="{{ url(asset('images/logo/logo_32.png')) }}" alt="" class="absolute top-2 md:top-8 left-2 md:left-8 w-16">
             <div class="flex flex-col flex-1 justify-center items-center text-center">
                 <h2 class="txt-lg font-bold tracking-wider"> ADMISSION FORM</h2>
                 <h2 class="text-sm font-semibold">Part I - Session {{ date('Y')}}</h2>
@@ -238,8 +238,8 @@
                         <input type="text" name="rollno" class="custom-input fancy-focus" placeholder="Roll no." required>
                     </div>
                     <div>
-                        <label for="total_marks">Total Marks</label>
-                        <select name="total_marks" id="total_marks" class="custom-input fancy-focus">
+                        <label for="max_marks">Total Marks</label>
+                        <select name="max_marks" id="max_marks" class="custom-input fancy-focus">
                             <option value="1000">1000</option>
                             <option value="1050">1050</option>
                             <option value="1100">1100</option>

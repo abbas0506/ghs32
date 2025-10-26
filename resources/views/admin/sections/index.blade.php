@@ -13,7 +13,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 mt-12 w-full md:w-3/4 mx-auto gap-4">
         @foreach($sections->sortBy('grade') as $section)
         <a href="{{route('admin.sections.show',$section)}}" class="p-4 ring-1 shadow-[0_0_20px_rgba(0,100,0,0.2)] rounded-md ">
-            <h2>{{ $section->grade }}-{{ $section->name }}</h2>
+            <h2>Class {{ $section->fullName() }}</h2>
             <div>{{ $section->students->count() }}</div>
         </a>
         @endforeach

@@ -10,7 +10,7 @@ class AlumniController extends Controller
     public function index()
     {
         $alumni = Alumni::latest()->paginate(10);
-        return view('alumni', compact('alumni'));
+        return view('alumni.index', compact('alumni'));
     }
 
     public function create()
@@ -21,13 +21,11 @@ class AlumniController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'prefix' => 'nullable|string|max:10',
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
             'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-            'home_address' => 'nullable|string',
-            'office_address' => 'nullable|string',
-            'job_desc' => 'nullable|string',
+            'address' => 'nullable|string|max:100',
+            'session' => 'nullable|string',
+            'introduction' => 'nullable|string',
             'photo' => 'nullable|image|max:2048',
         ]);
 
@@ -37,10 +35,5 @@ class AlumniController extends Controller
 
         Alumni::create($data);
         return redirect()->route('alumni.index')->with('success', 'Alumni added successfully.');
-    }
-
-    public function edit(Alumni $alumni)
-    {
-        return view('alumni.edit', compact('alumni'));
     }
 }

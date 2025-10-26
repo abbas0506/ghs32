@@ -1,7 +1,7 @@
 @extends('layouts.teacher')
 @section('page-content')
 
-<h2>{{ $testAllocation->allocation->section->roman() }}</h2>
+<h2>{{ $testAllocation->section->fullName() }}</h2>
 <div class="bread-crumb">
     <a href="{{url('/')}}">Home</a>
     <div>/</div>
@@ -32,10 +32,10 @@
     @csrf
     @method('patch')
     <div class="flex flex-wrap items-center gap-x-16 gap-y-3 mt-8">
-        <h2 class="text-teal-600">{{ $testAllocation->allocation->subject->name }}, {{ $testAllocation->allocation->section->roman() }}</h2>
+        <h2 class="text-teal-600">{{ $testAllocation->subject->name }}, {{ $testAllocation->section->fullName() }}</h2>
         <div class="flex space-x-3 items-center">
             <h3 class="text-red-600">Total Marks *</h3>
-            <input type="number" name="total_marks" value="{{ $testAllocation->total_marks }}" class="custom-input-borderless w-16 h-8 text-center px-0" min='0' max='100'>
+            <input type="number" name="max_marks" value="{{ $testAllocation->max_marks }}" class="custom-input-borderless w-16 h-8 text-center px-0" min='0' max='100'>
         </div>
     </div>
     <div class="overflow-x-auto w-full mt-6">

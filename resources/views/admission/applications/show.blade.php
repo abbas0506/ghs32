@@ -74,7 +74,7 @@
                 </div>
                 <div>
                     <label for="">Academic Info</label>
-                    <p>BISE {{ $application->bise }}, #{{ $application->rollno }} ({{ $application->pass_year }}), &nbsp &nbsp {{ $application->obtained_marks }}/{{ $application->total_marks}} ( {{ $application->obtained_percentage() }} % )</p>
+                    <p>BISE {{ $application->bise }}, #{{ $application->rollno }} ({{ $application->pass_year }}), &nbsp &nbsp {{ $application->obtained_marks }}/{{ $application->max_marks}} ( {{ $application->obtained_percentage() }} % )</p>
                     <p class="text-slate-600 text-sm">{{ $application->previous_school }}</p>
                 </div>
                 @if($application->status == 'admitted')

@@ -4,7 +4,7 @@
 <div class="bread-crumb">
     <a href="/">Home</a>
     <div>/</div>
-    <a href="{{route('admin.section.lecture.allocations.index',[0,0])}}">Allocations</a>
+    <a href="{{route('admin.section.lecture.schedule.index',[0,0])}}">Allocations</a>
     <div>/</div>
     <div>New</div>
 </div>
@@ -17,11 +17,11 @@
     <x-message></x-message>
     @endif
 
-    <form action="{{route('admin.section.lecture.allocations.store',[$section, $lecture_no])}}" method='post' class="grid grid-cols-1 md:grid-cols-2 w-full gap-5 p-5" onsubmit="return validate(event)">
+    <form action="{{route('admin.section.lecture.schedule.store',[$section, $lecture_no])}}" method='post' class="grid grid-cols-1 md:grid-cols-2 w-full gap-5 p-5" onsubmit="return validate(event)">
         @csrf
         <input type="hidden" name="session_id" value="1">
         <div class="col-span-full">
-            <h1 class="font-bold">Section: {{ $section->fullName() }}</h1>
+            <h1 class="font-bold">Class: {{ $section->fullName() }}</h1>
             <h2><i class="bi-clock mr-2"></i>Lecture # {{ $lecture_no }}</h2>
             <div class="divider my-2"></div>
         </div>
@@ -40,8 +40,8 @@
                 <i class="bx bx-user"></i>
             </div>
             <select name="teacher_id" id="" class="custom-input-borderless">
-                @foreach($users->sortByDesc('profile.bps') as $user)
-                <option value="{{ $user->id }}">{{ $user->profile->name }}</option>
+                @foreach($teachers->sortByDesc('bps') as $teacher)
+                <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                 @endforeach
             </select>
         </div>

@@ -81,14 +81,14 @@
 <section>
     <div class="max-w-full m-5 md:mx-auto lg:w-2/3  mt-24 bg-white">
         <div class="bg-slate-300 p-5 relative">
-            <img src="{{ url(asset('images/logo/app_logo_transparent.png')) }}" alt="" class="absolute top-2 md:top-2 left-2 md:left-2 w-16">
+            <img src="{{ url(asset('images/logo/logo_32.png')) }}" alt="" class="absolute top-2 md:top-2 left-2 md:left-2 w-12">
             <div class="flex flex-col flex-1 justify-center items-center text-center">
-                <h2 class="txt-lg font-bold tracking-wider"> Teacher Profile</h2>
+                <h2 class="txt-lg font-bold tracking-wider"> Faculty Members Only</h2>
             </div>
         </div>
 
         <div class="px-5 shadow-lg">
-            <form action="{{ route('teachers.store') }}" method="post" id='applicationForm' class="w-full py-5 md:px-16" enctype="multipart/form-data">
+            <form action="{{ route('faculty.store') }}" method="post" id='applicationForm' class="w-full py-5 md:px-16" enctype="multipart/form-data">
                 @csrf
                 <div class="photo-upload-wrapper">
                     <!-- Placeholder Photo Box -->
@@ -114,6 +114,10 @@
                         <input type="text" name="name" class="custom-input fancy-focus" placeholder="Your good name" required>
                     </div>
                     <div class="">
+                        <label for="">Short Name <span class="text-red-600">(To be displayed on time table)</span></label>
+                        <input type="text" name="short_name" class="custom-input fancy-focus" placeholder="for example: M Abbas" required>
+                    </div>
+                    <div class="">
                         <label for="">Father Name</label>
                         <input type="text" name="father_name" class="custom-input fancy-focus" placeholder="Father name" required>
                     </div>
@@ -132,11 +136,11 @@
                     </div>
                     <div>
                         <label for="">Personal Phone No <i class="bi-whatsapp"></i></label>
-                        <input type="text" name="personal_phone" id='personal_phone' class="custom-input fancy-focus phone" placeholder="Personal Phone" required>
+                        <input type="text" name="phone" id='phone' class="custom-input fancy-focus phone" placeholder="Personal Phone" required>
                     </div>
                     <div>
                         <label for="">Official Phone No <i class="bi-telephone"></i></label>
-                        <input type="text" name="official_phone" id='personal_phone' class="custom-input fancy-focus phone" placeholder="Official Phone">
+                        <input type="text" name="official_phone" id='phone' class="custom-input fancy-focus phone" placeholder="Official Phone">
                     </div>
                     <div class="md:col-span-2">
                         <label for="">Home Address <i class="bi-house"></i></label>
@@ -176,8 +180,8 @@
                         <input type="date" name="joined_at" class="custom-input fancy-focus" required>
                     </div>
                     <div>
-                        <label for="personal_number">Personal # <i class="bi-numeric"></i></label>
-                        <input type="text" name="personal_number" class="custom-input fancy-focus" placeholder="Personal No." required>
+                        <label for="personal_no">Personal # <i class="bi-numeric"></i></label>
+                        <input type="text" name="personal_no" class="custom-input fancy-focus" placeholder="Personal No." required>
                     </div>
                     <div class="flex justify-center space-x-3 text-center mt-8 md:col-span-2">
                         <a href="{{ url('/')}}" class="btn-gray rounded py-3 px-5">Cancel <i class="bi-x text-white"></i></a>

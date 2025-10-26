@@ -30,8 +30,8 @@
     @foreach($allocations->sortBy('section.id') as $allocation)
     <div class="allocation flex justify-between items-center border hover:border-teal-100 rounded-md mt-3 p-3 shadow-md hover:bg-teal-50 transition-all duration-500 ease-in-out hover:cursor-pointer text-sm">
         <div data-bound='{{ $allocation->id }}'>
-            <h3 class="font-bold">{{ $allocation->section->roman()}} Lecture # {{ $allocation->lecture_no }}</h3>
-            <p>{{ $allocation->subject->name}} <span class="text-slate-400">by {{ $allocation->teacher->profile->name }}</span></p>
+            <h3 class="font-bold">{{ $allocation->section->fullName()}} Lecture # {{ $allocation->lecture_no }}</h3>
+            <p>{{ $allocation->subject->name}} <span class="text-slate-400">by {{ $allocation->teacher->teacher->name }}</span></p>
         </div>
         <i class="bi-arrow-right text-slate-400"></i>
     </div>
