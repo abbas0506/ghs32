@@ -43,7 +43,9 @@
                     <th class="w-10">#</th>
                     <th class="w-48 text-left">Name</th>
                     <th class="w-48 text-left">Father</th>
-                    <th class="w-24">Group</th>
+                    <th class="w-48 text-left">DOB</th>
+                    <th class="w-24">BForm</th>
+                    <th class="w-24">Address</th>
                     <th class="w-24">Photo</th>
 
                 </tr>
@@ -54,7 +56,9 @@
                     <td>{{$student->rollno}}</td>
                     <td class="text-left"><a href="{{route('admin.section.students.show', [$section, $student])}}" class="link">{{$student->name}}</a></td>
                     <td class="text-left">{{$student->father_name}}</td>
-                    <td>{{$student->group->name}}</td>
+                    <td>{{$student->dob->format('d/m/Y')}}</td>
+                    <td>{{$student->bform}}</td>
+                    <td>{{$student->address}}</td>
                     <td><img src="{{ asset('storage/' . $student->photo) }}" alt="photo" class="rounded mx-auto w-8 h-8"></td>
                 </tr>
                 @endforeach

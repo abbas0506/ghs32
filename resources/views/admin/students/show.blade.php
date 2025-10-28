@@ -49,7 +49,7 @@
             </div>
             <div>
                 <label for="">Group</label>
-                <p>{{ $student->group->name }}</p>
+                <p>{{ $student->group?->name }}</p>
             </div>
             <div>
                 <label for="">Academic Info</label>

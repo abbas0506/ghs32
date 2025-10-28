@@ -5,7 +5,7 @@
 @section('body')
 <div class="min-h-screen w-screen flex flex-col justify-center items-center">
 
-    <h2 class="text-3xl font-bold mb-4 mt-32 text-center text-gray-800">Meet Our Faculty</h2>
+    <h2 class="text-2xl md:text-3xl mb-4 mt-32 text-center text-gray-800">Meet Our Faculty</h2>
 
     <div class="text-center mb-8">
         <a href="{{ route('faculty.create') }}"

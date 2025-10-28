@@ -93,8 +93,8 @@ $numOfCardsPerRow = 3;
 
                                 <!-- Foreground Content -->
                                 <div class="card-content">
-                                    <div><img src="{{ public_path('images/logo/school_logo.png') }}" alt="" width="36px" height="36px"></div>
-                                    <p class="text-xs mt-2">Govt. Higher Secondary School Chak Bedi, District Pakpattan</p>
+                                    <div><img src="{{ public_path('images/logo/logo.jpg') }}" alt="" width="36px" height="36px"></div>
+                                    <p class="text-xs mt-2">Govt. High School 32/2L, Okara</p>
 
                                     <div class="w-24 h-24 m-auto mt-3">
                                         @if ($student->photo)
@@ -106,7 +106,7 @@ $numOfCardsPerRow = 3;
                                     </div>
 
                                     <div class="font-bold" style="color:green">{{ Str::upper($student->name) }}</div>
-                                    <div class="text-md mt-2">Class {{ $student->section->grade }}-{{ $student->section->name }}, {{ $student->group->name }}</div>
+                                    <div class="text-md mt-2">Class {{ $student->section->grade }}-{{ $student->section->name }}, {{ $student->group?->name }}</div>
                                     <div class="text-xs mt-1">{{ date('Y') }}-{{ date('y') + 1 }}</div>
 
                                     <table width="100%" style="margin-top: 24px;">

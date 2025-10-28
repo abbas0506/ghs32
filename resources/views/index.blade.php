@@ -248,7 +248,7 @@
 
 <section class="pt-0" data-aos="fade-up">
     <div class="mt-24 px-4 md:px-16 md:w-3/4 mx-auto">
-        <h2 class="text-4xl text-center">Message</h2>
+        <h2 class="text-2xl md:text-4xl text-center">Message</h2>
         <div class="h-1 w-24 bg-teal-800 mx-auto mt-6"></div>
     </div>
     <div class="w-full md:w-3/4 mx-auto mt-12">
@@ -321,11 +321,11 @@
 
 <section id='events' class="mt-12 md:mt-16 px-4 md:px-24">
     <!-- section title -->
-    <h2 class="text-4xl text-slate-800 text-center">Recent Events</h2>
+    <h2 class="text-2xl md:text-4xl text-slate-800 text-center">Recent Events</h2>
     <div class="h-1 w-24 bg-teal-800 mx-auto mt-6"></div>
 
     <div class="bg-slate-100 mt-12 p-6">
-        <p class="italic text-center text-xl">We arrange wonderful and supportive events full of knowledge and experience for students and professionals. We are very concerned about enhancing our professional capacities.</p>
+        <p class="italic text-center text-lg">We arrange wonderful and supportive events full of knowledge and experience for students and professionals. We are very concerned about enhancing our professional capacities.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mt-12">
             <div class="flex flex-1">
@@ -353,7 +353,7 @@
 
 </section>
 
-<section class="mt-24 md:px-24 p-5">
+<section class="mt-12 md:px-24 p-5">
 
     <div class="overflow-x-hidden">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6858.6632086990285!2d73.52574868837141!3d30.73718562002131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39180624c19cb001%3A0x4eb6e3a38a104dbe!2sGovt%20Boys%20High%20School!5e0!3m2!1sen!2s!4v1761409543502!5m2!1sen!2s" width="100%" height="324" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full" height="320" style="border:0;"></iframe>
