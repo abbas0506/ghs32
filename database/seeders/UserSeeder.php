@@ -40,5 +40,30 @@ class UserSeeder extends Seeder
             'bps' => 18,
             'personal_no' => '31282674',
         ]);
+
+        $user = User::create([
+            'email' => 'muazzam@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
+
+        $user->assignRole(['admin', 'teacher', 'library']);
+
+        Teacher::create([
+
+            'user_id' => $user->id,
+            'name' => 'Muazzam Ali',
+            'short_name' => 'Moazzam',
+            'father_name' => 'Muhammad Ali',
+            'cnic' => '3530119663435',
+            'dob' => '06/05/1978',
+            'blood_group' => 'B+',
+            'address' => 'PTCL Exchange Road, Depalpur',
+            'phone' => '03000373004',
+            'joined_at' => '10/16/2025',
+            'designation' => 'SSE(Sc)',
+            'qualification' => 'MS in Computer Sc.',
+            'bps' => 16,
+            'personal_no' => '31282680',
+        ]);
     }
 }

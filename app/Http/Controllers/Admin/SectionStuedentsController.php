@@ -90,23 +90,22 @@ class SectionStuedentsController extends Controller
         $validated = $request->validate([
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
             'name' => 'required|string|max:50',
-            'father_name' => 'required|string|max:50',
+            'dob' => 'required|date',
             'bform' => 'required|string|max:15|unique:students,bform,' . $student->id,
             'phone' => 'required|string|max:16',
             'address' => 'nullable|string|max:100',
-            'dob' => 'required|date',
-            'id_mark' => 'required|string|max:100',
-            'caste' => 'required|string|max:50',
+            'id_mark' => 'nullable|string|max:100',
+            'caste' => 'nullable|string|max:50',
             'is_orphan' => 'required|boolean',
-            'guardian_relation' => 'nullable|string|max:50',
-            'guardian_name' => 'nullable|string|max:50',
-            'father_cnic' => 'nullable|string|max:15',
-            'mother_cnic' => 'nullable|string|max:15',
-            'profession' => 'required|string|max:50',
-            'income' => 'required|integer|min:0',
+            'distinction' => 'nullable',
 
-            // 'grade' => 'required|integer|min:1|max:12',
-            'group_id' => 'required|exists:groups,id',
+            'father_name' => 'required|string|max:50',
+            'father_cnic' => 'nullable|string|max:15',
+            'profession' => 'nullable|string|max:50',
+            'income' => 'nullable|integer|min:0',
+
+            'gender' => 'required',
+            'group_id' => 'nullable|exists:groups,id',
         ]);
 
         try {

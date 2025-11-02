@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fee Payments</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
     <style>
         @page {
             margin: 50px 50px 50px 80px;
@@ -35,7 +35,7 @@
     </style>
 </head>
 @php
-$roman = config('global.romans');
+    $roman = config('global.romans');
 @endphp
 
 <body>
@@ -45,7 +45,8 @@ $roman = config('global.romans');
 
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo_32.png')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                            class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
@@ -65,7 +66,7 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr class="text-xs">
-                            <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
+                            <td class="text-right">Printed on {{ now()->format('d-M-Y') }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -86,23 +87,24 @@ $roman = config('global.romans');
                 </thead>
                 <tbody>
 
-                    @foreach($applications->sortByDesc('obtained_marks')->sortBy('group_id') as $application)
-                    <tr class="text-base">
-                        <td>{{$sr++}}</td>
-                        <td>{{$application->rollno}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{ucwords(strtolower($application->name))}}</td>
-                        <td>{{$application->group->name}}</td>
-                        <td>{{$application->obtained_marks}}</td>
-                        <td>{{$application->amount_paid}}</td>
-                        <td>
-                            @if ($application->photo)
-                            <img src="{{ public_path('storage/' . $application->photo) }}"
-                                style="width:32px; height:32px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
-                            @else
-                            <span style="color: #999;">No Photo</span>
-                            @endif
-                        </td>
-                    </tr>
+                    @foreach ($applications->sortByDesc('obtained_marks')->sortBy('group_id') as $application)
+                        <tr class="text-base">
+                            <td>{{ $sr++ }}</td>
+                            <td>{{ $application->rollno }}</td>
+                            <td style="text-align: left !important; padding:2px 6px;">
+                                {{ ucwords(strtolower($application->name)) }}</td>
+                            <td>{{ $application->group->name }}</td>
+                            <td>{{ $application->obtained_marks }}</td>
+                            <td>{{ $application->amount_paid }}</td>
+                            <td>
+                                @if ($application->photo)
+                                    <img src="{{ public_path('storage/' . $application->photo) }}"
+                                        style="width:32px; height:32px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
+                                @else
+                                    <span style="color: #999;">No Photo</span>
+                                @endif
+                            </td>
+                        </tr>
                     @endforeach
 
                 </tbody>
@@ -112,8 +114,8 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr class="text-xs">
-                            <td class="text-left">Students: {{ $applications->count()}}</td>
-                            <td class="text-right">Total Fee: {{ $applications->sum('amount_paid')}}</td>
+                            <td class="text-left">Students: {{ $applications->count() }}</td>
+                            <td class="text-right">Total Fee: {{ $applications->sum('amount_paid') }}</td>
                         </tr>
                     </tbody>
                 </table>

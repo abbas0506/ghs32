@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List of Books</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
     <style>
         @page {
             margin: 50px 80px 50px 50px;
@@ -35,7 +35,7 @@
     </style>
 </head>
 @php
-$roman = config('global.romans');
+    $roman = config('global.romans');
 @endphp
 
 <body>
@@ -45,12 +45,13 @@ $roman = config('global.romans');
 
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo_32.png')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                            class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-xl font-bold">Books - {{$rack->label}} </td>
+                            <td class="text-center text-xl font-bold">Books - {{ $rack->label }} </td>
                         </tr>
                         <tr>
                             <td class="text-center text-sm">Govt. High School 32/2L, Okara</td>
@@ -65,14 +66,14 @@ $roman = config('global.romans');
                 <table class="w-full">
                     <tbody>
                         <tr class="text-xs">
-                            <td class="text-left">Rack: {{ $rack->label}} </td>
-                            <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
+                            <td class="text-left">Rack: {{ $rack->label }} </td>
+                            <td class="text-right">Printed on {{ now()->format('d-M-Y') }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             @php
-            $i=1;
+                $i = 1;
             @endphp
             <table class="table-auto border w-full mt-2">
                 <thead>
@@ -86,16 +87,16 @@ $roman = config('global.romans');
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($rack->books as $book)
-                    <tr class="text-xs border">
-                        <td>{{$i++}}</td>
-                        <td class="text-left">{{$book->title}}</td>
-                        <td>{{$book->author}}</td>
-                        <td>{{$book->domain->name}}</td>
-                        <td>{{$book->num_of_copies}}</td>
-                        <td>{{$book->reference()}}</td>
+                    @foreach ($rack->books as $book)
+                        <tr class="text-xs border">
+                            <td>{{ $i++ }}</td>
+                            <td class="text-left">{{ $book->title }}</td>
+                            <td>{{ $book->author }}</td>
+                            <td>{{ $book->domain->name }}</td>
+                            <td>{{ $book->num_of_copies }}</td>
+                            <td>{{ $book->reference() }}</td>
 
-                    </tr>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>GHS32/2L</title>
-    <link rel="icon" href="{{ asset('/images/logo/logo_32.png') }}">
+    <link rel="icon" href="{{ asset('/images/logo/dark_green.png') }}">
     <!-- Fonts -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Styles -->
-    @vite(['resources/js/app.js','resources/css/app.css'])
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 
     <!-- <script src="{{ asset('/fonts/bootstrap-icons/bootstrap-icons.min.css') }}"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
-    <!-- <script src="{{asset('js/jsqrcode-combined.min.js')}}"></script> -->
-    <script src="{{asset('js/html5-qrcode.min.js')}}"></script>
+    <!-- <script src="{{ asset('js/jsqrcode-combined.min.js') }}"></script> -->
+    <script src="{{ asset('js/html5-qrcode.min.js') }}"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
@@ -36,11 +36,11 @@
     @yield('header')
     @yield('sidebar')
     @yield('body')
-    <script src="{{asset('js/sweetalert2@10.js')}}"></script>
-    <script type="module" src="{{asset('js/collapsible.js')}}"></script>
-    <script type="module" src="{{asset('js/swiper.js')}}"></script>
-    <script type="module" src="{{asset('js/testimonial.js')}}"></script>
-    <script type="module" src="{{asset('js/flowbite.min.js')}}"></script>
+    <script src="{{ asset('js/sweetalert2@10.js') }}"></script>
+    <script type="module" src="{{ asset('js/collapsible.js') }}"></script>
+    <script type="module" src="{{ asset('js/swiper.js') }}"></script>
+    <script type="module" src="{{ asset('js/testimonial.js') }}"></script>
+    <script type="module" src="{{ asset('js/flowbite.min.js') }}"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     @yield('script')
     @yield('footer')

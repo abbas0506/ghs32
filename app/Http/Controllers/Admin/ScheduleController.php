@@ -91,7 +91,7 @@ class ScheduleController extends Controller
         $model = Allocation::findOrFail($allocationId);
         try {
             $model->update($request->all());
-            return redirect()->route('admin.section.lecture.schedule.index', [0, 0])->with('success', 'Successfully updated');
+            return redirect('admin/section-wise-schedule')->with('success', 'Successfully updated');
         } catch (Exception $ex) {
             return redirect()->back()->withErrors($ex->getMessage());
         }

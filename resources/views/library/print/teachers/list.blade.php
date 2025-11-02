@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List of Books</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
     <style>
         @page {
             margin: 50px 80px 50px 50px;
@@ -35,7 +35,7 @@
     </style>
 </head>
 @php
-$roman = config('global.romans');
+    $roman = config('global.romans');
 @endphp
 
 <body>
@@ -45,7 +45,8 @@ $roman = config('global.romans');
 
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo_32.png')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                            class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
@@ -66,13 +67,13 @@ $roman = config('global.romans');
                     <tbody>
                         <tr class="text-xs">
                             <td class="text-left">Teachers list </td>
-                            <td class="text-right">printed on {{ now()->format('d-M-Y')}}</td>
+                            <td class="text-right">printed on {{ now()->format('d-M-Y') }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             @php
-            $i=1;
+                $i = 1;
             @endphp
             <table class="table-auto border w-full mt-2">
                 <thead>
@@ -85,14 +86,14 @@ $roman = config('global.romans');
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($teachers as $teacher)
-                    <tr class="text-xs border">
-                        <td>{{$i++}}</td>
-                        <td class="text-left">{{ $teacher->name  }}</td>
-                        <td>{{ $teacher->designation }}</td>
-                        <td>{{ $teacher->phone }}</td>
-                        <td>{{ $teacher->email }}</td>
-                    </tr>
+                    @foreach ($teachers as $teacher)
+                        <tr class="text-xs border">
+                            <td>{{ $i++ }}</td>
+                            <td class="text-left">{{ $teacher->name }}</td>
+                            <td>{{ $teacher->designation }}</td>
+                            <td>{{ $teacher->phone }}</td>
+                            <td>{{ $teacher->email }}</td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

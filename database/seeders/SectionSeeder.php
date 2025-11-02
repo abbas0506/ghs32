@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Section;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SectionSeeder extends Seeder
@@ -14,11 +13,11 @@ class SectionSeeder extends Seeder
     public function run(): void
     {
         //
+        Section::create(['grade' => 0, 'name' => 'Nursery']);
         Section::create(['grade' => 1]);
         Section::create(['grade' => 2]);
         Section::create(['grade' => 3]);
         Section::create(['grade' => 4]);
-        Section::create(['grade' => 5]);
         Section::create(['grade' => 5]);
         Section::create(['grade' => 6]);
         Section::create(['grade' => 7]);

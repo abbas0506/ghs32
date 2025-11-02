@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Cards</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
     <style>
         @page {
             margin: 50px 80px;
@@ -39,7 +39,7 @@
     </style>
 </head>
 @php
-$roman = config('global.romans');
+    $roman = config('global.romans');
 @endphp
 
 
@@ -50,52 +50,92 @@ $roman = config('global.romans');
             <!-- front page ... section gazzet -->
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo.jpg')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                            class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-lg font-bold">Subject Result - {{ $testAllocation->test->title }}</td>
+                            <td class="text-center text-lg font-bold">{{ $testAllocation->subject->name }},
+                                {{ $testAllocation->section->fullName() }} </td>
                         </tr>
                         <tr>
-                            <td class="text-center text-base">Govt Higher Secondary School Chak Bedi, Pakpattan</td>
+                            <td class="text-center text-base">{{ $testAllocation->test->title }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <h4 class="mt-8 underline text-center">Subject: {{ $testAllocation->subject->name }}, {{ $testAllocation->section->fullName() }} </h4>
-            <h6 class="my-0 text-right">Total Marks: {{ $testAllocation->max_marks }}</h6>
+
+            {{-- Position Holders --}}
+            <div class="font-bold text-sm mt-4 underline">Top 3</div>
+            <table class="table-auto borderless w-full mt-1" cellspacing="0">
+                <thead class="data">
+                    <tr class="">
+                        <th class="w-12"></th>
+                        <th class=""></th>
+                        <th class="w-16"></th>
+                        <th class="w-16"></th>
+                    </tr>
+                </thead>
+                <tbody class="data">
+
+                    @foreach ($testAllocation->results->sortByDesc('obtained_marks')->take(3) as $result)
+                        <!-- calculate percentage -->
+                        @php $percentage=round($result->obtained_marks/$testAllocation->max_marks*100,1); @endphp
+                        <tr class="">
+                            <td>{{ Number::ordinal($loop->index + 1) }}</td>
+                            <td class="text-left">{{ ucwords(strtolower($result->student->name)) }} s/o
+                                {{ ucwords(strtolower($result->student->father_name)) }}</td>
+                            <td>{{ $result->obtained_marks }}</td>
+                            <td>{{ $percentage }} %</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <hr class="w-8 m-auto mt-4">
+
+            {{-- Overall results --}}
+            <table class="w-full mt-3">
+                <tbody>
+                    <tr>
+                        <td class="text-left text-sm font-bold">Overall Result</td>
+                        <td class="text-right text-sm font-bold">Total Marks: {{ $testAllocation->max_marks }}</td>
+                    </tr>
+                </tbody>
+            </table>
             <table class="table-auto w-full mt-1" cellspacing="0">
                 <thead class="data">
                     <tr class="border">
-                        <th class="w-12">Position</th>
+                        <th class="w-12">Roll #</th>
                         <th class="">Student Name</th>
-                        <th class="w-12">Roll No</th>
-                        <th class="w-16">obtained_marks</th>
+                        <th class="w-16">Obtained</th>
                         <th class="w-16">Percentage</th>
                         <th class="w-16">Status</th>
                     </tr>
                 </thead>
                 <tbody class="data">
 
-                    @foreach($testAllocation->results->sortByDesc('obtained_marks') as $result)
-                    <!-- calculate percentage -->
-                    @php $percentage=round($result->obtained_marks/$testAllocation->max_marks*100,1); @endphp
-                    <tr class="border">
-                        <td>{{ $loop->index+1 }}</td>
-                        <td class="text-left">{{ ucwords(strtolower($result->student->name)) }}</td>
-                        <td>{{ $result->student->rollno }}</td>
-                        <td>{{ $result->obtained_marks }}</td>
-                        <td>{{ $percentage }} %</td>
-                        <td>@if($percentage >=33) Pass @else Fail @endif</td>
+                    @foreach ($testAllocation->results->sortBy('rollno') as $result)
+                        <!-- calculate percentage -->
+                        @php $percentage=round($result->obtained_marks/$testAllocation->max_marks*100,1); @endphp
+                        <tr class="border">
+                            <td>{{ $result->student->rollno }}</td>
+                            <td class="text-left">{{ ucwords(strtolower($result->student->name)) }}</td>
+                            <td>{{ $result->obtained_marks }}</td>
+                            <td>{{ $percentage }} %</td>
+                            <td>
+                                @if ($percentage >= 33)
+                                    Pass
+                                @else
+                                    Fail
+                                @endif
+                            </td>
 
-                    </tr>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-
-
     </main>
 
     <script type="text/php">

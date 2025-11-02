@@ -22,12 +22,12 @@ return new class extends Migration
             $table->date('dob')->nullable();
             $table->string('id_mark', 100)->nullable();
             $table->string('caste', 50)->nullable();
+            $table->string('distinction')->nullable();
             $table->boolean('is_orphan')->default(false);
             $table->string('father_name', 50)->nullable();
-            $table->string('mother_name', 50)->nullable();
             $table->string('father_cnic')->nullable();
-            $table->string('mother_cnic')->nullable();
             $table->string('profession', 50)->nullable();
+            $table->string('blood_grou', 5)->nullable();
             $table->unsignedInteger('income')->nullable();
 
 

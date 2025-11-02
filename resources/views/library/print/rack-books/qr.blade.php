@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Codes</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
     <style>
         @page {
             margin: 50px 80px 50px 50px;
@@ -35,7 +35,7 @@
     </style>
 </head>
 @php
-$roman = config('global.romans');
+    $roman = config('global.romans');
 @endphp
 
 <body>
@@ -45,12 +45,13 @@ $roman = config('global.romans');
 
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo_32.png')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                            class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-xl font-bold">QR Codes - {{$rack->label}} </td>
+                            <td class="text-center text-xl font-bold">QR Codes - {{ $rack->label }} </td>
                         </tr>
                         <tr>
                             <td class="text-center text-sm">Govt. High School 32/2L, Okara</td>
@@ -65,7 +66,7 @@ $roman = config('global.romans');
                     <tbody>
                         <tr class="text-xs">
                             <td class="text-left">Book Rack: {{ $rack->label }} </td>
-                            <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
+                            <td class="text-right">Printed on {{ now()->format('d-M-Y') }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -73,27 +74,34 @@ $roman = config('global.romans');
             @php $i=1; @endphp
 
             @php
-            $i=0;
-            $numOfQrPerRow=6;
+                $i = 0;
+                $numOfQrPerRow = 6;
             @endphp
 
             <table class="table-auto w-full mt-2">
                 <tbody>
-                    @foreach($books as $book)
-                    @for($copy_sr=1; $copy_sr<=$book->num_of_copies;$copy_sr++)
-                        @if($i%$numOfQrPerRow==0)<tr class="text-sm">@endif
-                            @php if($copy_sr<10) $copy_sr="0" .$copy_sr; @endphp <td class="w-20 p-2">
+                    @foreach ($books as $book)
+                        @for ($copy_sr = 1; $copy_sr <= $book->num_of_copies; $copy_sr++)
+                            @if ($i % $numOfQrPerRow == 0)
+                                <tr class="text-sm">
+                            @endif
+                            @php
+                                if ($copy_sr < 10) {
+                                    $copy_sr = '0' . $copy_sr;
+                                }
+                            @endphp <td class="w-20 p-2">
                                 <div class="flex flex-col">
-                                    <div>{!! DNS2D::getBarcodeHTML($book->reference()."-".$copy_sr, 'QRCODE',4,4) !!}</div>
-                                    <!-- <div>{!! DNS1D::getBarcodeHTML($book->reference()."-".$copy_sr, 'C39',0.6,40) !!}</div> -->
-                                    <label class="text-xs">{{$book->reference()}}-{{$copy_sr}}</label>
+                                    <div>{!! DNS2D::getBarcodeHTML($book->reference() . '-' . $copy_sr, 'QRCODE', 4, 4) !!}</div>
+                                    <!-- <div>{!! DNS1D::getBarcodeHTML($book->reference() . '-' . $copy_sr, 'C39', 0.6, 40) !!}</div> -->
+                                    <label class="text-xs">{{ $book->reference() }}-{{ $copy_sr }}</label>
                                 </div>
-                                </td>
-                                @if($i%$numOfQrPerRow==$numOfQrPerRow-1)
-                        </tr>@endif
-                        @php $i++; @endphp
+                            </td>
+                            @if ($i % $numOfQrPerRow == $numOfQrPerRow - 1)
+                                </tr>
+                            @endif
+                            @php $i++; @endphp
                         @endfor
-                        @endforeach
+                    @endforeach
                 </tbody>
             </table>
 

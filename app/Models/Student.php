@@ -17,12 +17,14 @@ class Student extends Model
         'phone',
         'address',
         'caste',
+        'distinction',
+        'gender',
+        'blood_group',
         'is_orphan',
         'father_name',
-        'mother_name',
         'father_cnic',
-        'mother_cnic',
-        //school tag
+
+        //academic info
         'group_id',
         'section_id',
         'rollno',
@@ -30,7 +32,7 @@ class Student extends Model
         'admission_date',
         'score',
 
-        // 'marks',
+        // guardian info
         'caste',
         'profession',
         'income',

@@ -63,9 +63,9 @@
 </head>
 
 @php
-$roman = config('global.romans');
-$i = 0;
-$numOfCardsPerRow = 3;
+    $roman = config('global.romans');
+    $i = 0;
+    $numOfCardsPerRow = 3;
 @endphp
 
 <body>
@@ -82,35 +82,38 @@ $numOfCardsPerRow = 3;
 
             <table class="table-auto w-full mt-2" cellspacing="0">
                 <tbody class="data">
-                    @foreach($teachers->sortByDesc('bps') as $teacher)
-                    @if($i % $numOfCardsPerRow == 0)
-                    <tr class="text-sm">
+                    @foreach ($teachers->sortByDesc('bps') as $teacher)
+                        @if ($i % $numOfCardsPerRow == 0)
+                            <tr class="text-sm">
                         @endif
 
                         <td class="p-6">
                             <div class="border p-2 card-container">
                                 <!-- Background Logo -->
-                                <img src="{{ public_path('images/logo/punjab.png') }}" class="card-logo-bg" alt="Background Logo">
+                                <img src="{{ public_path('images/logo/punjab.png') }}" class="card-logo-bg"
+                                    alt="Background Logo">
                                 <!-- wave patten -->
-                                <img src="{{ public_path('images/bg/waves.png') }}" class="wave-pattern" alt="Wave pattern">
+                                <img src="{{ public_path('images/bg/waves.png') }}" class="wave-pattern"
+                                    alt="Wave pattern">
 
                                 <!-- Foreground Content -->
                                 <div class="card-content">
-                                    <div><img src="{{ public_path('images/logo/school_logo.png') }}" alt="" width="36px" height="36px"></div>
-                                    <p class="text-xs mt-2">GHSS Chak Bedi, Pakpattan</p>
+                                    <div><img src="{{ public_path('images/logo/dark_green.png') }}" alt=""
+                                            width="36px" height="36px"></div>
+                                    <p class="text-xs mt-2">Govt High School 32/2L, Okara</p>
 
                                     <div class="w-24 h-24 m-auto mt-3">
                                         @if ($teacher->photo)
-                                        <img src="{{ public_path('storage/' . $teacher->photo) }}"
-                                            style="width:75px; height:75px; border-radius:50%; border:0.5px solid #fff; object-fit:cover;">
+                                            <img src="{{ public_path('storage/' . $teacher->photo) }}"
+                                                style="width:75px; height:75px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
                                         @else
-                                        <span style="color: #999;">No Photo</span>
+                                            <span style="color: #999;">No Photo</span>
                                         @endif
                                     </div>
 
-                                    <div class="font-bold" style="color:#2B5E39">{{ Str::upper($teacher->name) }}</div>
+                                    <div class="font-bold" style="color:#0c0e0c">{{ Str::upper($teacher->name) }}</div>
                                     <div class="text-md mt-2">BPS {{ $teacher->bps }}</div>
-                                    <h3>{{ $teacher->designation }}</h3>
+                                    <h4>{{ $teacher->designation }}</h4>
                                     <table width="100%" style="margin-top: 24px;">
                                         <tr>
                                             <td style="text-align: left;">
@@ -118,9 +121,11 @@ $numOfCardsPerRow = 3;
                                             </td>
                                             <td style="text-align: right; padding-right:8px">
                                                 <div style="text-align: center; display: inline-block;">
-                                                    <img src="{{ public_path('images/principal/sign1.png') }}" alt="" width="32px" height="32px">
-                                                    <span style="display: block; border-top: 1px solid #000; width: 80px; margin-top: 5px;"></span>
-                                                    <span>Principal</span>
+                                                    <img src="{{ public_path('images/principal/sign2.png') }}"
+                                                        alt="" width="32px" height="32px">
+                                                    <span
+                                                        style="display: block; border-top: 1px solid #000; width: 84px; margin-top: 5px;"></span>
+                                                    <span>Sr. Headmaster</span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -129,10 +134,10 @@ $numOfCardsPerRow = 3;
                             </div>
                         </td>
 
-                        @if($i % $numOfCardsPerRow == $numOfCardsPerRow - 1)
-                    </tr>
-                    @endif
-                    @php $i++; @endphp
+                        @if ($i % $numOfCardsPerRow == $numOfCardsPerRow - 1)
+                            </tr>
+                        @endif
+                        @php $i++; @endphp
                     @endforeach
                 </tbody>
             </table>

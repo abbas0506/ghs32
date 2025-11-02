@@ -210,7 +210,7 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('racks', RackController::class);
             Route::resource('rack.books', RackBooksController::class);
             Route::resource('library-rules', LibraryRuleController::class);
-            Route::resource('teachers', LibraryTeacherController::class);
+            // Route::resource('teachers', LibraryTeacherController::class);
 
             Route::get('print', [PrintController::class, 'index']);
 

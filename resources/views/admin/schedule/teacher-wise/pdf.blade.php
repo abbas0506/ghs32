@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Wise Schedule</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
     <style>
         @page {
             margin: 50px 50px 50px 80px;
@@ -43,12 +43,14 @@
         <div class="custom-container">
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo.jpg')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                            class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
                         <tr>
-                            <td class="text-center text-xl font-bold">Teacher Wise Time Table {{ now()->format('Y') }} </td>
+                            <td class="text-center text-xl font-bold">Teacher Wise Time Table {{ now()->format('Y') }}
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-center text-sm">Govt. High School 32/2L, Okara</td>
@@ -63,7 +65,7 @@
                 <table class="w-full">
                     <tbody>
                         <tr class="text-xs">
-                            <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
+                            <td class="text-right">Printed on {{ now()->format('d-M-Y') }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -73,30 +75,30 @@
                 <thead>
                     <tr>
                         <th class="w-24">Teacher</th>
-                        @foreach(range(1,8) as $lecture_no)
-                        <th>{{ $lecture_no }}</th>
+                        @foreach (range(1, 8) as $lecture_no)
+                            <th>{{ $lecture_no }}</th>
                         @endforeach
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach($teachers as $teacher)
-                    <tr>
-                        <td class="font-semibold">{{ $teacher->short_name }}</td>
-                        @foreach(range(1,8) as $lecture_no)
-                        <td class="p-1">
-                            @foreach($teacher->allocations()->havingLectureNo($lecture_no)->get() as $allocation)
-                            <div class="text-sm bg-teal-50">
-                                <div class="font-bold">{{ $allocation->subject->short_name }}</div>
-                                <div>Class {{ $allocation->section->fullName() }}</div>
-                            </div>
-                            @if(!$loop->last)
-                            <div>---</div>
-                            @endif
+                    @foreach ($teachers as $teacher)
+                        <tr>
+                            <td class="font-semibold">{{ $teacher->short_name }}</td>
+                            @foreach (range(1, 8) as $lecture_no)
+                                <td class="p-1">
+                                    @foreach ($teacher->allocations()->havingLectureNo($lecture_no)->get() as $allocation)
+                                        <div class="text-sm bg-teal-50">
+                                            <div class="font-bold">{{ $allocation->subject->short_name }}</div>
+                                            <div>Class {{ $allocation->section->fullName() }}</div>
+                                        </div>
+                                        @if (!$loop->last)
+                                            <div>---</div>
+                                        @endif
+                                    @endforeach
+                                </td>
                             @endforeach
-                        </td>
-                        @endforeach
-                    </tr>
+                        </tr>
                     @endforeach
 
                 </tbody>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Objections</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
     <style>
         @page {
             margin: 50px 50px 50px 80px;
@@ -37,7 +37,7 @@
     </style>
 </head>
 @php
-$roman = config('global.romans');
+    $roman = config('global.romans');
 @endphp
 
 <body>
@@ -47,7 +47,8 @@ $roman = config('global.romans');
 
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo_32.png')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                            class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
@@ -68,7 +69,7 @@ $roman = config('global.romans');
                     <tbody>
                         <tr class="text-xs">
                             <td class="text-left">Total Students: {{ $applicationsHavingObjection->count() }}</td>
-                            <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
+                            <td class="text-right">Printed on {{ now()->format('d-M-Y') }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -90,18 +91,19 @@ $roman = config('global.romans');
                 </thead>
                 <tbody>
 
-                    @foreach($applicationsHavingObjection as $application)
-                    <tr class="text-base">
-                        <td>{{$application->rollno}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$application->name}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{$application->father_name}}</td>
-                        <td>{{$application->group->name}}</td>
-                        <td>{{$application->obtained_marks}}</td>
-                        <td>{{$application->phone}}</td>
-                        <td>{{$application->amount_paid}}</td>
-                        <td>{{$application->rejection_note}}</td>
-                    </tr>
-                    @php $i++; @endphp
+                    @foreach ($applicationsHavingObjection as $application)
+                        <tr class="text-base">
+                            <td>{{ $application->rollno }}</td>
+                            <td style="text-align: left !important; padding:2px 6px;">{{ $application->name }}</td>
+                            <td style="text-align: left !important; padding:2px 6px;">{{ $application->father_name }}
+                            </td>
+                            <td>{{ $application->group->name }}</td>
+                            <td>{{ $application->obtained_marks }}</td>
+                            <td>{{ $application->phone }}</td>
+                            <td>{{ $application->amount_paid }}</td>
+                            <td>{{ $application->rejection_note }}</td>
+                        </tr>
+                        @php $i++; @endphp
                     @endforeach
                 </tbody>
             </table>

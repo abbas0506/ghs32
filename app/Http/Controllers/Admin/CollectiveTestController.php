@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Allocation;
 use App\Models\Grade;
+use App\Models\Result;
 use App\Models\Section;
 use App\Models\Test;
 use App\Models\TestAllocation;
@@ -60,7 +61,7 @@ class CollectiveTestController extends Controller
             $sections = Section::whereIn('id', $sectionIdsArray)->get();
             foreach ($sections as $section) {
                 foreach ($section->allocations as $allocation) {
-                    $test->testAllocations()->create([
+                    $testAllocation = $test->testAllocations()->create([
                         'section_id' => $allocation->section_id,
                         'lecture_no' => $allocation->lecture_no,
                         'subject_id' => $allocation->subject_id,
@@ -68,6 +69,14 @@ class CollectiveTestController extends Controller
                         'max_marks' => $request->max_marks,
                         'test_date' => now(),
                     ]);
+
+                    foreach ($section->students as $student) {
+                        Result::create([
+                            'student_id' => $student->id,
+                            'test_allocation_id' => $testAllocation->id,
+                            'obtained_marks' => 0,
+                        ]);
+                    }
                 }
             }
 

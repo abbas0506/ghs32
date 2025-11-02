@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Cards</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
     <style>
         @page {
             margin: 50px 80px;
@@ -39,7 +39,7 @@
     </style>
 </head>
 @php
-$roman = config('global.romans');
+    $roman = config('global.romans');
 @endphp
 
 <body>
@@ -49,7 +49,8 @@ $roman = config('global.romans');
             <!-- front page ... section gazzet -->
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo.jpg')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                            class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
@@ -78,17 +79,17 @@ $roman = config('global.romans');
                 </thead>
                 <tbody class="data">
 
-                    @foreach($sortedResult as $sortedPercentage)
-                    <tr class="border">
-                        <td>{{ $sortedPercentage['position'] }}</td>
-                        <td class="text-left">{{ ucwords(strtolower($sortedPercentage['name'])) }}</td>
-                        <td>{{ $sortedPercentage['rollno'] }}</td>
-                        <td>{{ $sortedPercentage['max_marks'] }}</td>
-                        <td>{{ $sortedPercentage['obtained_marks'] }}</td>
-                        <td>{{ $sortedPercentage['percentage'] }} %</td>
+                    @foreach ($sortedResult as $sortedPercentage)
+                        <tr class="border">
+                            <td>{{ $sortedPercentage['position'] }}</td>
+                            <td class="text-left">{{ ucwords(strtolower($sortedPercentage['name'])) }}</td>
+                            <td>{{ $sortedPercentage['rollno'] }}</td>
+                            <td>{{ $sortedPercentage['max_marks'] }}</td>
+                            <td>{{ $sortedPercentage['obtained_marks'] }}</td>
+                            <td>{{ $sortedPercentage['percentage'] }} %</td>
 
 
-                    </tr>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

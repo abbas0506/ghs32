@@ -13,8 +13,10 @@ class GroupSeeder extends Seeder
     public function run(): void
     {
         //
-        Group::create(['name' => 'Pre Engg.', 'subjects_list' => 'Phy, Math, Chem', 'admission_fee' => 5200]);
-        Group::create(['name' => 'ICS', 'subjects_list' => 'Phy, Math, Computer Sc', 'admission_fee' => 5200]);
-        Group::create(['name' => 'FA', 'subjects_list' => 'Civics, Punjabi', 'admission_fee' => 5000]);
+        Group::create(['name' => 'Biology', 'subjects_list' => 'Phy, Bio, Chem']);
+        Group::create(['name' => 'Computer Sc.', 'subjects_list' => 'Phy, Chem, Computer Sc']);
+        Group::create(['name' => 'ICT, Tech', 'subjects_list' => 'Phy, Computer Sc, Entp']);
+        Group::create(['name' => 'Arts', 'subjects_list' => 'Punjabi, Islamic St, Gen. Sc']);
+        Group::create(['name' => 'General', 'subjects_list' => 'Agri, History, Geography']);
     }
 }

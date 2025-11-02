@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('subjects_list');
-            $table->unsignedSmallInteger('admission_fee')->default('5000');
+            $table->unsignedSmallInteger('admission_fee')->nullable();
             $table->timestamps();
         });
     }

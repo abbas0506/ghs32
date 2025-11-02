@@ -12,13 +12,15 @@ class Section extends Model
     protected $fillable = [
         'name',    //section label A, B, C
         'grade',
-        // 'incharge_id',
     ];
 
     public function fullName()
     {
         if ($this->name)
-            return $this->grade . "(" . $this->name . ")";
+            if ($this->grade == 0)
+                return $this->name;
+            else
+                return $this->grade . "(" . $this->name . ")";
         else
             return $this->grade;
     }

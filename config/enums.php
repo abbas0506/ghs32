@@ -3,15 +3,11 @@
 return [
 
     'professions' => [
-        'Teacher' => 'Teacher',
-        'Farmer' => 'Farmer',
-        'Businessman' => 'Businessman',
-        'Doctor' => 'Doctor',
-        'Engineer' => 'Engineer',
-        'Labourer' => 'Labourer (مزدور)',
-        'Civil Servant' => 'Civil Servant (سرکاری ملازم)',
-        'Private' => 'Private Sector (پرائیویٹ ملازم)',
-        'Others' => 'Others (کوئی اور)',
+        'Teaching' => 'Teaching',
+        'Farming' => 'Farming',
+        'Business' => 'Business',
+        'Labour' => 'Labour',
+        'Other' => 'Other',
     ],
 
     'incomes' => [
@@ -23,18 +19,60 @@ return [
         '150000' => 'More than Rs. 100,000',
     ],
 
+    'genders' => [
+        'm' => 'M',
+        'f' => 'F',
+        't' => 'T',
+
+    ],
+
     'castes' => [
         'Rajput' => 'Rajput',
         'Bhatti' => 'Bhatti',
-        'Arains' => 'Arains (آرائیں)',
+        'Arains' => 'Arains',
         'Wattoo' => 'Wattoo',
-        'Gujjars' => 'Gujjars',
         'Khokhar' => 'Khokhar',
         'Kharal' => 'Kharal',
         'Syeds' => 'Syeds',
         'Qureshi' => 'Qureshi',
         'Mughal' => 'Mughal',
         'Others' => 'Others',
+    ],
+
+    'distinctions' => [
+        'Hifz e Quran' => 'Hifz e Quran',
+        'Recitation' => 'Recitation',
+        'Naat Sharif' => 'Naat Sharif',
+        'Milli Naghma' => 'Milli Naghma',
+        'Song' => 'Song',
+        'Dance' => 'Dance',
+        'Athlete' => 'Athlete',
+        'Cricket' => 'Cricket',
+        'Hockey' => 'Hockey',
+        'Football' => 'Football',
+        'Volleyball' => 'Volleyball',
+        'Kabaddi' => 'Kabaddi',
+        'Spear' => 'Spear',
+        'Shot Put' => 'Shot Put',   //throw heavy ball
+        'Long Jump' => 'Long Jump',
+        'High Jump' => 'High Jump',
+        'Poetry' => 'Poetry',
+        'Speech' => 'Speech',
+        'Debate' => 'Debate',
+        'Other' => 'Other',
+
+    ],
+
+    'bloodgroups' => [
+        'O+' => 'O+',
+        'A+' => 'A+',
+        'B+' => 'B+',
+        'AB+' => 'AB+',
+        'O-' => 'O-',
+        'A-' => 'A-',
+        'B-' => 'B-',
+        'AB-' => 'AB-',
+
     ],
 
     'bises' => [

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Section Result</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
     <style>
         @page {
             margin: 50px 80px 50px 50px;
@@ -35,7 +35,7 @@
     </style>
 </head>
 @php
-$roman = config('global.romans');
+    $roman = config('global.romans');
 @endphp
 
 <body>
@@ -45,7 +45,8 @@ $roman = config('global.romans');
 
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo.jpg')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                            class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
@@ -66,19 +67,19 @@ $roman = config('global.romans');
                     <tr class="border text-sm">
                         <th>Roll#</th>
                         <th>Name</th>
-                        @foreach($lectureNos as $lectureNo)
-                        <th>
-                            @if($allocations->where('lecture_no', $lectureNo)->count()==1)
-                            {{ $allocations->where('lecture_no', $lectureNo)->first()->subject->short_name }}
-                            @else
-                            @foreach($allocations->where('lecture_no', $lectureNo) as $allocation)
-                            {{ $allocation->subject->short_name }}
-                            @if(!$loop->last)
-                            /
-                            @endif
-                            @endforeach
-                            @endif
-                        </th>
+                        @foreach ($lectureNos as $lectureNo)
+                            <th>
+                                @if ($allocations->where('lecture_no', $lectureNo)->count() == 1)
+                                    {{ $allocations->where('lecture_no', $lectureNo)->first()->subject->short_name }}
+                                @else
+                                    @foreach ($allocations->where('lecture_no', $lectureNo) as $allocation)
+                                        {{ $allocation->subject->short_name }}
+                                        @if (!$loop->last)
+                                            /
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </th>
                         @endforeach
                         <th>Obt.</th>
                         <th>Total</th>
@@ -86,21 +87,25 @@ $roman = config('global.romans');
                     </tr>
                 </thead>
                 <tbody class="data">
-                    @foreach($section->students->sortBy('rollno') as $student)
-                    <tr class="tr">
-                        <td>{{ $student->rollno }}</td>
-                        <td style="text-align: left; padding-left:8px;">{{ ucwords(strtolower($student->name)) }}</td>
-                        @foreach($lectureNos as $lectureNo)
-                        <td class="w-8">{{ $student->results()->test($test->id)->forLectureNo($lectureNo)->first()?->obtained_marks }}</td>
-                        @endforeach
-                        <td>{{ $student->results()->test($test->id)->sum('obtained_marks') }}</td>
-                        <td>{{ $student->maximumMarks($test->id) }}</td>
-                        <td>
-                            @if($student->maximumMarks($test->id)>0)
-                            {{ round($student->results()->test($test->id)->sum('obtained_marks') / $student->maximumMarks($test->id)*100,0) }} %
-                            @endif
-                        </td>
-                    </tr>
+                    @foreach ($section->students->sortBy('rollno') as $student)
+                        <tr class="tr">
+                            <td>{{ $student->rollno }}</td>
+                            <td style="text-align: left; padding-left:8px;">{{ ucwords(strtolower($student->name)) }}
+                            </td>
+                            @foreach ($lectureNos as $lectureNo)
+                                <td class="w-8">
+                                    {{ $student->results()->test($test->id)->forLectureNo($lectureNo)->first()?->obtained_marks }}
+                                </td>
+                            @endforeach
+                            <td>{{ $student->results()->test($test->id)->sum('obtained_marks') }}</td>
+                            <td>{{ $student->maximumMarks($test->id) }}</td>
+                            <td>
+                                @if ($student->maximumMarks($test->id) > 0)
+                                    {{ round(($student->results()->test($test->id)->sum('obtained_marks') / $student->maximumMarks($test->id)) * 100, 0) }}
+                                    %
+                                @endif
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

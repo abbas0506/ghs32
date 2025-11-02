@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phone List</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
     <style>
         @page {
             margin: 50px 50px 50px 80px;
@@ -37,7 +37,7 @@
     </style>
 </head>
 @php
-$roman = config('global.romans');
+    $roman = config('global.romans');
 @endphp
 
 <body>
@@ -47,7 +47,8 @@ $roman = config('global.romans');
 
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo_32.png')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                            class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
@@ -68,7 +69,7 @@ $roman = config('global.romans');
                     <tbody>
                         <tr class="text-xs">
                             <td class="text-left">Total Students: {{ $section->students->count() }}</td>
-                            <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
+                            <td class="text-right">Printed on {{ now()->format('d-M-Y') }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -88,23 +89,27 @@ $roman = config('global.romans');
                 </thead>
                 <tbody>
 
-                    @foreach($section->students->sortBy('rollno') as $student)
-                    <tr class="text-sm">
-                        <td>{{$student->rollno}}</td>
-                        <td style="text-align: left !important; padding:2px 6px;"><b>{{ ucwords(strtolower($student->name))}}</b><br>{{ $student->admission_no }},{{$student->dob->format('d/m/Y')}} ({{ $student->score }})</td>
-                        <td style="text-align: left !important; padding:2px 6px;">{{ ucwords(strtolower($student->father_name))}}, {{ $student->caste }}<br>{{ $student->address }}</td>
-                        <td>{{$student->group->name}}</td>
-                        <td>{{$student->phone}}</td>
-                        <td>
-                            @if ($student->photo)
-                            <img src="{{ public_path('storage/' . $student->photo) }}"
-                                style="width:24px; height:24px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
-                            @else
-                            <span style="color: #999;">No Photo</span>
-                            @endif
-                        </td>
-                    </tr>
-                    @php $i++; @endphp
+                    @foreach ($section->students->sortBy('rollno') as $student)
+                        <tr class="text-sm">
+                            <td>{{ $student->rollno }}</td>
+                            <td style="text-align: left !important; padding:2px 6px;">
+                                <b>{{ ucwords(strtolower($student->name)) }}</b><br>{{ $student->admission_no }},{{ $student->dob->format('d/m/Y') }}
+                                ({{ $student->score }})</td>
+                            <td style="text-align: left !important; padding:2px 6px;">
+                                {{ ucwords(strtolower($student->father_name)) }},
+                                {{ $student->caste }}<br>{{ $student->address }}</td>
+                            <td>{{ $student->group->name }}</td>
+                            <td>{{ $student->phone }}</td>
+                            <td>
+                                @if ($student->photo)
+                                    <img src="{{ public_path('storage/' . $student->photo) }}"
+                                        style="width:24px; height:24px; border-radius:10%; border:0.5px solid #fff; object-fit:cover;">
+                                @else
+                                    <span style="color: #999;">No Photo</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @php $i++; @endphp
                     @endforeach
                 </tbody>
             </table>

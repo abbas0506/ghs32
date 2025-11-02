@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Codes</title>
-    <link href="{{public_path('css/pdf_tw.css')}}" rel="stylesheet">
+    <link href="{{ public_path('css/pdf_tw.css') }}" rel="stylesheet">
     <style>
         @page {
             margin: 50px 80px 50px 50px;
@@ -35,7 +35,7 @@
     </style>
 </head>
 @php
-$roman = config('global.romans');
+    $roman = config('global.romans');
 @endphp
 
 <body>
@@ -45,7 +45,8 @@ $roman = config('global.romans');
 
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{public_path('/images/logo/logo_32.png')}}" class="w-16"></div>
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                            class="w-16"></div>
                 </div>
                 <table class="w-full">
                     <tbody>
@@ -64,33 +65,36 @@ $roman = config('global.romans');
                     <tbody>
                         <tr class="text-xs">
                             <td class="text-left">{{ $teachers->count() }} Teachers </td>
-                            <td class="text-right">Printed on {{ now()->format('d-M-Y')}}</td>
+                            <td class="text-right">Printed on {{ now()->format('d-M-Y') }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             @php
-            $i=0;
-            $numOfQrPerRow=6;
+                $i = 0;
+                $numOfQrPerRow = 6;
             @endphp
 
             <table class="table-auto w-full mt-2">
                 <tbody>
-                    @foreach($teachers as $teacher)
-                    @if($i%$numOfQrPerRow==0)<tr class="text-sm">@endif
+                    @foreach ($teachers as $teacher)
+                        @if ($i % $numOfQrPerRow == 0)
+                            <tr class="text-sm">
+                        @endif
 
                         <td class="py-2 text-left">
                             <div>
-                                <div>{!! DNS2D::getBarcodeHTML($teacher->cnic, 'QRCODE',4,4) !!}</div>
-                                <span class="text-xs pl-1">{{$teacher->cnic}}</span>
+                                <div>{!! DNS2D::getBarcodeHTML($teacher->cnic, 'QRCODE', 4, 4) !!}</div>
+                                <span class="text-xs pl-1">{{ $teacher->cnic }}</span>
                             </div>
                             <div class="mt-2 text-xs">
-                                {{$teacher->name}}
+                                {{ $teacher->name }}
                             </div>
                         </td>
-                        @if($i%$numOfQrPerRow==$numOfQrPerRow-1)
-                    </tr>@endif
-                    @php $i++; @endphp
+                        @if ($i % $numOfQrPerRow == $numOfQrPerRow - 1)
+                            </tr>
+                        @endif
+                        @php $i++; @endphp
                     @endforeach
                 </tbody>
             </table>
