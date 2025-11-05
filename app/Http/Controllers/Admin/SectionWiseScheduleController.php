@@ -17,7 +17,7 @@ class SectionWiseScheduleController extends Controller
     //
     public function index()
     {
-        $sections = Section::all()->sortBy('grade'); //get active sections
+        $sections = Section::all()->sortByDesc('grade'); //get active sections
         return view('admin.schedule.section-wise.index', compact('sections'));
     }
 
