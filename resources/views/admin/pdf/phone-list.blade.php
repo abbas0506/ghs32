@@ -98,7 +98,7 @@
                             <td style="text-align: left !important; padding:2px 6px;">
                                 {{ ucwords(strtolower($student->father_name)) }},
                                 {{ $student->caste }}<br>{{ $student->address }}</td>
-                            <td>{{ $student->group->name }}</td>
+                            <td>{{ $student->group?->namename }}</td>
                             <td>{{ $student->phone }}</td>
                             <td>
                                 @if ($student->photo)

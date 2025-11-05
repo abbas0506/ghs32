@@ -105,7 +105,7 @@
                                 {{ ucwords(strtolower($student->name)) }}</td>
                             <td style="text-align: left !important; padding:2px 6px;">
                                 {{ ucwords(strtolower($student->father_name)) }}</td>
-                            <td>{{ $student->group->name }}</td>
+                            <td>{{ $student->group?->namename }}</td>
                             <td>
                                 @if ($student->photo)
                                     <img src="{{ public_path('storage/' . $student->photo) }}"

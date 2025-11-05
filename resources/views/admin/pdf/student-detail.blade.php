@@ -111,7 +111,7 @@
                                 <b>{{ ucwords(strtolower($student->mother_name)) }} </b><br>
                                 {{ $student->mother_cnic }} <br>
                             </td>
-                            <td>{{ $student->group->name }}</td>
+                            <td>{{ $student->group?->namename }}</td>
                             <td>
                                 @if ($student->photo)
                                     <img src="{{ public_path('storage/' . $student->photo) }}"
