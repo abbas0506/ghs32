@@ -50,7 +50,8 @@
                 @foreach ($teachers as $teacher)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td class="font-semibold">Mr. {{ $teacher->short_name }}</td>
+                        <td class="font-semibold">{{ $teacher->short_name }} <br> ({{ $teacher->allocations->count() }})
+                        </td>
                         @foreach (range(1, 8) as $lecture_no)
                             <td class="p-1">
                                 @foreach ($teacher->allocations()->havingLectureNo($lecture_no)->get() as $allocation)

@@ -43,7 +43,7 @@
         <div class="custom-container">
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/black.png') }}"
                             class="w-16"></div>
                 </div>
                 <table class="w-full">
@@ -74,6 +74,7 @@
             <table class="w-full mt-2 data">
                 <thead>
                     <tr>
+                        <th class="w-6">Sr</th>
                         <th class="w-24">Teacher</th>
                         @foreach (range(1, 8) as $lecture_no)
                             <th>{{ $lecture_no }}</th>
@@ -84,7 +85,10 @@
 
                     @foreach ($teachers as $teacher)
                         <tr>
-                            <td class="font-semibold">{{ $teacher->short_name }}</td>
+                            <td>{{ $loop->index + 1 }}</td>
+                            <td class="font-semibold">{{ $teacher->short_name }}
+                                <br>({{ $teacher->allocations->count() }})
+                            </td>
                             @foreach (range(1, 8) as $lecture_no)
                                 <td class="p-1">
                                     @foreach ($teacher->allocations()->havingLectureNo($lecture_no)->get() as $allocation)
@@ -98,6 +102,7 @@
                                     @endforeach
                                 </td>
                             @endforeach
+
                         </tr>
                     @endforeach
 

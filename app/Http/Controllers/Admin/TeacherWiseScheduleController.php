@@ -13,12 +13,12 @@ class TeacherWiseScheduleController extends Controller
     //
     public function  index()
     {
-        $teachers = Teacher::all()->sortByDesc('bps'); //get active sections
+        $teachers = Teacher::has('allocations')->get()->sortByDesc('bps'); //get active sections
         return view('admin.schedule.teacher-wise.index', compact('teachers'));
     }
     public function print()
     {
-        $teachers = Teacher::all();
+        $teachers = Teacher::has('allocations')->get()->sortByDesc('bps');;
         $pdf = PDF::loadview('admin.schedule.teacher-wise.pdf', compact('teachers'))->setPaper('a4', 'landscape');
         $pdf->set_option("isPhpEnabled", true);
         $file = "teacher-schedule.pdf";

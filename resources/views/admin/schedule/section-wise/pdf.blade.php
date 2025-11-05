@@ -43,7 +43,7 @@
         <div class="custom-container">
             <div class="w-1/2 mx-auto">
                 <div class="relative">
-                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
+                    <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/black.png') }}"
                             class="w-16"></div>
                 </div>
                 <table class="w-full">
@@ -90,7 +90,7 @@
                                     @foreach ($section->allocations()->havingLectureNo($lecture_no)->get() as $allocation)
                                         <div class="text-sm bg-teal-50">
                                             <div class="font-bold">{{ $allocation->subject->short_name }}</div>
-                                            <div>Mr. {{ $allocation->teacher->short_name }}</div>
+                                            <div>{{ $allocation->teacher->short_name }}</div>
                                         </div>
                                         @if (!$loop->last)
                                             <div>---</div>
