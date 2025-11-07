@@ -70,13 +70,13 @@ class CollectiveTestController extends Controller
                         'test_date' => now(),
                     ]);
 
-                    foreach ($section->students as $student) {
-                        Result::create([
-                            'student_id' => $student->id,
-                            'test_allocation_id' => $testAllocation->id,
-                            'obtained_marks' => 0,
-                        ]);
-                    }
+                    // foreach ($section->students as $student) {
+                    //     Result::create([
+                    //         'student_id' => $student->id,
+                    //         'test_allocation_id' => $testAllocation->id,
+                    //         'obtained_marks' => 0,
+                    //     ]);
+                    // }
                 }
             }
 
