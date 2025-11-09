@@ -47,7 +47,7 @@ class ScheduleController extends Controller
                 'subject_id' => $request->subject_id,
                 'teacher_id' => $request->teacher_id,
             ]);
-            return redirect('admin/section-wise-schedule')->with('success', 'Successfully created');
+            return redirect('admin/class-schedule')->with('success', 'Successfully created');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -91,7 +91,7 @@ class ScheduleController extends Controller
         $model = Allocation::findOrFail($allocationId);
         try {
             $model->update($request->all());
-            return redirect('admin/section-wise-schedule')->with('success', 'Successfully updated');
+            return redirect('admin/class-schedule')->with('success', 'Successfully updated');
         } catch (Exception $ex) {
             return redirect()->back()->withErrors($ex->getMessage());
         }
@@ -106,7 +106,7 @@ class ScheduleController extends Controller
         $model = Allocation::findOrFail($id);
         try {
             $model->delete();
-            return redirect()->route('admin.section-wise-schedule.index')->with('success', 'Successfully deleted');
+            return redirect()->route('admin.class-schedule.index')->with('success', 'Successfully deleted');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong

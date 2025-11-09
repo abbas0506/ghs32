@@ -86,15 +86,18 @@
                     @foreach ($teachers as $teacher)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
-                            <td class="font-semibold">{{ $teacher->short_name }}
-                                <br>({{ $teacher->allocations->count() }})
+                            <td class="font-bold">{{ $teacher->short_name }}
+                                <br><span class="font-normal">({{ $teacher->allocations->count() }})</span>
                             </td>
                             @foreach (range(1, 8) as $lecture_no)
                                 <td class="p-1">
                                     @foreach ($teacher->allocations()->havingLectureNo($lecture_no)->get() as $allocation)
-                                        <div class="text-sm bg-teal-50">
-                                            <div class="font-bold">{{ $allocation->subject->short_name }}</div>
-                                            <div>Class {{ $allocation->section->fullName() }}</div>
+                                        <div>
+                                            <div style="font-size:10px">
+                                                <span class="font-bold">{{ $allocation->subject->short_name }}
+                                                </span><br>
+                                                {{ $allocation->section->fullName() }}
+                                            </div>
                                         </div>
                                         @if (!$loop->last)
                                             <div>---</div>
@@ -113,7 +116,7 @@
 
     <script type="text/php">
         if (isset($pdf) ) {
-            $x = 425;
+            $x = 300;
             $y = 20;
             $text = "{PAGE_NUM} of {PAGE_COUNT}";
             $font = $fontMetrics->get_font("helvetica", "bold");

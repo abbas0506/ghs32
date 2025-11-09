@@ -122,7 +122,7 @@
                                             </td>
                                             <td style="text-align: right; padding-right:8px">
                                                 <div style="text-align: center; display: inline-block;">
-                                                    <img src="{{ public_path('images/principal/sign2.png') }}"
+                                                    <img src="{{ public_path('images/principal/sign.png') }}"
                                                         alt="" width="32px" height="32px">
                                                     <span
                                                         style="display: block; border-top: 1px solid #000; width: 80px; margin-top: 5px;"></span>

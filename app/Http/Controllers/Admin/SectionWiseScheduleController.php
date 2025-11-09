@@ -23,7 +23,12 @@ class SectionWiseScheduleController extends Controller
 
     public function print()
     {
-        $sections = Section::all();
+
+        if (session('section_ids'))
+            $sections = Section::whereIn('id', session('section_ids'))->get();
+        else
+            $sections = Section::all();
+
         $pdf = PDF::loadview('admin.schedule.section-wise.pdf', compact('sections'))->setPaper('a4', 'landscape');
         $pdf->set_option("isPhpEnabled", true);
         $file = "schedule.pdf";
@@ -31,15 +36,35 @@ class SectionWiseScheduleController extends Controller
     }
 
 
-    public function clear()
+    public function clear(Request $request)
     {
         $allocations = Allocation::all();
         try {
             foreach ($allocations as $allocation)
                 $allocation->delete();
-            return redirect('admin/section-wise-schedule')->with('success', 'Successfuly removed all entries!');
+            return redirect('admin/class-schedule')->with('success', 'Successfuly removed all entries!');
         } catch (Exception $ex) {
             return back()->with('error', $ex->getMessage());
+        }
+    }
+
+    public function post(Request $request)
+    {
+        $request->validate([
+            'section_ids_array' => 'required',
+        ]);
+
+
+        try {
+            $sectionIdsArray = array();
+            $sectionIdsArray = $request->section_ids_array;
+            session([
+                'section_ids' => $sectionIdsArray,
+            ]);
+            return redirect()->route('admin.class-schedule.print');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+            // something went wrong
         }
     }
 }

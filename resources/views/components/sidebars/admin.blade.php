@@ -57,7 +57,7 @@
             </li>
             <li>
                 <!-- <a href="{{ route('admin.section.lecture.schedule.index', [0, 0]) }}" class="flex items-center"> -->
-                <a href="{{ url('admin/section-wise-schedule') }}" class="flex items-center">
+                <a href="{{ route('admin.class-schedule') }}" class="flex items-center">
                     <i class="bi-clock"></i>
                     <span class="ml-3">Schedule</span>
                 </a>

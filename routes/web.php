@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\SectionResultCardController;
 use App\Http\Controllers\Admin\SectionResultController;
 use App\Http\Controllers\Admin\SectionStuedentsController;
 use App\Http\Controllers\Admin\SectionWiseScheduleController;
+use App\Http\Controllers\Admin\SingleTeacherScheduleController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherCardController;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
@@ -134,12 +135,14 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('section.lecture.schedule', ScheduleController::class);
 
-        Route::get('section-wise-schedule', [SectionWiseScheduleController::class, 'index']);
-        Route::get('section-wise-schedule/print', [SectionWiseScheduleController::class, 'print']);
-        Route::get('section-wise-schedule/clear', [SectionWiseScheduleController::class, 'clear']);
+        Route::get('class-schedule', [SectionWiseScheduleController::class, 'index'])->name('class-schedule');
+        Route::post('class-schedule/post', [SectionWiseScheduleController::class, 'post'])->name('class-schedule.post');
+        Route::get('class-schedule/print', [SectionWiseScheduleController::class, 'print'])->name('class-schedule.print');
+        Route::post('class-schedule/clear', [SectionWiseScheduleController::class, 'clear']);
 
-        Route::get('teacher-wise-schedule', [TeacherWiseScheduleController::class, 'index']);
-        Route::get('teacher-wise-schedule/print', [TeacherWiseScheduleController::class, 'print']);
+        Route::get('teacher-schedule', [TeacherWiseScheduleController::class, 'index'])->name('teacher-schedule');
+        Route::post('teacher-schedule/post', [TeacherWiseScheduleController::class, 'post'])->name('teacher-schedule.post');
+        Route::get('teacher-schedule/print', [TeacherWiseScheduleController::class, 'print'])->name('teacher-schedule.print');
 
         Route::get('section/{section}/reset-index', [AdminSectionController::class, 'resetIndex'])->name('sections.reset');
         Route::post('section/{section}/reset-rollno', [AdminSectionController::class, 'resetRollNo'])->name('sections.reset.rollno');
