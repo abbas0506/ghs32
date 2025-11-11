@@ -137,7 +137,7 @@ class AuthController extends Controller
 
             try {
 
-                Mail::raw('Password has been reset by exampixel.com : ' . $code, function ($message) use ($email) {
+                Mail::raw('Password has been reset by ghs32.txdevs.com : ' . $code, function ($message) use ($email) {
                     $message->to($email);
                     $message->subject('Password reset');
                 });

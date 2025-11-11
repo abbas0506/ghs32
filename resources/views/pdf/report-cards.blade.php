@@ -55,7 +55,7 @@
                 <div class="w-1/2 mx-auto">
                     <div class="relative">
                         <div class="absolute"><img alt="logo" src="{{ public_path('/images/logo/dark_green.png') }}"
-                                class="w-16"></div>
+                                class="w-12"></div>
                     </div>
                     <table class="w-full">
                         <tbody>
@@ -127,7 +127,7 @@
                             @endphp
                             <tr class="border">
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td class="text-left">{{ $result->testAllocation->allocation->subject->name }}</td>
+                                <td class="text-left">{{ $result->testAllocation->subject->name }}</td>
                                 <td>{{ $result->testAllocation->max_marks }}</td>
                                 <td>{{ $result->obtained_marks }}</td>
                                 <td>{{ $percentage }} %</td>

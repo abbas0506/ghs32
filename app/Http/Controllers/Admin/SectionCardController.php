@@ -18,7 +18,7 @@ class SectionCardController extends Controller
     {
         //
         $section = Section::findOrFail($id);
-        return view('admin.cards.index', compact('section'));
+        return view('admin.student-cards.index', compact('section'));
     }
 
     /**
@@ -91,7 +91,7 @@ class SectionCardController extends Controller
         if (session('students')) {
             $students = session('students');
 
-            $pdf = PDF::loadview('admin.cards.print', compact('students'))->setPaper('a4', 'portrait');
+            $pdf = PDF::loadview('admin.student-cards.print', compact('students'))->setPaper('a4', 'portrait');
             $pdf->set_option("isPhpEnabled", true);
             $file = "cards.pdf";
             return $pdf->stream($file);

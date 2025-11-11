@@ -2,9 +2,10 @@
     <div class="flex flex-wrap w-full h-16 items-center justify-between shadow-sm bg-white px-5">
         <div class="flex items-center space-x-2">
             <a href="{{ url('/') }}" class="flex justify-center">
-                <img alt="logo" src="{{ asset('images/logo/dark_green.png') }}" class="w-10 h-10 md:hidden">
+                <img alt="logo" src="{{ asset('images/logo/dark_green.png') }}"
+                    class="w-8 h-8 md:w-10 md:h-10 md:hidden">
             </a>
-            <div class="text-base font-semibold">GHS 32/2L</div>
+            <div class="hidden md:block text-base font-semibold">GHS 32/2L</div>
             <select id="roleSwitcher"
                 class="ml-3 text-sm border-none focus:outline-none focus:ring-0 hover:cursor-pointer">
                 @if (Auth::user()->roles->count() > 1)

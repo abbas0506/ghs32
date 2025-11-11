@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Alumni;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,7 +12,6 @@ class AlumniController extends Controller
 {
     public function index()
     {
-        echo "admin page";
         $alumni = Alumni::latest()->paginate(10);
         return view('admin.alumni.index', compact('alumni'));
     }
@@ -27,10 +27,9 @@ class AlumniController extends Controller
             'prefix' => 'nullable|string|max:10',
             'name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-            'home_address' => 'nullable|string',
-            'office_address' => 'nullable|string',
-            'job_desc' => 'nullable|string',
+            'address' => 'nullable|string|max:255',
+            'session' => 'nullable|string',
+            'introduction' => 'nullable|string',
             'photo' => 'nullable|image|max:2048',
         ]);
 
@@ -39,45 +38,52 @@ class AlumniController extends Controller
         }
 
         Alumni::create($data);
-        return redirect()->route('alumni.index')->with('success', 'Alumni added successfully.');
+        return redirect()->route('admin.alumni.index')->with('success', 'Alumni added successfully.');
     }
 
-    public function edit(Alumni $alumni)
+    public function edit($id)
+
     {
-        return view('alumni.edit', compact('alumni'));
+        $alumni = Alumni::findOrFail($id);
+        return view('admin.alumni.edit', compact('alumni'));
     }
 
-    public function update(Request $request, Alumni $alumni)
+    public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'prefix' => 'nullable|string|max:10',
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
             'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-            'home_address' => 'nullable|string',
-            'office_address' => 'nullable|string',
-            'job_desc' => 'nullable|string',
+            'address' => 'nullable|string|max:100',
+            'session' => 'nullable|string',
+            'introduction' => 'nullable|string',
             'photo' => 'nullable|image|max:2048',
         ]);
 
-        if ($request->hasFile('photo')) {
-            if ($alumni->photo && Storage::disk('public')->exists($alumni->photo)) {
-                Storage::disk('public')->delete($alumni->photo);
-            }
-            $data['photo'] = $request->file('photo')->store('alumni', 'public');
-        }
+        $alumni = Alumni::findOrFail($id);
 
-        $alumni->update($data);
-        return redirect()->route('alumni.index')->with('success', 'Alumni updated successfully.');
+        try {
+            if ($request->hasFile('photo')) {
+                if ($alumni->photo && Storage::disk('public')->exists($alumni->photo)) {
+                    Storage::disk('public')->delete($alumni->photo);
+                }
+                $data['photo'] = $request->file('photo')->store('alumni', 'public');
+            }
+
+            $alumni->update($data);
+            return redirect()->route('admin.alumni.index')->with('success', 'Alumni updated successfully.');
+        } catch (Exception $ex) {
+            return back()->with('warning', $ex->getMessage());
+        }
     }
 
-    public function destroy(Alumni $alumni)
+    public function destroy($id)
     {
+        $alumni = Alumni::findOrFail($id);
         if ($alumni->photo && Storage::disk('public')->exists($alumni->photo)) {
             Storage::disk('public')->delete($alumni->photo);
         }
 
         $alumni->delete();
-        return redirect()->route('alumni.index')->with('success', 'Alumni deleted.');
+        return redirect()->route('admin.alumni.index')->with('success', 'Alumni deleted.');
     }
 }

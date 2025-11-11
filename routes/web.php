@@ -120,7 +120,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('login/as', [AuthController::class, 'loginAs'])->name('login.as');
 Route::get('signout', [AuthController::class, 'signout'])->name('signout');
 Route::resource('faculty', FacultyController::class)->only('index', 'create', 'store');
-Route::resource('alumni', ControllersAlumniController::class)->only('index', 'create', 'store');
+Route::resource('alumni', ControllersAlumniController::class)->only('index', 'create', 'store');;
 
 Route::middleware(['auth'])->group(function () {
 

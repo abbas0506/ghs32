@@ -9,6 +9,7 @@ use App\Models\Test;
 use App\Models\TestAllocation;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TestAllocationController extends Controller
 {
@@ -30,9 +31,24 @@ class TestAllocationController extends Controller
     {
         //
         $test = Test::findOrFail($id);
-        $alreadyIncludedAllocationIdsArray = TestAllocation::where('test_id', $test->id)->pluck('allocation_id')->toArray();
-        $allocations = Allocation::with('section')->whereNotIn('id', $alreadyIncludedAllocationIdsArray)->get();
-        return view('admin.tests.allocations.create', compact('test', 'allocations'));
+
+        #identify classes/section of this test
+        $sectionIds = $test->testAllocations->pluck('section_id')->unique()->toArray();
+        $allocations = Allocation::whereIn('section_id', $sectionIds)->get();
+
+
+        $unallocated = Allocation::whereIn('section_id', $sectionIds)
+            ->whereNotExists(function ($query) use ($test) {
+                $query->select(DB::raw(1))
+                    ->from('test_allocations')
+                    ->where('test_allocations.test_id', $test->id)
+                    ->whereColumn('test_allocations.section_id', 'allocations.section_id')
+                    ->whereColumn('test_allocations.lecture_no', 'allocations.lecture_no')
+                    ->whereColumn('test_allocations.subject_id', 'allocations.subject_id');
+            })
+            ->get();
+
+        return view('admin.tests.allocations.create', compact('test', 'unallocated'));
     }
 
     /**
@@ -46,11 +62,15 @@ class TestAllocationController extends Controller
         ]);
 
         $test = Test::findOrFail($testId);
+        $allocation = Allocation::findOrFail($request->allocation_id);
         try {
             $test->testAllocations()->create([
-                'allocation_id' => $request->allocation_id,
-                'max_marks' => 50,
-                'test_date' => now(),
+                'section_id' => $allocation->section_id,
+                'lecture_no' => $allocation->lecture_no,
+                'subject_id' => $allocation->subject_id,
+                'teacher_id' => $allocation->teacher_id,
+                'max_marks' => $test->max_marks,
+                'test_date' => $test->test_date,
             ]);
             return redirect()->route('admin.test.allocations.index', $test)->with('success', 'Successfully created');
         } catch (Exception $e) {

@@ -7,12 +7,12 @@
 @section('body')
     <style>
         /* body {
-            background-color: #6d6d6d;
-        } */
+                                                                                                background-color: #6d6d6d;
+                                                                                            } */
 
         /* .sticky-header {
-            background-color: #0d9488;
-        } */
+                                                                                                background-color: #0d9488;
+                                                                                            } */
 
         @keyframes waveGlow {
             0% {
@@ -80,11 +80,12 @@
 
     <section>
         <div class="max-w-full m-5 md:mx-auto lg:w-2/3  mt-24 bg-white">
-            <div class="bg-slate-300 p-5 relative">
-                <img src="{{ url(asset('images/logo/dark_green.png')) }}" alt=""
-                    class="absolute top-2 md:top-2 left-2 md:left-2 w-12">
-                <div class="flex flex-col flex-1 justify-center items-center text-center">
-                    <h2 class="txt-lg font-bold tracking-wider"> I Love My School</h2>
+            <div class="bg-green-100 p-5 relative">
+                {{-- <img src="{{ url(asset('images/logo/dark_green.png')) }}" alt=""
+                    class="absolute top-2 md:top-2 left-2 md:left-2 w-12"> --}}
+                <div class="flex flex-col flex-1 justify-center items-center text-center ">
+                    <h2 class="text-lg md:text-xl font-bold tracking-wider text-green-600 "> We are happy that you are here!
+                        <i class="bi-emoji-smile text-green-600 "></i></h2>
                 </div>
             </div>
 
@@ -124,14 +125,14 @@
                         </div>
 
                         <div class="">
-                            <label for="">Village Name <i class="bi-house"></i></label>
+                            <label for="">Residence <i class="bi-house"></i></label>
                             <input type="text" name="address" id='address' class="custom-input fancy-focus"
                                 placeholder="for example: 32/2L" required>
                         </div>
 
 
                         <div>
-                            <label for="session">Session <i class="bi-clock"></i></label>
+                            <label for="session">Session <i class="bi-clock"></i> (میٹرک کب پاس کیا؟) </label>
                             <select name="session" class="custom-input fancy-focus" required>
                                 <option value="">Select ...</option>
                                 @foreach (range(1955, now()->format('Y')) as $session)
@@ -145,7 +146,7 @@
                             <label for="introduction">Brief Introduction (maximum 100 characters)<i
                                     class="bi-numeric"></i></label>
                             <input type="text" name="introduction" class="custom-input fancy-focus"
-                                placeholder="for example: Currently serving as a police officer" required>
+                                placeholder="Currently I am working as ..." required>
                         </div>
                         <div class="flex justify-center space-x-3 text-center mt-8 md:col-span-2">
                             <a href="{{ url('/') }}" class="btn-gray rounded py-3 px-5">Cancel <i

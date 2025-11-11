@@ -31,7 +31,7 @@ class Result extends Model
 
     public function scopeForLectureNo($query, $lectureNo)
     {
-        return $query->whereHas('testAllocation.allocation', function ($query) use ($lectureNo) {
+        return $query->whereHas('testAllocation', function ($query) use ($lectureNo) {
             $query->where('lecture_no', $lectureNo);
         });
     }

@@ -13,11 +13,11 @@
 
     <div class="content-section  mt-8">
         <div class="flex items-center justify-between flex-wrap gap-4">
-            <div class="flex items-center gap-8 flex-wrap">
+            <div class="flex items-center gap-2 md:gap-8 flex-wrap">
                 <h2>Result Status</h2>
-                <div class="flex items-center gap-4 flex-wrap">
+                <div class="flex items-center gap-3 flex-wrap">
                     @if ($test->testAllocations()->count())
-                        <p>{{ $test->testAllocations()->resultSubmitted()->count() }} / {{ $testAllocations->count() }}
+                        <p>{{ $test->testAllocations()->resultSubmitted()->count() }}/{{ $testAllocations->count() }}
                             ({{ round(($test->testAllocations()->resultSubmitted()->count() / $test->testAllocations->count()) * 100, 0) }}%)
                         </p>
                         <p class="text-sm"><i
@@ -25,8 +25,11 @@
                         </p>
                     @endif
                 </div>
-                <a href="{{ route('admin.test.sections.index', $test) }}" class="link text-sm">Get Print &nbsp <i
-                        class="bi-printer"></i></a>
+                <a href="{{ route('admin.test.sections.index', $test) }}"
+                    class="flex w-12 h-12 items-center justify-center rounded-full bg-teal-100 hover:bg-teal-200 ml-2">
+                    <i class="bi-printer"></i>
+                </a>
+
             </div>
             <div class="flex items-center space-x-3 text-sm">
                 <i class="bi-filter"></i>
@@ -132,6 +135,7 @@
         }
 
         function filterBy(criteria) {
+
             if (criteria == 'all') {
                 $('.tr').each(function() {
                     $(this).removeClass('hidden');
@@ -140,7 +144,7 @@
                 // show submitted or pending as selected
                 $('.tr').each(function() {
                     if ((
-                            $(this).children().eq(6).hasClass(criteria)
+                            $(this).children().eq(7).hasClass(criteria)
                         )) {
                         $(this).removeClass('hidden');
                     } else {

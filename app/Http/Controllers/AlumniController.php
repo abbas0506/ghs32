@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alumni;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AlumniController extends Controller
 {
@@ -35,5 +38,11 @@ class AlumniController extends Controller
 
         Alumni::create($data);
         return redirect()->route('alumni.index')->with('success', 'Alumni added successfully.');
+    }
+
+    public function edit($id)
+    {
+        $alumni = Alumni::findOrFail($id);
+        return view('admin.alumni.edit', compact('alumni'));
     }
 }
