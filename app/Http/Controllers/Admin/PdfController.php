@@ -20,7 +20,7 @@ class PdfController extends Controller
         try {
             if (session('teachers')) {
                 $teachers = session('teachers');
-                $pdf = PDF::loadview('admin.teacher-cards.pdf', compact('teachers'))->setPaper('a4', 'portrait');
+                $pdf = PDF::loadview('admin.teacher-cards.pdf-lg', compact('teachers'))->setPaper('a4', 'portrait');
                 $pdf->set_option("isPhpEnabled", true);
                 $file = "cards.pdf";
                 return $pdf->stream($file);
