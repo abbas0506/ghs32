@@ -33,8 +33,8 @@
             position: relative;
             overflow: hidden;
             background-color: white;
-            width: 250px;
-            height: 380px;
+            width: 240px;
+            height: 375px;
         }
 
         .card-content {
@@ -57,7 +57,7 @@
         .logo {
             position: absolute;
             top: 25px;
-            left: 50px;
+            left: 45px;
             z-index: 1;
             width: 36px;
             height: 36px;
@@ -65,7 +65,7 @@
 
         .school-name {
             position: absolute;
-            left: 96px;
+            left: 90px;
             top: 30px;
             font-size: 14px;
             font-weight: bold;
@@ -73,7 +73,7 @@
 
         .web-address {
             position: absolute;
-            left: 97px;
+            left: 91px;
             top: 42px;
             font-size: 10px;
         }
@@ -109,7 +109,7 @@
 
         .qr-code {
             position: absolute;
-            left: 100px;
+            left: 95px;
             bottom: 10px;
             width: 50px;
         }
@@ -117,7 +117,7 @@
         .footer {
             position: absolute;
             bottom: 2px;
-            left: 85px;
+            left: 80px;
             font-size: 10px;
         }
 
@@ -169,8 +169,6 @@
                                 <div class="footer">ID: {{ $teacher->cnic }}</div>
                                 <!-- Foreground Content -->
                                 <div class="card-content">
-
-
                                     <div class="w-32 h-32 m-auto mt-20">
                                         @if ($teacher->photo)
                                             <img src="{{ public_path('storage/' . $teacher->photo) }}"
@@ -194,7 +192,6 @@
 
                         <td class="p-1">
                             <div class="border p-2 card-container">
-                                <!-- wave patten -->
                                 <img src="{{ public_path('images/bg/waves.png') }}" class="wave-pattern"
                                     alt="Wave pattern">
                                 <img src="{{ public_path('images/logo/black.png') }}" alt="" class="logo">
@@ -206,8 +203,6 @@
                                 <div class="footer">ID: {{ $teacher->cnic }}</div>
                                 <!-- Foreground Content -->
                                 <div class="card-content">
-
-
                                     <div class="w-32 h-32 m-auto mt-20">
                                         @if ($teacher->photo)
                                             <img src="{{ public_path('storage/' . $teacher->photo) }}"
