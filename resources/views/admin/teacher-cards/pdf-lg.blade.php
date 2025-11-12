@@ -22,7 +22,7 @@
         .data tr td {
             font-size: 12px;
             text-align: center;
-            padding-top: 10px;
+            /* padding-top: 10px; */
         }
 
         .border {
@@ -33,8 +33,8 @@
             position: relative;
             overflow: hidden;
             background-color: white;
-            width: 240px;
-            height: 375px;
+            width: 100%;
+            height: 370px;
         }
 
         .card-content {
@@ -44,8 +44,8 @@
 
         .bg-custom {
             position: absolute;
-            width: 420px;
-            height: 70%;
+            width: 500px;
+            height: 72%;
             opacity: 1;
             transform-origin: top right;
             transform: rotate(-48deg);
@@ -61,6 +61,7 @@
             z-index: 1;
             width: 36px;
             height: 36px;
+            z-index: 1;
         }
 
         .school-name {
@@ -69,6 +70,7 @@
             top: 30px;
             font-size: 14px;
             font-weight: bold;
+            z-index: 1;
         }
 
         .web-address {
@@ -76,6 +78,7 @@
             left: 91px;
             top: 42px;
             font-size: 10px;
+            z-index: 1;
         }
 
         .wave-pattern {
@@ -110,15 +113,16 @@
         .qr-code {
             position: absolute;
             left: 95px;
-            bottom: 10px;
+            bottom: 16px;
             width: 50px;
+            z-index: 1;
         }
 
         .footer {
             position: absolute;
             bottom: 2px;
-            left: 80px;
-            font-size: 10px;
+            left: 78px;
+            font-size: 9px;
         }
 
         .page-break {
@@ -130,12 +134,6 @@
         }
     </style>
 </head>
-
-@php
-    $roman = config('global.romans');
-    $i = 0;
-    $numOfCardsPerRow = 1;
-@endphp
 
 <body>
     <main>
@@ -149,85 +147,47 @@
                 </tbody>
             </table>
 
-            <table class="table-auto w-full mt-2">
+            <table class="table-auto mt-2 mx-auto" cellspacing="5" style="border-collapse:separate;">
                 <tbody class="data">
                     @foreach ($teachers->sortByDesc('bps') as $teacher)
-                        @if ($i % $numOfCardsPerRow == 0)
-                            <tr class="text-sm">
-                        @endif
+                        <tr class="text-sm">
+                            @foreach (range(1, 2) as $column)
+                                <td class="border w-60">
+                                    <div class="card-container">
+                                        <img src="{{ public_path('images/bg/waves.png') }}" class="wave-pattern"
+                                            alt="Wave pattern">
+                                        <img src="{{ public_path('images/logo/black.png') }}" alt=""
+                                            class="logo">
+                                        <div class="bg-custom"></div>
+                                        <div class="school-name">GHS 32/2L</div>
+                                        <div class="web-address">ghs32.txdevs.com</div>
+                                        <div class="bottom-left-bar"></div>
+                                        <div class="bottom-right-bar"></div>
+                                        <div class="footer">ID: {{ $teacher->cnic }}</div>
+                                        <!-- Foreground Content -->
+                                        <div class="card-content">
+                                            <div class="w-32 h-32 m-auto" style="margin-top: 80px">
+                                                @if ($teacher->photo)
+                                                    <img src="{{ public_path('storage/' . $teacher->photo) }}"
+                                                        style="width:100px; height:100px; border-radius:50%; border:5px solid white; object-fit:cover;">
+                                                @else
+                                                    <span style="color: #999;">No Photo</span>
+                                                @endif
+                                            </div>
 
-                        <td class="p-1">
-                            <div class="border p-2 card-container" style="float:right;">
-                                <img src="{{ public_path('images/bg/waves.png') }}" class="wave-pattern"
-                                    alt="Wave pattern">
-                                <img src="{{ public_path('images/logo/black.png') }}" alt="" class="logo">
-                                <div class="bg-custom"></div>
-                                <div class="school-name">GHS 32/2L</div>
-                                <div class="web-address">ghs32.txdevs.com</div>
-                                <div class="bottom-left-bar"></div>
-                                <div class="bottom-right-bar"></div>
-                                <div class="footer">ID: {{ $teacher->cnic }}</div>
-                                <!-- Foreground Content -->
-                                <div class="card-content">
-                                    <div class="w-32 h-32 m-auto mt-20">
-                                        @if ($teacher->photo)
-                                            <img src="{{ public_path('storage/' . $teacher->photo) }}"
-                                                style="width:100px; height:100px; border-radius:50%; border:5px solid white; object-fit:cover;">
-                                        @else
-                                            <span style="color: #999;">No Photo</span>
-                                        @endif
+                                            <div class="font-bold px-5 mt-4" style="font-size: 18px; line-height:20px">
+                                                {{ Str::upper($teacher->name) }}</div>
+                                            <div style="color:rgb(57, 129, 35); font-size:14px; margin-top:12px">
+                                                {{ $teacher->designation }}</div>
+
+                                            <div class="qr-code">
+                                                {!! DNS2D::getBarcodeHTML($teacher->cnic, 'QRCODE', 2.4, 2.4) !!}
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <div class="font-bold px-5 mt-4" style="font-size: 18px; line-height:20px">
-                                        {{ Str::upper($teacher->name) }}</div>
-                                    <div style="color:rgb(57, 129, 35); font-size:14px; margin-top:12px">
-                                        {{ $teacher->designation }}</div>
-                                    <div class="qr-code">
-                                        {!! DNS2D::getBarcodeHTML($teacher->cnic, 'QRCODE', 2.4, 2.4) !!}
-                                    </div>
-
-                                </div>
-                            </div>
-                        </td>
-
-                        <td class="p-1">
-                            <div class="border p-2 card-container">
-                                <img src="{{ public_path('images/bg/waves.png') }}" class="wave-pattern"
-                                    alt="Wave pattern">
-                                <img src="{{ public_path('images/logo/black.png') }}" alt="" class="logo">
-                                <div class="bg-custom"></div>
-                                <div class="school-name">GHS 32/2L</div>
-                                <div class="web-address">ghs32.txdevs.com</div>
-                                <div class="bottom-left-bar"></div>
-                                <div class="bottom-right-bar"></div>
-                                <div class="footer">ID: {{ $teacher->cnic }}</div>
-                                <!-- Foreground Content -->
-                                <div class="card-content">
-                                    <div class="w-32 h-32 m-auto mt-20">
-                                        @if ($teacher->photo)
-                                            <img src="{{ public_path('storage/' . $teacher->photo) }}"
-                                                style="width:100px; height:100px; border-radius:50%; border:5px solid white; object-fit:cover;">
-                                        @else
-                                            <span style="color: #999;">No Photo</span>
-                                        @endif
-                                    </div>
-
-                                    <div class="font-bold px-5 mt-4" style="font-size: 18px; line-height:20px">
-                                        {{ Str::upper($teacher->name) }}</div>
-                                    <div style="color:rgb(57, 129, 35); font-size:14px; margin-top:12px">
-                                        {{ $teacher->designation }}</div>
-                                    <div class="qr-code">
-                                        {!! DNS2D::getBarcodeHTML($teacher->cnic, 'QRCODE', 2.4, 2.4) !!}
-                                    </div>
-
-                                </div>
-                            </div>
-                        </td>
-
-                        @if ($i % $numOfCardsPerRow == $numOfCardsPerRow - 1)
-                            </tr>
-                        @endif
-                        @php $i++; @endphp
+                                </td>
+                            @endforeach
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
