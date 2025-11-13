@@ -34,7 +34,7 @@
             overflow: hidden;
             background-color: white;
             width: 100%;
-            height: 370px;
+            height: 390px;
         }
 
         .card-content {
@@ -45,7 +45,7 @@
         .bg-custom {
             position: absolute;
             width: 500px;
-            height: 72%;
+            height: 74%;
             opacity: 1;
             transform-origin: top right;
             transform: rotate(-48deg);
@@ -112,7 +112,7 @@
 
         .qr-code {
             position: absolute;
-            left: 95px;
+            left: 102px;
             bottom: 16px;
             width: 50px;
             z-index: 1;
@@ -121,7 +121,7 @@
         .footer {
             position: absolute;
             bottom: 2px;
-            left: 78px;
+            left: 85px;
             font-size: 9px;
         }
 
@@ -147,12 +147,12 @@
                 </tbody>
             </table>
 
-            <table class="table-auto mt-2 mx-auto" cellspacing="5" style="border-collapse:separate;">
+            <table class="table-auto mt-2 mx-auto" cellspacing="8" style="border-collapse:separate;">
                 <tbody class="data">
                     @foreach ($teachers->sortByDesc('bps') as $teacher)
                         <tr class="text-sm">
                             @foreach (range(1, 2) as $column)
-                                <td class="border w-60">
+                                <td class="border" width='255px'>
                                     <div class="card-container">
                                         <img src="{{ public_path('images/bg/waves.png') }}" class="wave-pattern"
                                             alt="Wave pattern">
@@ -166,7 +166,7 @@
                                         <div class="footer">ID: {{ $teacher->cnic }}</div>
                                         <!-- Foreground Content -->
                                         <div class="card-content">
-                                            <div class="w-32 h-32 m-auto" style="margin-top: 80px">
+                                            <div class="w-32 h-32 m-auto" style="margin-top: 85px">
                                                 @if ($teacher->photo)
                                                     <img src="{{ public_path('storage/' . $teacher->photo) }}"
                                                         style="width:100px; height:100px; border-radius:50%; border:5px solid white; object-fit:cover;">
