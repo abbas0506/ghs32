@@ -51,8 +51,10 @@
                     <tr>
                         <th class="chk w-6 hidden"></th>
                         <th class="w-24">Class</th>
-                        @foreach (range(1, 8) as $lecture_no)
-                            <th>{{ $lecture_no }}</th>
+                        @foreach ($lectures as $lecture)
+                            <th>{{ $lecture->lecture_no }} <br><span
+                                    class="text-slate-500">{{ $lecture->starts_at->format('hh:') }}</span>
+                            </th>
                         @endforeach
                     </tr>
                 </thead>

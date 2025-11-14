@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Allocation;
+use App\Models\Lecture;
 use Illuminate\Http\Request;
 use App\Models\Section;
 use App\Models\Subject;
@@ -17,8 +18,9 @@ class SectionWiseScheduleController extends Controller
     //
     public function index()
     {
+        $lectures = Lecture::all();
         $sections = Section::all()->sortByDesc('grade'); //get active sections
-        return view('admin.schedule.section-wise.index', compact('sections'));
+        return view('admin.schedule.section-wise.index', compact('sections', 'lectures'));
     }
 
     public function print()

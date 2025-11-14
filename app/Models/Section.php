@@ -38,7 +38,10 @@ class Section extends Model
     {
         return $this->hasMany(Allocation::class);
     }
-
+    public function testAllocations()
+    {
+        return $this->hasMany(TestAllocation::class);
+    }
     public function scopeActive($query)
     {
         return true;

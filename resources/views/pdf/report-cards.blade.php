@@ -68,36 +68,45 @@
                         </tbody>
                     </table>
                 </div>
+                @php
+                    $obtained = $student->results()->test($test->id)->get()->sum('obtained_marks');
+                    $total = $student->maximumMarks($test->id);
+                @endphp
 
                 <table class="table-auto w-full mt-4" cellspacing="0">
                     <thead>
                         <tr>
-                            <th class="w-24 "></th>
+                            <th class="w-24"></th>
                             <th class="w-6"></th>
-                            <th class=""></th>
+                            <th class="w-48"></th>
+                            <th rowspan="4" class="w-32"></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody class="data">
-
                         <tr>
-                            <td class="text-left">Student</td>
+                            <td class="text-left font-bold">Student</td>
                             <td>:</td>
                             <td class="text-left">{{ ucwords(strtolower($student->name)) }}</td>
+                            <td rowspan="3" class="text-left px-4 bg-slate-300">
+                                <div><span class="font-bold">Obtained:</span> {{ $obtained }} /
+                                    {{ $total }} = {{ round(($obtained / $total) * 100, 2) }} %
+                                </div>
+                                <div> <span class="font-bold w-24">Position:</span>
+                                    {{ $student->testRank($sortedResult) }} /
+                                    {{ $student->section->students->count() }}
+                                </div>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="text-left">father_name</td>
+                            <td class="text-left font-bold">Father Name</td>
                             <td>:</td>
                             <td class="text-left">{{ ucwords(strtolower($student->father_name)) }}</td>
                         </tr>
                         <tr>
-                            <td class="text-left">Class</td>
+                            <td class="text-left font-bold">Class</td>
                             <td>:</td>
-                            <td class="text-left">{{ $section->fullName() }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">Roll No.</td>
-                            <td>:</td>
-                            <td class="text-left">{{ $student->rollno }}</td>
+                            <td class="text-left">{{ $section->fullName() }} ({{ $student->rollno }})</td>
                         </tr>
                     </tbody>
                 </table>
@@ -114,22 +123,18 @@
                     </thead>
                     <tbody class="data">
 
-                        @php
-                            $obtained_marks = $student->results()->test($test->id)->get()->sum('obtained_marks');
-                            $total = 0;
-                        @endphp
                         @foreach ($student->results()->test($test->id)->get() as $result)
-                            @php
-                                $percentage = round(
-                                    ($result->obtained_marks / $result->testAllocation->max_marks) * 100,
-                                    0,
-                                );
-                            @endphp
                             <tr class="border">
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td class="text-left">{{ $result->testAllocation->subject->name }}</td>
                                 <td>{{ $result->testAllocation->max_marks }}</td>
                                 <td>{{ $result->obtained_marks }}</td>
+                                @php
+                                    $percentage = round(
+                                        $result->obtained_marks / $result->testAllocation->max_marks,
+                                        2,
+                                    );
+                                @endphp
                                 <td>{{ $percentage }} %</td>
                                 <td>
                                     @if ($percentage >= 33)
@@ -140,28 +145,9 @@
                                 </td>
                             </tr>
                             @php
-                                $total += $result->testAllocation->max_marks;
                             @endphp
                         @endforeach
-                        <tr>
-                            <td colspan="6" style="padding-top:16px">
-                                @if ($total != 0)
-                                    <span class="font-bold">Overall Marks:</span> {{ $obtained_marks }} /
-                                    {{ $total }} = {{ round(($obtained_marks / $total) * 100, 2) }} % <span
-                                        class="text-white">-------</span> <span class="font-bold"> Class
-                                        Position:</span> {{ $student->testRank($sortedResult) }}
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="pt-4 text-left"></td>
-                        </tr>
 
-                        <tr>
-                            <td colspan="6">
-                                <div class="p-4 text-left" style="border:solid 0.1px">Comments:</div>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
                 <table class="w-full mt-2">
@@ -187,7 +173,7 @@
                             </td>
                             <td colspan="3"></td>
                             <td>
-                                <div class="pt-2" style="border-top:solid 0.1px">Principal</div>
+                                <div class="pt-2" style="border-top:solid 0.1px">Sr. Headmaster</div>
                             </td>
                         </tr>
                     </tbody>
