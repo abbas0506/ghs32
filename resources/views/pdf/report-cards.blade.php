@@ -89,13 +89,15 @@
                             <td>:</td>
                             <td class="text-left">{{ ucwords(strtolower($student->name)) }}</td>
                             <td rowspan="3" class="text-left px-4 bg-slate-300">
-                                <div><span class="font-bold">Obtained:</span> {{ $obtained }} /
-                                    {{ $total }} = {{ round(($obtained / $total) * 100, 2) }} %
-                                </div>
-                                <div> <span class="font-bold w-24">Position:</span>
-                                    {{ $student->testRank($sortedResult) }} /
-                                    {{ $student->section->students->count() }}
-                                </div>
+                                @if ($total)
+                                    <div><span class="font-bold">Obtained:</span> {{ $obtained }} /
+                                        {{ $total }} = {{ round(($obtained / $total) * 100, 2) }} %
+                                    </div>
+                                    <div> <span class="font-bold w-24">Position:</span>
+                                        {{ $student->testRank($sortedResult) }} /
+                                        {{ $student->section->students->count() }}
+                                    </div>
+                                @endif
                             </td>
                         </tr>
                         <tr>
