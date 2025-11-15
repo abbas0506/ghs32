@@ -133,7 +133,7 @@
                                 <td>{{ $result->obtained_marks }}</td>
                                 @php
                                     $percentage = round(
-                                        $result->obtained_marks / $result->testAllocation->max_marks,
+                                        ($result->obtained_marks / $result->testAllocation->max_marks) * 100,
                                         2,
                                     );
                                 @endphp
@@ -182,6 +182,9 @@
                 </table>
                 @if (($loop->index + 1) % 2 == 0 && !$loop->last)
                     <div class="page-break"></div>
+                @else
+                    <p></p>
+                    <p></p>
                 @endif
             @endforeach
     </main>
