@@ -33,7 +33,7 @@
             <p>{{ $testAllocation->subject->name }} - {{ $testAllocation->section->grade }}</p>
         </div>
 
-        <a href="{{ route('teacher.test-allocation.result.print', $testAllocation) }}" target="_blank"
+        <a href="{{ route('shared.test-allocation.result.print', $testAllocation) }}" target="_blank"
             class="flex justify-center items-center w-12 h-12 rounded-full bg-blue-100">
             <i class="bi-printer text-blue-600"></i>
         </a>

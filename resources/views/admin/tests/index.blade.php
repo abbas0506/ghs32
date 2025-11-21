@@ -7,20 +7,7 @@
         <div>Tests</div>
     </div>
 
-
-    <div class="content-section">
-        <div class="flex items-center flex-wrap justify-between">
-            <!-- search -->
-            <div class="flex relative w-full md:w-1/3">
-                <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full"
-                    oninput="search(event)">
-                <i class="bx bx-search absolute top-2 right-2"></i>
-            </div>
-            <a href="{{ route('admin.tests.create') }}"
-                class="fixed bottom-4 right-4 flex justify-center items-center bg-teal-400 hover:bg-teal-600 hover:cursor-pointer rounded-full w-12 h-12"><i
-                    class="bi-plus-lg"></i></a>
-        </div>
-
+    <div class="grid md:w-4/5 mx-auto mt-6 bg-white md:p-8 p-4 rounded border gap-3">
         <!-- page message -->
         @if ($errors->any())
             <x-message :errors='$errors'></x-message>
@@ -28,52 +15,53 @@
             <x-message></x-message>
         @endif
 
-        <table class="table-auto borderless w-full mt-3">
+        <!-- search -->
+        <div class="flex relative w-full md:w-1/3">
+            <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
+            <i class="bx bx-search absolute top-2 right-2"></i>
+        </div>
+
+        {{-- new buttn --}}
+        <a href="{{ route('admin.tests.create') }}"
+            class="fixed bottom-4 right-4 flex justify-center items-center bg-teal-400 hover:bg-teal-600 hover:cursor-pointer rounded-full w-12 h-12"><i
+                class="bi-plus-lg"></i></a>
+
+        <table class="table-auto borderless w-full mt-8">
             <thead>
                 <tr class="">
                     <th class="w-16">Sr</th>
                     <th class="text-left">Test Title</th>
-                    <th>Status</th>
-                    <th class="w-24">Action</th>
+                    <th class="w-12"></th>
                 </tr>
             </thead>
             <tbody>
 
-                @foreach ($tests as $test)
+                @foreach ($tests->sortByDesc('created_at') as $test)
                     <tr class="tr">
                         <td>{{ $loop->index + 1 }}</td>
                         <td class="text-left">
                             @if ($test->is_open)
-                                <a href="{{ route('admin.test.allocations.index', $test) }}"
-                                    class="link">{{ $test->title }}</a>
+                                <a href="{{ route('admin.tests.show', $test) }}" class="link">{{ $test->title }}</a>
+                                <br><span class="text-slate-500 text-xs">Created at:
+                                    {{ $test->created_at }}</span>
                             @else
                                 {{ $test->title }}
                             @endif
                         </td>
                         <td>
                             @if ($test->is_open)
-                                <i class="bi-unlock-fill text-green-600"></i>
-                            @else
-                                <i class="bi-lock-fill text-red-600"></i>
-                            @endif
-                        </td>
-                        <td>
-                            <div class="flex justify-center items-center space-x-3">
-                                <a href="{{ route('admin.tests.edit', $test) }}">
-                                    <i class="bx bx-pencil text-green-600"></i>
-                                </a>
-                                <span class="text-slate-400">|</span>
-                                <form action="{{ route('admin.tests.destroy', $test) }}" method="POST"
-                                    id='del_form{{ $test->id }}'>
+                                <form action="{{ route('admin.test.lock', $test) }}" method='post'>
                                     @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="bg-transparent p-0 border-0"
-                                        onclick="delme('{{ $test->id }}')">
-                                        <i class="bx bx-trash text-red-600"></i>
-                                    </button>
+                                    @method('patch')
+                                    <button type="submit"><i class="bi-unlock text-green-500 font-bold"></i></button>
                                 </form>
-                            </div>
-
+                            @else
+                                <form action="{{ route('admin.test.unlock', $test) }}" method='post'>
+                                    @csrf
+                                    @method('patch')
+                                    <button type="submit"><i class="bi-lock text-red-500 font-bold"></i></button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lecture;
 use App\Models\Section;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class TeacherWiseScheduleController extends Controller
     public function  index()
     {
         $teachers = Teacher::has('allocations')->get()->sortByDesc('bps'); //get active sections
-        return view('admin.schedule.teacher-wise.index', compact('teachers'));
+        $lectures = Lecture::all();
+        return view('admin.schedule.teacher-wise.index', compact('teachers', 'lectures'));
     }
 
     public function print()
@@ -26,7 +28,8 @@ class TeacherWiseScheduleController extends Controller
         else
             $teachers = Teacher::has('allocations')->get()->sortByDesc('bps');;
 
-        $pdf = PDF::loadview('admin.schedule.teacher-wise.pdf', compact('teachers'))->setPaper('a4', 'portrait');
+        $lectures = Lecture::all();
+        $pdf = PDF::loadview('admin.schedule.teacher-wise.pdf', compact('teachers', 'lectures'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = "teacher-schedule.pdf";
         return $pdf->stream($file);

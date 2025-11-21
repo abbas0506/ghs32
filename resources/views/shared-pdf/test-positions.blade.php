@@ -58,7 +58,7 @@
                             <td class="text-center text-lg font-bold">Class Result - {{ $test->title }}</td>
                         </tr>
                         <tr>
-                            <td class="text-center">Govt Higher Secondary School Chak Bedi, Pakpattan</td>
+                            <td class="text-center">Govt. High School 32/2.L, Okara</td>
                         </tr>
                     </tbody>
                 </table>

@@ -64,7 +64,7 @@ class ReportCardController extends Controller
             ]);
         }
 
-        $pdf = PDF::loadview('pdf.report-cards', compact('test', 'section', 'sortedResult'))->setPaper('a4', 'portrait');
+        $pdf = PDF::loadview('shared-pdf.report-cards', compact('test', 'section', 'sortedResult'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = "Report Cards - " . $section->fullName() . ".pdf";
         return $pdf->stream($file);

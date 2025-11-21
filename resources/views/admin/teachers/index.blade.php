@@ -32,14 +32,13 @@
         @endif
 
         <div class="overflow-x-auto bg-white w-full mt-8">
-
             <table class="table-auto borderless w-full">
                 <thead>
                     <tr>
                         <th class="w-10">#</th>
                         <th class="w-48 text-left">Name</th>
-                        <th class="w-24">Designation</th>
-                        <th class="w-24">Photo</th>
+                        <th class="w-24"></th>
+                        <th class="w-16">Photo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,8 +46,18 @@
                         <tr class="tr">
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-left"><a href="{{ route('admin.teachers.show', $teacher) }}"
-                                    class="link">{{ $teacher->name }}</a></td>
-                            <td>{{ $teacher->designation }}</td>
+                                    class="link">{{ $teacher->name }}</a><br>
+                                <span class="text-slate-500 text-xs">{{ $teacher->designation }}</span>
+                            </td>
+                            <td class="text-left px-3">
+                                <div class="grid divide-x-0">
+                                    @foreach ($teacher->user->roles as $role)
+                                        {{ $role->name }} @if (!$loop->last)
+                                            |
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </td>
                             <td><img src="{{ asset('storage/' . $teacher->photo) }}" alt="photo"
                                     class="rounded mx-auto w-8 h-8"></td>
                         </tr>

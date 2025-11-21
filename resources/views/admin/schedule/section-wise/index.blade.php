@@ -53,7 +53,7 @@
                         <th class="w-24">Class</th>
                         @foreach ($lectures as $lecture)
                             <th>{{ $lecture->lecture_no }} <br><span
-                                    class="text-slate-500">{{ $lecture->starts_at->format('hh:') }}</span>
+                                    class="text-slate-500 font-normal">{{ $lecture->starts_at->format('H:i') }}</span>
                             </th>
                         @endforeach
                     </tr>
@@ -64,17 +64,17 @@
                             <td class="chk hidden"><input type="checkbox" class="w-4 h-4 rounded" name="section_ids_array[]"
                                     value="{{ $section->id }}" checked></td>
                             <td class="font-bold"> {{ $section->fullName() }}</td>
-                            @foreach (range(1, 8) as $lecture_no)
+                            @foreach ($lectures as $lecture)
                                 <td class="p-1">
-                                    @foreach ($section->allocations()->havingLectureNo($lecture_no)->get() as $allocation)
+                                    @foreach ($section->allocations()->havingLectureNo($lecture->lecture_no)->get() as $allocation)
                                         <div class="text-sm bg-teal-50">
-                                            <a href="{{ route('admin.section.lecture.schedule.edit', [$section, $lecture_no, $allocation]) }}"
+                                            <a href="{{ route('admin.section.lecture.schedule.edit', [$section, $lecture->lecture_no, $allocation]) }}"
                                                 class="link">{{ $allocation->subject->short_name }}</a>
                                             <p>{{ $allocation->teacher->short_name }}</p>
                                         </div>
                                         <div class="divider"></div>
                                     @endforeach
-                                    <a href="{{ route('admin.section.lecture.schedule.create', [$section, $lecture_no]) }}"
+                                    <a href="{{ route('admin.section.lecture.schedule.create', [$section, $lecture->lecture_no]) }}"
                                         class="text-sm link"><i class="bi-plus"></i></a>
                                 </td>
                             @endforeach

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -46,15 +47,19 @@ class TeacherController extends Controller
     {
         //
         $teacher = Teacher::findOrFail($id);
-        return view('admin.teachers.show', compact('teacher'));
+        $roles = Role::all();
+        return view('admin.teachers.show', compact('teacher', 'roles'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Teacher $teacher)
+    public function edit($id)
     {
-        return view('admin.teachers.edit', compact('teacher'));
+
+        $teacher = Teacher::findOrFail($id);
+        $roles = Role::all();
+        return view('admin.teachers.edit', compact('teacher', 'roles'));
     }
 
     public function update(Request $request, Teacher $teacher)
@@ -93,7 +98,7 @@ class TeacherController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('admin.teachers.index')->with('success', 'Teacher updated successfully.');
+            return redirect()->route('admin.teachers.show', $teacher)->with('success', 'Teacher updated successfully.');
         } catch (Exception $ex) {
             DB::rollBack();
             return back()->with('error', $ex->getMessage());

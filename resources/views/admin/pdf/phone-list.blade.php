@@ -81,8 +81,6 @@
                     <tr style="background-color: #bbb;">
                         <th class="w-8">Roll#</th>
                         <th>Name</th>
-                        <th>Father</th>
-                        <th>Group</th>
                         <th>Phone</th>
                         <th>Photo</th>
                     </tr>
@@ -93,12 +91,9 @@
                         <tr class="text-sm">
                             <td>{{ $student->rollno }}</td>
                             <td style="text-align: left !important; padding:2px 6px;">
-                                <b>{{ ucwords(strtolower($student->name)) }}</b><br>{{ $student->admission_no }},{{ $student->dob->format('d/m/Y') }}
+                                <b>{{ ucwords(strtolower($student->name)) }}</b><br><span
+                                    style="color:#777">{{ ucwords(strtolower($student->father_name)) }}</span>
                             </td>
-                            <td style="text-align: left !important; padding:2px 6px;">
-                                {{ ucwords(strtolower($student->father_name)) }},
-                                {{ $student->caste }}<br>{{ $student->address }}</td>
-                            <td>{{ $student->group?->name }}</td>
                             <td>{{ $student->phone }}</td>
                             <td>
                                 @if ($student->photo)

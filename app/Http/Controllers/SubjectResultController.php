@@ -15,7 +15,7 @@ class SubjectResultController extends Controller
     {
         //
         $testAllocation = TestAllocation::findOrFail($id);
-        $pdf = PDF::loadview('pdf.subject-result', compact('testAllocation'))->setPaper('a4', 'portrait');
+        $pdf = PDF::loadview('shared-pdf.subject-result', compact('testAllocation'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = "subject result.pdf";
         return $pdf->stream($file);

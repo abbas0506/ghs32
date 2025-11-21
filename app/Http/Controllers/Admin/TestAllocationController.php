@@ -21,7 +21,7 @@ class TestAllocationController extends Controller
         //
         $test = Test::findOrFail($id);
         $testAllocations = $test->testAllocations;
-        return view('admin.tests.allocations.index', compact('test', 'testAllocations'));
+        return view('admin.tests.show', compact('test'));
     }
 
     /**
@@ -82,10 +82,14 @@ class TestAllocationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($testId, $id)
     {
         //
+        $test = Test::findOrFail($testId);
+        $testAllocation = TestAllocation::findOrFail($id);
+        return view('admin.tests.allocations.show', compact('test', 'testAllocation'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -145,6 +149,34 @@ class TestAllocationController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
+        }
+    }
+
+
+    public function lock(Request $request, $id)
+    {
+        //
+        $testAllocation = TestAllocation::findOrFail($id);
+        try {
+            $testAllocation->update([
+                'result_date' => now(),
+            ]);
+            return redirect()->back()->with('success', 'Successfully locked');
+        } catch (Exception $ex) {
+            return redirect()->back()->withErrors($ex->getMessage());
+        }
+    }
+    public function unlock(Request $request, $id)
+    {
+        //
+        $testAllocation = TestAllocation::findOrFail($id);
+        try {
+            $testAllocation->update([
+                'result_date' => null,
+            ]);
+            return redirect()->back()->with('success', 'Successfully unlocked');
+        } catch (Exception $ex) {
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
 }

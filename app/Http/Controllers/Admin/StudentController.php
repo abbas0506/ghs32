@@ -3,31 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Imports\StudentImport;
 use App\Models\Group;
 use App\Models\Section;
 use App\Models\Student;
 use Exception;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
 
-class SectionStuedentsController extends Controller
+class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index($id)
-    {
-        //
-        $section = Section::findOrFail($id);
-        return view('admin.students.index', compact('section'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
+    //
     public function create($sectionId)
     {
         //
@@ -51,7 +36,7 @@ class SectionStuedentsController extends Controller
 
             $section = Section::findOrFail($sectionId);
             $section->students()->create($request->all());
-            return redirect()->route('admin.section.students.index', $section)->with('success', 'Successfully created');
+            return redirect()->route('admin.sections.show', $section)->with('success', 'Successfully created');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -90,13 +75,13 @@ class SectionStuedentsController extends Controller
         $validated = $request->validate([
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
             'name' => 'required|string|max:50',
-            'dob' => 'required|date',
+            'dob' => 'nullable|date',
             'bform' => 'required|string|max:15|unique:students,bform,' . $student->id,
-            'phone' => 'required|string|max:16',
+            'phone' => 'nullable|string|max:16',
             'address' => 'nullable|string|max:100',
             'id_mark' => 'nullable|string|max:100',
             'caste' => 'nullable|string|max:50',
-            'is_orphan' => 'required|boolean',
+            'is_orphan' => 'nullable|boolean',
             'distinction' => 'nullable',
 
             'father_name' => 'required|string|max:50',

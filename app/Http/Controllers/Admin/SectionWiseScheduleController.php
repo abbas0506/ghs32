@@ -31,9 +31,10 @@ class SectionWiseScheduleController extends Controller
         else
             $sections = Section::all();
 
-        $pdf = PDF::loadview('admin.schedule.section-wise.pdf', compact('sections'))->setPaper('a4', 'landscape');
+        $lectures = Lecture::all();
+        $pdf = PDF::loadview('admin.schedule.section-wise.pdf', compact('sections', 'lectures'))->setPaper('a4', 'landscape');
         $pdf->set_option("isPhpEnabled", true);
-        $file = "schedule.pdf";
+        $file = "schedule_" . today()->format('dmy');
         return $pdf->stream($file);
     }
 

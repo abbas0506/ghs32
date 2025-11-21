@@ -13,4 +13,7 @@ class Lecture extends Model
         'lecture_no',
         'starts_at',
     ];
+    protected $casts = [
+        'starts_at' => 'datetime',
+    ];
 }

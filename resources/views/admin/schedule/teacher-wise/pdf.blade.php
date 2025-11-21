@@ -76,8 +76,10 @@
                     <tr>
                         <th class="w-6">Sr</th>
                         <th class="w-24">Teacher</th>
-                        @foreach (range(1, 8) as $lecture_no)
-                            <th>{{ $lecture_no }}</th>
+                        @foreach ($lectures as $lecture)
+                            <th>{{ $lecture->lecture_no }} <br><span
+                                    class="text-slate-500 font-normal">{{ $lecture->starts_at->format('H:i') }}</span>
+                            </th>
                         @endforeach
                     </tr>
                 </thead>
@@ -89,9 +91,9 @@
                             <td class="font-bold">{{ $teacher->short_name }}
                                 <br><span class="font-normal">({{ $teacher->allocations->count() }})</span>
                             </td>
-                            @foreach (range(1, 8) as $lecture_no)
+                            @foreach ($lectures as $lecture)
                                 <td class="p-1">
-                                    @foreach ($teacher->allocations()->havingLectureNo($lecture_no)->get() as $allocation)
+                                    @foreach ($teacher->allocations()->havingLectureNo($lecture->lecture_no)->get() as $allocation)
                                         <div>
                                             <div style="font-size:10px">
                                                 <span class="font-bold">{{ $allocation->subject->short_name }}

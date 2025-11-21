@@ -55,9 +55,24 @@ class Student extends Model
         return $this->belongsTo(Group::class);
     }
 
+    public function vouchers()
+    {
+        return $this->belongsToMany(Voucher::class, 'fees', 'student_id', 'voucher_id');
+    }
+
+    public function fees()
+    {
+        return $this->hasMany(Fee::class);
+    }
+
+
     public function bookIssuances()
     {
         return $this->hasMany(BookIssuance::class, 'user_id');
+    }
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
     }
     public function results()
     {

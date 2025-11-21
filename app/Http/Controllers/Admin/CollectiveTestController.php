@@ -69,14 +69,6 @@ class CollectiveTestController extends Controller
                         'max_marks' => $request->max_marks,
                         'test_date' => now(),
                     ]);
-
-                    // foreach ($section->students as $student) {
-                    //     Result::create([
-                    //         'student_id' => $student->id,
-                    //         'test_allocation_id' => $testAllocation->id,
-                    //         'obtained_marks' => 0,
-                    //     ]);
-                    // }
                 }
             }
 
@@ -95,8 +87,8 @@ class CollectiveTestController extends Controller
     public function show(string $id)
     {
         //
-        // $test = Test::findOrFail($id);
-        // return view('admin.tests.show', compact('test'));
+        $test = Test::findOrFail($id);
+        return view('admin.tests.show', compact('test'));
     }
 
     /**
@@ -122,7 +114,7 @@ class CollectiveTestController extends Controller
         $model = Test::findOrFail($id);
         try {
             $model->update($request->all());
-            return redirect()->route('admin.tests.index')->with('success', 'Successfully updated');
+            return redirect()->back()->with('success', 'Successfully updated');
         } catch (Exception $ex) {
             return redirect()->back()->withErrors($ex->getMessage());
         }
@@ -141,6 +133,32 @@ class CollectiveTestController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
+        }
+    }
+    public function lock(Request $request, string $id)
+    {
+        //
+        $test = Test::findOrFail($id);
+        try {
+            $test->update([
+                'is_open' => false,
+            ]);
+            return redirect()->back()->with('success', 'Successfully locked');
+        } catch (Exception $ex) {
+            return redirect()->back()->withErrors($ex->getMessage());
+        }
+    }
+    public function unlock(Request $request, string $id)
+    {
+        //
+        $test = Test::findOrFail($id);
+        try {
+            $test->update([
+                'is_open' => true,
+            ]);
+            return redirect()->back()->with('success', 'Successfully unlocked');
+        } catch (Exception $ex) {
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
 }

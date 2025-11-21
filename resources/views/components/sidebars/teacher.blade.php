@@ -20,6 +20,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('teacher.attendance.index') }}" class="flex items-center">
+                    <i class="bi bi-person-gear"></i>
+                    <span class="ml-3">Attendance</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ url('signout') }}" class="flex items-center">
                     <i class="bi bi-power"></i>
                     <span class="ml-3">Log Off</span>

@@ -22,7 +22,7 @@ class ResultDetailController extends Controller
 
         $allocations = $section->allocations->sortBy('lecture_no');
 
-        $pdf = PDF::loadview('pdf.section-result', compact('test', 'section', 'lectureNos', 'allocations'))->setPaper('a4', 'portrait');
+        $pdf = PDF::loadview('shared-pdf.section-result', compact('test', 'section', 'lectureNos', 'allocations'))->setPaper('a4', 'portrait');
         $pdf->set_option("isPhpEnabled", true);
         $file = "results.pdf";
         return $pdf->stream($file);
