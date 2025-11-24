@@ -19,12 +19,15 @@
                     <span class="ml-3">Create Test</span>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('teacher.attendance.index') }}" class="flex items-center">
-                    <i class="bi bi-person-gear"></i>
-                    <span class="ml-3">Attendance</span>
-                </a>
-            </li>
+            @if (Auth::user()->teacher?->isIncharge())
+                <li>
+                    <a href="{{ route('teacher.section.attendance.index', Auth::user()->teacher?->sectionAsIncharge()) }}"
+                        class="flex items-center">
+                        <i class="bi bi-person-gear"></i>
+                        <span class="ml-3">Attendance</span>
+                    </a>
+                </li>
+            @endif
             <li>
                 <a href="{{ url('signout') }}" class="flex items-center">
                     <i class="bi bi-power"></i>

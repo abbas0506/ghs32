@@ -73,7 +73,7 @@
         <table class="table-auto borderless w-full">
             <thead>
                 <tr>
-                    <th class="w-2/3">Class</th>
+                    <th class="w-2/3 text-left">Class</th>
                     <th><i class="bi-people"></i></th>
                     <th><i class="bi-gear"></i></th>
                 </tr>
@@ -81,7 +81,7 @@
             <tbody>
                 @foreach ($sections as $section)
                     <tr class="tr">
-                        <td>{{ $section->fullName() }}</td>
+                        <td class="text-left">{{ $section->fullName() }}</td>
                         <td>{{ $voucher->students->where('section_id', $section->id)->count() }}</td>
                         <td><a href="{{ route('admin.voucher.section.payers.index', [$voucher, $section]) }}">
                                 <i class="bx bx-pencil text-green-600"></i>

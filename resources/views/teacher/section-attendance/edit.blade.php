@@ -1,11 +1,11 @@
 @extends('layouts.teacher')
 @section('page-content')
     <div class="custom-container">
-        <h1>Section: {{ $section->fullName() }}</h1>
+        <h1>Class: {{ $section->fullName() }}</h1>
         <div class="bread-crumb">
             <a href="{{ url('/') }}">Dashoboard</a>
             <div>/</div>
-            <a href="{{ route('teacher.attendance.index') }}">Attendance</a>
+            <a href="{{ route('teacher.section.attendance.index', $section) }}">Attendance</a>
             <div>/</div>
             <div>{{ $section->fullName() }}</div>
         </div>
@@ -25,7 +25,8 @@
         @endif
 
         <div class="overflow-x-auto bg-white w-full mt-8">
-            <form action="{{ route('teacher.attendance.update', $section) }}" method="post">
+            <h2><i class="bi-clock mr-3"></i>{{ now()->format('d-m-Y') }}</h2>
+            <form action="{{ route('teacher.section.attendance.update', [$section, 1]) }}" method="post" class="mt-3">
                 @csrf
                 @method('PATCH')
                 <table class="table-auto borderless w-full">
@@ -38,7 +39,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($attendances as $attendance)
+                        @foreach ($attendances->sortBy('status') as $attendance)
                             <tr class="tr">
                                 <td>{{ $attendance->student->rollno }}</td>
                                 <td class="text-left text-xs md:text-sm">{{ $attendance->student->name }} <br> <span
@@ -53,8 +54,10 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="text-center">
-                    <button type="submit" class="btn-blue rounded mt-8">Update Now</button>
+                <div class="text-center mt-8">
+                    <a href="{{ route('teacher.section.attendance.index', $section) }}"
+                        class="btn-gray rounded py-2 mr-3">Cancel</a>
+                    <button type="submit" class="btn-blue rounded py-2">Update Now</button>
                 </div>
             </form>
         </div>

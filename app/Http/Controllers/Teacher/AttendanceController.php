@@ -6,60 +6,85 @@ use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\Section;
 use App\Models\Student;
-use Exception;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
         //if attendance for the date has already been created, then show index file
         //showing all classes, on click show class with checkboxes
-        $attendanceHasBeenMarked = Attendance::whereDate('date', today())->count();
-        if ($attendanceHasBeenMarked) {
-            $sections = Section::all();
-            return view('teacher.attendance.index', compact('sections'));
-        } else {
-            //else show create page with sinle button, on press ...will auto mark all as present
-            //later on edit page will be used to update absent students
-            return view('teacher.attendance.create');
-        }
+        $section = Section::findOrFail($id);
+        $present = $section->attendances()->whereDate('date', today())->where('status', 1)->count();
+        return view('teacher.section-attendance.index', compact('section', 'present'));
+        // if (!$section->attendanceMarked()) {
+        //     // create attendance
+        //     return view('teacher.section-attendance.create', compact('section'));
+        // } else {
+        //     // echo "attendance not marked";
+        //     //mark all the students present for today
+
+        // }
+
+        // $attendances = Attendance::whereDate('date', today())
+        //     ->whereHas('student', function ($query) use ($id) {
+        //         $query->where('section_id', $id);
+        //     })->get();
+
+        // return view('teacher.section-attendance.index', compact('attendances', 'section'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
         //
-        $sections = Section::all();
-        return view('attendance.index', compact('sections'));
+        $section = Section::findOrFail($id);
+        return view('teacher.section-attendance.create', compact('section'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //will auto marks all students present for the date
-        //get current date
+
+        $request->validate([
+            'student_ids_array' => 'required',
+        ]);
+
+        $section = Section::findOrFail($id);
+
         $today = today();
-        //start db transaction and mark all as present
         DB::beginTransaction();
         try {
-            $students = Student::all();
-            foreach ($students as $student) {
+
+            $student_ids_array = array();
+            $student_ids_array = $request->student_ids_array;
+            $presentStudents = Student::whereIn('id', $student_ids_array)->get();
+            foreach ($presentStudents as $student) {
                 $student->attendances()->create([
                     'date' => today(),
                     'status' => true,
                 ]);
             }
+            $absentStudents = Student::whereNotIn('id', $student_ids_array)->get();
+            foreach ($absentStudents as $student) {
+                $student->attendances()->create([
+                    'date' => today(),
+                    'status' => false,
+                ]);
+            }
             DB::commit();
-            return redirect()->route('teacher.attendance.index')->with('success', 'Welcome today!');
+            return redirect()->route('teacher.section.attendance.index', $section);
         } catch (Exception $ex) {
             Db::rollBack();
             return back()->with('warning', $ex->getMessage());
@@ -72,14 +97,7 @@ class AttendanceController extends Controller
     public function show($id)
     {
         //
-        $section = Section::findOrFail($id);
-        $attendances = Attendance::whereDate('date', today())
-            ->whereHas('student', function ($query) use ($id) {
-                $query->where('section_id', $id);
-            })
-            ->get();
 
-        return view('teacher.attendance.show', compact('attendances', 'section'));
     }
 
     /**
@@ -88,6 +106,14 @@ class AttendanceController extends Controller
     public function edit($id)
     {
         //
+        $section = Section::findOrFail($id);
+        // $attendances = Attendance::whereDate('date', today())
+        //     ->whereHas('student', function ($query) use ($id) {
+        //         $query->where('section_id', $id);
+        //     })->get();
+        $absence = $section->attendances()->whereDate('date', today())->get();
+        $attendances = $section->attendances()->whereDate('date', today())->get();
+        return view('teacher.section-attendance.edit', compact('section', 'attendances'));
     }
 
     /**
@@ -121,7 +147,7 @@ class AttendanceController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('teacher.attendance.index')->with('success', 'Attendance successfully updated');
+            return redirect()->route('teacher.section.attendance.index', $section)->with('success', 'Attendance successfully updated');
         } catch (Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors($e->getMessage());

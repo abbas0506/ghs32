@@ -1,24 +1,19 @@
 <?php
 
-use App\Http\Controllers\Admin\AllocationController;
 use App\Http\Controllers\Admin\AlumniController;
-use App\Http\Controllers\Admin\ClassWiseScheduleController;
+use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\Admin\CollectiveTestController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\EmployeeCardController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\InchargeController;
 use App\Http\Controllers\Admin\PdfController as AdminPdfController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\SectionCardController;
 use App\Http\Controllers\Admin\SectionController as AdminSectionController;
-use App\Http\Controllers\Admin\SectionResultCardController;
 use App\Http\Controllers\Admin\SectionResultController;
-use App\Http\Controllers\Admin\SectionStuedentsController;
 use App\Http\Controllers\Admin\SectionWiseScheduleController;
-use App\Http\Controllers\Admin\SingleTeacherScheduleController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherCardController;
@@ -35,8 +30,6 @@ use App\Http\Controllers\Admission\ApplicationController as AdmissionApplication
 use App\Http\Controllers\Admission\CardController;
 use App\Http\Controllers\Admission\DashboardController;
 use App\Http\Controllers\Admission\FeeController as AdmissionFeeController;
-use App\Http\Controllers\Admission\GroupController as AdmissionGroupController;
-use App\Http\Controllers\Admission\HighAchieverController;
 use App\Http\Controllers\Admission\ObjectionController as AdmissionObjectionController;
 use App\Http\Controllers\Admission\RejectionController;
 use App\Http\Controllers\Admission\SectionController;
@@ -61,19 +54,13 @@ use App\Http\Controllers\ReportCardController;
 use App\Http\Controllers\ResultDetailController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\SubjectResultController;
-use App\Http\Controllers\Teacher\AllocationController as TeacherAllocationController;
-use App\Http\Controllers\Teacher\AttendanceController;
-use App\Http\Controllers\Teacher\CombinedTestController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
 use App\Http\Controllers\Teacher\ImportStudentController;
-use App\Http\Controllers\Teacher\SectionResultController as TeacherSectionResultController;
 use App\Http\Controllers\Teacher\TestAllocationController;
 use App\Http\Controllers\Teacher\TestAllocationResultController;
 use App\Http\Controllers\Teacher\TestController;
-use App\Http\Controllers\Teacher\TestSectionController;
-use App\Http\Controllers\Teacher\TestSectionStudentController;
-use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TestPositionController;
+use App\Http\Controllers\Teacher\AttendanceController as TeacherAttendanceController;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -202,6 +189,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('sections/{section}/print/attendance-list', [PdfController::class, 'printAttendanceList'])->name('sections.print.attendanceList');
         Route::get('sections/{section}/print/student-detail', [PdfController::class, 'printStudentDetail'])->name('sections.print.studentDetail');
         Route::get('sections/{section}/print/orphan-list', [PdfController::class, 'printOrphanList'])->name('sections.print.orphanList');
+
+        Route::resource('attendance', AttendanceController::class);
+        Route::post('attendances/filter', [AttendanceController::class, 'filter'])->name('attendance.filter');
     });
 
     Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {
@@ -263,7 +253,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('test.test-allocations', TestAllocationController::class);
         Route::resource('test-allocation.results', TestAllocationResultController::class);
         Route::resource('test-allocation.import-students', ImportStudentController::class);
-        Route::resource('attendance', AttendanceController::class);
+        Route::resource('section.attendance', TeacherAttendanceController::class);
     });
 
     Route::group(['prefix' => 'shared', 'as' => 'shared.', 'middleware' => ['role:teacher|admin']], function () {

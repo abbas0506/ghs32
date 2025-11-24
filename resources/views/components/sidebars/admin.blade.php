@@ -14,15 +14,9 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.users.index') }}" class="flex items-center">
+                <a href="{{ route('admin.teachers.index') }}" class="flex items-center">
                     <i class="bi bi-person-circle"></i>
                     <span class="ml-3">Users</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admin.teachers.index') }}" class="flex items-center">
-                    <i class="bi bi-people"></i>
-                    <span class="ml-3">Teachers</span>
                 </a>
             </li>
             <li>
@@ -35,6 +29,12 @@
                 <a href="{{ route('admin.sections.index') }}" class="flex items-center">
                     <i class="bi bi-diagram-3"></i>
                     <span class="ml-3">Classes</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.attendance.index') }}" class="flex items-center">
+                    <i class="bi bi-diagram-3"></i>
+                    <span class="ml-3">Attendance</span>
                 </a>
             </li>
             <li>

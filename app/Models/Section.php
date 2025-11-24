@@ -28,6 +28,9 @@ class Section extends Model
     public function incharge()
     {
         //
+        $inchargeId = $this->allocations->where('lecture_no', 1)->value('teacher_id');
+        $incharge = Teacher::findOrFail($inchargeId);
+        return $incharge;
     }
 
     public function students()
@@ -57,5 +60,13 @@ class Section extends Model
         } else {
             return '';
         }
+    }
+    public function attendances()
+    {
+        return $this->hasManyThrough(Attendance::class, Student::class);
+    }
+    public function attendanceMarked()
+    {
+        return $this->attendances()->whereDate('date', today())->count();
     }
 }

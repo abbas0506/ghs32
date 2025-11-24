@@ -49,4 +49,14 @@ class Teacher extends Model
     {
         return $this->hasMany(TestAllocation::class);
     }
+    public function isIncharge()
+    {
+        return $this->allocations->where('lecture_no', 1)->count();
+    }
+    public function sectionAsIncharge()
+    {
+        $sectionId = $this->allocations->where('lecture_no', 1)->value('section_id');
+        $section = Section::findOrFail($sectionId);
+        return $section;
+    }
 }
