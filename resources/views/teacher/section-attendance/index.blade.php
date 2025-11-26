@@ -21,8 +21,9 @@
 
         <div class="md:w-4/5 mx-auto bg-white md:p-8 p-4 rounded border mt-12">
             <div class="grid text-center gap-8">
-                <h2 class="text-2xl md:text-4xl"><i class="bi-people"></i> {{ $present }} /
-                    {{ $section->students->count() }}</h2>
+                <h2 class="text-xl md:text-4xl"><i class="bi-people"></i>
+                    {{ $present }}/{{ $section->students->count() }}
+                    , {{ round(($present / $section->students->count()) * 100, 1) }}%</h2>
 
                 @if ($present)
                     <a href="{{ route('teacher.section.attendance.edit', [$section, 1]) }}" class="btn-blue rounded py-2">

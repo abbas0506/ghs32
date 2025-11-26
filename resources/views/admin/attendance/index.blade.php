@@ -37,8 +37,8 @@
 
                     @foreach ($sections as $section)
                         <tr class="tr">
-                            <td class="text-left"><a
-                                    href="{{ route('admin.attendance.show', $section) }}">{{ $section->fullName() }}</a>
+                            <td class="text-left"><a href="{{ route('admin.attendance.show', $section) }}"
+                                    class="link">{{ $section->fullName() }}</a>
                             </td>
                             <td>{{ $section->present_count }} / {{ $section->students->count() }}</td>
                             <td>{{ round(($section->present_count / $section->students->count()) * 100, 1) }} %</td>

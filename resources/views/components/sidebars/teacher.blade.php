@@ -3,6 +3,7 @@
         <img src="{{ asset('images/logo/dark_green.png') }}" alt="logo" class="w-20">
     </div>
     <div class="mt-8 font-bold text-center text-orange-300 uppercase tracking-wider">Teacher</div>
+    <div class="text-center text-xs text-slate-500">{{ Auth::user()->teacher?->short_name }}</div>
     <hr class="border-teal-600 border-2 rounded-full mt-3 w-1/2 mx-auto">
 
     <div class="mt-12">
