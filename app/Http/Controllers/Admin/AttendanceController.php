@@ -65,11 +65,12 @@ class AttendanceController extends Controller
     {
         //
         $section = Section::findOrFail($id);
-        $attendances = Attendance::whereDate('date', today())
-            ->whereHas('student', function ($query) use ($id) {
-                $query->where('section_id', $id);
-            })
-            ->get();
+        // $attendances = Attendance::whereDate('date', today())
+        //     ->whereHas('student', function ($query) use ($id) {
+        //         $query->where('section_id', $id);
+        //     })
+        //     ->get();
+        $attendances = $section->attendances()->whereDate('date', today())->get();
 
         return view('admin.attendance.show', compact('attendances', 'section'));
     }

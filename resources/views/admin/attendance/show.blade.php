@@ -55,8 +55,7 @@
                 </table>
                 <div class="text-center mt-8">
                     <a href="{{ route('teacher.section.attendance.index', $section) }}"
-                        class="btn-gray rounded py-2 mr-3">Cancel</a>
-                    <button type="submit" class="btn-blue rounded py-2">Submit Now</button>
+                        class="btn-blue rounded py-2 px-5 mr-3">Close</a>
                 </div>
             </form>
         </div>
