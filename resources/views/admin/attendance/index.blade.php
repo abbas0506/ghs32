@@ -40,12 +40,16 @@
                             <td class="text-left"><a href="{{ route('admin.attendance.show', $section) }}"
                                     class="link">{{ $section->fullName() }}</a>
                             </td>
-                            <td>{{ $section->present_count }} / {{ $section->students->count() }}</td>
-                            <td>{{ round(($section->present_count / $section->students->count()) * 100, 1) }} %</td>
+                            <td>{{ $section->presence_count }} / {{ $section->students->count() }}</td>
+                            <td>{{ round(($section->presence_count / $section->students->count()) * 100, 1) }} %</td>
 
                         </tr>
                     @endforeach
-
+                    <tr>
+                        <td class="text-left font-semibold">Total</td>
+                        <td class="font-semibold">{{ $today_presence }} / {{ $student_count }}</td>
+                        <td class="font-semibold">{{ round(($today_presence / $student_count) * 100, 2) }}%</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

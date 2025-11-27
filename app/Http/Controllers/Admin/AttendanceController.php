@@ -25,17 +25,19 @@ class AttendanceController extends Controller
 
         $sections = Section::withCount([
             'students',
-            'students as present_count' => function ($q) use ($today) {
+            'students as presence_count' => function ($q) use ($today) {
                 $q->whereHas('attendances', function ($q2) use ($today) {
                     $q2->where('date', $today)
                         ->where('status', 1);
                 });
-            }
+            },
         ])
             ->has('students')
             ->get();
 
-        return view('admin.attendance.index', compact('sections', 'today'));
+        $today_presence = Attendance::whereDate('date', today())->where('status', 1)->count();
+        $student_count = Student::count();
+        return view('admin.attendance.index', compact('sections', 'today', 'today_presence', 'student_count'));
     }
 
 
