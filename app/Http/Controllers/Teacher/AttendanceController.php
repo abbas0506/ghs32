@@ -72,11 +72,11 @@ class AttendanceController extends Controller
             $presentStudents = Student::whereIn('id', $student_ids_array)->get();
 
             foreach ($presentStudents as $student) {
-                $exists = $student->attendances()
-                    ->whereDate('date', today())->exists();
-                if ($exists) {
-                    return back()->with('warning', 'Attendance already marked for this date.');
-                }
+                // $exists = $student->attendances()
+                //     ->whereDate('date', today())->exists();
+                // if ($exists) {
+                //     return back()->with('warning', 'Attendance already marked for this date.');
+                // }
                 $student->attendances()->create([
                     'date' => today(),
                     'status' => true,
