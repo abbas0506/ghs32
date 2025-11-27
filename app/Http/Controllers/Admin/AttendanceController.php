@@ -71,7 +71,6 @@ class AttendanceController extends Controller
         //     })
         //     ->get();
         $attendances = $section->attendances()->whereDate('date', today())->get();
-
         return view('admin.attendance.show', compact('attendances', 'section'));
     }
 

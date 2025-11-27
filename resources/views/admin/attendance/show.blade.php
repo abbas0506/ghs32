@@ -54,8 +54,7 @@
                     </tbody>
                 </table>
                 <div class="text-center mt-8">
-                    <a href="{{ route('teacher.section.attendance.index', $section) }}"
-                        class="btn-blue rounded py-2 px-5 mr-3">Close</a>
+                    <a href="{{ route('admin.attendance.index') }}" class="btn-blue rounded py-2 px-5">Close</a>
                 </div>
             </form>
         </div>
