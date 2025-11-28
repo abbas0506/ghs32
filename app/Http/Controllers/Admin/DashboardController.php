@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
+use App\Models\Attendance;
 use App\Models\Book;
 use App\Models\Clas;
 use App\Models\Grade;
@@ -26,9 +27,10 @@ class DashboardController extends Controller
         $teachers = User::whereRelation('roles', 'name', 'teacher')->get();
         $students = Student::all();
         $tests = Test::all();
+        $attendances = Attendance::where('date', today())->where('status', 1)->get();
         $applications = Application::all();
 
-        return view('admin.dashboard', compact('sections', 'students', 'teachers', 'tests', 'applications'));
+        return view('admin.dashboard', compact('sections', 'students', 'teachers', 'tests', 'applications', 'attendances'));
     }
 
     /**

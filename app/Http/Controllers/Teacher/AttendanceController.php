@@ -67,28 +67,21 @@ class AttendanceController extends Controller
         DB::beginTransaction();
         try {
 
-            $student_ids_array = array();
             $student_ids_array = $request->student_ids_array;
-            $presentStudents = Student::whereIn('id', $student_ids_array)->get();
+            $section->students->each(function ($student) use ($student_ids_array) {
+                $exists = $student->attendances()
+                    ->whereDate('date', today())
+                    ->exists();
 
-            foreach ($presentStudents as $student) {
-                // $exists = $student->attendances()
-                //     ->whereDate('date', today())->exists();
-                // if ($exists) {
-                //     return back()->with('warning', 'Attendance already marked for this date.');
-                // }
+                if ($exists) {
+                    return back()->with('warning', 'Attendance already marked for this date.');
+                }
+
                 $student->attendances()->create([
                     'date' => today(),
-                    'status' => true,
+                    'status' => in_array($student->id, $student_ids_array),
                 ]);
-            }
-            $absentStudents = Student::whereNotIn('id', $student_ids_array)->get();
-            foreach ($absentStudents as $student) {
-                $student->attendances()->create([
-                    'date' => today(),
-                    'status' => false,
-                ]);
-            }
+            });
             DB::commit();
             return redirect()->route('teacher.section.attendance.index', $section);
         } catch (Exception $ex) {
@@ -129,28 +122,24 @@ class AttendanceController extends Controller
     {
         //
         $request->validate([
-            'attendance_ids_array' => 'required',
+            'attendance_ids' => 'required',
+            'attendance_ids_checked' => 'required',
         ]);
+
 
         $section = Section::findOrFail($id);
 
         DB::beginTransaction();
         try {
-            $attendance_ids_array = array();
-            $attendance_ids_array = $request->attendance_ids_array;
-            $absentees = Attendance::whereNotIn('id', $attendance_ids_array)->get();
-            foreach ($absentees as $attendance) {
+            $attendance_ids = $request->attendance_ids;
+            $attendance_ids_checked = $request->attendance_ids_checked;
+            $attendances = Attendance::whereIn('id', $attendance_ids)->get();
+
+            $attendances->each(function ($attendance) use ($attendance_ids_checked) {
                 $attendance->update([
-                    'status' => 0
+                    'status' => in_array($attendance->id, $attendance_ids_checked),
                 ]);
-            }
-            // present
-            $attendances = Attendance::whereIn('id', $attendance_ids_array)->get();
-            foreach ($attendances as $attendance) {
-                $attendance->update([
-                    'status' => 1
-                ]);
-            }
+            });
 
             DB::commit();
             return redirect()->route('teacher.section.attendance.index', $section)->with('success', 'Attendance successfully updated');

@@ -41,12 +41,14 @@
                     <tbody>
                         @foreach ($attendances->sortBy('status') as $attendance)
                             <tr class="tr">
+                                <td class="hidden"><input type="text" name="attendance_ids[]"
+                                        value="{{ $attendance->id }}"></td>
                                 <td>{{ $attendance->student->rollno }}</td>
                                 <td class="text-left text-xs md:text-sm">{{ $attendance->student->name }} <br> <span
                                         class="text-slate-400">{{ $attendance->student->father_name }}</span></td>
                                 <td>
                                     <div class="flex items-center justify-center">
-                                        <input type="checkbox" class="w-4 h-4 rounded" name="attendance_ids_array[]"
+                                        <input type="checkbox" class="w-4 h-4 rounded" name="attendance_ids_checked[]"
                                             value="{{ $attendance->id }}" @checked($attendance?->status)>
                                     </div>
                                 </td>
