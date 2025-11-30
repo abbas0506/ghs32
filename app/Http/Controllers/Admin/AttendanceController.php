@@ -107,4 +107,12 @@ class AttendanceController extends Controller
 
         return  redirect()->route('admin.attendance.index')->with('filter_date', $request->date);
     }
+    public function clear(Request $request)
+    {
+        $request->validate([
+            'clear_date' => 'required',
+        ]);
+        Attendance::whereDate('date', $request->clear_date)->delete();
+        return  redirect()->route('admin.attendance.index')->with('filter_date', $request->clear_date);
+    }
 }

@@ -62,6 +62,7 @@ use App\Http\Controllers\Teacher\TestAllocationResultController;
 use App\Http\Controllers\Teacher\TestController;
 use App\Http\Controllers\TestPositionController;
 use App\Http\Controllers\Teacher\AttendanceController as TeacherAttendanceController;
+use App\Http\Controllers\Teacher\MyScheduleController;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -193,6 +194,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('attendance', AttendanceController::class);
         Route::post('attendances/filter', [AttendanceController::class, 'filter'])->name('attendance.filter');
+        Route::post('attendances/clear', [AttendanceController::class, 'clear'])->name('attendance.clear');
     });
 
     Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {
@@ -253,6 +255,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('tests', TestController::class);
         Route::resource('students', TeacherStudentController::class);
         Route::get('student-list/print', [TeacherStudentController::class, 'print'])->name('students.print');
+        Route::resource('my-schedule', MyScheduleController::class);
         Route::resource('test.test-allocations', TestAllocationController::class);
         Route::resource('test-allocation.results', TestAllocationResultController::class);
         Route::resource('test-allocation.import-students', ImportStudentController::class);

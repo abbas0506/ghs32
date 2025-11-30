@@ -17,10 +17,10 @@
             <i class="bx bx-search absolute top-2 right-2"></i>
         </div>
         <div class="flex justify-center items-center gap-3 flex-wrap mt-5">
-            <a href="{{ route('teacher.students.create', $section) }}"><i class="bi bi-person-add text-teal-600"></i></a>
-            <a href="{{ route('admin.section.cards.index', $section) }}" class=""><i
-                    class="bi-person-badge text-indigo-600"></i></a>
-            <a href="{{ route('teacher.students.print', $section) }}" class="" target="_blank"><i
+            <a href="{{ route('teacher.students.create') }}"><i class="bi bi-person-add text-teal-600"></i></a>
+            {{-- <a href="{{ route('admin.section.cards.index', $section) }}" class=""><i
+                    class="bi-person-badge text-indigo-600"></i></a> --}}
+            <a href="{{ route('teacher.students.print') }}" class="" target="_blank"><i
                     class="bi-printer text-teal-600"></i></a>
         </div>
 

@@ -15,7 +15,7 @@
                 </a>
             </li>
             <li>
-                <a href="" class="flex items-center">
+                <a href="{{ route('teacher.my-schedule.index') }}" class="flex items-center">
                     <i class="bi-clock"></i>
                     <span class="ml-3">Schedule</span>
                 </a>
@@ -23,7 +23,7 @@
             @if (Auth::user()->teacher?->isIncharge())
                 <li>
                     <a href="{{ route('teacher.students.index') }}" class="flex items-center">
-                        <i class="bi bi-person-gear"></i>
+                        <i class="bi-diagram-2"></i>
                         <span class="ml-3">My Class</span>
                     </a>
                 </li>
@@ -37,7 +37,7 @@
             @endif
             <li>
                 <a href="" class="flex items-center">
-                    <i class="bi bi-person-gear"></i>
+                    <i class="bi bi-file-earmark-text"></i>
                     <span class="ml-3">Create Test</span>
                 </a>
             </li>

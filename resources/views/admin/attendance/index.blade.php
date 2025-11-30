@@ -8,15 +8,23 @@
             <div>Attendance</div>
         </div>
 
-        <div class="md:w-4/5 mx-auto bg-white md:p-8 p-4 rounded border mt-12">
-            <form action="{{ route('admin.attendance.filter') }}" method="POST">
+
+        {{-- clear specific date attendance --}}
+        <div class="md:w-4/5 mx-auto bg-white mt-8 flex justify-between items-center gap-3">
+            <input type="date" id='filter_date' class="custom-input-borderless md:w-3/4">
+            {{-- filter form  --}}
+            <form action="{{ route('admin.attendance.filter') }}" method="POST" id="form_filter">
                 @csrf
-                <input type="date" name="date" class="custom-input">
-                <div class="text-right mt-3">
-                    <button type="submit" class="btn-blue rounded"><i class="bi-filter"></i> Filter</button>
-                </div>
+                <input type="hidden" name="date" id="date">
+            </form>
+            <form action="{{ route('admin.attendance.clear') }}" method="POST" id="form_clear"
+                onsubmit="return confirmClear(event)">
+                @csrf
+                <input type="hidden" name="clear_date" value="{{ $today }}">
+                <button type="submit"><i class="bi-recycle text-red-600"></i></button>
             </form>
         </div>
+
         <div class="md:w-4/5 mx-auto bg-white md:p-8 p-4 rounded border mt-3">
             <!-- page message -->
             @if ($errors->any())
@@ -24,7 +32,7 @@
             @else
                 <x-message></x-message>
             @endif
-            <h2><i class="bi-clock mr-3"></i> {{ \Carbon\Carbon::parse($today)->format('d-m-Y') }}</h2>
+            <h2><i class="bi-clock mr-3"></i> {{ \Carbon\Carbon::parse($today)->format('M j, Y') }}</h2>
             <table class="table-auto borderless w-full mt-8">
                 <thead>
                     <tr class="tr">
@@ -54,4 +62,36 @@
             </table>
         </div>
     </div>
+@endsection
+@section('script')
+    <script type="module">
+        $(document).ready(function() {
+            $('#filter_date').val("{{ $today }}")
+            $('#filter_date').on('change', function() {
+                let selected = $(this).val();
+                $('#date').val(selected);
+                $('#form_filter').submit();
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function confirmClear(event) {
+            event.preventDefault(); // prevent form submit
+            var form = event.target; // storing the form
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    form.submit();
+                }
+            })
+        }
+    </script>
 @endsection
