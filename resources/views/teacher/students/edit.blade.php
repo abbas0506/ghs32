@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.teacher')
 
 @section('page-content')
     <style>
@@ -51,9 +51,7 @@
                 <div class="bread-crumb">
                     <a href="{{ url('/') }}">Dashboard</a>
                     <div>/</div>
-                    <a href="{{ route('admin.sections.index') }}">Sections</a>
-                    <div>/</div>
-                    <a href="{{ route('admin.sections.show', $section) }}">{{ $section->fullName() }}</a>
+                    <a href="{{ route('teacher.students.index') }}">{{ $section->fullName() }}</a>
                     <div>/</div>
                     <div>{{ $student->rollno }}</div>
                     <div>/</div>
@@ -68,16 +66,13 @@
             <x-message></x-message>
         @endif
 
-        <div class="w-full md:w-4/5 bg-slate-100 mx-auto p-8 mt-8 shadow-lg">
-            <form action="{{ route('admin.section.students.update', [$section, $student]) }}" method="post"
-                enctype="multipart/form-data">
+        <div class="w-full md:w-4/5 mx-auto md:p-8 mt-8">
+            <form action="{{ route('teacher.students.update', $student) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <!-- student info -->
-                <div class="grid md:grid-cols-3 gap-4">
-                    <h1 class="md:col-span-2">{{ $student->section->fullName() }} ({{ $student->rollno }}) <label
-                            for=""><i class="bi-clock ml-2"></i> {{ $student->created_at }}</label></h1>
-                    <div class="photo-upload-wrapper">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
                         <div class="photo-box" id="photoPreview">
                             @if ($student->photo)
                                 <!-- adjust $user or $student as needed -->
@@ -88,30 +83,21 @@
                             @endif
                         </div>
                         <!-- Custom Upload Button -->
-                        <label for="photo" class="custom-file-upload">Upload Your Photo</label>
+                        <label for="photo" class="custom-file-upload">Upload Photo</label>
                         <input type="file" id="photo" name="photo" accept="image/*"
                             onchange="previewSelectedPhoto(event)">
                         <label id="photo-error" class="text-red-500 mt-1 hidden">File size exceeds 1MB.</label>
                     </div>
-                    <div>
-                        <label for="">Group</label>
-                        <select name="group_id" class="custom-input">
-                            <option value="">Select a Group</option>
-                            @foreach ($groups as $group)
-                                <option value="{{ $group->id }}" @selected($group->id == $student->group_id)>{{ $group->name }}
-                                </option>
-                            @endforeach
-                        </select>
+
+                    <div class="md:col-span-2">
+                        <label for="">Student Name</label>
+                        <input type="text" name="name" class="custom-input" placeholder="Student name"
+                            value="{{ $student->name }}">
                     </div>
                     <div>
                         <label for="">Roll No</label>
                         <input type="text" name="rollno" value="{{ $student->rollno }}" placeholder="Roll #"
                             class="custom-input">
-                    </div>
-                    <div class="md:col-span-3">
-                        <label for="">Student Name</label>
-                        <input type="text" name="name" class="custom-input" placeholder="Student name"
-                            value="{{ $student->name }}">
                     </div>
                     <div>
                         <label for="">Date of Birth</label>

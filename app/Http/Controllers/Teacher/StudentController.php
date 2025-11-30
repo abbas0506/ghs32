@@ -1,42 +1,57 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
-use App\Models\Group;
-use App\Models\Section;
 use App\Models\Student;
 use Exception;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class StudentController extends Controller
 {
-    //
-    public function create($sectionId)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
         //
-        $section = Section::findOrFail($sectionId);
-        return view('admin.students.create', compact('section'));
+        $section = Auth::user()->teacher?->sectionAsIncharge();
+        return view('teacher.students.index', compact('section'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+        $section = Auth::user()->teacher?->sectionAsIncharge();
+        return view('teacher.students.create', compact('section'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $sectionId)
+    public function store(Request $request)
     {
         //
         $request->validate([
             'name' => 'required',
+            'father' => 'nullable',
+            'phone' => 'nullable',
             'bform' => 'required',
             'rollno' => 'required',
         ]);
 
         try {
 
-            $section = Section::findOrFail($sectionId);
+            $section = Auth::user()->teacher?->sectionAsIncharge();
             $section->students()->create($request->all());
-            return redirect()->route('admin.sections.show', $section)->with('success', 'Successfully created');
+            return redirect()->route('teacher.students.index')->with('success', 'Successfully created');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -46,32 +61,33 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($sectionId, string $id)
+    public function show(string $id)
     {
         //
-        $section = Section::findOrFail($sectionId);
+        $section = Auth::user()->teacher?->sectionAsIncharge();
         $student = Student::findOrFail($id);
-        return view('admin.students.show', compact('section', 'student'));
+        return view('teacher.students.show', compact('section', 'student'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($sectionId, string $id)
+    public function edit(string $id)
     {
         //
-        $section = Section::findOrFail($sectionId);
+        $section = Auth::user()->teacher?->sectionAsIncharge();
         $student = Student::findOrFail($id);
-        $groups = Group::all();
-        return view('admin.students.edit', compact('section', 'student', 'groups'));
+        return view('teacher.students.edit', compact('section', 'student'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Section $section, Student $student)
+    public function update(Request $request, string $id)
     {
         //
+        $student = Student::findOrFail($id);
+
         $validated = $request->validate([
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
             'name' => 'required|string|max:50',
@@ -108,7 +124,7 @@ class StudentController extends Controller
                 $validated['photo'] = $path; // full path like "uploads/abc.jpg"
             }
             $student->update($validated);
-            return redirect()->route('admin.sections.show', $section)->with('success', 'Student successfully updated');
+            return redirect()->route('teacher.students.index')->with('success', 'Student successfully updated');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong
@@ -118,15 +134,16 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($sectionId, string $id)
+    public function destroy(string $id)
     {
         //
-        try {
-            $student = Student::findOrFail($id);
-            $student->delete();
-            return redirect()->route('admin.sections.show', $sectionId)->with('success', 'Successfully deleted!');
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors($e->getMessage());
-        }
+    }
+    public function print()
+    {
+        $section = Auth::user()->teacher?->sectionAsIncharge();
+        $pdf = PDF::loadview('teacher.students.print', compact('section'))->setPaper('a4', 'portrait');
+        $pdf->set_option("isPhpEnabled", true);
+        $file = "Phone_list" . Str::random(3);
+        return $pdf->stream($file);
     }
 }

@@ -9,14 +9,26 @@
             <div>/</div>
             <div>All</div>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 mt-12 w-full md:w-3/4 mx-auto gap-4 text-center">
-            @foreach ($sections->sortBy('grade') as $section)
-                <a href="{{ route('admin.sections.show', $section) }}"
-                    class="p-4 border rounded-md bg-slate-100 hover:bg-slate-200 transition-all ease-in-out duration-500">
-                    <h2>Class {{ $section->fullName() }}</h2>
-                    <div>{{ $section->students->count() }}</div>
-                </a>
-            @endforeach
+        <div class="md:w-4/5 mx-auto bg-white md:p-8 p-4 rounded border mt-8">
+            <table class="table-auto borderless w-full mt-5">
+                <thead>
+                    <tr class="tr">
+                        <th class="text-left">Class</th>
+                        <th class="w-24">Strength</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($sections->sortBy('grade') as $section)
+                        <tr class="tr">
+                            <td class="text-left"><a href="{{ route('admin.sections.show', $section) }}"
+                                    class="link">{{ $section->fullName() }}</a>
+                            </td>
+                            <td>{{ $section->students->count() }}</td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
         </div>
     </div>
     <a href="{{ route('admin.sections.create') }}"

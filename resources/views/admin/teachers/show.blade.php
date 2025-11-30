@@ -74,7 +74,7 @@
         </div>
         <div>
             <label for="">Email</label>
-            <h3>{{ $teacher->email }}</h3>
+            <h3>{{ $teacher->user?->email }}</h3>
         </div>
         <div>
             <label for="">Address</label>

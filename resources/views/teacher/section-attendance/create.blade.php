@@ -38,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($section->students as $student)
+                        @foreach ($section->students->sortBy('rollno') as $student)
                             <tr class="tr">
                                 <td>{{ $student->rollno }}</td>
                                 <td class="text-left text-xs md:text-sm">{{ $student->name }} <br> <span

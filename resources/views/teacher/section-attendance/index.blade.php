@@ -26,8 +26,8 @@
                     , {{ round(($present / $section->students->count()) * 100, 1) }}%</h2>
 
                 @if ($present)
-                    <a href="{{ route('teacher.section.attendance.edit', [$section, 1]) }}" class="btn-blue rounded py-2">
-                        Change Attendance</a>
+                    <a href="{{ route('teacher.section.attendance.show', [$section, 1]) }}" class="btn-blue rounded py-2">
+                        View Attendance</a>
                 @else
                     <a href="{{ route('teacher.section.attendance.create', $section) }}" class="btn-blue rounded py-2">
                         Start Attendance</a>

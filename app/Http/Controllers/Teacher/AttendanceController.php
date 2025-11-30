@@ -96,7 +96,9 @@ class AttendanceController extends Controller
     public function show($id)
     {
         //
-
+        $section = Section::findOrFail($id);
+        $attendances = $section->attendances()->whereDate('date', today())->get();
+        return view('teacher.section-attendance.show', compact('section', 'attendances'));
     }
 
     /**

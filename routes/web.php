@@ -55,6 +55,7 @@ use App\Http\Controllers\ResultDetailController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\SubjectResultController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
+use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
 use App\Http\Controllers\Teacher\ImportStudentController;
 use App\Http\Controllers\Teacher\TestAllocationController;
 use App\Http\Controllers\Teacher\TestAllocationResultController;
@@ -250,6 +251,8 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['role:teacher']], function () {
         Route::get('/', [TeacherDashboardController::class, 'index']);
         Route::resource('tests', TestController::class);
+        Route::resource('students', TeacherStudentController::class);
+        Route::get('student-list/print', [TeacherStudentController::class, 'print'])->name('students.print');
         Route::resource('test.test-allocations', TestAllocationController::class);
         Route::resource('test-allocation.results', TestAllocationResultController::class);
         Route::resource('test-allocation.import-students', ImportStudentController::class);

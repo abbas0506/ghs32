@@ -33,7 +33,7 @@
             </li>
             <li>
                 <a href="{{ route('admin.attendance.index') }}" class="flex items-center">
-                    <i class="bi bi-diagram-3"></i>
+                    <i class="bi bi-person-check"></i>
                     <span class="ml-3">Attendance</span>
                 </a>
             </li>
@@ -45,7 +45,7 @@
             </li>
             <li>
                 <a href="{{ route('admin.alumni.index') }}" class="flex items-center">
-                    <i class="bi bi-people"></i>
+                    <i class="bi bi-person-heart"></i>
                     <span class="ml-3">Alumni</span>
                 </a>
             </li>
