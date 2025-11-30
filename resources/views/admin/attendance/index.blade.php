@@ -10,29 +10,30 @@
 
 
         {{-- clear specific date attendance --}}
-        <div class="md:w-4/5 mx-auto bg-white mt-8 flex justify-between items-center gap-3">
+        <div class="md:w-4/5 mx-auto bg-white mt-8">
             <input type="date" id='filter_date' class="custom-input-borderless md:w-3/4">
             {{-- filter form  --}}
             <form action="{{ route('admin.attendance.filter') }}" method="POST" id="form_filter">
                 @csrf
                 <input type="hidden" name="date" id="date">
             </form>
+        </div>
+
+        <div class="md:w-4/5 mx-auto bg-white md:p-8 p-4 rounded border mt-3 relative">
+
             <form action="{{ route('admin.attendance.clear') }}" method="POST" id="form_clear"
-                onsubmit="return confirmClear(event)">
+                onsubmit="return confirmClear(event)" class="absolute right-4 top-4">
                 @csrf
                 <input type="hidden" name="clear_date" value="{{ $today }}">
                 <button type="submit"><i class="bi-recycle text-red-600"></i></button>
             </form>
-        </div>
-
-        <div class="md:w-4/5 mx-auto bg-white md:p-8 p-4 rounded border mt-3">
             <!-- page message -->
             @if ($errors->any())
                 <x-message :errors='$errors'></x-message>
             @else
                 <x-message></x-message>
             @endif
-            <h2><i class="bi-clock mr-3"></i> {{ \Carbon\Carbon::parse($today)->format('M j, Y') }}</h2>
+            <h2><i class="bi-clock mr-3"></i> {{ \Carbon\Carbon::parse($today)->format('d-m-Y') }}</h2>
             <table class="table-auto borderless w-full mt-8">
                 <thead>
                     <tr class="tr">
@@ -66,7 +67,7 @@
 @section('script')
     <script type="module">
         $(document).ready(function() {
-            $('#filter_date').val("{{ $today }}")
+            // $('#filter_date').val("{{ $today }}")
             $('#filter_date').on('change', function() {
                 let selected = $(this).val();
                 $('#date').val(selected);
