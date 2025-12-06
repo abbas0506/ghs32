@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             LibraryRuleSeeder::class,
             SectionSeeder::class,
-            // DomainSeeder::class,
+            LectureSeeder::class,
+            DomainSeeder::class,
         ]);
     }
 }

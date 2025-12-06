@@ -30,7 +30,7 @@ class Voucher extends Model
 
     public function sumOfPaidAmount()
     {
-        return $this->fees->sum('paid_amount');
+        return $this->fees->where('status',1)->count()*$this->amount;
     }
     public function isOpen()
     {
@@ -39,4 +39,51 @@ class Voucher extends Model
         else
             return false;
     }
+    
+    // Get students of a section who have paid this voucher
+    public function studentsWhoHavePaid($sectionId)
+    {
+        return Student::where('section_id', $sectionId)
+            ->whereHas('fees', function ($query) {
+                $query->where('voucher_id', $this->id)
+                      ->where('status', 1);
+            })
+            ->get();
+    }
+    public function studentsWhoHavePaidToday($sectionId)
+    {
+        return Student::where('section_id', $sectionId)
+            ->whereHas('fees', function ($query) {
+                $query->where('voucher_id', $this->id)
+                      ->where('status', 1)
+                      ->whereDate('updated_at',today());
+            })
+            ->get();
+    }
+
+    // Get students of a section who have NOT paid this voucher
+    public function studentsWhoHaveNotPaid($sectionId)
+    {
+        return Student::where('section_id', $sectionId)
+            ->whereDoesntHave('fees', function ($query) {
+                $query->where('voucher_id', $this->id)
+                      ->where('status', 1);
+            })
+            ->get();
+    }
+
+    public function studentsFromSection($sectionId)
+    {
+        return Student::where('section_id', $sectionId)
+            ->whereHas('fees', function ($query) {
+                $query->where('voucher_id', $this->id);
+            })
+            ->get();
+    }
+    public function sumOfPaidAmountForSection($sectionId)
+    {
+        return $this->studentsWhoHavePaid($sectionId)->count()*$this->amount;
+    }
 }
+
+

@@ -41,8 +41,8 @@
         @endif
 
         <div class="overflow-x-auto bg-white w-full mt-8">
-
-            <table class="table-auto borderless w-full">
+            <h2 class="text-sm text-slate-600"> Total Students: {{ $section->students->count() }}</h2>
+            <table class="table-auto borderless w-full mt-1">
                 <thead>
                     <tr>
                         <th class="w-10">#</th>

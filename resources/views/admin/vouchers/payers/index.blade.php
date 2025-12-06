@@ -75,7 +75,7 @@
                                 <td>{{ $fee->student->group?->name }}</td>
                                 <td>
                                     <div class="flex items-center justify-center">
-                                        @if ($fee->paid_amount == 0)
+                                        @if (!$fee->status)
                                             <form
                                                 action="{{ route('admin.voucher.section.payers.destroy', [$voucher, $section, $fee]) }}"
                                                 method="POST" onsubmit="return confirmDel(event)">

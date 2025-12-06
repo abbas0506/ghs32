@@ -19,26 +19,9 @@ class AttendanceController extends Controller
      */
     public function index($id)
     {
-        //if attendance for the date has already been created, then show index file
-        //showing all classes, on click show class with checkboxes
         $section = Section::findOrFail($id);
         $present = $section->attendances()->whereDate('date', today())->where('status', 1)->count();
         return view('teacher.section-attendance.index', compact('section', 'present'));
-        // if (!$section->attendanceMarked()) {
-        //     // create attendance
-        //     return view('teacher.section-attendance.create', compact('section'));
-        // } else {
-        //     // echo "attendance not marked";
-        //     //mark all the students present for today
-
-        // }
-
-        // $attendances = Attendance::whereDate('date', today())
-        //     ->whereHas('student', function ($query) use ($id) {
-        //         $query->where('section_id', $id);
-        //     })->get();
-
-        // return view('teacher.section-attendance.index', compact('attendances', 'section'));
     }
 
     /**

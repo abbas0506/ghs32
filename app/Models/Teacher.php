@@ -59,4 +59,14 @@ class Teacher extends Model
         $section = Section::findOrFail($sectionId);
         return $section;
     }
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class)
+                    ->withPivot('status')
+                    ->withTimestamps();
+    }
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }

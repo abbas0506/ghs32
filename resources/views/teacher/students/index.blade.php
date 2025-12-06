@@ -11,7 +11,6 @@
         </div>
 
         <!-- search -->
-        <!-- <div class="flex justify-between items-center flex-wrap gap-6 mt-12"> -->
         <div class="flex relative w-full md:w-1/3">
             <input type="text" id='searchby' placeholder="Search ..." class="custom-search w-full" oninput="search(event)">
             <i class="bx bx-search absolute top-2 right-2"></i>
@@ -31,9 +30,15 @@
             <x-message></x-message>
         @endif
 
-        <div class="overflow-x-auto bg-white w-full mt-8">
 
-            <table class="table-auto borderless w-full">
+        {{-- <textarea id="english" class="form-control"></textarea>
+        <button id="translateBtn" class="btn-blue">Translate</button>
+        <textarea id="urdu" class="form-control"></textarea>
+ --}}
+
+        <div class="overflow-x-auto bg-white w-full mt-8">
+            <h2 class="text-sm text-slate-600"> Total Students: {{ $section->students->count() }}</h2>
+            <table class="table-auto borderless w-full mt-3">
                 <thead>
                     <tr>
                         <th class="w-10">#</th>
@@ -46,7 +51,7 @@
                     @foreach ($section->students->sortBy('rollno') as $student)
                         <tr class="tr">
                             <td>{{ $student->rollno }}</td>
-                            <td class="text-left">
+                            <td class="text-left text-xs md:text-sm">
                                 <a href="{{ route('teacher.students.show', $student) }}"
                                     class="link">{{ $student->name }}</a>
                                 <br><span class="text-slate-400 text-xs">{{ $student->father_name }}</span>
@@ -75,5 +80,15 @@
                 }
             });
         }
+
+        document.getElementById('translateBtn').onclick = function() {
+            let text = document.getElementById('english').value;
+
+            fetch("https://api.mymemory.translated.net/get?q=" + text + "&langpair=en|ur")
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('urdu').value = data.responseData.translatedText;
+                });
+        };
     </script>
 @endsection

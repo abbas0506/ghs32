@@ -68,6 +68,12 @@
                     <span class="ml-3">Events</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.tasks.index') }}" class="flex items-center">
+                    <i class="bi bi-calendar-event"></i>
+                    <span class="ml-3">Tasks</span>
+                </a>
+            </li>
 
             <li>
                 <a href="{{ url('signout') }}" class="flex items-center">

@@ -34,6 +34,13 @@
                         <span class="ml-3">Attendance</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('teacher.section.fee.index', Auth::user()->teacher?->sectionAsIncharge()) }}"
+                        class="flex items-center">
+                        <i class="bi bi-person-gear"></i>
+                        <span class="ml-3">Fee / Dues</span>
+                    </a>
+                </li>
             @endif
             <li>
                 <a href="" class="flex items-center">

@@ -12,11 +12,15 @@ class Fee extends Model
         'id',
         'student_id',
         'voucher_id',
-        'paid_amount',
+        'status',
     ];
 
     public function student()
     {
         return $this->belongsTo(Student::class);
+    }
+    public function voucher()
+    {
+        return $this->belongsTo(Voucher::class);
     }
 }

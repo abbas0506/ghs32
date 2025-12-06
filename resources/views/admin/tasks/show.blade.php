@@ -1,32 +1,31 @@
 @extends('layouts.admin')
 @section('page-content')
     <h2>
-        Voucher # {{ $voucher->id }}</h2>
+        Task # {{ $task->id }}</h2>
     <div class="bread-crumb">
         <a href="/">Home</a>
         <div>/</div>
-        <a href="{{ route('admin.vouchers.index') }}">Vouchers</a>
+        <a href="{{ route('admin.tasks.index') }}">Tasks</a>
         <div>/</div>
-        <div>Edit</div>
+        <div>View</div>
     </div>
 
     <div class="grid md:grid-cols-3 md:w-4/5 mx-auto mt-6 bg-white md:p-8 p-4 rounded border">
         <div class="md:col-span-2 text-slate-400 text-sm">
-            Removing voucher is a destructive activity.
-            It will destory all fee info against this voucher.
+            Removing task is a destructive activity.
+            It will destory all data associated with this task.
             Remove only if you are sure!
         </div>
         <div class="flex items-center justify-end space-x-2 mt-4">
             <div class="flex w-8 h-8 rounded-full border justify-center items-center">
-                <form action="{{ route('admin.vouchers.destroy', $voucher) }}" method="post"
-                    onsubmit="return confirmDel(event)">
+                <form action="{{ route('admin.tasks.destroy', $task) }}" method="post" onsubmit="return confirmDel(event)">
                     @csrf
                     @method('DELETE')
                     <button><i class="bx bx-trash text-red-600"></i></button>
                 </form>
             </div>
             <div class="flex w-8 h-8 rounded-full border justify-center items-center">
-                <a href="{{ route('admin.vouchers.edit', $voucher) }}"><i class="bx bx-pencil text-green-600"></i></a>
+                <a href="{{ route('admin.tasks.edit', $task) }}"><i class="bx bx-pencil text-green-600"></i></a>
             </div>
 
         </div>
@@ -42,33 +41,33 @@
     </div>
 
     <div class="md:w-4/5 overflow-x-auto mx-auto bg-white md:p-8 p-4 rounded border mt-3">
-        <h2 class="mb-4"><i class="bi-people-fill text-slate-500"></i> Voucher Payers</h2>
+        <h2 class="mb-4"><i class="bi-calendar-event text-slate-500 mr-2"></i> {{ $task->description }} </h2>
         <table class="table-auto borderless w-full">
             <thead>
                 <tr>
-                    <th class="w-2/3 text-left">Class</th>
-                    <th>#</th>
-                    <th></th>
+                    <th class="w-2/3 text-left">Teacher</th>
+                    <th class="text-right">Status</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($sections as $section)
+                @foreach ($task->assignments as $assignment)
                     <tr class="tr">
-                        <td class="text-left text-sm">{{ $section->fullName() }}</td>
-                        <td class="text-sm">
-                            {{ $voucher->studentsWhoHavePaid($section->id)->count() }}/{{ $voucher->studentsFromSection($section->id)->count() }}
-                            @if ($voucher->studentsWhoHavePaidToday($section->id)->count())
-                                <span class="text-xs ml-2">
-                                    <i class="bi-arrow-up text-green-600"></i>
-                                    {{ $voucher->studentsWhoHavePaidToday($section->id)->count() }}
+                        <td class="text-left text-sm">{{ $assignment->teacher->name }}</td>
+                        <td class="text-sm text-right">
+                            @if ($assignment->status)
+                                <form action="{{ route('admin.assignments.update', $assignment) }}" method='post'>
+                                    @csrf
+                                    @method('patch')
+                                    <button type="submit"> <i class="bi-check-lg text-green-600"></i></button>
+                                </form>
+                            @else
+                                <form action="{{ route('admin.assignments.update', $assignment) }}" method='post'>
+                                    @csrf
+                                    @method('patch')
+                                    <button type="submit"> <i class="bi-check text-slate-300"></i></button>
+                                </form>
                             @endif
-                            </span>
                         </td>
-                        <td class="text-sm"><a
-                                href="{{ route('admin.voucher.section.payers.index', [$voucher, $section]) }}"
-                                class="bg-teal-100 hover:bg-teal-200 px-2 py-1 rounded-lg">
-                                <i class="bx bx-pencil text-teal-600"></i>
-                            </a></td>
                     </tr>
                 @endforeach
             </tbody>

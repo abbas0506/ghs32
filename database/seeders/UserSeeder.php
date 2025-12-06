@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        $user->assignRole(['admin', 'teacher', 'library']);
+        $user->assignRole(['admin', 'teacher']);
 
         Teacher::create([
 
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        $user->assignRole(['admin', 'teacher', 'library']);
+        $user->assignRole(['teacher']);
 
         Teacher::create([
 

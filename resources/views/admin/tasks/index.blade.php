@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('page-content')
-    <h1>Collective Tests</h1>
+    <h1>Tasks</h1>
     <div class="bread-crumb">
         <a href="{{ url('/') }}">Home</a>
         <div>/</div>
-        <div>Vouchers</div>
+        <div>Tasks</div>
     </div>
 
 
@@ -16,7 +16,7 @@
                     oninput="search(event)">
                 <i class="bx bx-search absolute top-2 right-2"></i>
             </div>
-            <a href="{{ route('admin.vouchers.create') }}"
+            <a href="{{ route('admin.tasks.create') }}"
                 class="fixed bottom-4 right-4 flex justify-center items-center bg-teal-400 hover:bg-teal-600 hover:cursor-pointer rounded-full w-12 h-12"><i
                     class="bi-plus-lg"></i></a>
         </div>
@@ -31,30 +31,30 @@
         <table class="table-auto borderless w-full mt-8">
             <thead>
                 <tr class="">
-                    <th class="w-16">Sr</th>
-                    <th class="text-left">Voucher Title</th>
-                    <th>Rs.</th>
+                    <th class="w-6">Sr</th>
+                    <th class="text-left">Task Desc</th>
+                    <th class="w-6"></th>
                 </tr>
             </thead>
             <tbody>
 
-                @foreach ($vouchers as $voucher)
+                @foreach ($tasks as $task)
                     <tr class="tr">
                         <td>{{ $loop->index + 1 }}</td>
                         <td class="text-left">
-                            @if ($voucher->isOpen())
-                                <a href="{{ route('admin.vouchers.show', $voucher) }}"
-                                    class="link">{{ $voucher->name }}</a>
+                            @if ($task->isOpen())
+                                <a href="{{ route('admin.tasks.show', $task) }}" class="link">{{ $task->description }}</a>
                                 <br>
-                                <span>@Rs. {{ $voucher->amount }} <span class="text-slate-400 text-xs">till
-                                        {{ $voucher->due_date->format('d-m-Y') }}</span>
-                                @else
-                                    <a href="{{ route('admin.vouchers.show', $voucher) }}">{{ $voucher->name }}</a><br>
-                                    <span>@Rs. {{ $voucher->amount }} <span class="text-slate-400 text-xs">till
-                                            {{ $voucher->due_date->format('d-m-Y') }}</span>
+                                <span class="text-xs text-slate-400">Due date:
+                                    {{ $task->due_date->format('d-m-Y') }}</span>
+                            @else
+                                <a href="{{ route('admin.tasks.show', $task) }}">{{ $task->description }}</a>
+                                <br>
+                                <span class="text-xs text-slate-400">Due date:
+                                    {{ $task->due_date->format('d-m-Y') }}</span>
                             @endif
                         </td>
-                        <td>{{ $voucher->sumOfPaidAmount() }} / {{ $voucher->students->count() * $voucher->amount }} </td>
+                        <td>{{ $task->teachers()->count() }} </td>
                     </tr>
                 @endforeach
 
