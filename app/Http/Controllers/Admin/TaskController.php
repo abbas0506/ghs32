@@ -75,7 +75,7 @@ class TaskController extends Controller
     public function show($id)
     {
         //
-         $task=Task::findOrFail($id);
+        $task=Task::findOrFail($id);
         return view('admin.tasks.show', compact('task'));
     }
 
@@ -85,14 +85,27 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         //
+        return view('admin.tasks.edit', compact('task'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
         //
+        $request->validate([
+           'description' => 'required',
+            'due_date' => 'required|date',
+        ]);
+
+        $model = Task::findOrFail($id);
+        try {
+            $model->update($request->all());
+            return redirect()->route('admin.tasks.index')->with('success', 'Successfully updated');
+        } catch (Exception $ex) {
+            return redirect()->back()->withErrors($ex->getMessage());
+        }
     }
 
     /**
@@ -101,5 +114,12 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         //
+        try {
+            $task->delete();
+            return redirect()->route('admin.tasks.index')->with('success', 'Successfully deleted');
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+            // something went wrong
+        }
     }
 }

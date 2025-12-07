@@ -41,32 +41,43 @@
     </div>
 
     <div class="md:w-4/5 overflow-x-auto mx-auto bg-white md:p-8 p-4 rounded border mt-3">
-        <h2 class="mb-4"><i class="bi-calendar-event text-slate-500 mr-2"></i> {{ $task->description }} </h2>
-        <table class="table-auto borderless w-full">
+        <div class="flex justify-between items-center flex-wrap">
+            <h2 class=""><i class="bi-calendar-event text-slate-500 mr-2"></i> {{ $task->description }} </h2>
+            <a href="{{ route('admin.task.assignments.create', $task) }}"><i class="bi-folder-plus"></i></a>
+        </div>
+        <table class="table-auto borderless w-full mt-5">
             <thead>
                 <tr>
                     <th class="w-2/3 text-left">Teacher</th>
-                    <th class="text-right">Status</th>
+                    <th class="">Status</th>
+                    <th class="w-6"></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($task->assignments as $assignment)
                     <tr class="tr">
                         <td class="text-left text-sm">{{ $assignment->teacher->name }}</td>
-                        <td class="text-sm text-right">
-                            @if ($assignment->status)
-                                <form action="{{ route('admin.assignments.update', $assignment) }}" method='post'>
-                                    @csrf
-                                    @method('patch')
-                                    <button type="submit"> <i class="bi-check-lg text-green-600"></i></button>
-                                </form>
-                            @else
-                                <form action="{{ route('admin.assignments.update', $assignment) }}" method='post'>
-                                    @csrf
-                                    @method('patch')
-                                    <button type="submit"> <i class="bi-check text-slate-300"></i></button>
-                                </form>
-                            @endif
+                        <td class="text-sm">
+
+                            <form action="{{ route('admin.task.assignments.update', [$task, $assignment]) }}"
+                                method='post'>
+                                @csrf
+                                @method('patch')
+                                <button type="submit">
+                                    @if ($assignment->status)
+                                        <i class="bi-check-lg text-green-600"></i>
+                                    @else
+                                        <i class="bi-check text-slate-300"></i>
+                                    @endif
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{{ route('admin.task.assignments.destroy', [$task, $assignment]) }}"
+                                method="POST" style="display:inline-block" onsubmit="return confirmDel(event)">
+                                @csrf @method('DELETE')
+                                <button class=""><i class="bi-x"></i></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

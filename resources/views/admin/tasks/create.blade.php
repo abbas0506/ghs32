@@ -22,8 +22,8 @@
             <div class="grid md:grid-cols-2 gap-3">
                 <div class="md:col-span-2">
                     <label>Task Desc.</label>
-                    <input type="text" name='description' class="custom-input" placeholder="Teacher Diary Completion"
-                        value="" required>
+                    <input type="text" name='description' class="custom-input"
+                        placeholder="Attendance Register Completion" value="" required>
                 </div>
                 <div>
                     <label>Due Date</label>

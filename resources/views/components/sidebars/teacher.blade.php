@@ -41,6 +41,12 @@
                         <span class="ml-3">Fee / Dues</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('teacher.tasks.index') }}" class="flex items-center">
+                        <i class="bi bi-person-gear"></i>
+                        <span class="ml-3">My Tasks</span>
+                    </a>
+                </li>
             @endif
             <li>
                 <a href="" class="flex items-center">

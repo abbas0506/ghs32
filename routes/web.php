@@ -66,6 +66,7 @@ use App\Http\Controllers\TestPositionController;
 use App\Http\Controllers\Teacher\AttendanceController as TeacherAttendanceController;
 use App\Http\Controllers\Teacher\FeeController;
 use App\Http\Controllers\Teacher\MyScheduleController;
+use App\Http\Controllers\Teacher\TaskController as TeacherTaskController;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -199,7 +200,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('attendances/filter', [AttendanceController::class, 'filter'])->name('attendance.filter');
         Route::post('attendances/clear', [AttendanceController::class, 'clear'])->name('attendance.clear');
         Route::resource('tasks',TaskController::class);
-        Route::resource('assignments',AssignmentController::class);
+        Route::resource('task.assignments',AssignmentController::class);
     });
 
     Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {
@@ -266,6 +267,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('test-allocation.import-students', ImportStudentController::class);
         Route::resource('section.attendance', TeacherAttendanceController::class);
         Route::resource('section.fee', FeeController::class);
+        Route::resource('tasks', TeacherTaskController::class);
     });
 
     Route::group(['prefix' => 'shared', 'as' => 'shared.', 'middleware' => ['role:teacher|admin']], function () {
