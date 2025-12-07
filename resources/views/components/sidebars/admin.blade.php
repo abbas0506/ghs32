@@ -6,29 +6,11 @@
     <hr class="border-teal-600 border-2 rounded-full mt-3 w-1/2 mx-auto">
 
     <div class="my-8">
-        <ul class="grid gap-y-4 font-medium">
+        <ul class="grid gap-y-3 text-xs md:text-sm">
             <li>
                 <a href="{{ url('admin') }}" class="flex items-center">
                     <i class="bi-house"></i>
                     <span class="ml-3">Home</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admin.teachers.index') }}" class="flex items-center">
-                    <i class="bi bi-person-circle"></i>
-                    <span class="ml-3">Users</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admin.alumni.index') }}" class="flex items-center">
-                    <i class="bi bi-person-heart"></i>
-                    <span class="ml-3">Alumni</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admin.subjects.index') }}" class="flex items-center">
-                    <i class="bi-book"></i>
-                    <span class="ml-3">Subjects</span>
                 </a>
             </li>
             <li>
@@ -60,12 +42,6 @@
                 <a href="{{ route('admin.vouchers.index') }}" class="flex items-center">
                     <i class="bi-receipt"></i>
                     <span class="ml-3">Vouchers</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admin.events.index') }}" class="flex items-center">
-                    <i class="bi bi-calendar-event"></i>
-                    <span class="ml-3">Events</span>
                 </a>
             </li>
             <li>

@@ -31,9 +31,12 @@
 
                 </div>
             </div>
-
-            <div class="md:p-5 border rounded-lg">
-                <h2 class="mb-4">Users who will complete this task</h2>
+            <div>
+                <input type="checkbox" name="grouped" id="grouped">
+                <label for="grouped">Grouped</label>
+            </div>
+            <div class="p-2 md:p-5 border rounded-lg hidden" id="grouped_task">
+                <h2 class="text-sm mb-4">Users who will complete this task</h2>
                 @foreach ($teachers as $teacher)
                     <div class="flex items-center odd:bg-slate-100 checkable-row px-4">
                         <!-- <div class="flex flex-1 items-center justify-between space-x-2 pr-3"> -->
@@ -77,5 +80,8 @@
                 })
             }
         })
+        $('#grouped').on('change', function() {
+            $('#grouped_task').toggle(this.checked);
+        });
     </script>
 @endsection

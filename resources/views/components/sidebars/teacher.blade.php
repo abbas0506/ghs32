@@ -6,8 +6,8 @@
     <div class="text-center text-xs text-slate-500">{{ Auth::user()->teacher?->short_name }}</div>
     <hr class="border-teal-600 border-2 rounded-full mt-3 w-1/2 mx-auto">
 
-    <div class="mt-12">
-        <ul class="grid gap-y-4">
+    <div class="mt-8">
+        <ul class="grid gap-y-3 text-xs md:text-sm">
             <li>
                 <a href="{{ url('/') }}" class="flex items-center">
                     <i class="bi-house"></i>

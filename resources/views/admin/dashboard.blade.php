@@ -54,13 +54,55 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 mt-8 gap-6">
         <!-- middle panel  -->
+        <div class="col-span-2 bg-blue-50">
+            <h2 class="bg-blue-100 py-1 px-2">My Tasks</h2>
+            <div class="py-2 px-5">
+                <table class="table-auto borderless w-full">
+                    <thead>
+                        <tr>
+                            <th class="text-left"></th>
+                            <th class="w-6"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($assignments as $assignment)
+                            <tr class="tr">
+                                <td class="text-left text-sm">{{ $assignment->task->description }}</td>
+                                <td class="text-sm">
 
-    </div>
-    <!-- middle panel end -->
-    <!-- right side bar starts -->
-    <div class="">
-        <div class="bg-white p-4">
-            <p class="text-center">Welcome dear admin!</p>
+                                    <form
+                                        action="{{ route('admin.task.assignments.update', [$assignment->task, $assignment]) }}"
+                                        method='post'>
+                                        @csrf
+                                        @method('patch')
+                                        <button type="submit">
+                                            @if ($assignment->status)
+                                                <i class="bi-check-lg text-green-600"></i>
+                                            @else
+                                                <i class="bi-check text-slate-300"></i>
+                                            @endif
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
+        {{-- right panel --}}
+        <div class="bg-teal-50 rounded-lg">
+            <h3 class="bg-teal-100 rounded-t-lg px-2 py-1"><i class="bi-house-gear mr-2"></i> Home Config
+            </h3>
+            <div class="grid gap-2 text-sm p-2">
+                <a href="{{ route('admin.teachers.index') }}" class="link">Users</a>
+                <a href="{{ route('admin.alumni.index') }}" class="link">Alumni</a>
+                <a href="{{ route('admin.events.index') }}" class="link">Events</a>
+                <a href="{{ route('admin.subjects.index') }}" class="link">Subjects</a>
+                <a href="{{ route('admin.sections.index') }}" class="link">Classes</a>
+            </div>
+
+        </div>
+
     </div>
 @endsection

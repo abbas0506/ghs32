@@ -4,16 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
+use App\Models\Assignment;
 use App\Models\Attendance;
 use App\Models\Book;
 use App\Models\Clas;
 use App\Models\Grade;
 use App\Models\Section;
 use App\Models\Student;
+use App\Models\Task;
 use App\Models\Teacher;
 use App\Models\Test;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -24,13 +27,14 @@ class DashboardController extends Controller
     {
         //
         $sections = Section::all();
-        $teachers = User::whereRelation('roles', 'name', 'teacher')->get();
         $students = Student::all();
         $tests = Test::all();
+        // admin task have no teacher id
+        $assignments = Assignment::where('teacher_id', Auth::user()->teacher?->id)->get();
         $attendances = Attendance::where('date', today())->where('status', 1)->get();
         $applications = Application::all();
 
-        return view('admin.dashboard', compact('sections', 'students', 'teachers', 'tests', 'applications', 'attendances'));
+        return view('admin.dashboard', compact('sections', 'students', 'tests', 'attendances','assignments'));
     }
 
     /**

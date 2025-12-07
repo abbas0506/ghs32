@@ -7,6 +7,7 @@ use App\Models\Task;
 use App\Models\Teacher;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
@@ -40,7 +41,8 @@ class TaskController extends Controller
         $request->validate([
             'description' => 'required',
             'due_date' => 'required|date',
-            'teacher_ids_array' => 'required',
+            'grouped' => 'nullable',
+            'teacher_ids_array' => 'required_if:grouped,on',
         ]);
 
         $teacherIdsArray = array();
@@ -50,16 +52,30 @@ class TaskController extends Controller
 
         DB::beginTransaction();
         try {
-            $teacherIdsArray = array();
-            $teacherIdsArray = $request->teacher_ids_array;
-
             $task = Task::create([
                 'description' => $request->description,
                 'due_date' => $request->due_date,
-            ]);
+                ]);
 
-            // Assign to multiple teachers
-            $task->teachers()->attach($teacherIdsArray); // teacher IDs
+            if($request->grouped){
+                // Assign to multiple teachers
+                $task->teachers()->attach($teacherIdsArray); // teacher IDs
+                $teacherIdsArray = array();
+                $teacherIdsArray = $request->teacher_ids_array;
+
+                $task = Task::create([
+                    'description' => $request->description,
+                    'due_date' => $request->due_date,
+                ]);
+
+                // Assign to multiple teachers
+                $task->teachers()->attach($teacherIdsArray); // teacher IDs
+            }else{
+                
+                $task->assignments()->create([
+                    'teacher_id'=>Auth::user()->teacher?->id,
+                ]);
+            }
             DB::commit();
             return redirect()->route('admin.tasks.index')->with('success', 'Successfully created');
         } catch (Exception $e) {
