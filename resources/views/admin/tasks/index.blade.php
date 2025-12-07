@@ -33,7 +33,7 @@
                 <tr class="">
                     <th class="w-6">Sr</th>
                     <th class="text-left">Task Desc</th>
-                    <th class="w-6"></th>
+                    <th class="w-6"><i class="bi-paperclip"></i></th>
                 </tr>
             </thead>
             <tbody>
