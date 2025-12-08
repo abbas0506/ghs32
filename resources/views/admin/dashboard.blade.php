@@ -52,10 +52,10 @@
         </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 mt-8 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 mt-8 md:gap-x-6 gap-y-4">
         <!-- middle panel  -->
         <div class="col-span-2 bg-blue-50">
-            <h2 class="bg-blue-100 py-1 px-2">My Tasks</h2>
+            <h2 class="bg-blue-100 py-1 px-2 rounded-t-lg">My Tasks</h2>
             <div class="py-2 px-5">
                 <table class="table-auto borderless w-full">
                     <thead>

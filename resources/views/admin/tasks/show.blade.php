@@ -32,7 +32,7 @@
     </div>
 
     <!-- message -->
-    <div class="md:w-3/4 mx-auto">
+    <div class="md:w-4/5 mx-auto">
         @if ($errors->any())
             <x-message :errors='$errors'></x-message>
         @else
@@ -49,15 +49,14 @@
             <thead>
                 <tr>
                     <th class="w-2/3 text-left">Teacher</th>
-                    <th class="">Status</th>
-                    <th class="w-6"></th>
+                    <th class=""></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($task->assignments as $assignment)
                     <tr class="tr">
                         <td class="text-left text-sm">{{ $assignment->teacher->name }}</td>
-                        <td class="text-sm">
+                        <td class="text-sm text-right">
 
                             <form action="{{ route('admin.task.assignments.update', [$task, $assignment]) }}"
                                 method='post'>
@@ -70,13 +69,6 @@
                                         <i class="bi-check text-slate-300"></i>
                                     @endif
                                 </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{{ route('admin.task.assignments.destroy', [$task, $assignment]) }}"
-                                method="POST" style="display:inline-block" onsubmit="return confirmDel(event)">
-                                @csrf @method('DELETE')
-                                <button class=""><i class="bi-x"></i></button>
                             </form>
                         </td>
                     </tr>
