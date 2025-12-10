@@ -1,59 +1,62 @@
 @extends('layouts.teacher')
 @section('page-content')
-<!--welcome  -->
-<div class="flex items-center">
-    <div class="flex-1">
-        <div class="bread-crumb">
-            <div>Teacher</div>
-            <div>/</div>
-            <div>Dashbaord</div>
+    <!--welcome  -->
+    <div class="flex items-center">
+        <div class="flex-1">
+            <div class="bread-crumb">
+                <div><i class="bi-house"></i></div>
+                <div>/</div>
+                <div>Home</div>
+            </div>
         </div>
+        <label class="text-slate-500">{{ today()->format('d/m/Y') }}</label>
     </div>
-    <label class="text-slate-500">{{ today()->format('d/m/Y') }}</label>
-</div>
 
-<!-- pallets -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-    <a href="{{ route('teacher.tests.index') }}" class="pallet-box bg-gradient-to-r from-teal-100 to-white ">
-        <div class="flex-1">
-            <h3>Collective Tests</h3>
-            <p class="text-sm text-slate-600 font-thin">Pendency:
-                @if ($teacher->testAllocations()->active()->count())
-                {{100-round($teacher->testAllocations()->combined()->active()->resultSubmitted()->count()/$teacher->testAllocations()->combined()->active()->count()*100,0)}} %
-                @else
-                -
-                @endif
+    <!-- pallets -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <a href="{{ route('teacher.tests.index') }}" class="pallet-box bg-gradient-to-r from-teal-100 to-white ">
+            <div class="flex-1">
+                <h3>My Class</h3>
+                <p class="text-sm text-slate-400">Total Strength: {{ $section->students->count() }}
 
-            </p>
+                </p>
+            </div>
+            <div class="ico bg-teal-100 text-teal-600">
+                <i class="bi-people"></i>
+            </div>
+        </a>
+        <a href="{{ route('teacher.tests.index') }}" class="pallet-box bg-gradient-to-r from-indigo-100 to-white">
+            <div class="flex-1">
+                <h3>Assessment</h3>
+                <p class="text-sm text-slate-400">Currently Active: {{ $tasks->count() }}</p>
+            </div>
+            <div class="ico bg-indigo-100 text-indigo-400">
+                <i class="bi-file-earmark-text"></i>
+            </div>
+        </a>
+
+    </div>
+
+    <div
+        class="w-full p-5 bg-gradient-to-b  from-sky-100 to-white border border-sky-200 rounded-lg text-xs md:text-sm mt-8">
+        <div class="flex items-center gap-x-2">
+            <div class="w-6 text-xl text-slate-600"><i class="bi-list-task"></i> </div>
+            <div>
+                <h2 class="text-slate-600 relative">Pending Tasks <span
+                        class="absolute top-0 inline-block w-2 h-2 bg-red-500 rounded-full animate-ping"></span></h2>
+                <div class="text-slate-400">
+                    Waiting for your response ...
+                </div>
+            </div>
         </div>
-        <div class="ico bg-teal-100 text-teal-600">
-            {{ $tests->whereNull('teacher_id')->where('is_open', true)->count() }}
-        </div>
-    </a>
-    <a href="#" class="pallet-box bg-gradient-to-r from-indigo-100 to-white">
-        <div class="flex-1">
-            <h3>Individual Tests</h3>
-            <p class="text-sm text-slate-600 font-thin">Pendency: -</p>
-        </div>
-        <div class="ico bg-indigo-100 text-indigo-400">
-            {{$teacher->tests()->individual()->count() }}
-        </div>
-    </a>
-
-</div>
-
-<div class="grid w-full p-5 bg-gradient-to-b  from-sky-100 to-white border border-sky-200 rounded-lg text-xs md:text-sm mt-8">
-    <h2 class="text-left">Do you know?</h2>
-    <p class="text-left">There are 6-steps in result submission: </p>
-    <ul class="pl-5 list-roman leading-relaxed ">
-        <li>Select test type: combined or individual</li>
-        <li>Open the selected test and review your subjects </li>
-        <li>Open each subject and import the students list</li>
-        <li>After successful import, feed the result </li>
-        <li>Ensure total marks are updated correctly</li>
-        <li>Once all data is entered and reviewed, submit the final results</li>
-    </ul>
-
-</div>
-
+        <hr class="my-2">
+        <ul class="grid gap-y-4 mx-auto ml-8">
+            @foreach ($tasks as $task)
+                <li class="text-slate-600">{{ $task->description }}
+                    <br>
+                    <span class="text-slate-400 text-xs">Due date: {{ $task->due_date->format('d-m-Y') }}</span>
+                </li>
+            @endforeach
+        </ul>
+    </div>
 @endsection

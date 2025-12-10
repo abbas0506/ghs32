@@ -58,16 +58,9 @@ class TaskController extends Controller
                 ]);
 
             if($request->grouped){
-                // Assign to multiple teachers
-                $task->teachers()->attach($teacherIdsArray); // teacher IDs
+                
                 $teacherIdsArray = array();
                 $teacherIdsArray = $request->teacher_ids_array;
-
-                $task = Task::create([
-                    'description' => $request->description,
-                    'due_date' => $request->due_date,
-                ]);
-
                 // Assign to multiple teachers
                 $task->teachers()->attach($teacherIdsArray); // teacher IDs
             }else{

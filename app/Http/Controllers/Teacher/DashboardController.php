@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assignment;
 use App\Models\Teacher;
 use App\Models\Test;
 use Illuminate\Http\Request;
@@ -14,11 +15,15 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        $teacher = Teacher::where('user_id', Auth::user()->id)->first();
-        $allocations = $teacher->allocations;
         $tests = Test::all();
-
-        return view('teacher.dashboard', compact('allocations', 'tests', 'teacher'));
+        $section = Auth::user()->teacher?->sectionAsIncharge();
+        $tasks = Assignment::where('teacher_id', Auth::user()->teacher?->id)
+            ->where('status', 0)   // not completed
+            ->with('task')
+            ->get()
+            ->pluck('task');
+        
+        return view('teacher.dashboard', compact('section', 'tests','tasks'));
     }
 
     /**
