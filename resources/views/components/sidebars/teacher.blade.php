@@ -20,12 +20,6 @@
                     <span class="ml-3">Schedule</span>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('teacher.tests.index') }}" class="flex items-center">
-                    <i class="bi-file-earmark-text"></i>
-                    <span class="ml-3">Assessment</span>
-                </a>
-            </li>
 
             @if (Auth::user()->teacher?->isIncharge())
                 <li>
@@ -49,6 +43,12 @@
                     </a>
                 </li>
             @endif
+            <li>
+                <a href="{{ route('teacher.tests.index') }}" class="flex items-center">
+                    <i class="bi-file-earmark-text"></i>
+                    <span class="ml-3">Assessment</span>
+                </a>
+            </li>
             {{-- <li>
                 <a href="" class="flex items-center">
                     <i class="bi bi-file-earmark-text"></i>

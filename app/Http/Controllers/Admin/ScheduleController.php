@@ -106,7 +106,7 @@ class ScheduleController extends Controller
         $model = Allocation::findOrFail($id);
         try {
             $model->delete();
-            return redirect()->route('admin.class-schedule.index')->with('success', 'Successfully deleted');
+            return redirect()->route('admin.class-schedule')->with('success', 'Successfully deleted');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong

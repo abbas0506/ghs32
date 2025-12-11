@@ -256,7 +256,7 @@ Route::middleware(['auth'])->group(function () {
         }
     );
 
-    Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['role:teacher']], function () {
+    Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['auth','role:teacher']], function () {
         Route::get('/', [TeacherDashboardController::class, 'index']);
         Route::resource('tests', TestController::class);
         Route::resource('students', TeacherStudentController::class);

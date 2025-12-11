@@ -44,7 +44,6 @@
                         <th class="w-10">#</th>
                         <th class="w-48 text-left">Name</th>
                         <th class="w-16">Photo</th>
-
                     </tr>
                 </thead>
                 <tbody>

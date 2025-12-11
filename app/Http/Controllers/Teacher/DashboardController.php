@@ -22,7 +22,7 @@ class DashboardController extends Controller
             ->with('task')
             ->get()
             ->pluck('task');
-        
+        // echo Auth::user()->roles()->first()->name;
         return view('teacher.dashboard', compact('section', 'tests','tasks'));
     }
 

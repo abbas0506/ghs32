@@ -40,7 +40,8 @@ class AuthController extends Controller
             ]);
 
             // go to related dashboard
-            return redirect($role);
+             return redirect("/");
+
         } else {
             //user not verified
             return redirect()->back()->with(['warning' => 'User credentials incorrect !']);

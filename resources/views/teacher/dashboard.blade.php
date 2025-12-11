@@ -14,21 +14,36 @@
 
     <!-- pallets -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-        <a href="{{ route('teacher.tests.index') }}" class="pallet-box bg-gradient-to-r from-teal-100 to-white ">
-            <div class="flex-1">
-                <h3>My Class</h3>
-                <p class="text-sm text-slate-400">Total Strength: {{ $section->students->count() }}
+        @if ($section)
+            <a href="{{ route('teacher.students.index') }}" class="pallet-box bg-gradient-to-r from-teal-100 to-white ">
+                <div class="flex-1">
+                    <h2>My Class</h2>
+                    <p class="text-xs text-slate-400">Total Strength: {{ $section->students->count() }}
 
-                </p>
-            </div>
-            <div class="ico bg-teal-100 text-teal-600">
-                <i class="bi-people"></i>
-            </div>
-        </a>
+                    </p>
+                </div>
+                <div class="ico bg-teal-100 text-teal-600">
+                    <i class="bi-people"></i>
+                </div>
+            </a>
+        @else
+            <a href="{{ route('teacher.my-schedule.index') }}" class="pallet-box bg-gradient-to-r from-teal-100 to-white ">
+                <div class="flex-1 items-center">
+                    <h2>My Schedule</h2>
+                    <p class="text-xs text-slate-400">Lectures Count:
+                        {{ Auth::user()->teacher?->allocations->count() }}
+
+                    </p>
+                </div>
+                <div class="ico bg-teal-100 text-teal-600">
+                    <i class="bi-person-workspace"></i>
+                </div>
+            </a>
+        @endif
         <a href="{{ route('teacher.tests.index') }}" class="pallet-box bg-gradient-to-r from-indigo-100 to-white">
-            <div class="flex-1">
-                <h3>Assessment</h3>
-                <p class="text-sm text-slate-400">Currently Active: {{ $tasks->count() }}</p>
+            <div class="flex-1 items-center">
+                <h2>Assessment</h2>
+                <p class="text-xs text-slate-400">Currently Active Tests: {{ $tasks->count() }}</p>
             </div>
             <div class="ico bg-indigo-100 text-indigo-400">
                 <i class="bi-file-earmark-text"></i>

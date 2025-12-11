@@ -6,15 +6,17 @@
                     class="w-8 h-8 md:w-10 md:h-10 md:hidden">
             </a>
             <div class="hidden md:block text-base font-semibold">GHS 32/2L</div>
-            <select id="roleSwitcher"
-                class="ml-3 text-sm border-none focus:outline-none focus:ring-0 hover:cursor-pointer">
-                @if (Auth::user()->roles->count() > 1)
+            @if (Auth::user()->roles->count() > 1)
+                <select id="roleSwitcher"
+                    class="ml-3 text-sm border-none focus:outline-none focus:ring-0 hover:cursor-pointer">
+
                     @foreach (Auth::user()->roles as $role)
                         <option value="{{ url('switch/as', $role->name) }}" class="ml-3" @selected($role->name == session('role'))>
                             {{ ucfirst($role->name) }} </option>
                     @endforeach
-                @endif
-            </select>
+
+                </select>
+            @endif
         </div>
         <div id=" current-user-area" class="flex space-x-3 items-center justify-center relative">
             <label for="toggle-current-user-dropdown" class="hidden md:flex items-center">

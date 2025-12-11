@@ -56,7 +56,7 @@ class Teacher extends Model
     public function sectionAsIncharge()
     {
         $sectionId = $this->allocations->where('lecture_no', 1)->value('section_id');
-        $section = Section::findOrFail($sectionId);
+        $section = Section::find($sectionId);
         return $section;
     }
     public function tasks()
