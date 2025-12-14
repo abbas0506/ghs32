@@ -4,7 +4,7 @@
     <div class="bread-crumb">
         <a href="/">Home</a>
         <div>/</div>
-        <a href="{{ route('admin.tests.index') }}">Tests</a>
+        <a href="{{ route('admin.tests.index') }}">Assessment</a>
         <div>/</div>
         <div>Edit</div>
     </div>

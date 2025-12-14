@@ -20,12 +20,8 @@ class TestAllocationController extends Controller
         //
 
         $teacher = Teacher::where('user_id', Auth::user()->id)->first();
-
+        $testAllocations=$teacher->testAllocations()->where('test_id', $id)->get();
         $test = Test::with('testAllocations')->findOrFail($id);
-        $testAllocations = TestAllocation::where('test_id', $test->id)
-            ->where('teacher_id', $teacher->id)
-            ->get();
-
         return view('teacher.test-allocations.index', compact('test', 'testAllocations'));
     }
 

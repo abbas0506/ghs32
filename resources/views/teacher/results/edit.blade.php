@@ -1,7 +1,6 @@
 @extends('layouts.teacher')
 @section('page-content')
-
-    <h2>{{ $testAllocation->section->fullName() }}</h2>
+    <h2>Class {{ $testAllocation->section->fullName() }}</h2>
     <div class="bread-crumb">
         <a href="{{ url('/') }}">Home</a>
         <div>/</div>
@@ -28,14 +27,15 @@
         <x-message></x-message>
     @endif
 
-    <form action="{{ route('teacher.test-allocation.results.update', [$testAllocation, 1]) }}" method="post">
+    <form action="{{ route('teacher.test-allocation.results.update', [$testAllocation, 1]) }}" method="post"
+        onsubmit="return validate(event)">
         @csrf
         @method('patch')
         <div class="flex flex-wrap items-center gap-x-16 gap-y-3 mt-8">
             <h2 class="text-teal-600">{{ $testAllocation->subject->name }}, {{ $testAllocation->section->fullName() }}</h2>
             <div class="flex space-x-3 items-center">
                 <h3 class="text-red-600">Total Marks *</h3>
-                <input type="number" name="max_marks" value="{{ $testAllocation->max_marks }}"
+                <input type="number" id="max_marks" name="max_marks" value="{{ $testAllocation->max_marks }}"
                     class="custom-input-borderless w-16 h-8 text-center px-0" min='0' max='100'>
             </div>
         </div>
@@ -57,8 +57,8 @@
                             <td>
                                 <input type="text" name="result_ids_array[]" value="{{ $result->id }}" hidden>
                                 <input type="number" name="obtained_marks_array[]" value="{{ $result->obtained_marks }}"
-                                    class="custom-input-borderless w-16 h-8 text-center px-0" min='0' max='100'
-                                    onclick="selectMe(event)">
+                                    class="custom-input-borderless w-16 h-8 text-center px-0 obtained-marks" min='0'
+                                    max='100' onclick="selectMe(event)">
                             </td>
                         </tr>
                     @endforeach
@@ -76,4 +76,30 @@
         function selectMe(event) {
             event.target.select()
         }
+
+        function validate(event) {
+            const maxMarks = parseFloat(document.getElementById('max_marks').value);
+            const inputs = document.querySelectorAll('.obtained-marks');
+
+            for (let i = 0; i < inputs.length; i++) {
+                const obtained = parseFloat(inputs[i].value);
+
+                if (obtained > maxMarks) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid Marks',
+                        text: `Obtained marks (${obtained}) > maximum marks.`,
+                        confirmButtonText: 'Fix it'
+                    }).then(() => {
+                        inputs[i].focus();
+                        inputs[i].select();
+                    });
+
+                    return false; // ❌ stop submission
+                }
+            }
+
+            return true; // ✅ submit form
+        }
     </script>
+@endsection

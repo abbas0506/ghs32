@@ -5,43 +5,42 @@
     <div class="md:w-4/5 mx-auto bg-white md:p-8 p-4 rounded border mt-12 relative">
         <div class="absolute top-2 right-2">
             <div class="flex items-center justify-center space-x-2">
-                <div class="flex w-8 h-8 rounded-full border justify-center items-center">
-                    <a href="{{ route('teacher.students.edit', $student) }}"><i class="bx bx-pencil text-green-600"></i></a>
+                <div class="w-6 h-6">
+                    <a href="{{ route('teacher.students.edit', $student) }}"><i class="bx  bx-pencil text-green-600"></i></a>
                 </div>
-                <div class="flex w-8 h-8 rounded-full border justify-center items-center">
-                    <a href="{{ route('teacher.students.index') }}"><i class="bi-x-lg"></i></a>
+                <div class="w-6 h-6">
+                    <a href="{{ route('teacher.students.index') }}"><i class="bx  bx-x"></i></a>
                 </div>
             </div>
         </div>
-        <div class="grid md:col-span-2 gap-3 order-2 md:order-1">
+        <div class="grid gap-3">
+            <div class="">
+                <div>
+                    @if ($student->photo)
+                        <img src="{{ asset('storage/' . $student->photo) }}" alt="Student Photo" width="100"
+                            height="100">
+                    @else
+                        <img src="{{ asset('/images/default.png') }}" alt="Student Photo" width="100" height="100">
+                    @endif
+                </div>
+            </div>
             <div>
-                <label for="">Admission # </label>
+                <label for="">Roll # </label>
                 <div class="flex flex-wrap items-center gap-x-4">
-                    <h2>{{ $student->admission_no }}</h2>
+                    <h2>{{ $student->rollno }}</h2>
                 </div>
             </div>
             <div>
-                <label for="">Personal Info</label>
+                <label for="">Name</label>
                 <p>{{ $student->name }}</p>
-                <p class="text-slate-600 text-sm">{{ $student->dob?->format('d-m-Y') }}</p>
-                <p class="text-slate-600 text-sm"> {{ $student->bform }} </p>
-                <p class="text-slate-600 text-sm">{{ $student->phone }}</p>
-                <p class="text-slate-600 text-sm">{{ $student->id_mark }} </p>
-                <p class="text-slate-600 text-sm">{{ $student->address }} </p>
+                <p class="text-slate-500 text-xs">{{ $student->father_name }}</p>
             </div>
             <div>
-                <label for="">Father / Guardian Info</label>
-                <p>{{ $student->father_name }} </p>
-                <p class="text-slate-600 text-sm">{{ $student->father_cnic }} </p>
-                <p class="text-slate-600 text-sm">{{ $student->caste }} / {{ $student->profession }} </p>
-                <p class="text-slate-600 text-sm"><i class="bi-currency"></i>{{ $student->income }} </p>
+                <label for=""><i class="bi-telephone"></i></label>
+                <p>{{ $student->phone }}</p>
             </div>
         </div>
-        <div class="order-1 md:order-2">
-            <div>
-                <img src="{{ asset('storage/' . $student->photo) }}" alt="Student Photo" width="100" height="100">
-            </div>
-        </div>
+
     </div>
 @endsection
 @section('script')

@@ -30,14 +30,8 @@
             <x-message></x-message>
         @endif
 
-
-        {{-- <textarea id="english" class="form-control"></textarea>
-        <button id="translateBtn" class="btn-blue">Translate</button>
-        <textarea id="urdu" class="form-control"></textarea>
- --}}
-
-        <div class="overflow-x-auto bg-white w-full mt-8">
-            <h2 class="text-sm text-slate-600"> Total Students: {{ $section->students->count() }}</h2>
+        <div class="overflow-x-auto bg-white w-full mt-4">
+            <h2 class="text-slate-600 text-sm"> Students: {{ $section->students->count() }}</h2>
             <table class="table-auto borderless w-full mt-3">
                 <thead>
                     <tr>

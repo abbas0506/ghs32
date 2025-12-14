@@ -16,8 +16,7 @@
     <div class="flex flex-row items-center gap-x-2">
         <i class="bi bi-info-circle text-2xl w-8"></i>
         <ul class="text-sm">
-            <li>Subject result has been locked, cant be edited furhter, however, if you want to edit after final submission,
-                please contact admin </li>
+            <li>Subject result has been locked. If you want any change, contact admin </li>
         </ul>
     </div>
     <div class="divider my-3"></div>

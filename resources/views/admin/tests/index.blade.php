@@ -4,7 +4,7 @@
     <div class="bread-crumb">
         <a href="{{ url('/') }}">Home</a>
         <div>/</div>
-        <div>Tests</div>
+        <div>Assessment</div>
     </div>
 
     <div class="grid md:w-4/5 mx-auto mt-6 bg-white md:p-8 p-4 rounded border gap-3">
@@ -29,9 +29,8 @@
         <table class="table-auto borderless w-full mt-8">
             <thead>
                 <tr class="">
-                    <th class="w-16">Sr</th>
-                    <th class="text-left">Test Title</th>
-                    <th class="w-12"></th>
+                    <th class="w-12">Sr</th>
+                    <th class="text-left w-48">Test</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,25 +41,12 @@
                         <td class="text-left">
                             @if ($test->is_open)
                                 <a href="{{ route('admin.tests.show', $test) }}" class="link">{{ $test->title }}</a>
-                                <br><span class="text-slate-500 text-xs">Created at:
-                                    {{ $test->created_at }}</span>
+                                <br><span class="text-slate-500 text-xs text-slate-400">
+                                    {{ $test->created_at->format('d/m/Y H:i') }}</span>
                             @else
-                                {{ $test->title }}
-                            @endif
-                        </td>
-                        <td>
-                            @if ($test->is_open)
-                                <form action="{{ route('admin.test.lock', $test) }}" method='post'>
-                                    @csrf
-                                    @method('patch')
-                                    <button type="submit"><i class="bi-unlock text-green-500 font-bold"></i></button>
-                                </form>
-                            @else
-                                <form action="{{ route('admin.test.unlock', $test) }}" method='post'>
-                                    @csrf
-                                    @method('patch')
-                                    <button type="submit"><i class="bi-lock text-red-500 font-bold"></i></button>
-                                </form>
+                                <a href="{{ route('admin.tests.show', $test) }}">{{ $test->title }}</a>
+                                <br><span
+                                    class="text-slate-500 text-xs text-slate-400">{{ $test->created_at->format('d/m/Y H:i') }}</span>
                             @endif
                         </td>
                     </tr>

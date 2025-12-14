@@ -11,6 +11,9 @@
     </div>
 
     <div class="grid md:grid-cols-3 md:w-4/5 mx-auto mt-6 bg-white md:p-8 p-4 rounded border">
+        <h2 class="mb-4 col-span-full"><i class="bi-receipt text-slate-500"></i> {{ $voucher->name }} @ Rs.
+            {{ $voucher->amount }}</h2>
+
         <div class="md:col-span-2 text-slate-400 text-sm">
             Removing voucher is a destructive activity.
             It will destory all fee info against this voucher.
@@ -42,21 +45,27 @@
     </div>
 
     <div class="md:w-4/5 overflow-x-auto mx-auto bg-white md:p-8 p-4 rounded border mt-3">
-        <h2 class="mb-4"><i class="bi-people-fill text-slate-500"></i> Voucher Payers</h2>
         <table class="table-auto borderless w-full">
             <thead>
                 <tr>
                     <th class="w-2/3 text-left">Class</th>
                     <th>#</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($sections as $section)
                     <tr class="tr">
-                        <td class="text-left text-sm">{{ $section->fullName() }}</td>
+                        <td class="text-left text-sm">
+                            <a href="{{ route('admin.voucher.section.payers.index', [$voucher, $section]) }}"
+                                class="link">
+                                {{ $section->fullName() }}
+                            </a>
+                        </td>
                         <td class="text-sm">
-                            {{ $voucher->studentsWhoHavePaid($section->id)->count() }}/{{ $voucher->studentsFromSection($section->id)->count() }}
+                            {{ $voucher->studentsWhoHavePaid($section->id)->count() }}
+                            <span class="text-slate-400"> /
+                                {{ $voucher->studentsFromSection($section->id)->count() }}</span>
+
                             @if ($voucher->studentsWhoHavePaidToday($section->id)->count())
                                 <span class="text-xs ml-2">
                                     <i class="bi-arrow-up text-green-600"></i>
@@ -64,11 +73,6 @@
                             @endif
                             </span>
                         </td>
-                        <td class="text-sm"><a
-                                href="{{ route('admin.voucher.section.payers.index', [$voucher, $section]) }}"
-                                class="bg-teal-100 hover:bg-teal-200 px-2 py-1 rounded-lg">
-                                <i class="bx bx-pencil text-teal-600"></i>
-                            </a></td>
                     </tr>
                 @endforeach
             </tbody>

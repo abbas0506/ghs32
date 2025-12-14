@@ -72,7 +72,7 @@
                 @method('PATCH')
                 <!-- student info -->
                 <div class="grid md:grid-cols-2 gap-4">
-                    <div>
+                    <div class="md:col-span-2 photo-upload-wrapper">
                         <div class="photo-box" id="photoPreview">
                             @if ($student->photo)
                                 <!-- adjust $user or $student as needed -->
@@ -94,21 +94,26 @@
                         <input type="text" name="name" class="custom-input" placeholder="Student name"
                             value="{{ $student->name }}">
                     </div>
+                    <div class="md:col-span-2">
+                        <label for="">Father Name</label>
+                        <input type="text" name="father_name" class="custom-input" placeholder="Father name"
+                            value="{{ $student->father_name }}">
+                    </div>
                     <div>
                         <label for="">Roll No</label>
                         <input type="text" name="rollno" value="{{ $student->rollno }}" placeholder="Roll #"
                             class="custom-input">
                     </div>
-                    <div>
+                    {{-- <div>
                         <label for="">Date of Birth</label>
                         <input type="date" name="dob" class="custom-input" placeholder="Date of birth"
                             value="{{ optional($student->dob)->format('Y-m-d') }}">
-                    </div>
-                    <div>
+                    </div> --}}
+                    {{-- <div>
                         <label for="">Form-B</label>
                         <input type="text" name="bform" class="custom-input cnic" placeholder="B Form"
                             value="{{ $student->bform }}">
-                    </div>
+                    </div> --}}
                     <div>
                         <label for="">Phone No</label>
                         <input type="text" name="phone" class="custom-input phone" placeholder="Phone No."
@@ -120,36 +125,8 @@
                             value="{{ $student->address }}">
                     </div>
 
-                    <div>
-                        <label for="id_mark">Identification Mark</label>
-                        <input type="text" name="id_mark" class="custom-input fancy-focus"
-                            placeholder="Identification mark" value="{{ $student->id_mark }}">
-                    </div>
 
-                    <div>
-                        <label for="caste">Caste</label>
-                        <select name="caste" class="custom-input fancy-focus">
-                            <option value="">Select a Caste</option>
-                            @foreach (config('enums.castes') as $value => $label)
-                                <option value="{{ $value }}" @selected($student->caste == $value)>
-                                    {{ $label }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div>
-                        <label for="is_orphan"> Is Orphan?</label>
-                        <select name="is_orphan" class="custom-input fancy-focus" required>
-                            <option value="0" @selected($student->is_orphan == 0)>No</option>
-                            <option value="1" @selected($student->is_orphan == 1)>Yes</option>
-                        </select>
-                    </div>
-                    <div class="">
-                        <label for="">Father Name</label>
-                        <input type="text" name="father_name" class="custom-input" placeholder="Father name"
-                            value="{{ $student->father_name }}">
-                    </div>
-                    <div>
+                    {{-- <div>
                         <label for="distinction">Distinction</label>
                         <select name="distinction" class="custom-input fancy-focus">
                             <option value="">Select a Distinction</option>
@@ -159,9 +136,9 @@
                                 </option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
 
-                    <div>
+                    {{-- <div>
                         <label for="father_cnic">Father/Guardian's CNIC</label>
                         <input type="text" name="father_cnic" class="custom-input fancy-focus cnic"
                             placeholder="Guardian cnic" value="{{ $student->father_cnic }}">
@@ -209,7 +186,7 @@
                                 </option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
 
                 </div>
                 <div class="text-center mt-8">

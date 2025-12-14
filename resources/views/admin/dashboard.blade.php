@@ -39,7 +39,7 @@
         </a>
         <a href="{{ route('admin.tests.index') }}" class="pallet-box">
             <div class="flex-1">
-                <div class="title">Tests
+                <div class="title">Assessment
                     @if ($tests->where('is_open', 1)->count())
                         <sup><i class="bi-circle-fill text-green-500 text-xxs"></i></sup>
                     @endif

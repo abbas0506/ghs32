@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Models\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
 {
@@ -14,7 +15,14 @@ class TestController extends Controller
     public function index()
     {
         //
-        $tests = Test::whereNull('teacher_id')->where('is_open',1)->get();
+        // $tests = Test::whereNull('teacher_id')->where('is_open',1)->get();
+        $teacherId=Auth::user()->teacher->id;
+        $tests = Test::where('is_open', true)
+            ->whereNull('teacher_id')
+            ->whereHas('testAllocations', function ($q) use ($teacherId) {
+                $q->where('teacher_id', $teacherId);
+            })
+            ->get();
         return view('teacher.tests.index', compact('tests'));
     }
 

@@ -145,7 +145,7 @@ class TestAllocationController extends Controller
         $model = TestAllocation::findOrFail($id);
         try {
             $model->delete();
-            return redirect()->back()->with('success', 'Successfully deleted');
+            return redirect()->route('admin.tests.show',$testId)->with('success', 'Successfully deleted');
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
             // something went wrong

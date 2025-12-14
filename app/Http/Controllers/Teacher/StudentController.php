@@ -87,27 +87,28 @@ class StudentController extends Controller
     {
         //
         $student = Student::findOrFail($id);
-
+        
         $validated = $request->validate([
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
             'name' => 'required|string|max:50',
-            'dob' => 'nullable|date',
-            'bform' => 'required|string|max:15|unique:students,bform,' . $student->id,
+            'father_name' => 'required|string|max:50',
+            'rollno' => 'integer|min:1',
             'phone' => 'nullable|string|max:16',
             'address' => 'nullable|string|max:100',
-            'id_mark' => 'nullable|string|max:100',
-            'caste' => 'nullable|string|max:50',
-            'is_orphan' => 'nullable|boolean',
-            'distinction' => 'nullable',
+            
+            // 'dob' => 'nullable|date',
+            // 'bform' => 'required|string|max:15|unique:students,bform,' . $student->id,
+            // 'id_mark' => 'nullable|string|max:100',
+            // 'caste' => 'nullable|string|max:50',
+            // 'is_orphan' => 'nullable|boolean',
+            // 'distinction' => 'nullable',
 
-            'father_name' => 'required|string|max:50',
-            'father_cnic' => 'nullable|string|max:15',
-            'profession' => 'nullable|string|max:50',
-            'income' => 'nullable|integer|min:0',
+            // 'father_cnic' => 'nullable|string|max:15',
+            // 'profession' => 'nullable|string|max:50',
+            // 'income' => 'nullable|integer|min:0',
 
-            'gender' => 'required',
-            'group_id' => 'nullable|exists:groups,id',
-            'rollno' => 'integer|min:1',
+            // 'gender' => 'required',
+            // 'group_id' => 'nullable|exists:groups,id',
         ]);
 
         try {
