@@ -25,11 +25,11 @@
                     onsubmit="return confirmDel(event)">
                     @csrf
                     @method('DELETE')
-                    <button><i class="bx bx-trash text-red-600"></i></button>
+                    <button><i class="bx  bx-trash text-red-600"></i></button>
                 </form>
             </div>
             <div class="flex w-8 h-8 rounded-full border justify-center items-center">
-                <a href="{{ route('admin.vouchers.edit', $voucher) }}"><i class="bx bx-pencil text-green-600"></i></a>
+                <a href="{{ route('admin.vouchers.edit', $voucher) }}"><i class="bx  bx-pencil text-green-600"></i></a>
             </div>
 
         </div>
