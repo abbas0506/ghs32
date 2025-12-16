@@ -36,23 +36,29 @@
                     <tr>
                         <th class="w-10">#</th>
                         <th class="w-48 text-left">Name</th>
+                        <th class="w-10"><i class="bi-exclamation-triangle"></i></th>
                         <th class="w-6"></th>
-                        <th class="w-6"><i class="bi-exclamation-triangle"></i></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($attendances->sortBy('status') as $attendance)
                         <tr class="tr">
                             <td>{{ $attendance->student->rollno }}</td>
-                            <td class="text-left text-xs md:text-sm">{{ $attendance->student->name }} <br> <span
-                                    class="text-slate-400 text-xs">{{ $attendance->student->father_name }}</span>
+                            <td class="text-left text-xs md:text-sm ">{{ $attendance->student->name }} <br>
+                                <span class="text-slate-400 text-xs">{{ $attendance->student->father_name }}</span>
                                 @if (!$attendance->status)
                                     <br>
                                     <span class="text-slate-400 text-xs"><i
                                             class="bi-telephone"></i>{{ $attendance->student->phone }}</span>
                                 @endif
                             </td>
-
+                            <td>
+                                @if ($attendance->student->currentAbsences()->count())
+                                    <span class="text-blue-600 text-xs"> <i
+                                            class="bi-arrow-up"></i>{{ $attendance->student->currentAbsences()->count() }}</span>
+                                @endif
+                                {{ $attendance->student->previousAbsences()->count() ?: '' }}
+                            </td>
                             <td>
                                 @if ($attendance->status)
                                     <i class="bi-check text-teal-600"></i>
@@ -60,7 +66,7 @@
                                     <i class="bi-x text-red-600"></i>
                                 @endif
                             </td>
-                            <td>{{ $attendance->student->attendances()->where('status', 0)->count() }}</td>
+
                         </tr>
                     @endforeach
                 </tbody>

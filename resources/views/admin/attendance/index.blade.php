@@ -48,6 +48,10 @@
                         <tr class="tr">
                             <td class="text-left"><a href="{{ route('admin.attendance.show', $section) }}"
                                     class="link">{{ $section->fullName() }}</a>
+                                @if ($section->students()->createdToday()->count())
+                                    <span class="text-green-600 text-xs ml-2"><i
+                                            class="bi-arrow-up"></i>{{ $section->students()->createdToday()->count() }}</span>
+                                @endif
                             </td>
                             <td>{{ $section->presence_count }} / {{ $section->students->count() }}</td>
                             <td>{{ round(($section->presence_count / $section->students->count()) * 100, 1) }} %</td>

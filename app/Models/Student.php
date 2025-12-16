@@ -173,4 +173,22 @@ class Student extends Model
 
         return $sumMarks;
     }
+    public function scopeCreatedToday($query)
+    {
+        return $query->whereDate('created_at', today());
+    }
+
+    public function previousAbsences()
+    {
+        return $this->attendances()
+            ->where('status', 0)
+            ->whereDate('date', '<', today());
+    }
+    public function currentAbsences()
+    {
+        return $this->attendances()
+            ->where('status', 0)
+            ->whereMonth('date', now()->month)
+            ->whereYear('date', now()->year);
+    }
 }

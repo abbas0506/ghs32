@@ -5,23 +5,16 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
+
     theme: {
-        extend: {},
+        extend: {
+            listStyleType: {
+                roman: "lower-roman",
+            },
+        },
     },
-    plugins: [require("@tailwindcss/forms")],
-    
-    // customized
-    theme: {
-        listStyleType: {
-        none: 'none',
-        disc: 'disc',
-        decimal: 'decimal',
-        square: 'square',
-        roman: 'lower-roman',
-        }
-      },
+
+    plugins: [
+        require("@tailwindcss/forms"),
+    ],
 };
-
-
-    
-  

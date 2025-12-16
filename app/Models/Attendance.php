@@ -20,4 +20,8 @@ class Attendance extends Model
     {
         return $this->belongsTo(Student::class);
     }
+    public function scopeAbsences($query)
+    {
+        return $query->where('status', 0)->whereDate('date', '<', today());
+    }
 }

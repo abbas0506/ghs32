@@ -22,6 +22,10 @@
                         <tr class="tr">
                             <td class="text-left"><a href="{{ route('admin.sections.show', $section) }}"
                                     class="link">{{ $section->fullName() }}</a>
+                                @if ($section->students()->createdToday()->count())
+                                    <span class="text-green-600 text-xs ml-2"><i
+                                            class="bi-arrow-up"></i>{{ $section->students()->createdToday()->count() }}</span>
+                                @endif
                             </td>
                             <td>{{ $section->students->count() }}</td>
                         </tr>
