@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AlumniController;
 use App\Http\Controllers\Admin\AssignmentController;
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\AttendanceRegisterController;
 use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\Admin\CollectiveTestController;
@@ -199,8 +200,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('attendance', AttendanceController::class);
         Route::post('attendances/filter', [AttendanceController::class, 'filter'])->name('attendance.filter');
         Route::post('attendances/clear', [AttendanceController::class, 'clear'])->name('attendance.clear');
-        Route::resource('tasks',TaskController::class);
-        Route::resource('task.assignments',AssignmentController::class);
+        Route::resource('tasks', TaskController::class);
+        Route::resource('task.assignments', AssignmentController::class);
+        Route::resource('attendance-register', AttendanceRegisterController::class);
     });
 
     Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {
@@ -256,7 +258,7 @@ Route::middleware(['auth'])->group(function () {
         }
     );
 
-    Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['auth','role:teacher']], function () {
+    Route::group(['prefix' => 'teacher', 'as' => 'teacher.', 'middleware' => ['auth', 'role:teacher']], function () {
         Route::get('/', [TeacherDashboardController::class, 'index']);
         Route::resource('tests', TestController::class);
         Route::resource('students', TeacherStudentController::class);

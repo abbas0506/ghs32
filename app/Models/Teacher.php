@@ -62,8 +62,8 @@ class Teacher extends Model
     public function tasks()
     {
         return $this->belongsToMany(Task::class)
-                    ->withPivot('status')
-                    ->withTimestamps();
+            ->withPivot('status')
+            ->withTimestamps();
     }
     public function assignments()
     {
