@@ -31,11 +31,19 @@
                 <tr class="">
                     <th class="w-12">Sr</th>
                     <th class="text-left w-48">Test</th>
+                    <th class="w-24">Status</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach ($tests->sortByDesc('created_at') as $test)
+                    @php
+                        $percent = round(
+                            ($test->testAllocations()->resultSubmitted()->count() / $test->testAllocations->count()) *
+                                100,
+                            0,
+                        );
+                    @endphp
                     <tr class="tr">
                         <td>{{ $loop->index + 1 }}</td>
                         <td class="text-left">
@@ -47,6 +55,18 @@
                                 <a href="{{ route('admin.tests.show', $test) }}">{{ $test->title }}</a>
                                 <br><span
                                     class="text-slate-500 text-xs text-slate-400">{{ $test->created_at->format('d/m/Y H:i') }}</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($percent == 100)
+                                <i class="bi-check text-green-600"></i>
+                            @else
+                                <div class="w-full bg-gray-200 rounded-full h-4">
+                                    <div class="bg-green-600 h-4 rounded-full text-xs text-white text-center"
+                                        style="width: {{ $percent }}%">
+                                        {{ $percent }}%
+                                    </div>
+                                </div>
                             @endif
                         </td>
                     </tr>
