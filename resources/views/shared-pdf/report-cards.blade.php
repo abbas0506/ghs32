@@ -71,6 +71,9 @@
                 @php
                     $obtained = $student->results()->test($test->id)->get()->sum('obtained_marks');
                     $total = $student->maximumMarks($test->id);
+                    $presences = $student->attendances->where('status', 1)->count();
+                    $attendances = $student->attendances->count();
+                    $attendanceBonus = round(($presences / $attendances) * 10, 1);
                 @endphp
 
                 <table class="table-auto w-full mt-4" cellspacing="0">
@@ -90,6 +93,10 @@
                             <td class="text-left">{{ ucwords(strtolower($student->name)) }}</td>
                             <td rowspan="3" class="text-left px-4 bg-slate-300">
                                 @if ($total)
+                                    <div><span class="font-bold">Attendance:</span>
+                                        {{ $presences }} /
+                                        {{ $attendances }}
+                                    </div>
                                     <div><span class="font-bold">Obtained:</span> {{ $obtained }} /
                                         {{ $total }} = {{ round(($obtained / $total) * 100, 2) }} %
                                     </div>

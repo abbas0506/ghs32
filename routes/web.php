@@ -140,20 +140,19 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('voucher/{voucher}/section/{section}/clean', [VoucherPayerController::class, 'postClean'])->name('voucher.section.payers.clean');
 
         Route::resource('section.lecture.schedule', ScheduleController::class);
-
         Route::get('class-schedule', [SectionWiseScheduleController::class, 'index'])->name('class-schedule');
-        Route::post('class-schedule/post', [SectionWiseScheduleController::class, 'post'])->name('class-schedule.post');
         Route::get('class-schedule/print', [SectionWiseScheduleController::class, 'print'])->name('class-schedule.print');
+        Route::post('class-schedule/post', [SectionWiseScheduleController::class, 'post'])->name('class-schedule.post');
         Route::post('class-schedule/clear', [SectionWiseScheduleController::class, 'clear']);
 
         Route::get('teacher-schedule', [TeacherWiseScheduleController::class, 'index'])->name('teacher-schedule');
-        Route::post('teacher-schedule/post', [TeacherWiseScheduleController::class, 'post'])->name('teacher-schedule.post');
         Route::get('teacher-schedule/print', [TeacherWiseScheduleController::class, 'print'])->name('teacher-schedule.print');
+        Route::post('teacher-schedule/post', [TeacherWiseScheduleController::class, 'post'])->name('teacher-schedule.post');
 
+        Route::get('sections/{section}/clean', [AdminSectionController::class, 'clean'])->name('sections.clean');
         Route::get('section/{section}/reset-index', [AdminSectionController::class, 'resetIndex'])->name('sections.reset');
         Route::post('section/{section}/reset-rollno', [AdminSectionController::class, 'resetRollNo'])->name('sections.reset.rollno');
         Route::post('section/{section}/reset-admission-no', [AdminSectionController::class, 'resetAdmNo'])->name('sections.reset.admno');
-        Route::get('sections/{section}/clean', [AdminSectionController::class, 'clean'])->name('sections.clean');
         Route::post('sections/{section}/clean', [AdminSectionController::class, 'postClean'])->name('sections.clean.post');
         Route::resource('section.students', StudentController::class);
         Route::resource('section.cards', SectionCardController::class);
@@ -203,6 +202,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('tasks', TaskController::class);
         Route::resource('task.assignments', AssignmentController::class);
         Route::resource('attendance-register', AttendanceRegisterController::class);
+        Route::get('attendanceByDate/{section}/{date}', [AttendanceController::class, 'attendanceByDate'])->name('attendance.byDate');
     });
 
     Route::group(['prefix' => 'admission', 'as' => 'admission.', 'middleware' => ['role:admission']], function () {

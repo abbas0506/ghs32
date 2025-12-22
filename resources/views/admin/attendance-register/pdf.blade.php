@@ -55,7 +55,7 @@
             /* Adjust based on where you want the image */
             left: 150px;
             width: 300px;
-            opacity: 0.25;
+            opacity: 0.4;
         }
 
         .sunday,
@@ -91,14 +91,14 @@
 <body>
     <main>
         <div class="">
-            @foreach ($months as $month)
+            @foreach ($monthData as $month)
                 @foreach ($teacherChunks as $teachers)
                     <div class="page-break page-container">
                         <!-- Background Logo -->
                         <img src="{{ public_path('images/logo/logo_32.png') }}" class="bg-logo" alt="Logo">
 
                         <div class="month-title">
-                            Staff Attendance Register — {{ $month['name'] }} {{ $year }}
+                            Staff Attendance Register — {{ $month['month_name'] }} {{ $year }}
                         </div>
                         <div class="month-title"> Govt High School 32/2L, Okara</div>
 
@@ -129,10 +129,10 @@
                             </thead>
 
                             <tbody>
-                                @for ($day = 1; $day <= $month['daysInMonth']; $day++)
+                                @for ($day = 1; $day <= $month['month_days']; $day++)
                                     @php
-                                        $date = \Carbon\Carbon::create($month['year'], $month['month'], $day);
-                                        $holidayName = $holidayMap[$month['month']][$day] ?? null;
+                                        $date = \Carbon\Carbon::create($year, $month['month_number'], $day);
+                                        $holidayName = $holidayMap[$month['month_number']][$day] ?? null;
                                     @endphp
                                     {{-- HOLIDAY ROW --}}
                                     @if ($holidayName)

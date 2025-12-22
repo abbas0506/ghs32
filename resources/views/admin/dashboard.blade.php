@@ -101,7 +101,7 @@
                 <a href="{{ route('admin.subjects.index') }}" class="link">Subjects</a>
                 <a href="{{ route('admin.sections.index') }}" class="link">Classes</a>
                 <hr>
-                <a href="{{ route('admin.attendance-register.index') }}" target="_blank" class="link">Attendance
+                <a href="{{ route('admin.attendance-register.index') }}" class="link">Attendance
                     Register</a>
             </div>
 

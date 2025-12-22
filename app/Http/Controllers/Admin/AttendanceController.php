@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Colors\Rgb\Channels\Red;
 
 class AttendanceController extends Controller
 {
@@ -18,26 +19,24 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        if (session('filter_date'))
-            $today = session('filter_date') ?? now()->toDateString();
-        else
-            $today = now()->toDateString();
-
+        // load data from current date initially
+        $date = session('filter_date') ?? now()->toDateString();
         $sections = Section::withCount([
             'students',
-            'students as presence_count' => function ($q) use ($today) {
-                $q->whereHas('attendances', function ($q2) use ($today) {
-                    $q2->where('date', $today)
-                        ->where('status', 1);
-                });
+            'attendances as presence_count' => function ($q1) use ($date) {
+                $q1->where('date', $date)
+                    ->where('status', 1);
+            },
+            'attendances as attendance_count' => function ($q) use ($date) {
+                $q->whereDate('date', $date);
             },
         ])
             ->has('students')
             ->get();
 
-        $today_presence = Attendance::whereDate('date', today())->where('status', 1)->count();
-        $student_count = Student::count();
-        return view('admin.attendance.index', compact('sections', 'today', 'today_presence', 'student_count'));
+        $total_presence = Attendance::whereDate('date', $date)->where('status', 1)->count();
+        $total_attendance = Attendance::whereDate('date', $date)->count();
+        return view('admin.attendance.index', compact('sections', 'date', 'total_presence', 'total_attendance'));
     }
 
 
@@ -66,14 +65,8 @@ class AttendanceController extends Controller
     public function show($id)
     {
         //
-        $section = Section::findOrFail($id);
-        // $attendances = Attendance::whereDate('date', today())
-        //     ->whereHas('student', function ($query) use ($id) {
-        //         $query->where('section_id', $id);
-        //     })
-        //     ->get();
-        $attendances = $section->attendances()->whereDate('date', today())->get();
-        return view('admin.attendance.show', compact('attendances', 'section'));
+        $student = Student::find($id);
+        return view('admin.attendance.history', compact('student'));
     }
 
     /**
@@ -114,5 +107,11 @@ class AttendanceController extends Controller
         ]);
         Attendance::whereDate('date', $request->clear_date)->delete();
         return  redirect()->route('admin.attendance.index')->with('filter_date', $request->clear_date);
+    }
+    public function attendanceByDate($sectionId, $date)
+    {
+        $section = Section::findOrFail($sectionId);
+        $attendances = $section->attendances()->whereDate('date', $date)->get();
+        return view('admin.attendance.viewbydate', compact('attendances', 'section', 'date'));
     }
 }

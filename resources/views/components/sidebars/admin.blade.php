@@ -47,7 +47,7 @@
             <li>
                 <a href="{{ route('admin.tasks.index') }}" class="flex items-center">
                     <i class="bi bi-calendar-event"></i>
-                    <span class="ml-3">Tasks</span>
+                    <span class="ml-3">Given Tasks</span>
                 </a>
             </li>
 

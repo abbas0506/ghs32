@@ -159,9 +159,6 @@ class Student extends Model
 
     public function maximumMarks($testId)
     {
-
-
-
         $sumMarks = $this  // Find the student by ID
             ->results()  // Get the student's results
             ->whereHas('testAllocation', function ($query) use ($testId) {

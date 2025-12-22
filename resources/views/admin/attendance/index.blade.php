@@ -24,7 +24,7 @@
             <form action="{{ route('admin.attendance.clear') }}" method="POST" id="form_clear"
                 onsubmit="return confirmClear(event)" class="absolute right-4 top-4">
                 @csrf
-                <input type="hidden" name="clear_date" value="{{ $today }}">
+                <input type="hidden" name="clear_date" value="{{ $date }}">
                 <button type="submit"><i class="bi-recycle text-red-600"></i></button>
             </form>
             <!-- page message -->
@@ -33,7 +33,7 @@
             @else
                 <x-message></x-message>
             @endif
-            <h2><i class="bi-clock mr-3"></i> {{ \Carbon\Carbon::parse($today)->format('d-m-Y') }}</h2>
+            <h2><i class="bi-clock mr-3"></i> {{ \Carbon\Carbon::parse($date)->format('d-m-Y') }}</h2>
             <table class="table-auto borderless w-full mt-8">
                 <thead>
                     <tr class="tr">
@@ -43,26 +43,32 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     @foreach ($sections as $section)
-                        <tr class="tr">
-                            <td class="text-left"><a href="{{ route('admin.attendance.show', $section) }}"
-                                    class="link">{{ $section->fullName() }}</a>
-                                @if ($section->students()->createdToday()->count())
-                                    <span class="text-green-600 text-xs ml-2"><i
-                                            class="bi-arrow-up"></i>{{ $section->students()->createdToday()->count() }}</span>
-                                @endif
-                            </td>
-                            <td>{{ $section->presence_count }} / {{ $section->students->count() }}</td>
-                            <td>{{ round(($section->presence_count / $section->students->count()) * 100, 1) }} %</td>
+                        @if ($section->attendance_count)
+                            <tr class="tr">
+                                <td class="text-left">
+                                    <a href="{{ route('admin.attendance.byDate', ['section' => $section, 'date' => $date]) }}"
+                                        class="link">{{ $section->fullName() }}</a>
+                                    @if ($section->students()->createdToday()->count())
+                                        <span class="text-green-600 text-xs ml-2"><i
+                                                class="bi-arrow-up"></i>{{ $section->students()->createdToday()->count() }}</span>
+                                    @endif
+                                </td>
+                                <td>{{ $section->presence_count }} / {{ $section->attendance_count }}</td>
+                                <td>{{ round(($section->presence_count / $section->attendance_count) * 100, 1) }} %</td>
 
-                        </tr>
+                            </tr>
+                        @endif
                     @endforeach
-                    <tr>
-                        <td class="text-left font-semibold">Total</td>
-                        <td class="font-semibold">{{ $today_presence }} / {{ $student_count }}</td>
-                        <td class="font-semibold">{{ round(($today_presence / $student_count) * 100, 2) }}%</td>
-                    </tr>
+                    @if ($total_attendance)
+                        <tr>
+                            <td class="text-left font-semibold">Total</td>
+                            <td class="font-semibold">{{ $total_presence }} / {{ $total_attendance }}</td>
+                            <td class="font-semibold">
+                                {{ round(($total_presence / $total_attendance) * 100, 2) }}%
+                            </td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -71,7 +77,7 @@
 @section('script')
     <script type="module">
         $(document).ready(function() {
-            // $('#filter_date').val("{{ $today }}")
+            // $('#filter_date').val("{{ $date }}")
             $('#filter_date').on('change', function() {
                 let selected = $(this).val();
                 $('#date').val(selected);

@@ -16,15 +16,49 @@ class AttendanceRegisterController extends Controller
     public function index()
     {
         //
-        $teachers = Teacher::all();
-        $teachers = Teacher::orderBy('name')->get();
+
+        $years = range(now()->year, now()->year + 1);
+        $months = [
+            1 => 'January',
+            2 => 'February',
+            3 => 'March',
+            4 => 'April',
+            5 => 'May',
+            6 => 'June',
+            7 => 'July',
+            8 => 'August',
+            9 => 'September',
+            10 => 'October',
+            11 => 'November',
+            12 => 'December',
+        ];
+
+        return view('admin.attendance-register.index', compact('years', 'months'));
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create() {}
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+        $teachers = Teacher::all()->sortBy('seniority');
         $teacherChunks = $teachers->chunk(4)->map(function ($chunk) {
             return $chunk->pad(4, null);
         });
         // $teacherChunks = $teachers->chunk(4);
         set_time_limit(0); // 🔥 no timeout
         ini_set('memory_limit', '512M');
-        $year = 2026;
+
+        $year = $request->year;
+        $months = collect($request->months)->sort();
+
         $holidays = [
             '02-05' => 'Kashmir Day',
             '05-01' => 'Labour Day',
@@ -41,42 +75,33 @@ class AttendanceRegisterController extends Controller
         }
 
         // Build months data
-        $months = collect(range(1, 12))->map(function ($month) use ($year) {
+
+        $monthData = $months->map(function ($month) use ($year) {
             $date = Carbon::create($year, $month, 1);
 
             return [
-                'name' => $date->format('F'),
-                'daysInMonth' => $date->daysInMonth,
-                'month' => $month,
-                'year' => $year,
+                'month_number' => $month,
+                'month_name' => $date->format('F'),
+                'month_days' => $date->daysInMonth,
             ];
         });
 
+
         $pdf = PDF::loadView('admin.attendance-register.pdf', compact(
             'teacherChunks',
-            'months',
+            'monthData',
             'year',
             'holidayMap'
         ))->setPaper('A4', 'portrait');
 
+
+
+
+
+
+
+
         return $pdf->stream("Teacher_Attendance_Register_$year.pdf");
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**

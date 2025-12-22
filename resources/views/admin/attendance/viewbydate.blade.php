@@ -25,7 +25,7 @@
         @endif
 
         <div class="overflow-x-auto bg-white w-full mt-8">
-            <h2><i class="bi-clock mr-3"></i>{{ now()->format('d-m-Y') }}</h2>
+            <h2><i class="bi-clock mr-3"></i>{{ \Carbon\Carbon::parse($date)->format('d-m-Y') }}</h2>
             <form action="{{ route('teacher.section.attendance.store', [$section]) }}" method="post" class="mt-3">
                 @csrf
                 <table class="table-auto borderless w-full">
@@ -41,8 +41,11 @@
                         @foreach ($attendances->sortBy('status') as $attendance)
                             <tr class="tr">
                                 <td>{{ $attendance->student->rollno }}</td>
-                                <td class="text-left text-xs md:text-sm">{{ $attendance->student->name }} <br> <span
-                                        class="text-slate-400 text-xs">{{ $attendance->student->father_name }}</span>
+                                <td class="text-left text-xs md:text-sm">
+                                    <a href="{{ route('admin.attendance.show', $attendance->student) }}"
+                                        class="link">{{ $attendance->student->name }}
+                                    </a>
+                                    <br> <span class="text-slate-400 text-xs">{{ $attendance->student->father_name }}</span>
                                     <br>
                                     <span class="text-slate-400 text-xs"><i
                                             class="bi-telephone"></i>{{ $attendance->student->phone }}</span>
@@ -59,12 +62,12 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="text-center mt-8">
-                    <a href="{{ route('admin.attendance.index') }}" class="btn-blue rounded py-2 px-5">Close</a>
-                </div>
             </form>
-        </div>
 
+        </div>
+        <div class="text-center mt-8">
+            <a href="{{ route('admin.attendance.index') }}" class="btn-blue rounded py-2 px-5">Close</a>
+        </div>
     </div>
     <script>
         function search(event) {
